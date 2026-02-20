@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model - QTTF</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --accent:#0066ff;
+      --muted:#6b7280;
+      --max-width:1200px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0b1220;background:linear-gradient(180deg,#f7fafc 0%, #eef4ff 100%);} 
+    a{color:inherit;text-decoration:none}
+
+    /* header / nav - reused from homepage (sticky, semi-transparent, blur) */
+    header{background:rgba(255,255,255,0.72);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 6px 24px rgba(16,24,40,.06);position:sticky;top:0;z-index:1100;border-bottom:1px solid rgba(15,23,42,.03)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 28px}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{font-weight:700;font-size:20px;color:var(--accent)}
+    .nav-links{display:flex;gap:20px}
+    .nav-links a{color:var(--muted);padding:8px 10px;border-radius:8px;transition:all .18s;font-weight:600}
+    .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--accent)}
+    .nav-links a.active{color:var(--accent);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:none;border-radius:10px}
+
+    main{padding:28px 0 56px}
+
+    /* 小组件样式（继承但默认隐藏） */
+    .features{display:none; /* 暂不显示任何小组件 */ }
+    .card{background:linear-gradient(180deg,#ffffff,#ffffff);padding:14px;border-radius:14px;box-shadow:10px 12px 30px rgba(20,32,78,.04);border:1px solid rgba(15,23,42,.04);box-sizing:border-box}
+
+    footer{padding:28px 0;text-align:center;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="../QTTC.svg" alt="QTTC" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <div class="brand">QTTF</div>
+        </div>
+        <div class="nav-links">
+            <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
+            <a href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
+            <a class="active" href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Model 页面（示例）</h2>
+      <p>此页继承首页的导航栏（透明、置顶、悬停仅高亮当前 tab 的交互）以及页脚说明，保留小组件的样式但暂时不展示组件。</p>
+      <!-- 预留：小组件容器（隐藏） -->
+      <div class="features" aria-hidden="true">
+        <!-- 这里将复用首页的 .features 布局样式；当前设置为 display:none -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>本网页由Github Copilot生成，数据由丘班乒乓球联合会提供</p>
+    </div>
+  </footer>
+
+  <script>
+    // 导航悬停逻辑：默认高亮关于我们；悬停时仅高亮当前项（复制自 homepage）
+    (function(){
+      const navLinks = document.querySelectorAll('nav .nav-links a');
+      const defaultHref = 'https://dreamerdawn.github.io/QTTF/about';
+      const resetDefault = ()=>{
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const about = Array.from(navLinks).find(a=>a.getAttribute('href')===defaultHref);
+        if(about) about.classList.add('active');
+      };
+      navLinks.forEach(a=>{
+        a.addEventListener('mouseenter', ()=>{
+          navLinks.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+        });
+      });
+      const navLinksContainer = document.querySelector('nav .nav-links');
+      if(navLinksContainer) navLinksContainer.addEventListener('mouseleave', ()=> setTimeout(resetDefault,50));
+      resetDefault();
+    })();
+  </script>
+</body>
+</html>

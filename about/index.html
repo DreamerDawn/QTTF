@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>关于我们 - QTTF</title>
+  <!-- Font Awesome for social icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --accent:#d32f2f; /* 乒乓球红 */
+      --dark:#0b1220;
+      --muted:#6b7280;
+      --accent-2:#ff8a00; /* 活力橙 */
+      --max-width:1100px;
+    }
+    html,body{height:100%;margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#fff 0%, #f3f7ff 100%);color:var(--dark)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 28px}
+    /* 使用与首页相同的顶部/导航布局效果（保留本页配色变量） */
+    header{background:rgba(255,255,255,0.72);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 6px 24px rgba(16,24,40,.06);padding:0;position:sticky;top:0;z-index:1100;border-bottom:1px solid rgba(15,23,42,.03)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{font-weight:700;font-size:20px;color:var(--accent)}
+    .brand-img{display:flex;align-items:center;gap:10px}
+    .brand-img img{height:40px;display:inline-block;border-radius:8px;object-fit:contain}
+    .nav-links{display:flex;gap:20px}
+    .nav-links a{color:var(--muted);padding:8px 12px;border-radius:8px;transition:all .18s;font-weight:600;text-decoration:none}
+    .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--accent)}
+    /* 移除文字底部横线（去掉 inset 底纹），仅使用浅背景作为高亮 */
+    .nav-links a.active{color:var(--accent);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:none;border-radius:10px}
+
+    /* 顶部宗旨横幅（做大以匹配首页轮播高度视觉，并加入装饰 SVG） */
+    .hero{background:linear-gradient(135deg,#6b46ff 0%, #06b6d4 100%);color:#fff;border-radius:12px;padding:28px;margin:18px 0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(2,6,23,.08);position:relative;min-height:260px}
+    .motto{font-size:48px;font-weight:800;color:rgba(255,255,255,0.98);letter-spacing:0.4px;max-width:80%;text-align:center;margin:0 auto}
+
+    main{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 12px 30px rgba(2,6,23,.06);border:1px solid rgba(15,23,42,.04)}
+    /* 更高优先级的规则：确保当 .card 同时是 .hero 时使用 hero 的渐变背景而不是白色 */
+    .hero.card{background:linear-gradient(135deg,#6b46ff 0%, #06b6d4 100%);color:#fff;border-radius:12px;padding:28px;margin:18px 0;box-shadow:0 12px 40px rgba(2,6,23,.08);min-height:220px}
+    .hero .motto{z-index:2;position:relative}
+    .hero .decor{z-index:1;position:absolute;right:18px;top:20px;opacity:0.18;width:220px;height:140px;pointer-events:none}
+    .intro p{color:var(--muted);line-height:1.65}
+    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .section-title h3{margin:0;font-size:18px;color:var(--dark)}
+    .history-list{display:flex;flex-direction:column;gap:12px}
+    .history-item{display:flex;gap:12px;align-items:flex-start}
+    .history-item .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:6px;box-shadow:0 6px 14px rgba(211,47,47,.06)}
+    .history-item .meta{color:var(--muted)}
+
+    /* 小装饰：在章节标题旁显示简约球拍图标 */
+    .section-title svg{width:18px;height:18px;opacity:.9}
+
+    /* 英雄块右侧装饰：简约乒乓元素，低不透明度，用于活力感渲染 */
+    .hero{position:relative}
+    .hero .decor{position:absolute;right:18px;top:20px;opacity:0.14;width:220px;height:140px;pointer-events:none}
+
+    /* 右侧快速信息栏 */
+    .aside .meta-card{display:flex;flex-direction:column;gap:12px}
+    .meta-row{display:flex;align-items:center;gap:12px}
+    .meta-row i{font-size:22px;color:var(--accent)}
+    .join-btn{display:inline-block;padding:10px 14px;background:linear-gradient(90deg,var(--accent),#ff5a5a);color:#fff;border-radius:12px;text-decoration:none;font-weight:700;box-shadow:0 12px 30px rgba(211,47,47,.12)}
+
+    footer{margin-top:26px;text-align:center;color:var(--muted);padding:20px 0}
+    .socials a{margin:0 8px;color:var(--muted);text-decoration:none}
+
+    /* 桌面优先，简单响应 */
+    @media (max-width:1000px){main{grid-template-columns:1fr} .container{padding:16px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="../../QTTC.svg" alt="QTTC" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <div class="brand">QTTF</div>
+        </div>
+        <div class="nav-links">
+          <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
+          <a href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
+          <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
+          <a class="active" href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="grid-column:1/-1">
+        <div class="hero card">
+          <div class="motto">办干净的比赛，办精彩的比赛</div>
+          <!-- 装饰性 SVG：球拍、球与弧线，透明度较低以不干扰文案 -->
+          <svg class="decor" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="paddleGrad" x1="0" x2="1">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06"/>
+              </linearGradient>
+            </defs>
+            <!-- 球 -->
+            <circle cx="44" cy="36" r="10" fill="#fff" opacity="0.98"/>
+            <circle cx="44" cy="36" r="6" fill="#ff8a00" opacity="0.95"/>
+            <!-- 球拍柄 -->
+            <rect x="86" y="66" width="84" height="16" rx="6" fill="#ffffff" opacity="0.14" transform="rotate(-30 86 66)"/>
+            <rect x="96" y="66" width="64" height="10" rx="5" fill="#ffd1a8" opacity="0.12" transform="rotate(-30 96 66)"/>
+            <!-- 球拍面轮廓 -->
+            <ellipse cx="80" cy="40" rx="30" ry="36" fill="url(#paddleGrad)" transform="rotate(-22 80 40)"/>
+            <!-- 动线 -->
+            <path d="M28 44 C44 28, 64 24, 88 34" stroke="#ffffff" stroke-opacity="0.12" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+    </div>
+
+    <section class="card intro">
+      <div class="section-title"><h3>组织简介</h3></div>
+      <p>我们是贵州省丘班学生自主创办的乒乓球协会，也是QTTC（丘班乒乓球锦标赛）的组织团队。协会成立于2024年，现有会员20+，已成功举办两届班内联赛，并建立起了一套完善的积分排名系统。我们致力于推广乒乓球文化，让更多同学感受竞技乐趣。无论你是高手还是新手，欢迎加入我们，一起挥拍向前！</p>
+    </section>
+
+    <aside class="card aside">
+      <div class="meta-card">
+        <div class="section-title"><h3>联系我们</h3></div>
+        <div class="meta-row"><i class="fas fa-user-plus"></i><div>请在邮件联系时备注来意，如赞助/加入/建议。</div></div>
+        <div class="meta-row"><i class="fas fa-envelope"></i><div>邮箱：contact_qttf@163.com <!-- 请替换为正式联系邮箱 --></div></div>
+        <a class="join-btn" href="https://dreamerdawn.github.io/QTTF/contact">了解详情</a>
+      </div>
+    </aside>
+
+    <section class="card">
+      <div class="section-title"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden><path d="M2 12c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2 2 6.477 2 12zm7-1l6-3v6l-6 3V11z" fill="currentColor" opacity="0.9"/></svg><h3>历史与成就</h3></div>
+      <div class="history-list">
+        <div class="history-item"><div class="dot"></div><div><strong>2024-10</strong> — QTTF 成立。</div></div>
+        <div class="history-item"><div class="dot"></div><div><strong>2024-10</strong> — 举办首届丘班乒乓球锦标赛（“追光”杯选拔赛）。</div></div>
+        <div class="history-item"><div class="dot"></div><div><strong>2024-11</strong> — 参加年级“追光”杯，取得良好成绩。</div></div>
+        <div class="history-item"><div class="dot"></div><div><strong>2025-04</strong> — 举办“寝室团体赛”。</div></div>
+        <div class="history-item"><div class="dot"></div><div><strong>2025-09</strong> — 高一入学，完成组织改组。</div></div>
+        <div class="history-item"><div class="dot"></div><div><strong>2025-11</strong> — 举办“觚棻”杯暨第二届丘班乒乓球锦标赛。</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><h3>我们的理念</h3></div>
+      <p style="color:var(--muted)">秉持公平、透明与开放的比赛精神，鼓励学生参与、交流与持续进步。我们希望通过比赛与训练搭建学习平台，同时把竞技与友谊放在同等重要的位置。</p>
+    </section>
+
+    <div style="grid-column:1/-1">
+      <footer>
+        <div>本网页由Github Copilot生成，数据由丘班乒乓球联合会提供</div>
+          <div class="socials" style="margin-top:8px">
+            <!-- 只保留已在首页提供的真实社媒：B站 和 联系邮箱 -->
+            <a href="https://space.bilibili.com/3546718777903801" title="B站" target="_blank" rel="noopener noreferrer"><i class="fab fa-bilibili"></i></a>
+            <a href="mailto:contact_qttf@163.com" title="邮箱"><i class="fas fa-envelope"></i></a>
+          </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // 导航悬停逻辑：默认高亮关于我们；悬停时仅高亮当前项
+    (function(){
+      const navLinks = document.querySelectorAll('nav .nav-links a');
+      const defaultHref = 'https://dreamerdawn.github.io/QTTF/about';
+      const resetDefault = ()=>{
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const about = Array.from(navLinks).find(a=>a.getAttribute('href')===defaultHref);
+        if(about) about.classList.add('active');
+      };
+      navLinks.forEach(a=>{
+        a.addEventListener('mouseenter', ()=>{
+          navLinks.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+        });
+      });
+      const container = document.querySelector('nav .nav-links');
+      if(container) container.addEventListener('mouseleave', ()=> setTimeout(resetDefault, 50));
+      // 初始化
+      resetDefault();
+    })();
+  </script>
+</body>
+</html>
