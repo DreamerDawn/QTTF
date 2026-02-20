@@ -46,5 +46,3 @@
 故障排查
 - 页面显示“数据加载失败”：请确认 `rankings.json` 与 `index.html` 在同一目录，且通过 HTTP(s) 访问（非 file://）。
 - 控制台（F12）可查看 fetch 错误详情。
-
-如需我把 README 加到仓库根或生成一个简单的 GitHub Actions 自动发布脚本，告诉我你的偏好。 
