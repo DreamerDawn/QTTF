@@ -1,0 +1,129 @@
+{
+"leagueName": "2025-2026(II)赛季 丘超联赛",
+"round": "第2轮",
+"lastUpdated": "2026-06-07",
+"teams": [
+{
+"rank": 1,
+"team": "谢承宇",
+"matches": 2,
+"wins": 1,
+"draws": 1,
+"losses": 0,
+"gamesWon": 5,
+"gamesLost": 3,
+"gameDifference": 2,
+"points": 4,
+"last3": ["", "W", "D"]
+},
+{
+"rank": 2,
+"team": "肖逸轩",
+"matches": 1,
+"wins": 1,
+"draws": 0,
+"losses": 0,
+"gamesWon": 4,
+"gamesLost": 0,
+"gameDifference": 4,
+"points": 3,
+"last3": ["", "", "W"]
+},
+{
+"rank": 3,
+"team": "郭东珉",
+"matches": 2,
+"wins": 0,
+"draws": 2,
+"losses": 0,
+"gamesWon": 4,
+"gamesLost": 4,
+"gameDifference": 0,
+"points": 2,
+"last3": ["", "D", "D"]
+},
+{
+"rank": 4,
+"team": "陈金森",
+"matches": 2,
+"wins": 0,
+"draws": 2,
+"losses": 0,
+"gamesWon": 4,
+"gamesLost": 4,
+"gameDifference": 0,
+"points": 2,
+"last3": ["", "D", "D"]
+},
+{
+"rank": 5,
+"team": "赵久龄",
+"matches": 1,
+"wins": 0,
+"draws": 1,
+"losses": 0,
+"gamesWon": 2,
+"gamesLost": 2,
+"gameDifference": 0,
+"points": 1,
+"last3": ["", "", "D"]
+},
+{
+"rank": 6,
+"team": "朱恩骏",
+"matches": 1,
+"wins": 0,
+"draws": 1,
+"losses": 0,
+"gamesWon": 2,
+"gamesLost": 2,
+"gameDifference": 0,
+"points": 1,
+"last3": ["", "", "D"]
+},
+{
+"rank": 7,
+"team": "陈子扬",
+"matches": 2,
+"wins": 0,
+"draws": 1,
+"losses": 1,
+"gamesWon": 2,
+"gamesLost": 6,
+"gameDifference": -4,
+"points": 1,
+"last3": ["", "L", "D"]
+},
+{
+"rank": 8,
+"team": "杨蕊宁",
+"matches": 1,
+"wins": 0,
+"draws": 0,
+"losses": 1,
+"gamesWon": 1,
+"gamesLost": 3,
+"gameDifference": -2,
+"points": 0,
+"last3": ["", "", "L"]
+}
+],
+"zones": {
+    "schoolZone": {
+        "name": "校运区",
+        "range": [1, 4],
+        "color": "green"
+    },
+    "schoolPlayoff": {
+        "name": "校运附加赛区",
+        "range": [5, 6],
+        "color": "green"
+    },
+    "relegation": {
+        "name": "降级区",
+        "range": [7, 8],
+        "color": "grey"
+    }
+},
+"supplement": "丘班乒乓球超级联赛(Qiuban SMASH League)是QTTF联赛系列中的顶级赛事，试行赛季共由8名选手组成，单循环制比赛。\n 每场赛事胜者得3分，平局两队各得1分，负者不得分。 \n 7轮过后以积分多少决定最终排名，若同分则依次以下列方式决定排名：\n a）净胜局多者，名次列前；\n b）净胜分多者，名次列前；\n 若涉及到冠军、校运、降级名额的争夺，且以上选项都决定不出名次，则继续比较： \n c）相互对阵获胜者，名次列前；\n d）相互对阵净胜分多者，名次列前；\n e）五局三胜附加赛。\n \n 校运及降级名额：\n（一）联赛前4名直接获得下场“全球”运动会团体赛参赛资格；\n（二）第5、6名直接获得下场“全球”运动会附加赛参赛资格；\n（三）若本赛季有“觚棻”杯，则“觚棻”杯冠军直接获得下场“全球”运动会团体赛参赛资格；若其已获得校运资格，则名额顺延给联赛中未获校运资格中排名靠前的选手。\n（四）排名最后2名的选手降入丘冠联赛。"
+}

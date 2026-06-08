@@ -1,0 +1,163 @@
+{
+"leagueName": "2025-2026(II)赛季 丘冠联赛",
+"round": "第2轮",
+"lastUpdated": "2026-06-07",
+"teams": [
+{
+"rank": 1,
+"team": "周乾渊",
+"matches": 2,
+"wins": 1,
+"draws": 1,
+"losses": 0,
+"gamesWon": 6,
+"gamesLost": 2,
+"gameDifference": 4,
+"points": 4,
+"last3": ["", "W", "D"]
+},
+{
+"rank": 2,
+"team": "李嘉睿",
+"matches": 1,
+"wins": 1,
+"draws": 0,
+"losses": 0,
+"gamesWon": 4,
+"gamesLost": 0,
+"gameDifference": 4,
+"points": 3,
+"last3": ["", "", "W"]
+},
+{
+"rank": 3,
+"team": "邹雨岑",
+"matches": 1,
+"wins": 1,
+"draws": 3,
+"losses": 0,
+"gamesWon": 3,
+"gamesLost": 1,
+"gameDifference": 2,
+"points": 3,
+"last3": ["", "", "W"]
+},
+{
+"rank": 4,
+"team": "刘函宇",
+"matches": 1,
+"wins": 1,
+"draws": 0,
+"losses": 0,
+"gamesWon": 3,
+"gamesLost": 1,
+"gameDifference": 2,
+"points": 3,
+"last3": ["", "", "W"]
+},
+{
+"rank": 5,
+"team": "梁博涛",
+"matches": 2,
+"wins": 0,
+"draws": 2,
+"losses": 0,
+"gamesWon": 4,
+"gamesLost": 4,
+"gameDifference": 0,
+"points": 2,
+"last3": ["", "D", "D"]
+},
+{
+"rank": 6,
+"team": "唐近尧",
+"matches": 1,
+"wins": 0,
+"draws": 1,
+"losses": 0,
+"gamesWon": 2,
+"gamesLost": 2,
+"gameDifference": 0,
+"points": 1,
+"last3": ["", "", "D"]
+},
+{
+"rank": 7,
+"team": "胡雅文",
+"matches": 1,
+"wins": 0,
+"draws": 0,
+"losses": 1,
+"gamesWon": 1,
+"gamesLost": 3,
+"gameDifference": -2,
+"points": 0,
+"last3": ["", "", "L"]
+},
+{
+"rank": 8,
+"team": "王续成",
+"matches": 1,
+"wins": 0,
+"draws": 0,
+"losses": 1,
+"gamesWon": 0,
+"gamesLost": 4,
+"gameDifference": -4,
+"points": 0,
+"last3": ["", "", "L"]
+},
+{
+"rank": 9,
+"team": "郭慕晗",
+"matches": 2,
+"wins": 0,
+"draws": 0,
+"losses": 2,
+"gamesWon": 1,
+"gamesLost": 7,
+"gameDifference": -6,
+"points": 0,
+"last3": ["", "L", "L"]
+},
+{
+"rank": 10,
+"team": "殳晟欢",
+"matches": 0,
+"wins": 0,
+"draws": 0,
+"losses": 0,
+"gamesWon": 0,
+"gamesLost": 0,
+"gameDifference": 0,
+"points": 0,
+"last3": ["", "", ""]
+},
+{
+"rank": 11,
+"team": "杨梓隽",
+"matches": 0,
+"wins": 0,
+"draws": 0,
+"losses": 0,
+"gamesWon": 0,
+"gamesLost": 0,
+"gameDifference": 0,
+"points": 0,
+"last3": ["", "", ""]
+}
+],
+"zones": {
+    "schoolPlayoff": {
+        "name": "升级区/校运附加赛区",
+        "range": [1, 1],
+        "color": "green"
+    },
+    "qualification": {
+        "name": "升级附加赛区/选拔赛资格赛区",
+        "range": [2, 3],
+        "color": "green"
+    }
+},
+"supplement": "丘班乒乓球冠军联赛(Qiuban CHAMPIONSHIP League)是QTTF联赛系列中的次级赛事，试行赛季共由11名选手组成，单循环制比赛。\n 每场赛事胜者得3分，平局两队各得1分，负者不得分。 \n 11轮过后以积分多少决定最终排名，若同分则依次以下列方式决定排名：\n a）净胜局多者，名次列前；\n b）净胜分多者，名次列前；\n 若涉及到冠军、校运、升级名额的争夺，且以上选项都决定不出名次，则继续比较： \n c）相互对阵获胜者，名次列前；\n d）相互对阵净胜分多者，名次列前；\n e）五局三胜附加赛。\n \n 校运及升级名额：\n（一）联赛冠军直接获得下场“全球”运动会附加赛参赛资格，并升入丘超联赛；\n（二）联赛第2、3名单独进行五局三胜的升级附加赛，胜者升入丘超联赛并获得“全球”运动会附加赛参赛资格。 \n（三）若本赛季有“觚棻”杯，则“觚棻”杯冠军直接获得下场“全球”运动会团体赛参赛资格；若其已获得校运资格赛资格，则名额顺延给联赛中未获校运资格赛资格中排名靠前的选手。"
+}

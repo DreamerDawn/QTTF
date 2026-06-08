@@ -1,0 +1,22 @@
+[
+  { "rank": 1, "position": 1, "difference": "↑2", "points": 2000, "name": "陈金森", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "W", "points": 2000 } ] },
+  { "rank": 2, "position": 2, "difference": "↑5", "points": 1400, "name": "谢承宇", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "F", "points": 1400 } ]},
+  { "rank": 3, "position": 3, "difference": "↓2", "points": 800, "name": "朱恩骏", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "B", "points": 800 } ]},
+  { "rank": 4, "position": 4, "difference": "NEW", "points": 600, "name": "陈子扬", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "SF", "points": 600 } ] },
+  { "rank": 5, "position": 5, "difference": "↓-3", "points": 350, "name": "郭东珉", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "QF", "points": 350 } ]},
+  { "rank": 6, "position": 5, "difference": "NEW", "points": 350, "name": "殳晟欢", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "QF", "points": 350 } ] },
+  { "rank": 7, "position": 5, "difference": "", "points": 350, "name": "肖逸轩", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "QF", "points": 350 } ]},
+  { "rank": 8, "position": 5, "difference": "↓-1", "points": 350, "name": "杨蕊宁", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "QF", "points": 350 } ]},
+  { "rank": 9, "position": 9, "difference": "↓-1", "points": 175, "name": "刘函宇", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "R16", "points": 175 } ]},
+  { "rank": 10, "position": 9, "difference": "NEW", "points": 175, "name": "赵久龄", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "R16", "points": 175 } ] },
+  { "rank": 11, "position": 9, "difference": "", "points": 175, "name": "周乾渊", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "R16", "points": 175 } ]},
+  { "rank": 12, "position": 9, "difference": "NEW", "points": 175, "name": "邹雨岑", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "R16", "points": 175 } ] },
+  { "rank": 13, "position": 13, "difference": "", "points": 85, "name": "柴靖伟", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "G3L", "points": 85 } ]},
+  { "rank": 14, "position": 13, "difference": "NEW",  "points": 85, "name": "郭圣易", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "G3L", "points": 85 } ]},
+  { "rank": 15, "position": 13, "difference": "NEW", "points": 85, "name": "李嘉睿", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "G3L", "points": 85 } ]},
+  { "rank": 16, "position": 13, "difference": "NEW", "points": 85, "name": "唐近尧", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "G3L", "points": 85 } ]},
+  { "rank": 17, "position": 13, "difference": "", "points": 85, "name": "王文彬", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "G3L", "points": 85 } ]},
+  { "rank": 18, "position": 13, "difference": "NEW", "points": 85, "name": "王续成", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "G3L", "points": 85 } ]},
+  { "rank": 19, "position": 19, "difference": "", "points": 0, "name": "梁博涛", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "DNP", "points": 0 } ]},
+  { "rank": 20, "position": 19, "difference": "↓13", "points": 0, "name": "杨梓隽", "history": [ { "event": "QTTC 2025", "expires_on": "2026-12-08", "position": "DNP", "points": 0 } ]}
+]

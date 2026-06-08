@@ -101,14 +101,16 @@
     /* 仅适配PC端，简单响应 */
     @media (max-width:1100px){:root{--max-width:980px}}
   </style>
+
 </head>
 <body>
+  <script src="https://keepandroidopen.org/banner.js?size=mini"></script>
   <header>
     <div class="container">
       <nav>
         <div style="display:flex;align-items:center;gap:10px">
           <!-- 使用工作区中的 QTTC.svg 徽标文件（已写入 d:/QTTF/QTTC.svg） -->
-          <img src="QTTC.svg" alt="QTTC" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <img src="QTTF.png" alt="QTTF" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
           <div class="brand">QTTF</div>
         </div>
         <div class="nav-links">
@@ -267,9 +269,10 @@
        当前 href 为占位字符串（示例为 'test1'..'test4'），生产环境请替换为真实 URL。
     */
     const slidesData = [
-      { title: 'QTTC 2025赛事纪录', desc: '经历28场比赛，104局缠斗，QTTF历史上最大规模的比赛圆满落幕。', href: 'https://dreamerdawn.github.io/QTTF/events/qttc2025', bg: 'linear-gradient(135deg,#0f172a 0%, #1e40af 100%)' },
+      { title: '丘超联赛积分榜', desc: 'QTTF最高规格的联赛首周落幕，每分必争的联赛纪元已至。', href: 'https://dreamerdawn.github.io/QTTF/events/league/qsl', bg: 'linear-gradient(135deg,#ffa4a6 0%, #4285d1 100%)' },
+      { title: '丘冠联赛积分榜', desc: '次级联赛首周完赛，金字塔生态正式启幕', href: 'https://dreamerdawn.github.io/QTTF/events/league/qcl', bg: 'linear-gradient(135deg,#00a687 0%, #7644d4 100%)' },
+      { title: 'QTTC 2025赛事纪录', desc: '经历28场比赛，104局缠斗，QTTF历史上最大规模的比赛圆满落幕。', href: 'https://dreamerdawn.github.io/QTTF/events/qttc/qttc2025', bg: 'linear-gradient(135deg,#0f172a 0%, #1e40af 100%)' },
       { title: '2024年“追光”杯赛事纪录', desc: 'QTTF仅记录了2024年九年级组比赛且有部分缺失，望能谅解。', href: 'https://dreamerdawn.github.io/QTTF/events/zgcup2024', bg: 'linear-gradient(135deg,#7c3aed 0%, #06b6d4 100%)' },
-      { title: 'QTTC 2024赛事纪录', desc: 'QTTF建立后的首场大规模赛事，也是2024年“追光”杯选拔赛。', href: 'https://dreamerdawn.github.io/QTTF/events/qttc2024', bg: 'linear-gradient(135deg,#0ea5a4 0%, #0369a1 100%)' },
       { title: '2026年1月QTTF选手排名', desc: '为备战学校“全球运动会”，QTTF首次进行全性别组和女子组的划分。', href: 'https://dreamerdawn.github.io/QTTF/rankings/2026-01', bg: 'linear-gradient(135deg,#ff5f6d 0%, #ffc371 100%)' }
     ];
 

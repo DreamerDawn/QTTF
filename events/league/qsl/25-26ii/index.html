@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>联赛积分榜</title>
+  <!-- Font Awesome for social icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --header-bg:#1f2a37;
+      --brand:#1f6feb;
+      --accent:var(--brand);
+      --muted:#6b7280;
+      --radius:10px;
+      --badge-size:32px;
+      --gap:8px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a}
+    .page{max-width:1100px;margin:28px auto;padding:18px}
+
+    /* 顶栏 */
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .league-info{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 2px 6px rgba(16,24,40,0.05);display:flex;flex-direction:column}
+    .league-title{font-size:20px;font-weight:700;color:var(--header-bg)}
+    .meta{display:flex;gap:12px;color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* 控件 */
+    .controls{display:flex;gap:12px;align-items:center}
+    .search{padding:8px 12px;border-radius:8px;border:1px solid #e6edf6;background:#fff;min-width:180px}
+    .note{color:var(--muted);font-size:13px}
+
+    /* 表格容器 */
+    .table-card{background:var(--card);border-radius:var(--radius);padding:12px;margin-top:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:920px;table-layout:auto}
+    thead th{background:transparent;color:var(--muted);padding:10px 8px;font-weight:700;text-align:center;font-size:13px}
+    thead th.team{ text-align:left }
+    thead th.num{ text-align:right }
+    thead th.last3{ text-align:right }
+    thead th.sortable{cursor:pointer;user-select:none}
+    tbody tr{background:transparent}
+    tbody tr:nth-child(even){background:rgba(15,23,42,0.03)}
+    tbody tr:hover{background:rgba(31,42,55,0.04)}
+    td{padding:10px;border-bottom:1px solid rgba(15,23,42,0.04);vertical-align:middle}
+    td.num{ text-align:right; font-variant-numeric:tabular-nums }
+    td.team{ text-align:left }
+    .points{color:var(--brand);font-weight:700}
+
+    /* 徽章 */
+    .badges{display:flex;gap:6px;align-items:center;justify-content:flex-end}
+    .badge{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;font-size:13px;border:1px solid rgba(15,23,42,0.06)}
+    .badge.w{background:#10b981}
+    .badge.d{background:#f59e0b}
+    .badge.l{background:#ef4444}
+    .badge.empty{background:#9ca3af}
+
+    /* 排名小卡 */
+    .rank{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:#ffffff;font-weight:700;color:#0f172a;border:1px solid rgba(15,23,42,0.04)}
+
+    /* 模态 */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:opacity .18s}
+    .modal.show{visibility:visible;opacity:1}
+    .modal-card{background:var(--card);border-radius:10px;padding:16px;max-width:560px;width:100%;box-shadow:0 10px 30px rgba(2,6,23,.3)}
+
+    /* 小屏幕 */
+    @media (max-width:768px){
+      :root{--badge-size:24px}
+      .league-title{font-size:18px}
+      .table-wrap{overflow-x:auto}
+      thead th, td{padding:8px}
+      table{min-width:860px}
+      .badge{width:24px;height:24px;font-size:12px}
+    }
+
+    /* 友好提示 */
+    .status{padding:10px;color:var(--muted)}
+
+    /* 区域样式 */
+    .zone-header{font-weight:700;padding:8px 12px;text-align:left}
+    .zone-green{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.12)}
+    .zone-gray{background:rgba(107,114,128,0.12);border:1px solid rgba(107,114,128,0.08)}
+    .zone-row-green td{background:rgba(16,185,129,0.06)}
+    .zone-row-gray td{background:rgba(107,114,128,0.04)}
+    .history-link{display:inline-block;color:var(--accent);font-weight:700;text-decoration:none;margin-top:8px}
+    .history-link:hover{text-decoration:underline}
+
+    /* header & global container from homepage */
+    header{background:rgba(255,255,255,0.72);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 6px 24px rgba(16,24,40,.06);position:sticky;top:0;z-index:1100;border-bottom:1px solid rgba(15,23,42,.03)}
+    .container{max-width:1200px;margin:0 auto;padding:0 28px}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{font-weight:700;font-size:20px;color:#0066ff}
+    .nav-links{display:flex;gap:20px}
+    .nav-links a{color:#6b7280;padding:8px 10px;border-radius:8px;transition:all .18s;font-weight:600;text-decoration:none}
+    .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--brand)}
+    .nav-links a.active{color:var(--brand);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:inset 0 -4px 18px rgba(0,102,255,.03);border-radius:10px}
+    .btn{display:inline-block;padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,var(--brand),#1f8bff);color:#fff;font-weight:700;border:none;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px rgba(32,124,255,.12);transition:transform .18s ease,box-shadow .18s,opacity .15s}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(32,124,255,.18);opacity:0.98}
+    footer.site-footer{padding:28px 0;text-align:center;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="QTTF.png" alt="QTTF" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <div class="brand">QTTF</div>
+        </div>
+        <div class="nav-links">
+          <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
+          <a class="active" href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
+          <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
+          <a href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <script src="https://keepandroidopen.org/banner.js?size=mini"></script>
+  <div class="page">
+    <div class="topbar">
+      <div class="league-info">
+        <div class="league-title" id="leagueName">联赛积分榜</div>
+        <div class="meta"><span id="round">-</span><span id="lastUpdated">-</span></div>
+      </div>
+      <div class="controls">
+        <input id="search" class="search" placeholder="搜索队伍（回车或输入时过滤）" />
+      </div>
+    </div>
+
+    <div id="status" class="status">加载中...</div>
+
+    <div class="table-card">
+      <div class="table-wrap" id="tableWrap">
+        <!-- 表格会被 JS 渲染 -->
+      </div>
+    </div>
+
+    <!-- 补充说明区域 -->
+    <div style="margin-top:12px">
+      <div style="background:#f8f9fc;padding:16px;border-radius:8px;max-width:100%;">
+          <div style="font-weight:700;margin-bottom:6px">补充说明</div>
+          <div id="supplement" style="white-space: pre-line;">暂无补充说明</div>
+          <div style="margin-top:8px"><a class="history-link" href="#">&gt;&gt;历史赛事</a></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>本网页由Github Copilot生成，数据由丘班乒乓球联合会提供</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 行点击详情已移除 -->
+
+  <script>
+    // --- 示例回退数据，仅在 fetch 失败时使用 ---
+    const fallbackData = {
+      "leagueName": "示例联赛",
+      "round": "演示轮次",
+      "lastUpdated": "2025-06-07",
+      "teams": [
+        {"rank":1,"team":"示例队A","matches":10,"wins":8,"draws":1,"losses":1,"gamesWon":25,"gamesLost":8,"gameDifference":17,"points":25,"last3":["W","W","W"]},
+        {"rank":2,"team":"示例队B","matches":10,"wins":6,"draws":2,"losses":2,"gamesWon":18,"gamesLost":10,"gameDifference":8,"points":20,"last3":["W","L","W"]}
+      ]
+    };
+
+    let originalOrder = []; // 存储默认顺序
+    let currentData = [];
+    let currentSort = {key:null,dir:1};
+    let currentZones = null; // zones 原始对象
+    let zonesOrdered = []; // 按 JSON 顺序的区域数组
+
+    // 映射徽章样式
+    const badgeClass = t => t==='W' ? 'w' : t==='D' ? 'd' : t==='L' ? 'l' : 'empty';
+
+    async function loadLeague(){
+      const status = document.getElementById('status');
+      status.textContent = '加载中...';
+      try{
+        const res = await fetch('league.json',{cache:'no-store'});
+        if(!res.ok) throw new Error('Fetch failed: '+res.status);
+        const data = await res.json();
+        renderLeague(data);
+      }catch(err){
+        console.warn('加载 league.json 失败，使用示例数据：',err);
+        status.textContent = '无法加载 league.json，已使用示例数据。';
+        renderLeague(fallbackData);
+      }
+    }
+
+    function normalizeTeams(data){
+      const teams = (data.teams || []).map((t, idx) => {
+        const copy = Object.assign({}, t);
+        // 补全 gameDifference
+        if(copy.gameDifference===undefined && copy.gamesWon!==undefined && copy.gamesLost!==undefined){
+          copy.gameDifference = copy.gamesWon - copy.gamesLost;
+        }
+        // 保证 last3 为数组或 null
+        if(!Array.isArray(copy.last3)) copy.last3 = null;
+        return copy;
+      });
+
+      // 如果所有队伍都没有 rank，则生成排序并赋予 rank
+      const anyRank = teams.some(t=>typeof t.rank==='number');
+      if(!anyRank){
+        teams.sort((a,b)=> compareTeams(a,b));
+        teams.forEach((t,i)=> t.rank = i+1);
+      }
+      return teams;
+    }
+
+    function compareTeams(a,b){
+      // 排序：积分 desc > 净胜局 desc > 胜局 desc > 队名 asc
+      const pa = Number(a.points||0), pb = Number(b.points||0);
+      if(pa!==pb) return pb-pa;
+      const da = Number(a.gameDifference||0), db = Number(b.gameDifference||0);
+      if(da!==db) return db-da;
+      const wa = Number(a.gamesWon||0), wb = Number(b.gamesWon||0);
+      if(wa!==wb) return wb-wa;
+      return String(a.team||'').localeCompare(String(b.team||''));
+    }
+
+    function renderLeague(data){
+      document.getElementById('leagueName').textContent = data.leagueName || '联赛积分榜';
+      document.getElementById('round').textContent = data.round ? data.round : '';
+      document.getElementById('lastUpdated').textContent = data.lastUpdated ? ('更新：'+data.lastUpdated) : '';
+
+      // 解析 zones（可选），保持顺序以便优先匹配
+      try{
+        if(data && data.zones && typeof data.zones === 'object'){
+          currentZones = data.zones;
+          zonesOrdered = Object.keys(data.zones).map(k => {
+            const z = data.zones[k] || {};
+            return { key: k, name: z.name || k, range: Array.isArray(z.range) ? z.range : null, color: z.color || null, individualQualifiers: z.individualQualifiers || null };
+          }).filter(z => Array.isArray(z.range) && z.range.length===2);
+        }else{
+          currentZones = null; zonesOrdered = [];
+        }
+      }catch(e){ console.warn('解析 zones 失败，忽略区域标注', e); currentZones=null; zonesOrdered=[]; }
+
+      // 补充说明：从 JSON 的 `supplement` 字段读取；若缺失或为空则显示默认文字
+      try{
+        const suppEl = document.getElementById('supplement');
+        if(suppEl){
+          const suppText = (data && typeof data.supplement === 'string' && data.supplement.trim() !== '') ? data.supplement : '暂无补充说明';
+          suppEl.textContent = suppText;
+        }
+      }catch(e){ console.warn('设置补充说明失败', e); }
+
+      const teams = normalizeTeams(data);
+      if(teams.length===0){
+        document.getElementById('tableWrap').innerHTML = '<div style="padding:18px">暂无数据</div>';
+        return;
+      }
+
+      // 保存原始顺序（以 rank 或 JSON 顺序为准）
+      originalOrder = Array.from(teams).sort((a,b)=> (a.rank||0) - (b.rank||0));
+      currentData = teams.slice();
+      buildTable(currentData);
+      document.getElementById('status').textContent = '';
+    }
+
+    function buildTable(list){
+      const wrap = document.getElementById('tableWrap');
+      const tbl = document.createElement('table');
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      const headers = [
+        {k:'rank',t:'排名'},
+        {k:'team',t:'队伍'},
+        {k:'matches',t:'场次'},
+        {k:'wins',t:'胜'},
+        {k:'draws',t:'平'},
+        {k:'losses',t:'负'},
+        {k:'gamesWon',t:'胜局数'},
+        {k:'gamesLost',t:'负局数'},
+        {k:'gameDifference',t:'净胜局'},
+        {k:'points',t:'积分'},
+        {k:'last3',t:'最近3场'}
+      ];
+      headers.forEach(h=>{
+        const th = document.createElement('th');
+        th.textContent = h.t;
+        th.dataset.key = h.k;
+        if(['matches','wins','draws','losses','gamesWon','gamesLost','gameDifference','points'].includes(h.k)) th.classList.add('num');
+        if(h.k==='last3') th.classList.add('last3');
+        if(['points','gamesWon','gameDifference'].includes(h.k)) th.classList.add('sortable');
+        if(h.k==='team') th.classList.add('team');
+        if(h.k==='rank') th.classList.add('sortable');
+        th.addEventListener('click', ()=> onHeaderClick(h.k));
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      tbl.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+
+      // 根据 zonesOrdered 按顺序匹配名次，返回 zone 对象或 null
+      const getZoneForRank = (rank) => {
+        if(!Array.isArray(zonesOrdered) || zonesOrdered.length===0) return null;
+        for(const z of zonesOrdered){
+          if(!z || !Array.isArray(z.range)) continue;
+          const s = Number(z.range[0]), e = Number(z.range[1]);
+          if(!Number.isFinite(s) || !Number.isFinite(e)) continue;
+          if(rank >= s && rank <= e) return z;
+        }
+        return null;
+      };
+
+      let prevZoneKey = null;
+      for(const team of list){
+        const tr = document.createElement('tr');
+        tr.tabIndex = 0;
+        tr.style.cursor = 'default';
+
+        const zone = (typeof team.rank === 'number') ? getZoneForRank(Number(team.rank)) : null;
+        const zoneKey = zone ? zone.key : null;
+
+        // 如果当前可见行属于区域，且前一行不是同一区域，插入区域顶栏
+        if(zone && prevZoneKey !== zoneKey){
+          const hdr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.colSpan = headers.length;
+          td.className = 'zone-header';
+          if(zone.color === 'green'){
+            td.classList.add('zone-green'); hdr.classList.add('zone-green');
+          }else if(zone.color === 'gray'){
+            td.classList.add('zone-gray'); hdr.classList.add('zone-gray');
+          }else{
+            // 不支持的颜色：忽略样式
+            console.warn('不支持的 zone color:', zone.color, '（仅支持 green / gray）');
+          }
+          td.textContent = zone.name || zone.key || '';
+          hdr.appendChild(td);
+          tbody.appendChild(hdr);
+        }
+
+        // 排名
+        const tdRank = document.createElement('td');
+        tdRank.innerHTML = `<div class="rank">${team.rank||'-'}</div>`;
+        tr.appendChild(tdRank);
+
+        // 队伍
+        const tdTeam = document.createElement('td'); tdTeam.className='team'; tdTeam.textContent = team.team || '-'; tr.appendChild(tdTeam);
+
+        // 数字列
+        const numCols = ['matches','wins','draws','losses','gamesWon','gamesLost','gameDifference','points'];
+        numCols.forEach(k=>{
+          const td = document.createElement('td'); td.className='num';
+          let v = team[k];
+          if(k==='gameDifference' && (v===undefined || v===null)) v = (Number(team.gamesWon||0) - Number(team.gamesLost||0));
+          td.textContent = v===undefined || v===null ? '-' : v;
+          if(k==='points') td.classList.add('points');
+          tr.appendChild(td);
+        });
+
+        // 最近3场
+        const tdLast = document.createElement('td'); tdLast.style.textAlign='right';
+        const container = document.createElement('div'); container.className='badges';
+        if(Array.isArray(team.last3)){
+          team.last3.forEach(ch=>{
+            const sp = document.createElement('span'); sp.className = 'badge '+badgeClass(ch); sp.textContent = ch || '-'; container.appendChild(sp);
+          });
+        }else{
+          // 显示三个空徽章
+          for(let i=0;i<3;i++){ const sp=document.createElement('span'); sp.className='badge empty'; sp.textContent='-'; container.appendChild(sp); }
+        }
+        tdLast.appendChild(container);
+        tr.appendChild(tdLast);
+
+        // 为 tr 添加区域行样式（若有）
+        if(zone){
+          if(zone.color === 'green') tr.classList.add('zone-row-green');
+          else if(zone.color === 'gray') tr.classList.add('zone-row-gray');
+        }
+
+        tbody.appendChild(tr);
+        prevZoneKey = zoneKey;
+      }
+
+      // 替换内容
+      tbl.appendChild(tbody);
+      wrap.innerHTML = '';
+      wrap.appendChild(tbl);
+    }
+
+    function onHeaderClick(key){
+      // 排名列恢复默认顺序
+      if(key==='rank'){
+        currentData = originalOrder.slice();
+        currentSort = {key:null,dir:1};
+        buildTable(currentData);
+        return;
+      }
+
+      if(!currentSort.key || currentSort.key!==key) currentSort = {key,dir:-1};
+      else currentSort.dir = -currentSort.dir;
+
+      currentData.sort((a,b)=>{
+        const va = Number(a[key]||0), vb = Number(b[key]||0);
+        return (va - vb) * currentSort.dir * -1; // 使 dir 1 为 desc
+      });
+      buildTable(currentData);
+    }
+
+    // 行点击详情逻辑已移除（不再显示 JSON 模态）
+
+    // 搜索过滤
+    const searchEl = document.getElementById('search');
+    searchEl.addEventListener('input', onSearch);
+    function onSearch(e){
+      const q = (e.target.value||'').trim().toLowerCase();
+      if(!q){ buildTable(currentData); return; }
+      const filtered = currentData.filter(t => String(t.team||'').toLowerCase().includes(q));
+      buildTable(filtered);
+    }
+
+    // 初始加载
+    window.addEventListener('DOMContentLoaded', loadLeague);
+
+    /* ===== 导航 tab 悬停逻辑（移植自 homepage） ===== */
+    (function(){
+      const navLinks = document.querySelectorAll('nav .nav-links a');
+      const defaultHref = 'https://dreamerdawn.github.io/QTTF/events';
+      const resetDefault = ()=>{
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const home = Array.from(navLinks).find(a=>a.getAttribute('href')===defaultHref);
+        if(home) home.classList.add('active');
+      };
+
+      navLinks.forEach(a=>{
+        a.addEventListener('mouseenter', ()=>{
+          navLinks.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+        });
+      });
+
+      const navLinksContainer = document.querySelector('nav .nav-links');
+      if(navLinksContainer){
+        navLinksContainer.addEventListener('mouseleave', ()=>{
+          setTimeout(resetDefault, 50);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

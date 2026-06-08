@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>页面建设中 - QTTF</title>
+  <title>选手排名 - QTTF</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <!-- 后备：meta 刷新（作为备用方案） -->
-  <meta http-equiv="refresh" content="3;url=https://dreamerdawn.github.io/QTTF/homepage">
   <style>
     :root{
       --bg:#f6f8fb;
       --card:#ffffff;
       --accent:#0066ff;
-      --accent-warn:#ff6b35;
       --muted:#6b7280;
       --max-width:1200px;
+      --stripe:#f9f9f9;
+      --line:#e7e7ea;
     }
     html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0b1220;background:linear-gradient(180deg,#f7fafc 0%, #eef4ff 100%);} 
     a{color:inherit;text-decoration:none}
@@ -28,33 +27,68 @@
     .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--accent)}
     .nav-links a.active{color:var(--accent);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:none;border-radius:10px}
 
-    main{padding:28px 0 56px;min-height:60vh;display:flex;align-items:center}
+    main{padding:28px 0 56px}
 
-    .features{display:none}
-    .card{background:linear-gradient(180deg,var(--card),var(--card));padding:14px;border-radius:14px;box-shadow:10px 12px 30px rgba(20,32,78,.04);border:1px solid rgba(15,23,42,.04);box-sizing:border-box}
+    /* 布局：主内容 2 / 侧边 1 */
+    .layout{display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start}
 
-    /* 提示卡片样式 */
-    .notice-wrap{display:flex;align-items:center;justify-content:center;width:100%}
-    .notice{max-width:720px;width:100%;padding:36px;border-radius:16px;background:#fff;box-shadow:0 12px 30px rgba(16,24,40,.06);border:1px solid rgba(15,23,42,.04);text-align:center}
-    .notice h1{margin:0 0 8px;font-size:20px;font-weight:700;color:var(--accent-warn)}
-    .notice p{margin:0 0 12px;font-size:18px;color:#0b1220}
-    .notice .muted{color:var(--muted);font-size:14px;margin-top:8px}
+    /* 表格样式 */
+    .table-wrap{background:transparent;padding:10px}
+    table.ranking{width:100%;max-width:1200px;margin:8px auto;border-collapse:collapse;font-size:14px}
+    table.ranking thead th{background:#f3f6fb;font-weight:700;padding:12px 10px;text-align:center;color:#0b1220;border-bottom:2px solid var(--line)}
+    table.ranking thead th.name{ text-align:left }
+    table.ranking tbody td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+    table.ranking tbody tr:nth-child(even){background:var(--stripe)}
+    table.ranking tbody td.index{width:48px;text-align:center;color:#6b7280}
+    table.ranking tbody td.position{width:120px;text-align:center;font-weight:600}
+    table.ranking tbody td.difference{text-align:center;width:90px}
+    table.ranking tbody td.points{width:100px;text-align:center;padding-right:0;font-variant-numeric:tabular-nums}
+    table.ranking tbody td.name{text-align:left;padding-left:10px;color:#d3542a;font-weight:600}
+
+    .diff.up{color:green;font-weight:700}
+    .diff.down{color:#d9534f;font-weight:700}
+    .diff.new{color:#1e90ff;font-weight:700}
+
+    .card{background:linear-gradient(180deg,#ffffff,#ffffff);padding:14px;border-radius:14px;box-shadow:10px 12px 30px rgba(20,32,78,.04);border:1px solid rgba(15,23,42,.04);box-sizing:border-box}
+
+    .title{font-size:20px;margin:6px 0 12px}
+    .note{color:var(--muted);font-size:13px;margin-top:8px}
+
+    /* 历史参赛记录样式 */
+    .history-card{background:#fff;padding:12px;border-radius:10px;border:1px solid var(--line);}
+    .history-table{width:100%;border-collapse:collapse}
+    .history-table th{font-weight:700;text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+    .history-table td{padding:8px;border-bottom:1px dashed #eee}
+    /* 将历史表格内容居中，与大标题对齐 */
+    .history-table th, .history-table td{ text-align:center }
+    .history-table th.event, .history-table td.event{ text-align:left }
+    .history-table tr.ok td{background:#ecf9ef} /* 非DNP: 浅绿色 */
+    .history-table tr.dnp td{background:#fff2f2} /* DNP: 浅红色 */
+
+    /* 侧边栏链接样式 */
+    .aside-links a{display:block;color:#1e66d6;margin:8px 0;text-decoration:none}
+    .aside-links a::before{content:'>> ';color:#1e66d6;margin-right:6px}
 
     footer{padding:28px 0;text-align:center;color:var(--muted)}
+
+    /* 错误提示 */
+    .error{color:#b00020;background:#fff6f6;border:1px solid #ffd2d2;padding:10px;border-radius:8px;margin:8px 0}
   </style>
+
 </head>
 <body>
+  <script src="https://keepandroidopen.org/banner.js?size=mini"></script>
   <header>
     <div class="container">
       <nav>
         <div style="display:flex;align-items:center;gap:10px">
-          <img src="../QTTC.svg" alt="QTTC" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <img src="QTTF.png" alt="QTTF" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
           <div class="brand">QTTF</div>
         </div>
         <div class="nav-links">
             <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
             <a href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
-            <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
+            <a class="active" href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
             <a href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
         </div>
       </nav>
@@ -62,16 +96,55 @@
   </header>
 
   <main class="container">
-    <section class="card notice-wrap">
-      <div class="notice" role="status">
-        <h1>🏓 抱歉，此页面正在开发中，<span style="color:var(--accent-warn)">即将上线，敬请期待！</span></h1>
-        <p id="dev-message"><strong style="color:var(--accent-warn)">正在开发</strong> — 我们正在加速完善页面内容。</p>
-        <div id="countdown" class="muted">3秒后自动返回首页</div>
+    <div class="title">🏓 2026年1月选手排名（全性别组）</div>
+    <div class="layout">
+      <div class="table-wrap card">
+        <div id="table-area">
+          <table class="ranking" aria-describedby="ranking-desc">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th class="position">排名</th>
+                <th>变化</th>
+                <th>积分</th>
+                <th class="name">姓名</th>
+              </tr>
+            </thead>
+            <tbody id="ranking-body">
+              <tr><td colspan="5" style="text-align:center;padding:18px;color:var(--muted)">正在加载数据…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="error" style="display:none" class="error">数据加载失败，请刷新重试。</div>
       </div>
-    </section>
 
-    <!-- 预留：小组件容器（隐藏） -->
-    <div class="features" aria-hidden="true"></div>
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 8px">历史排名</h3>
+          <div class="note aside-links">
+            <a href="https://dreamerdawn.github.io/QTTF/rankings/2026-01">2026-01</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings/2025-11">2025-11</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings/2025-07">2025-07</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings/2024-11">2024-11</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings/2024-10">2024-10</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h4 style="margin:0 0 8px">术语解释</h4>
+          <div class="note">
+            <div><strong>W(Win)</strong> - 金牌，冠军</div>
+            <div style="margin-top:6px"><strong>F(Final)</strong> - 银牌，亚军</div>
+            <div style="margin-top:6px"><strong>B(Bronze)</strong> - 铜牌，季军</div>
+            <div style="margin-top:6px"><strong>SF(SemiFinal)</strong> - 四强，殿军</div>
+            <div style="margin-top:6px"><strong>QF(QuarterFinal)</strong> - 八强</div>
+            <div style="margin-top:6px"><strong>R16(Round of 16)</strong> - 十六强</div>
+            <div style="margin-top:6px"><strong>G3L(Group 3rd Last)</strong> - 未出线，特指小组第三名</div>
+            <div style="margin-top:6px"><strong>DNP(Did Not Play)</strong> - 未参赛</div>
+          </div>
+        </div>
+      </aside>
+    </div>
   </main>
 
   <footer>
@@ -81,40 +154,167 @@
   </footer>
 
   <script>
-    (function(){
-      const homeUrl = 'https://dreamerdawn.github.io/QTTF/homepage';
-      let seconds = 3;
-      const countdownEl = document.getElementById('countdown');
+    // 仅从同目录的 rankings.json 加载数据并渲染表格（用于 GitHub Pages）
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const body = document.getElementById('ranking-body');
+      const errorBox = document.getElementById('error');
 
-      function updateText(){
-        if(countdownEl) countdownEl.textContent = `${seconds}秒后自动返回首页`;
+      function showError(){
+        document.getElementById('table-area').style.display = 'none';
+        errorBox.style.display = 'block';
       }
 
-      updateText();
-      const timer = setInterval(()=>{
-        seconds -= 1;
-        if(seconds > 0){
-          updateText();
-        } else {
-          if(countdownEl) countdownEl.textContent = `0秒，正在跳转…`;
-          clearInterval(timer);
-          // 使用 replace 避免在历史中留下当前页
-          window.location.replace(homeUrl);
+      function renderData(data){
+        body.innerHTML = '';
+        if(!Array.isArray(data) || data.length===0){
+          body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:18px">暂无排名数据</td></tr>';
+          return;
         }
-      }, 1000);
+        data.forEach((row, idx)=>{
+          const tr = document.createElement('tr');
 
-      // 如果用户点击导航，取消倒计时（导航会自行跳转）
-      document.querySelectorAll('nav .nav-links a').forEach(a=>{
-        a.addEventListener('click', ()=>{ clearInterval(timer); });
-      });
+          const tdIndex = document.createElement('td');
+          tdIndex.className = 'index';
+          tdIndex.textContent = row.rank != null ? row.rank : (idx+1);
+          tr.appendChild(tdIndex);
 
-      // 鼠标悬停高亮逻辑：悬停时高亮，离开时移除所有高亮（不设置默认高亮）
+          const tdPos = document.createElement('td');
+          tdPos.className = 'position';
+          tdPos.textContent = row.position != null ? row.position : '';
+          tr.appendChild(tdPos);
+
+          const tdDiff = document.createElement('td');
+          tdDiff.className = 'difference';
+          if(row.difference && typeof row.difference === 'string'){
+            const val = row.difference.trim();
+            if(val.startsWith('↑')){
+              const span = document.createElement('span');
+              span.className = 'diff up';
+              span.textContent = val;
+              tdDiff.appendChild(span);
+            } else if(val.startsWith('↓')){
+              const span = document.createElement('span');
+              span.className = 'diff down';
+              span.textContent = val;
+              tdDiff.appendChild(span);
+            } else if(val.toUpperCase() === 'NEW'){
+              const span = document.createElement('span');
+              span.className = 'diff new';
+              span.textContent = 'NEW';
+              tdDiff.appendChild(span);
+            } else {
+              tdDiff.textContent = val;
+            }
+          } else {
+            tdDiff.textContent = '';
+          }
+          tr.appendChild(tdDiff);
+
+          const tdPoints = document.createElement('td');
+          tdPoints.className = 'points';
+          tdPoints.textContent = row.points != null ? row.points : '';
+          tr.appendChild(tdPoints);
+
+          const tdName = document.createElement('td');
+          tdName.className = 'name';
+          tdName.textContent = row.name || '';
+          tr.appendChild(tdName);
+
+          body.appendChild(tr);
+          // 行点击展开历史记录（使用 row.history 数组）
+          tr.style.cursor = 'pointer';
+          tr.addEventListener('click', ()=>{
+            const next = tr.nextElementSibling;
+            // 如果已展开，则收起
+            if(next && next.classList && next.classList.contains('history-row')){
+              next.remove();
+              return;
+            }
+
+            // 否则插入历史记录行
+            const hr = document.createElement('tr');
+            hr.className = 'history-row';
+            const td = document.createElement('td');
+            td.colSpan = 5;
+            const card = document.createElement('div');
+            card.className = 'history-card';
+
+            const history = Array.isArray(row.history) ? row.history : [];
+            if(history.length === 0){
+              const p = document.createElement('div');
+              p.textContent = '无历史参赛记录。';
+              card.appendChild(p);
+            } else {
+              const table = document.createElement('table');
+              table.className = 'history-table';
+              const thead = document.createElement('thead');
+              thead.innerHTML = '<tr><th>Event</th><th>Expires on</th><th>Position</th><th>Points</th></tr>';
+              table.appendChild(thead);
+              const tbodyH = document.createElement('tbody');
+              history.forEach(h=>{
+                const r = document.createElement('tr');
+                // 特判：若 position === 'DNP'（不区分大小写），标记为 dnp，否则为 ok
+                const posVal = (h.position || '').toString();
+                if(posVal.toUpperCase() === 'DNP') r.className = 'dnp'; else r.className = 'ok';
+
+                const tdEvent = document.createElement('td'); tdEvent.className = 'event'; tdEvent.textContent = h.event || '';
+                const tdExpire = document.createElement('td'); tdExpire.textContent = h.expires_on || '';
+                const tdPos = document.createElement('td'); tdPos.textContent = h.position || '';
+                const tdPts = document.createElement('td'); tdPts.textContent = h.points != null ? h.points : '';
+                r.appendChild(tdEvent); r.appendChild(tdExpire); r.appendChild(tdPos); r.appendChild(tdPts);
+                tbodyH.appendChild(r);
+              });
+              table.appendChild(tbodyH);
+              card.appendChild(table);
+            }
+
+            td.appendChild(card);
+            hr.appendChild(td);
+            tr.parentNode.insertBefore(hr, tr.nextSibling);
+          });
+        });
+      }
+
+      // 仅使用同目录的 rankings.json（适用于 GitHub Pages）
+      fetch('rankings.json')
+        .then(resp=>{
+          if(!resp.ok) throw new Error('网络错误');
+          return resp.json();
+        })
+        .then(data=>{
+          renderData(data);
+        })
+        .catch(err=>{
+          console.error('从 rankings.json 加载数据失败', err);
+          showError();
+        });
+    });
+  </script>
+
+  <script>
+    // 导航悬停逻辑：默认高亮“选手排名”；悬停时仅高亮当前项
+    (function(){
       const navLinks = document.querySelectorAll('nav .nav-links a');
+      if(!navLinks || navLinks.length===0) return;
+      const defaultHref = 'https://dreamerdawn.github.io/QTTF/rankings';
+
+      function resetDefault(){
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const def = Array.from(navLinks).find(a=>a.getAttribute('href')===defaultHref);
+        if(def) def.classList.add('active');
+      }
+
       navLinks.forEach(a=>{
-        a.addEventListener('mouseenter', ()=>{ navLinks.forEach(x=>x.classList.remove('active')); a.classList.add('active'); });
+        a.addEventListener('mouseenter', ()=>{
+          navLinks.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+        });
       });
-      const navLinksContainer = document.querySelector('nav .nav-links');
-      if(navLinksContainer) navLinksContainer.addEventListener('mouseleave', ()=>{ navLinks.forEach(x=>x.classList.remove('active')); });
+
+      const container = document.querySelector('nav .nav-links');
+      if(container) container.addEventListener('mouseleave', ()=> setTimeout(resetDefault,50));
+      // 初始化
+      resetDefault();
     })();
   </script>
 </body>

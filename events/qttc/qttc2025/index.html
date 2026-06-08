@@ -1,0 +1,1060 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赛事信息总结展示</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --border: #d8e0eb;
+      --primary: #1f6feb;
+      --primary-dark: #0f58d7;
+      --text: #1f2a37;
+      --muted: #62788c;
+      --danger: #ef4444;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(31, 42, 55, .08);
+      --maxWidth: 1200px;
+      --accent:#0066ff;
+      --max-width:1200px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "Segoe UI","Helvetica Neue","Microsoft YaHei",sans-serif;
+      background: linear-gradient(180deg, #eef3fb 0%, #fdfdff 100%);
+      color: var(--text); line-height: 1.54;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    header{background:rgba(255,255,255,0.72);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 6px 24px rgba(16,24,40,.06);position:sticky;top:0;z-index:1100;border-bottom:1px solid rgba(15,23,42,.03)}
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 28px}
+
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+
+    .brand{font-weight:700;font-size:20px;color:var(--accent)}
+
+    .nav-links{display:flex;gap:20px}
+
+    .nav-links a{color:var(--muted);padding:8px 10px;border-radius:8px;transition:all .18s;font-weight:600}
+
+    .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--accent)}
+
+    .nav-links a.active{color:var(--accent);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:inset 0 -4px 18px rgba(0,102,255,.03);border-radius:10px}
+
+    .wrapper {
+      width: min(100%, var(--maxWidth)); margin: 0 auto 40px;
+      padding: 0 16px;
+    }
+
+    .header-box { padding: 20px 18px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; }
+    .header-box h1 { margin: 0; font-size: clamp(1.5rem, 2.3vw, 2rem); color: var(--primary-dark); }
+    .header-box p { margin: 10px 0 0; font-size: 1rem; color: var(--muted); }
+
+    .stats-grid {
+      display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 12px;
+    }
+    .stat-card {
+      background: #f8f9fc; border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; font-weight: 600; color: var(--text);
+    }
+    .stat-card small { display: block; color: var(--muted); font-weight: 500; margin-top: 3px; }
+
+    .participants-grid, .podium-grid {
+      display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      margin-top: 10px;
+    }
+    .player-card, .podium-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 10px; box-shadow: 0 4px 8px rgba(31,42,55,0.08);
+      text-align: center;
+    }
+    .player-card .rank, .podium-card .rank { font-size: 0.9rem; color: var(--primary); font-weight: 700; }
+    .player-card .name, .podium-card .name { font-size: 1rem; color: var(--text); font-weight: 700; margin: 6px 0; }
+    .player-card .points, .podium-card .points { font-size: 0.87rem; color: #556b8a; }
+
+    .section-title {
+      margin: 30px 0 12px; font-size: clamp(1.1rem, 2vw, 1.4rem); color: #0f2650;
+    }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .stage-tab-bar { display: flex; gap: 10px; margin: 12px 0; }
+    .stage-tab { border: 1px solid #dbe5f1; background: #f7f9fc; color: #2f4a6b; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .stage-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .stage-section { display: none; }
+    .stage-section.active { display: block; }
+    .tab-btn {
+      border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; background: #fff; color: var(--text);
+      cursor: pointer; transition: all .24s ease;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--primary); border-color: var(--primary); color: #fff;
+    }
+
+    .stage-block { margin-top: 14px; }
+    .stage-block > h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-dark); }
+
+    .layout-grid { display: grid; gap: 14px; }
+    .group-content { display: none; }
+    .group-content.active { display: block; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    th, td { padding: 10px 9px; border-bottom: 1px solid #edf2f8; text-align: left; font-size: 0.93rem; }
+    th { background: #f4f7fb; color: #24345a; font-weight: 700; }
+    tr:last-child td { border-bottom: none; }
+
+    .match-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); justify-items: center; }
+    .card {
+      width: 240px; min-width: 240px; max-width: 240px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 10px 12px; box-shadow: var(--shadow); transition: transform .22s ease, box-shadow .22s ease; position: relative;
+      overflow: hidden; cursor: pointer;
+    }
+    .card-forfeit {
+      background: #fff1f1; border-color: #f5c2c2;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(31,42,55,0.16); }
+    .card > h4 { margin: 0 0 7px; font-size: 1rem; line-height: 1.2; }
+    .score { font-size: 1.3rem; font-weight: 700; margin: 3px 0; }
+    .card-set-grid { display: grid; grid-template-columns: 1fr 60px 60px; gap: 6px; font-size: 0.82rem; color: #475569; margin-top: 6px; }
+    .card-set-grid .set-head { font-weight: 700; color: #0f3d91; }
+    .card-set-grid .set-cell { padding: 2px 5px; border-radius: 4px; text-align: center; }
+    .card-set-grid .set-cell.winner { background: #f2f9ff; color: #0b4c8a; font-weight: 700; }
+    .card-score-top { font-size: 1.8rem; font-weight: 800; margin-bottom: 2px; color: var(--primary); text-align: center; }
+    .card-subtitle { font-size: 0.73rem; color: #475569; text-align: center; margin-bottom: 4px; }
+    .card-player-row { display: flex; justify-content: space-between; gap: 4px; margin-bottom: 4px; }
+    .card-player-row .player-name { flex: 1; text-align: center; font-size: 0.86rem; font-weight: 700; color: #1f2a37; }
+    .card-player-row .player-name.winner { color: var(--primary); }
+    .card-set-inline { position: relative; display: flex; flex-direction: column; gap: 2px; margin-top: 2px; min-height: calc(4 * 22px); max-height: calc(4 * 22px); overflow: hidden; }
+    .card-set-row { display: flex; justify-content: center; gap: 4px; flex-wrap: nowrap; }
+    .card-set-item { font-size: 0.78rem; }
+    .card-set-item .set-winner { font-weight: 700; color: var(--primary); }
+    .card-set-item .set-loser { color: #000; }
+    .btn-detail { position: absolute; right: 8px; bottom: 8px; border: 1px solid var(--primary); color: var(--primary); background: #fff; border-radius: 6px; padding: 2px 6px; cursor: pointer; font-size: 0.7rem; z-index: 2; }
+    .label { display: inline-block; margin-right: 6px; font-size: .76rem; border-radius: 5px; padding: 2px 7px; color: #fff; font-weight: 600; vertical-align: middle; }
+    .status-completed { background: var(--success); }
+    .status-bye { background: var(--primary); }
+    .status-default { background: var(--warning); }
+    .status-cancelled { background: var(--danger); }
+    .status-unknown { background: #6b7280; }
+    .qualified { color: var(--success); font-weight: bold; }
+    .btn-detail {
+      border: 1px solid var(--primary); color: var(--primary); background: transparent;
+      border-radius: 7px; padding: 5px 10px; cursor: pointer; font-size: 0.82rem; margin-top: 7px;
+    }
+
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(20,30,57,0.48); z-index: 50;
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal { width: min(100%, 780px); max-height: 90vh; overflow-y: auto; background: #fff; border-radius: 16px; box-shadow: var(--shadow); position: relative; padding: 20px 24px; }
+    .modal-close {
+      position: absolute; right: 14px; top: 12px; border: none; background: transparent; font-size: 1.25rem; cursor: pointer;
+      color: var(--muted);
+    }
+    .modal h3 { margin: 0 0 8px; }
+    .modal p { margin: 6px 0; color: #3a4a65; }
+    .detail-row { display: grid; grid-template-columns: 110px auto; gap: 8px; margin: 4px 0; }
+    .detail-row span:first-child { color: #5f7090; font-weight: 600; }
+    .modal .sets-list { margin-top: 8px; }
+    .sets-list div { font-size: .92rem; color: #35445f; margin: 2px 0; }
+    .modal-header { text-align: center; margin-bottom: 14px; }
+    .modal-title { font-size: 1.35rem; font-weight: 800; margin: 0; }
+    .modal-subtitle { font-size: .9rem; color: #546b89; margin: 2px 0 8px; }
+    .modal-main-score { font-size: 2.6rem; font-weight: 900; color: var(--primary); margin: 6px 0 0; }
+    .modal-score-duration { font-size: 0.95rem; color: #475569; margin: 3px 0 8px; }
+    .modal-player-row { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 8px; }
+    .modal-player-name { font-weight: 700; font-size: 1.05rem; }
+    .modal-player-name.winner { color: var(--primary); }
+    .modal-input-row { border-top: 1px solid #dbe5f1; border-bottom: 1px solid #dbe5f1; padding: 8px 0; margin-top: 8px; }
+    .modal-set-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .modal-set-table th, .modal-set-table td { border: none; padding: 8px 8px; font-size: .9rem; text-align: center; }
+    .modal-set-table th:first-child, .modal-set-table td:first-child { text-align: left; }
+    .modal-set-table .winner { color: var(--primary); font-weight: 800; }
+    .modal-set-table .main-score { font-size: 1.1rem; font-weight: 700; }
+    .modal-set-table .main-score.winner { color: var(--primary); }
+    .modal-set-table .main-score.tie { color: #000; }
+    .modal-venue { margin-top: 10px; text-align: center; font-size: .85rem; color: #4f5d79; }
+    .modal-stats-title { margin-top: 16px; font-size: 1rem; font-weight: 700; color: #2e405a; }
+    .modal-stats-table-wrap { margin-top: 8px; }
+    .modal-stats-table { width: 100%; border-collapse: collapse; }
+    .modal-stats-table th, .modal-stats-table td { padding: 6px 8px; font-size: .88rem; border: 0; text-align: center; }
+    .modal-stats-table thead th { font-weight: 700; }
+    .modal-stats-table tr:nth-child(odd) { background: #f7f9fc; }
+    .modal-info-card { display: grid; grid-template-columns: repeat(2,minmax(110px,1fr)); gap: 8px; margin-top: 10px; font-size: .83rem; color: #3c4d6e; }
+    .modal-info-card p { margin: 2px 0; }
+    .modal-set-table-wrap { margin-top: 10px; overflow-x: auto; }
+    .modal-set-grid { display: grid; grid-template-columns: 40px 70px 70px; gap: 4px; margin-top: 6px; font-size: .9rem; color: #2f4a6b; }
+    .modal-set-grid .set-head { font-weight: 700; color: #0f3d91; text-align: center; }
+    .modal-set-grid .set-cell { text-align: center; padding: 3px 4px; border-radius: 4px; }
+    .modal-set-grid .winner { background: #e6f4ff; font-weight: 700; }
+
+    @media (max-width: 760px) {
+      .header-box, .card, .modal { padding: 14px; }
+      .card { min-height: 120px; }
+      .detail-row { grid-template-columns: 100px auto; }
+    }
+  </style>
+
+</head>
+<body>
+  <script src="https://keepandroidopen.org/banner.js?size=mini"></script>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display:flex;align-items:center;gap:10px">
+          <!-- 使用工作区中的 QTTF.png 徽标文件（已写入 d:/QTTF/QTTC.svg） -->
+          <img src="QTTF.png" alt="QTTF" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <div class="brand">QTTF</div>
+        </div>
+        <div class="nav-links">
+            <!-- 导航链接为绝对路径（保持要求）。当前页面为赛事，已高亮显示 -->
+            <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
+            <a class="active" href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
+            <a href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+    <section class="header-box">
+      <h1 id="event-title">赛事信息汇总</h1>
+      <p id="event-subtitle">正在加载数据...</p>
+      <div id="event-info" style="margin-top:8px; padding:10px; background:#f8f9fc; border:1px solid #dbe5f1; border-radius:8px; color:#2f4a6b;"></div>
+      <div id="event-competitors" style="margin-top:10px;"></div>
+      <div id="event-podium" style="margin-top:10px;"></div>
+      <p id="event-time" style="margin-top:6px; color:#475569; font-size:0.95rem;">比赛时间：正在获取...</p>
+      <div id="overview-stats" class="stats-grid"></div>
+    </section>
+
+    <section id="main-stages"></section>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" title="关闭">&times;</button>
+      <h3 id="modalTitle">比赛详情</h3>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const eventTitleEl = document.getElementById('event-title');
+    const eventSubtitleEl = document.getElementById('event-subtitle');
+    const overviewStatsEl = document.getElementById('overview-stats');
+    const mainStagesEl = document.getElementById('main-stages');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+
+    const stageNameOrder = {
+      '八分之一决赛': 10,
+      '四分之一决赛': 20,
+      '半决赛': 30,
+      '铜牌赛': 40,
+      '决赛': 50,
+      '附加赛': 5,
+      '排位赛': 15
+    };
+
+    async function fetchMatchData() {
+      try {
+        const res = await fetch('matchdata.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        return json;
+      } catch (err) {
+        throw new Error('未找到 matchdata.json，请确保与 index.html 同目录。');
+      }
+}
+
+    function safeText(str) {
+      if (str === undefined || str === null || str === '') return '无数据';
+      return String(str);
+    }
+
+    function getTextFromPlayers(players) {
+      if (!players) return ['无名选手', '无名选手'];
+      const sep = / vs | VS | vs\.|【对决】/i;
+      const arr = String(players).split(sep).map(s => s.trim()).filter(Boolean);
+      if (arr.length >= 2) return [arr[0], arr[1]];
+      if (String(players).includes('轮空')) {
+        const parts = String(players).split(/ vs | VS /i);
+        if (parts.length === 2) return [parts[0].trim(), parts[1].trim()];
+      }
+      return [String(players), ''];
+    }
+
+    function parseScore(score) {
+      if (!score || score === '' || score === '-' || score === '未定') return {p1:0,p2:0};
+      const mm = score.toString().split('-').map(s=>parseInt(s.trim(),10));
+      if (mm.length === 2 && !Number.isNaN(mm[0]) && !Number.isNaN(mm[1])) return {p1:mm[0],p2:mm[1]};
+      return {p1:0,p2:0};
+    }
+
+    function parseSets(arr) {
+      if (!Array.isArray(arr)) return [];
+      return arr.map(item => {
+        if (typeof item === 'string') {
+          const p = item.split('-').map(s => parseInt(s.trim(), 10));
+          if (p.length === 2 && !Number.isNaN(p[0]) && !Number.isNaN(p[1])) {
+            const diff = p[0] - p[1];
+            return {p1:p[0], p2:p[1], winner: diff>0 ? 'p1' : (diff<0 ? 'p2' : null)};
+          }
+        } else if (item && typeof item === 'object' && item.p1 != null && item.p2 != null) {
+          const diff = item.p1 - item.p2;
+          return {p1:item.p1, p2:item.p2, winner: diff>0 ? 'p1' : (diff<0 ? 'p2' : null)};
+        }
+        return {p1:0,p2:0,winner:null};
+      });
+    }
+
+    function parseDateFromNotes(notes) {
+      if (!notes) return null;
+      const match = notes.match(/(20\d{2}年\d{1,2}月\d{1,2}日)|(\d{4}-\d{1,2}-\d{1,2})/);
+      return match ? match[0] : null;
+    }
+
+    function parseTimeFromNotes(notes) {
+      if (!notes) return null;
+      const matchTime = notes.match(/(\d{1,2}:\d{2})(?:\s*-\s*(\d{1,2}:\d{2}))?/);
+      if (!matchTime) return null;
+      if (matchTime[2]) return `${matchTime[1]} - ${matchTime[2]}`;
+      return matchTime[1];
+    }
+
+    function normalizeStageType(keyName, firstStageName) {
+      const lower = String(keyName).toLowerCase();
+      if (lower.includes('group') || lower.includes('组赛') || lower.includes('groupstage') || firstStageName?.includes('组')) return 'group';
+      if (lower.includes('knockout') || lower.includes('淘汰') || firstStageName?.includes('决赛') || firstStageName?.includes('半决赛')) return 'knockout';
+      return 'other';
+    }
+
+    function buildOverview(data) {
+      const md = data.matchData || {};
+      const playerData = data.playerData || {};
+      const title = md.name || data.matchName || '新比赛';
+      eventTitleEl.innerText = title;
+      const subtitle = (md.name && data.matchName && md.name !== data.matchName) ? `简称：${data.matchName}` : '';
+      eventSubtitleEl.innerText = subtitle;
+
+      // 新增赛事信息区
+      const competitionName = data.matchData.Name || md.name || '无';
+      const competitionFormat = data.format || md.format || '未指定';
+      const competitors = data.players || data.participants || Object.keys(playerData);
+      document.getElementById('event-info').innerHTML = `
+        <strong>赛事名称：</strong>${competitionName}<br>
+        <strong>赛制：</strong>${competitionFormat}<br>
+        <strong>参赛人数：</strong>${Array.isArray(competitors) ? competitors.length : (typeof competitors === 'object' ? Object.keys(competitors).length : '未知')}
+      `;
+
+      const allMatches = Object.values(md)
+        .filter(v => Array.isArray(v))
+        .flat();
+
+      // 参赛选手卡片：优先从 playerData 读取
+      const competitorsData = Object.keys(playerData).map(name => {
+        const p = playerData[name] || {};
+        return {
+          name: name || '无',
+          rank: p.rank != null ? p.rank : '无',
+          points: p.points != null ? p.points : '无',
+          seed: p.seed != null ? p.seed : null
+        };
+      });
+
+      const sortedCompetitors = [...competitorsData]
+        .filter(c => c && c.name)
+        .sort((a,b) => {
+          const aRank = (a.rank != null && !isNaN(Number(a.rank))) ? Number(a.rank) : Infinity;
+          const bRank = (b.rank != null && !isNaN(Number(b.rank))) ? Number(b.rank) : Infinity;
+          if (aRank !== bRank) return aRank - bRank;
+          return String(a.name).localeCompare(String(b.name), 'zh-Hans-u-co-pinyin');
+        });
+
+      if (sortedCompetitors.length > 0) {
+        const competitorCards = sortedCompetitors.map(c => {
+        const rankText = c.rank != null ? `排名 ${c.rank}` : '排名 无';
+        const pointsText = c.points != null ? `积分 ${c.points}` : '积分 无';
+          const isSeed = c.seed != null && c.seed !== '';
+          const seedStyle = isSeed ? 'background: #fff9e6; border-color: #f5d88b;' : '';
+          return `<div class="player-card" style="${seedStyle}"><div class="rank">${rankText}</div><div class="name">${safeText(c.name)}</div><div class="points">${pointsText}</div></div>`;
+        }).join('');
+        document.getElementById('event-competitors').innerHTML = `<h3 class="section-title">参赛选手</h3><div class="participants-grid">${competitorCards}</div>`;
+      } else {
+        document.getElementById('event-competitors').innerHTML = '';
+      }
+
+      // 结果栏（冠/亚/季军），可在 JSON 中开启
+      if (data.showPodium) {
+        const podium = data.podium || {};
+        const podiumItems = [
+          {key:'first', label:'冠军', color:'#facc15'},
+          {key:'second', label:'亚军', color:'#94a3b8'},
+          {key:'third', label:'季军', color:'#a855f7'}
+        ];
+        const podiumCards = podiumItems
+          .filter(({key}) => podium[key])
+          .map(({key,label,color}) => {
+            const item = podium[key];
+            const name = item.name || '暂无';
+            const rank = item.rank != null ? `排名 ${item.rank}` : '';
+            const points = item.points != null ? `积分 ${item.points}` : '';
+            return `<div class="podium-card" style="border-color:${color};"><div class="rank">${label}</div><div class="name">${safeText(name)}</div><div class="points">${rank}${rank && points ? ' · ' : ''}${points}</div></div>`;
+          });
+        if (podiumCards.length > 0) {
+          document.getElementById('event-podium').innerHTML = `<h3 class="section-title">结果</h3><div class="podium-grid">${podiumCards.join('')}</div>`;
+        } else {
+          document.getElementById('event-podium').innerHTML = '';
+        }
+      } else {
+        document.getElementById('event-podium').innerHTML = '';
+      }
+
+
+      const daySet = new Set();
+      const timeParts = [];
+      const validMatches = allMatches.filter(m => String(m.status).toLowerCase() === 'completed');
+      validMatches.forEach(m => {
+        const notes = String(m?.details?.notes || m.notes || '');
+        const d = parseDateFromNotes(notes);
+        if (d) daySet.add(d);
+
+        const t = parseTimeFromNotes(notes);
+        if (t) timeParts.push(t);
+      });
+
+      const timeRange = (() => {
+        if (allMatches.some(m => m.details?.startTime && m.details?.endTime)) {
+          const starts = allMatches.map(m => m.details?.startTime).filter(Boolean);
+          const ends = allMatches.map(m => m.details?.endTime).filter(Boolean);
+          if (starts.length && ends.length) {
+            const start = starts.sort()[0];
+            const end = ends.sort().slice(-1)[0];
+            return `${start} - ${end}`;
+          }
+        }
+        if (timeParts.length > 0) {
+          const uniq = Array.from(new Set(timeParts));
+          return uniq.length === 1 ? uniq[0] : `${uniq[0]} - ${uniq[uniq.length-1]}`;
+        }
+        return null;
+      })();
+
+
+      let groupMatches = 0, knockoutMatches = 0;
+      if (Array.isArray(md.groupStage)) groupMatches = md.groupStage.length;
+      if (Array.isArray(md.knockoutStage)) knockoutMatches = md.knockoutStage.length;
+      Object.entries(md).forEach(([k,v]) => {
+        if (!Array.isArray(v) || (k==='groupStage'||k==='knockoutStage')) return;
+        const type = normalizeStageType(k, v[0]?.stage);
+        if (type==='group') groupMatches += v.length;
+        if (type==='knockout') knockoutMatches += v.length;
+      });
+
+      const sortedDates = Array.from(daySet).sort((a,b) => a.localeCompare(b, 'zh-Hans-u-co-pinyin'));
+      const timeText = sortedDates.length === 0 ? '无' : (sortedDates.length === 1 ? sortedDates[0] : `${sortedDates[0]} 至 ${sortedDates[sortedDates.length-1]}`);
+      const eventTimeText = timeRange ? `${timeText} ${timeRange}` : timeText;
+      document.getElementById('event-time').innerText = `比赛时间：${eventTimeText}`;
+
+      eventSubtitleEl.innerText = `共 ${daySet.size} 个比赛日， ${Object.keys(playerData).length} 名选手， ${groupMatches} 场小组赛， ${knockoutMatches} 场淘汰赛。`;
+      overviewStatsEl.innerHTML = '';
+      const stats = [
+        ['比赛日', daySet.size],
+        ['小组赛场次', groupMatches],
+        ['淘汰赛场次', knockoutMatches],
+        ['选手数量', Object.keys(playerData).length]
+      ];
+      stats.forEach(([label, value]) => {
+        const card = document.createElement('div');
+        card.className = 'stat-card';
+        card.innerHTML = `<strong>${value}</strong><br><small>${label}</small>`;
+        overviewStatsEl.appendChild(card);
+      });
+    }
+
+    function calcGroupRanking(matches, playerList, playerData) {
+      const players = {};
+      playerList.forEach(name => {
+        players[name] = {name, played:0, win:0, loss:0, setsFor:0, setsAgainst:0, setDiff:0, pointsFor:0, pointsAgainst:0, pointDiff:0, direct: {}, qualified: playerData[name]?.qualified || null};
+      });
+
+      function ensureP(name) {
+        if (!(name in players)) players[name] = {name, played:0, win:0, loss:0, setsFor:0, setsAgainst:0, setDiff:0, pointsFor:0, pointsAgainst:0, pointDiff:0, direct:{}, qualified: playerData[name]?.qualified || null};
+      }
+
+      matches.forEach(m => {
+        const [p1, p2] = getTextFromPlayers(m.players);
+        if (!p1 || !p2) return;
+        ensureP(p1); ensureP(p2);
+        if (m.status === 'bye') {
+          players[p1].win += 1; players[p1].played +=1;
+          players[p1].direct[p2] = 1;
+          return;
+        }
+        if (m.status === 'completed') {  // 只计算完成比赛
+          const score = parseScore(m.score);
+          const sets = parseSets(m.details?.sets);
+          let p1Set = 0, p2Set = 0;
+          if (score.p1 + score.p2 > 0) {
+            p1Set = score.p1; p2Set = score.p2;
+          } else {
+            if (m.winner === p1) { p1Set = 3; p2Set = 0; }
+            else if (m.winner === p2) { p1Set = 0; p2Set = 3; }
+          }
+          players[p1].played += 1; players[p2].played += 1;
+          players[p1].setsFor += p1Set; players[p1].setsAgainst += p2Set;
+          players[p2].setsFor += p2Set; players[p2].setsAgainst += p1Set;
+          players[p1].setDiff = players[p1].setsFor - players[p1].setsAgainst;
+          players[p2].setDiff = players[p2].setsFor - players[p2].setsAgainst;
+
+          // 计算总分
+          sets.forEach(set => {
+            if (set.p1 != null && set.p2 != null) {
+              players[p1].pointsFor += set.p1;
+              players[p1].pointsAgainst += set.p2;
+              players[p2].pointsFor += set.p2;
+              players[p2].pointsAgainst += set.p1;
+            }
+          });
+          players[p1].pointDiff = players[p1].pointsFor - players[p1].pointsAgainst;
+          players[p2].pointDiff = players[p2].pointsFor - players[p2].pointsAgainst;
+
+          if (m.winner === p1) { players[p1].win++; players[p2].loss++; }
+          else if (m.winner === p2) { players[p2].win++; players[p1].loss++; }
+          if (!players[p1].direct[p2]) players[p1].direct[p2] = 0;
+          if (!players[p2].direct[p1]) players[p2].direct[p1] = 0;
+          if (m.winner === p1) players[p1].direct[p2]++;
+          if (m.winner === p2) players[p2].direct[p1]++;
+        }
+      });
+
+      const arr = Object.values(players);
+      arr.sort((a,b) => {
+        // 胜场降序
+        if (b.win !== a.win) return b.win - a.win;
+        // 负场升序（胜场相同，负场少的优先）
+        if (a.loss !== b.loss) return a.loss - b.loss;
+        // 净胜局降序
+        if (b.setDiff !== a.setDiff) return b.setDiff - a.setDiff;
+        // 净胜分降序
+        if (b.pointDiff !== a.pointDiff) return b.pointDiff - a.pointDiff;
+        // 直接对战胜负
+        const aBeatB = a.direct[b.name] || 0;
+        const bBeatA = b.direct[a.name] || 0;
+        if (aBeatB !== bBeatA) return bBeatA - aBeatB;
+        return a.name.localeCompare(b.name, 'zh');
+      });
+
+      return arr;
+    }
+
+    function buildRoundLabel(status) {
+      switch (status) {
+        case 'completed': return ['已完成', 'status-completed'];
+        case 'bye': return ['轮空', 'status-bye'];
+        case 'default': return ['弃赛', 'status-default'];
+        case 'cancelled': return ['取消', 'status-cancelled'];
+        default: return ['未知', 'status-unknown'];
+      }
+    }
+
+    function formatMainScore(scoreText, winner, p1, p2) {
+      if (!scoreText || scoreText === '—' || scoreText === '无比分') {
+        // 未定比分显示灰色
+        return `<span style="color:#65778c; font-weight:700;">${scoreText}</span>`;
+      }
+      const parts = scoreText.toString().split('-').map(s => s.trim());
+      if (parts.length !== 2) {
+        return `<span style="color:#65778c; font-weight:700;">${scoreText}</span>`;
+      }
+      const [a,b] = parts;
+      const p1Winner = winner === p1;
+      const p2Winner = winner === p2;
+      const p1Style = p1Winner ? 'color:var(--primary); font-weight:900;' : 'color:#000; font-weight:700;';
+      const p2Style = p2Winner ? 'color:var(--primary); font-weight:900;' : 'color:#000; font-weight:700;';
+      return `<span style="${p1Style}">${a}</span><span style="color:#000; margin:0 8px; font-weight:700;">-</span><span style="${p2Style}">${b}</span>`;
+    }
+
+    function buildMatchCard(match, context) {
+      const [p1,p2] = getTextFromPlayers(match.players);
+      const scoreText = match.status === 'bye' ? '—' : (match.score || '无比分');
+      const sets = parseSets(match.details?.sets);
+      const isForfeit = match.status === 'default' || match.status === 'cancelled';
+
+      const card = document.createElement('div');
+      card.className = 'card' + (isForfeit ? ' card-forfeit' : '');
+      card.setAttribute('data-panel', 'match-card');
+
+      const p1WinnerClass = match.winner === p1 ? 'winner' : '';
+      const p2WinnerClass = match.winner === p2 ? 'winner' : '';
+      const category = match.details?.category || match.category || 'Mixed Single';
+      const round = match.details?.round || match.round || context.stageName || '未知轮次';
+
+      function formatMainScore(score, winner) {
+        if (!score || score === '—' || score === '无比分') return `<span style="font-weight:700;color:#24345a;">${score}</span>`;
+        const parts = score.toString().split('-').map(v => v.trim());
+        if (parts.length !== 2) return `<span style="font-weight:700;color:#24345a;">${score}</span>`;
+        const [a,b] = parts;
+        const p1Class = winner === p1 ? 'winner' : 'normal';
+        const p2Class = winner === p2 ? 'winner' : 'normal';
+        const p1Style = p1Class === 'winner' ? 'color:var(--primary);font-weight:800;' : 'color:#000;font-weight:700;';
+        const p2Style = p2Class === 'winner' ? 'color:var(--primary);font-weight:800;' : 'color:#000;font-weight:700;';
+        return `<span style="${p1Style}">${a}</span> - <span style="${p2Style}">${b}</span>`;
+      }
+
+      function renderSetRows(setsArr) {
+        if (!setsArr.length) {
+          const rows = ['<div class="card-set-row"><span style="color:#9ca9bf;font-size:0.8rem;">暂无小分</span></div>'];
+          for (let j = 0; j < 3; j++) {
+            rows.push('<div class="card-set-row"><span style="visibility:hidden;">占位</span></div>');
+          }
+          return rows.join('');
+        }
+
+        // <=4局一行，>4局每行3局
+        const perRow = setsArr.length > 4 ? 3 : setsArr.length;
+        const rows = [];
+        for (let i = 0; i < setsArr.length; i += perRow) {
+          const slice = setsArr.slice(i, i + perRow);
+          const rowParts = slice.map((s) => {
+            const p1Class = s.winner === 'p1' ? 'set-winner' : 'set-loser';
+            const p2Class = s.winner === 'p2' ? 'set-winner' : 'set-loser';
+            return `<span class="card-set-item"><span class="${p1Class}">${s.p1}</span><span style="color:#000;font-weight:700;">-</span><span class="${p2Class}">${s.p2}</span></span>`;
+          });
+          rows.push(`<div class="card-set-row">${rowParts.join(', ')}</div>`);
+        }
+
+        // 固定至少 4 行高度，补足空行
+        while (rows.length < 4) {
+          rows.push('<div class="card-set-row"><span style="visibility:hidden;">占位</span></div>');
+        }
+
+        return rows.slice(0, 4).join('');
+      }
+
+      card.innerHTML = `
+        <div class="card-subtitle">${category} · ${round}</div>
+        <div class="card-score-top">${formatMainScore(scoreText, match.winner)}</div>
+        <div class="card-player-row">
+          <span class="player-name ${p1WinnerClass}">${p1}</span>
+          <span class="player-name ${p2WinnerClass}">${p2}</span>
+        </div>
+        <div class="card-set-inline">${renderSetRows(sets)}</div>
+        <button class="btn-detail" type="button">Details</button>
+      `;
+
+      const btn = card.querySelector('.btn-detail');
+      btn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        openMatchModal(match, context);
+      });
+
+      return card;
+
+      const openFn = () => openMatchModal(match, context);
+      card.addEventListener('click', openFn);
+      return card;
+    }
+
+    function openMatchModal(match, context) {
+      const [p1,p2] = getTextFromPlayers(match.players);
+      const sets = parseSets(match.details?.sets);
+      const totalP1 = match.details?.totals?.p1 ?? '无数据';
+      const totalP2 = match.details?.totals?.p2 ?? '无数据';
+      const duration = match.details?.duration != null ? `${match.details.duration} 分钟` : '无数据';
+      const timeout = Array.isArray(match.details?.timeout) ? match.details.timeout : null;
+      const medical = Array.isArray(match.details?.medical) ? match.details.medical : null;
+      const notes = match.details?.notes || match.notes || '无';
+      const vio = parseDateFromNotes(notes);
+      const matchTime = match.details?.time || match.details?.date || vio || '无数据';
+      const venue = match.details?.venue || match.venue || match.location || '';
+
+      const category = match.details?.category || match.category || 'Mixed Single';
+      const round = match.details?.round || match.round || context.stageName || '未知轮次';
+      const winnerName = match.winner || '';
+      const p1Wins = sets.filter(s => s.winner === 'p1').length;
+      const p2Wins = sets.filter(s => s.winner === 'p2').length;
+      const totalScore = match.score || `${p1Wins}-${p2Wins}`;
+      const statusKey = String(match.status).toLowerCase();
+      const isSpecialMatch = ['bye','default','cancelled'].includes(statusKey);
+      const showSetDetails = !isSpecialMatch;
+      const showGeneralInfo = !isSpecialMatch;
+      const isFixed4 = sets.length <= 4;
+      const forfeitPlayer = statusKey === 'default' ? (winnerName === p1 ? p2 : p1) : '';
+      const forfeitLabel = statusKey === 'default'
+        ? `${forfeitPlayer || '某选手'} 弃赛`
+        : statusKey === 'cancelled'
+          ? '比赛取消'
+          : statusKey === 'bye'
+            ? '轮空'
+            : '';
+
+      let points1 = match.details?.totals?.p1 ?? match.details?.totals?.points?.p1;
+      let points2 = match.details?.totals?.p2 ?? match.details?.totals?.points?.p2;
+      if (points1 == null && points2 == null && sets.length) {
+        points1 = sets.reduce((sum, s) => sum + (Number(s.p1) || 0), 0);
+        points2 = sets.reduce((sum, s) => sum + (Number(s.p2) || 0), 0);
+      }
+      points1 = points1 != null ? points1 : '未知';
+      points2 = points2 != null ? points2 : '未知';
+
+      modalContent.innerHTML = '';
+      const c = document.createElement('div');
+      c.innerHTML = `
+        <div class="modal-header">
+          <h2 class="modal-title">${safeText(match.matchName || match.name || (category + ' Match'))}</h2>
+          <div class="modal-subtitle">${category} · ${round}</div>
+          ${isSpecialMatch && forfeitLabel ? `<div class="modal-special-note" style="color:#c0392b;font-weight:900;font-size:1.4rem;margin:0.5rem 0;">${safeText(forfeitLabel)}</div>` : ''}
+          <div class="modal-player-row">
+            <div class="modal-player-name ${p1 === winnerName ? 'winner' : ''}">${p1}</div>
+            <div>
+              <div class="modal-main-score">${formatMainScore(totalScore, winnerName, p1, p2)}</div>
+              <div class="modal-score-duration">${duration}</div>
+            </div>
+            <div class="modal-player-name ${p2 === winnerName ? 'winner' : ''}">${p2}</div>
+          </div>
+        </div>
+        ${showGeneralInfo ? `<div class="modal-venue">${safeText(venue || '未知场地')}</div>
+        <div class="modal-info-card">
+          <p>阶段：${safeText(context.stageName || '未知')}</p>
+          <p>场次编号：${match.matchNum ?? '无'}</p>
+          <p>状态：${buildRoundLabel(match.status)[0]}</p>
+          <p>比赛时间：${safeText(matchTime)}</p>
+          <p>比赛时长：${duration}</p>
+          <p>备注：${safeText(notes)}</p>
+        </div>` : ''}
+        ${showSetDetails ? (() => {
+          if (!sets.length) return '<div class="modal-set-table-wrap"><div>暂无小分</div></div>';
+          const cols = sets.map((_, i) => `<th>${i+1}</th>`).join('');
+          const p1Class = p1 === winnerName ? 'winner' : '';
+          const p2Class = p2 === winnerName ? 'winner' : '';
+          const p1Cells = sets.map(s => `<td class="${s.winner === 'p1' ? 'winner' : ''}">${s.p1}</td>`).join('');
+          const p2Cells = sets.map(s => `<td class="${s.winner === 'p2' ? 'winner' : ''}">${s.p2}</td>`).join('');
+          const p1MainClass = p1Wins > p2Wins ? 'main-score winner' : (p1Wins === p2Wins ? 'main-score tie' : 'main-score');
+          const p2MainClass = p2Wins > p1Wins ? 'main-score winner' : (p1Wins === p2Wins ? 'main-score tie' : 'main-score');
+          return `<div class="modal-set-table-wrap"><table class="modal-set-table"><thead><tr><th>选手</th><th>局数</th>${cols}</tr></thead><tbody><tr><td class="${p1Class}">${p1 === winnerName && !isFixed4 ? '✔ ' : ''}${p1}</td><td class="${p1MainClass}">${p1Wins}</td>${p1Cells}</tr><tr><td class="${p2Class}">${p2 === winnerName && !isFixed4 ? '✔ ' : ''}${p2}</td><td class="${p2MainClass}">${p2Wins}</td>${p2Cells}</tr></tbody></table></div>`;
+        })() : ''}
+        ${showGeneralInfo ? `<div class="modal-stats-title">比赛统计</div>
+        <div class="modal-stats-table-wrap">
+          <table class="modal-stats-table">
+            <thead><tr><th>${p1}</th><th>指标</th><th>${p2}</th></tr></thead>
+            <tbody>
+              <tr><td>${points1}</td><td>总得分</td><td>${points2}</td></tr>
+              <tr><td>${timeout ? (timeout[0] ? '有' : '无') : '无数据'}</td><td>暂停</td><td>${timeout ? (timeout[1] ? '有' : '无') : '无数据'}</td></tr>
+              <tr><td>${medical ? (medical[0] ? '有' : '无') : '无数据'}</td><td>医疗暂停</td><td>${medical ? (medical[1] ? '有' : '无') : '无数据'}</td></tr>
+            </tbody>
+          </table>
+        </div>` : ''}
+      `;
+      modalContent.appendChild(c);
+
+      modalOverlay.classList.add('show');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('show');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function renderGroupStage(stageKey, matches, playerData) {
+      const QUALIFIED_COUNT = 2; // 每小组前2名晋级
+      const sectionName = stageKey === 'groupStage' ? '小组赛' : stageKey;
+      const stageContainer = document.createElement('div');
+      stageContainer.className = 'stage-section group-stage active';
+
+      const title = document.createElement('h2');
+      title.className = 'section-title';
+      title.textContent = sectionName + ' 排名';
+      stageContainer.appendChild(title);
+
+      const groups = [...new Set(matches.map(m=>String(m.stage || '').trim()).filter(Boolean))].sort((a,b) => {
+        const aKey = a.replace(/[^0-9a-zA-Z\u4e00-\u9fa5]/g,'');
+        const bKey = b.replace(/[^0-9a-zA-Z\u4e00-\u9fa5]/g,'');
+        return aKey.localeCompare(bKey,'zh-Hans-u-co-pinyin');
+      });
+
+      if (groups.length === 0) groups.push('默认');
+      const tabBox = document.createElement('div'); tabBox.className='tabs'; tabBox.id='group-tabs';
+      const contentBox = document.createElement('div'); contentBox.className='layout-grid';
+
+      groups.forEach((groupName, idx) => {
+        const btn = document.createElement('button');
+        btn.type='button';
+        btn.className='tab-btn' + (idx===0 ? ' active' : '');
+        btn.textContent = groupName;
+        btn.addEventListener('click', () => {
+          for (const b of tabBox.querySelectorAll('.tab-btn')) b.classList.remove('active');
+          btn.classList.add('active');
+          for (const c of contentBox.querySelectorAll('.group-content')) c.classList.remove('active');
+          document.getElementById('group-content-'+CSS.escape(groupName)).classList.add('active');
+        });
+        tabBox.appendChild(btn);
+
+        const groupMatches = matches.filter(m => {
+          if (!m.stage) return groupName==='默认';
+          return String(m.stage).trim() === groupName;
+        }).sort((a,b)=> (a.matchNum||0) - (b.matchNum||0));
+
+        const membersSet = new Set();
+        groupMatches.forEach(m => {
+          const [p1,p2] = getTextFromPlayers(m.players);
+          if (p1 && p1 !== '轮空') membersSet.add(p1);
+          if (p2 && p2 !== '轮空') membersSet.add(p2);
+        });
+
+        Object.entries(playerData || {}).forEach(([name, pd]) => {
+          if (pd.group===groupName) membersSet.add(name);
+        });
+
+        const playerList = Array.from(membersSet).sort((a,b)=>a.localeCompare(b,'zh-Hans-u-co-pinyin'));
+
+        // 检测是否固定4局制循环赛
+        const isFixed4Set = groupMatches.every(m => {
+          const sets = parseSets(m.details?.sets);
+          return sets.length === 4;
+        });
+
+        const ranking = calcGroupRanking(groupMatches, playerList, playerData);
+
+        const cDiv = document.createElement('div');
+        cDiv.className='group-content' + (idx===0 ? ' active' : '');
+        cDiv.id='group-content-'+groupName;
+
+        const rankTitle = document.createElement('h3');
+        rankTitle.textContent = groupName;
+        cDiv.appendChild(rankTitle);
+
+        const tableWrap = document.createElement('div');
+        tableWrap.className='table-wrap';
+        const table = document.createElement('table');
+        let headerHTML = '<thead><tr><th>#</th><th>选手</th>';
+        if (!isFixed4Set) {
+          headerHTML += '<th>胜</th><th>负</th>';
+        }
+        headerHTML += '<th>胜局</th><th>负局</th><th>胜分</th><th>负分</th><th>晋级</th></tr></thead><tbody></tbody>';
+        table.innerHTML = headerHTML;
+        const tbody = table.querySelector('tbody');
+        ranking.forEach((item, i) => {
+          let rowHTML = `<td>${i+1}</td><td>${item.name}</td>`;
+          if (!isFixed4Set) {
+            rowHTML += `<td>${item.win}</td><td>${item.loss}</td>`;
+          }
+          rowHTML += `<td>${item.setsFor}</td><td>${item.setsAgainst}</td><td>${item.pointsFor}</td><td>${item.pointsAgainst}</td>`;
+          const qualifiedText = item.qualified ? item.qualified : (i < QUALIFIED_COUNT ? '<span class="qualified">✓</span>' : '');
+          rowHTML += `<td>${qualifiedText}</td>`;
+          const tr = document.createElement('tr');
+          tr.innerHTML = rowHTML;
+          tbody.appendChild(tr);
+        });
+        tableWrap.appendChild(table);
+        cDiv.appendChild(tableWrap);
+
+        const matchesTitle = document.createElement('h3');
+        matchesTitle.textContent = groupName + ' 比赛列表';
+        cDiv.appendChild(matchesTitle);
+
+        const matchGrid = document.createElement('div');
+        matchGrid.className='match-grid';
+        groupMatches.forEach(m => matchGrid.appendChild(buildMatchCard(m, {stageName: groupName})));
+        if (groupMatches.length===0) {
+          const info = document.createElement('p'); info.innerText = '当前组暂无比赛数据';
+          cDiv.appendChild(info);
+        } else {
+          cDiv.appendChild(matchGrid);
+        }
+
+        contentBox.appendChild(cDiv);
+      });
+
+      const contentRoot = document.getElementById('stage-content') || mainStagesEl;
+      stageContainer.appendChild(tabBox);
+      stageContainer.appendChild(contentBox);
+      contentRoot.appendChild(stageContainer);
+    }
+
+    function renderKnockoutStage(stageKey, matches) {
+      const stageContainer = document.createElement('div');
+      stageContainer.className = 'stage-section knockout-stage active';
+      const stageTitle = document.createElement('h2');
+      stageTitle.className='section-title';
+      stageTitle.textContent = stageKey === 'knockoutStage' ? '淘汰赛' : ('淘汰赛：' + stageKey);
+      stageContainer.appendChild(stageTitle);
+
+      const grouped = {};
+      matches.forEach(m => {
+        const name = String(m.stage||'未命名');
+        grouped[name] = grouped[name] || [];
+        grouped[name].push(m);
+      });
+
+      const stageEntries = Object.entries(grouped).sort((a,b)=> {
+        const aPri = stageNameOrder[a[0]] ?? 0;
+        const bPri = stageNameOrder[b[0]] ?? 0;
+        if (aPri !== bPri) return aPri - bPri;
+        return a[0].localeCompare(b[0], 'zh-Hans-u-co-pinyin');
+      });
+
+      stageEntries.forEach(([roundName, roundMatches]) => {
+        const block = document.createElement('div');
+        block.className='stage-block';
+        const h3 = document.createElement('h3');
+        h3.textContent = roundName;
+        block.appendChild(h3);
+
+        const matchGrid = document.createElement('div');
+        matchGrid.className='match-grid';
+
+        roundMatches.sort((a,b)=> (a.matchNum||0) - (b.matchNum||0)).forEach(m => {
+          matchGrid.appendChild(buildMatchCard(m, {stageName: roundName}));
+        });
+
+        if (roundMatches.length === 0) {
+          const info = document.createElement('p');
+          info.innerText = '当前阶段暂无比赛';
+          block.appendChild(info);
+        } else {
+          block.appendChild(matchGrid);
+        }
+        stageContainer.appendChild(block);
+      });
+      const contentRoot = document.getElementById('stage-content') || mainStagesEl;
+      contentRoot.appendChild(stageContainer);
+    }
+
+    function renderOtherStage(stageKey, matches) {
+      const stageContainer = document.createElement('div');
+      stageContainer.className = 'stage-section other-stage active';
+      const title = document.createElement('h2');
+      title.className='section-title';
+      title.textContent = '阶段：' + stageKey;
+      stageContainer.appendChild(title);
+
+      const stageBlock = document.createElement('div');
+      stageBlock.className='stage-block';
+
+      const matchGrid = document.createElement('div');
+      matchGrid.className='match-grid';
+
+      matches.sort((a,b) => (a.matchNum||0)-(b.matchNum||0))
+        .forEach(m => matchGrid.appendChild(buildMatchCard(m, {stageName: stageKey})));
+
+      stageBlock.appendChild(matchGrid);
+      stageContainer.appendChild(stageBlock);
+      const contentRoot = document.getElementById('stage-content') || mainStagesEl;
+      contentRoot.appendChild(stageContainer);
+    }
+
+    async function init() {
+      try {
+        const data = await fetchMatchData();
+        buildOverview(data);
+
+        const matchData = data.matchData || {};
+        const playerData = data.playerData || {};
+        const stageKeys = Object.keys(matchData).filter(k => Array.isArray(matchData[k]));
+
+        mainStagesEl.innerHTML = '';
+        // 阶段切换栏（小组赛/淘汰赛/全部）
+        const stageTabBar = document.createElement('div');
+        stageTabBar.className = 'stage-tab-bar';
+        ['全部', '小组赛', '淘汰赛'].forEach((name, index) => {
+          const tabBtn = document.createElement('button');
+          tabBtn.className = 'stage-tab' + (index===0 ? ' active' : '');
+          tabBtn.textContent = name;
+          tabBtn.addEventListener('click', () => {
+            stageTabBar.querySelectorAll('.stage-tab').forEach(b => b.classList.remove('active'));
+            tabBtn.classList.add('active');
+            const allSections = document.querySelectorAll('.stage-section');
+            allSections.forEach(s => {
+              if (name === '全部') s.classList.add('active');
+              else if (name === '小组赛') s.classList.toggle('active', s.classList.contains('group-stage'));
+              else if (name === '淘汰赛') s.classList.toggle('active', s.classList.contains('knockout-stage'));
+            });
+          });
+          stageTabBar.appendChild(tabBtn);
+        });
+        mainStagesEl.appendChild(stageTabBar);
+
+        const stageContent = document.createElement('div');
+        stageContent.id = 'stage-content';
+        mainStagesEl.appendChild(stageContent);
+
+        const groupStages = stageKeys.filter(k => normalizeStageType(k, matchData[k][0]?.stage) === 'group');
+        const knockoutStages = stageKeys.filter(k => normalizeStageType(k, matchData[k][0]?.stage) === 'knockout');
+        const otherStages = stageKeys.filter(k => !groupStages.includes(k) && !knockoutStages.includes(k));
+
+        if (groupStages.length>0) {
+          groupStages.forEach(k => renderGroupStage(k, matchData[k] || [], playerData));
+        }
+        if (knockoutStages.length>0) {
+          knockoutStages.forEach(k => renderKnockoutStage(k, matchData[k] || []));
+        }
+        if (otherStages.length>0) {
+          otherStages.forEach(k => renderOtherStage(k, matchData[k] || []));
+        }
+
+        if (stageKeys.length===0) {
+          mainStagesEl.innerHTML = '<p>无赛程数据，请确认 JSON 结构是否正确。</p>';
+        }
+      } catch (error) {
+        eventSubtitleEl.innerText = '加载错误：' + error.message;
+        mainStagesEl.innerHTML = '<p style="color:#dc2626;">无法加载数据，请检查文件是否存在或格式是否正确。</p>';
+      }
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', event => {
+      if (event.target === modalOverlay) closeModal();
+    });
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeModal();
+    });
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+
+  <script>
+    /* ===== 导航 tab 悬停逻辑 =====
+       - 未悬停任意 tab 时，默认高亮赛事（保留 .active）
+       - 当鼠标悬停到某个 tab 上时，仅高亮该 tab（其它不高亮）
+    */
+    (function(){
+      const navLinks = document.querySelectorAll('nav .nav-links a');
+      const defaultHref = 'https://dreamerdawn.github.io/QTTF/events';
+      const resetDefault = ()=>{
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const home = Array.from(navLinks).find(a=>a.getAttribute('href')===defaultHref);
+        if(home) home.classList.add('active');
+      };
+
+      // 当鼠标进入某个 link：清除所有 active 并仅为当前项添加 active
+      navLinks.forEach(a=>{
+        a.addEventListener('mouseenter', ()=>{
+          navLinks.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+        });
+      });
+
+      // 当鼠标离开整个 nav 链接容器时，恢复默认赛事高亮
+      const navLinksContainer = document.querySelector('nav .nav-links');
+      navLinksContainer.addEventListener('mouseleave', ()=>{
+        // 延迟 50ms 以避免在快速移动时产生闪烁
+        setTimeout(resetDefault, 50);
+      });
+    })();
+  </script>
+</body>
+</html>

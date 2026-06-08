@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>赛事 - QTTF</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --accent:#0066ff;
+      --muted:#6b7280;
+      --max-width:1200px;
+      --radius:12px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0b1220;background:linear-gradient(180deg,#f7fafc 0%, #eef4ff 100%);} 
+    a{color:inherit;text-decoration:none}
+    header{background:rgba(255,255,255,0.72);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 6px 24px rgba(16,24,40,.06);position:sticky;top:0;z-index:1100;border-bottom:1px solid rgba(15,23,42,.03)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 28px}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{font-weight:700;font-size:20px;color:var(--accent)}
+    .nav-links{display:flex;gap:20px}
+    .nav-links a{color:var(--muted);padding:8px 10px;border-radius:8px;transition:all .18s;font-weight:600}
+    .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--accent)}
+    .nav-links a.active{color:var(--accent);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:inset 0 -4px 18px rgba(0,102,255,.03);border-radius:10px}
+
+    main{padding:28px 0 56px}
+
+    .features{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(2, minmax(160px, auto));gap:18px;margin-top:22px;align-items:stretch}
+    .card{background:linear-gradient(180deg,var(--card),var(--card));padding:18px;border-radius:14px;box-shadow:10px 12px 30px rgba(20,32,78,.04), inset 0 1px 0 rgba(255,255,255,.6);border:1px solid rgba(15,23,42,.04);display:flex;flex-direction:column;justify-content:flex-start;min-height:160px;box-sizing:border-box}
+    .card h3{margin:0;color:#0f172a;font-size:1.15rem}
+    .card p{margin:8px 0 0 0;color:var(--muted);line-height:1.45}
+    .event-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+    .event-item{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:8px;background:rgba(255,255,255,0.9)}
+    .event-item a.event-link{color:#0f172a;font-weight:600;font-size:0.95rem}
+    .event-item .dot{color:var(--accent);margin-right:6px}
+    .history-link{display:inline-block;margin-top:12px;color:var(--accent);font-weight:700;text-decoration:none}
+    .history-link:hover{text-decoration:underline}
+
+    /* 轻量化四色区块，复用 homepage 配色风格 */
+    .features .card:nth-child(1){background:linear-gradient(180deg,rgba(31,58,147,.04),rgba(245,250,255,.95))}
+    .features .card:nth-child(2){background:linear-gradient(180deg,rgba(0,164,239,.04),rgba(250,255,255,.95))}
+    .features .card:nth-child(3){background:linear-gradient(180deg,rgba(127,186,0,.04),rgba(255,255,245,.95))}
+    .features .card:nth-child(4){background:linear-gradient(180deg,rgba(255,185,0,.04),rgba(255,250,240,.95))}
+
+    footer{padding:28px 0;text-align:center;color:var(--muted)}
+
+    /* 响应式 */
+    @media (max-width:1199px){ .container{padding:0 20px} }
+    @media (max-width:900px){ .features{grid-template-columns:1fr 1fr} }
+    @media (max-width:767px){ .features{grid-template-columns:1fr;grid-auto-rows:auto} }
+  </style>
+
+</head>
+<body>
+  <script src="https://keepandroidopen.org/banner.js?size=mini"></script>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="QTTF.png" alt="QTTF" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
+          <div class="brand">QTTF</div>
+        </div>
+        <div class="nav-links">
+            <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
+            <a class="active" href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
+            <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
+            <a href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="features" aria-label="赛事总览">
+      <!-- 卡片：QTTC -->
+      <article class="card" aria-label="QTTC">
+        <h3>QTTC</h3>
+        <p>丘班乒乓球锦标赛（QTTC），又称“觚棻”杯，是 QTTF 主办的年度旗舰赛事，面向全体丘班同学，采用标准淘汰赛制，积分计入协会排名系统。</p>
+        <div class="event-list" aria-label="QTTC 子赛事列表">
+          <div class="event-item"><span class="dot">•</span><a class="event-link" data-event="qttc2024" href="https://dreamerdawn.github.io/QTTF/events/qttc/qttc2024">QTTC 2024</a></div>
+          <div class="event-item"><span class="dot">•</span><a class="event-link" data-event="qttc2025" href="https://dreamerdawn.github.io/QTTF/events/qttc/qttc2025">QTTC 2025</a></div>
+        </div>
+        <a class="history-link" data-category="QTTC" href="https://dreamerdawn.github.io/QTTF/events/qttc">&gt;&gt; 查看历史赛事</a>
+      </article>
+
+      <!-- 卡片：“追光”杯 -->
+      <article class="card" aria-label="追光杯">
+        <h3>“追光”杯</h3>
+        <p>“追光”杯是由学校官方主办的往届赛事，曾设七年级至九年级组别。QTTF 记录了部分高中阶段的参赛数据。</p>
+        <div class="event-list" aria-label="追光杯 子赛事列表">
+          <div class="event-item"><span class="dot">•</span><a class="event-link" data-event="zgcup2024" href="https://dreamerdawn.github.io/QTTF/events/zgcup2024">2024“追光”杯</a></div>
+        </div>
+      </article>
+
+      <!-- 卡片：校级赛事选拔赛 -->
+      <article class="card" aria-label="校级赛事选拔赛">
+        <h3>校级赛事选拔赛</h3>
+        <p>为备战校级以上运动会，QTTF 组织内部选拔赛，代表丘班参加乒乓球混合团体项目。</p>
+        <div class="event-list" aria-label="选拔赛 子赛事列表">
+          <div class="event-item"><span class="dot">•</span><a class="event-link" data-event="2026_omni_tryout" href="https://dreamerdawn.github.io/QTTF/events/tryout/xtcq2026">2026“全球”运动会乒乓球混合团体项目选拔赛</a></div>
+        </div>
+        <a class="history-link" data-category="tryouts" href="#">&gt;&gt; 查看历史赛事</a>
+      </article>
+
+      <!-- 卡片：班级联赛 -->
+      <article class="card" aria-label="班级联赛">
+        <h3>班级联赛</h3>
+        <p>面向丘班各班级的日常联赛体系，分为超级联赛和冠军联赛两个级别，升降级制度，贯穿整个学年。</p>
+        <div class="event-list" aria-label="班级联赛 子赛事列表">
+          <div class="event-item"><span class="dot">•</span><a class="event-link" data-event="qsl" href="https://dreamerdawn.github.io/QTTF/events/league/qsl">丘班乒乓球超级联赛 (QSL)</a></div>
+          <div class="event-item"><span class="dot">•</span><a class="event-link" data-event="qcl" href="https://dreamerdawn.github.io/QTTF/events/league/qcl">丘班乒乓球冠军联赛 (QCL)</a></div>
+        </div>
+        <a class="history-link" data-category="classleague" href="#">&gt;&gt; 查看历史赛事</a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>本网页由Github Copilot生成，数据由丘班乒乓球联合会提供</p>
+    </div>
+  </footer>
+
+  <script>
+    /* 导航悬停高亮逻辑（与 homepage.html 保持一致，但默认高亮为“赛事”） */
+    (function(){
+      const navLinks = document.querySelectorAll('nav .nav-links a');
+      const defaultHref = 'https://dreamerdawn.github.io/QTTF/events';
+      const resetDefault = ()=>{
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const el = Array.from(navLinks).find(a=>a.getAttribute('href')===defaultHref);
+        if(el) el.classList.add('active');
+      };
+
+      navLinks.forEach(a=>{
+        a.addEventListener('mouseenter', ()=>{
+          navLinks.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+        });
+      });
+
+      const navLinksContainer = document.querySelector('nav .nav-links');
+      navLinksContainer.addEventListener('mouseleave', ()=>{
+        setTimeout(resetDefault, 50);
+      });
+
+  // 初始状态：确保“赛事”高亮
+      resetDefault();
+    })();
+  </script>
+</body>
+</html>

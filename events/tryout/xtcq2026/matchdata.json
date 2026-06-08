@@ -1,0 +1,636 @@
+{
+  "matchName": "XTC Qualification 2026",
+  "format": "两阶段循环赛+淘汰赛",
+  "matchData": {
+    "Name": "2026年“全球”运动会乒乓球混合团体项目选拔赛（Mixed Team Championship Qualification 2026）",
+    "groupStage": [
+      {
+        "stage": "A组",
+        "matchNum": 1,
+        "players": "朱恩骏 vs 刘函宇",
+        "score": "3-2",
+        "winner": "朱恩骏",
+        "status": "completed",
+        "details": {
+          "sets": ["9-11", "11-9", "11-6", "11-13", "11-7"],
+          "duration": 38,
+          "timeout": [true, true],
+          "medical": [false, false],
+          "notes": "比赛在第5个比赛日(2025年11月27日)进行。",
+          "totals": { "p1": 53, "p2": 46 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-27"
+        }
+      },
+      {
+        "stage": "A组",
+        "matchNum": 2,
+        "players": "朱恩骏 vs 唐近尧",
+        "score": "3-0",
+        "winner": "朱恩骏",
+        "status": "completed",
+        "details": {
+          "sets": ["11-5", "11-4", "11-9"],
+          "duration": 12,
+          "timeout": [true, true],
+          "medical": [false, false],
+          "notes": "比赛在第3个比赛日(2025年11月25日)进行。",
+          "totals": { "p1": 33, "p2": 18 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-25"
+        }
+      },
+      {
+        "stage": "A组",
+        "matchNum": 3,
+        "players": "刘函宇 vs 唐近尧",
+        "score": "3-2",
+        "winner": "刘函宇",
+        "status": "completed",
+        "details": {
+          "sets": ["11-5", "9-11", "10-12", "11-9", "11-9"],
+          "duration": 25,
+          "timeout": [false, true],
+          "medical": [false, false],
+          "notes": "比赛在第1个比赛日(2025年11月21日)进行。",
+          "totals": { "p1": 52, "p2": 46 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-21"
+        }
+      },
+      {
+        "stage": "B组",
+        "matchNum": 1,
+        "players": "谢承宇 vs 殳晟欢",
+        "score": "3-0",
+        "winner": "谢承宇",
+        "status": "completed",
+        "details": {
+          "sets": ["11-7", "12-10", "11-6"],
+          "duration": 15,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第4个比赛日(2025年11月26日)进行。",
+          "totals": { "p1": 34, "p2": 23 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-26"
+        }
+      },
+      {
+        "stage": "B组",
+        "matchNum": 2,
+        "players": "谢承宇 vs 柴靖伟",
+        "score": "3-0",
+        "winner": "谢承宇",
+        "status": "completed",
+        "details": {
+          "sets": ["11-2", "11-2", "11-6"],
+          "duration": 15,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第4个比赛日(2025年11月26日)进行。",
+          "totals": { "p1": 33, "p2": 10 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-26"
+        }
+      },
+      {
+        "stage": "B组",
+        "matchNum": 3,
+        "players": "殳晟欢 vs 柴靖伟",
+        "score": "3-0",
+        "winner": "殳晟欢",
+        "status": "completed",
+        "details": {
+          "sets": ["11-2", "11-1", "11-6"],
+          "duration": 9,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第2个比赛日(2025年11月24日)进行。",
+          "totals": { "p1": 33, "p2": 9 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-24"
+        }
+      },
+      {
+        "stage": "C组",
+        "matchNum": 1,
+        "players": "陈金森 vs 赵久龄",
+        "score": "3-0",
+        "winner": "陈金森",
+        "status": "completed",
+        "details": {
+          "sets": ["11-6", "11-5", "11-5"],
+          "duration": 12,
+          "timeout": [false, true],
+          "medical": [false, false],
+          "notes": "比赛在第3个比赛日(2025年11月25日)进行。",
+          "totals": { "p1": 33, "p2": 16 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-25"
+        }
+      },
+      {
+        "stage": "C组",
+        "matchNum": 2,
+        "players": "陈金森 vs 李嘉睿",
+        "score": "3-1",
+        "winner": "陈金森",
+        "status": "completed",
+        "details": {
+          "sets": ["11-3", "12-10", "7-11", "11-7"],
+          "duration": 23,
+          "timeout": [true, false],
+          "medical": [false, false],
+          "notes": "比赛在第4个比赛日(2025年11月26日)进行。",
+          "totals": { "p1": 41, "p2": 31 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-26"
+        }
+      },
+      {
+        "stage": "C组",
+        "matchNum": 3,
+        "players": "赵久龄 vs 李嘉睿",
+        "score": "3-1",
+        "winner": "赵久龄",
+        "status": "completed",
+        "details": {
+          "sets": ["11-5", "11-7", "3-11", "11-9"],
+          "duration": 20,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第2个比赛日(2025年11月24日)进行。",
+          "totals": { "p1": 36, "p2": 32 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-24"
+        }
+      },
+      {
+        "stage": "D组",
+        "matchNum": 1,
+        "players": "杨蕊宁 vs 周乾渊",
+        "score": "2-3",
+        "winner": "周乾渊",
+        "status": "completed",
+        "details": {
+          "sets": ["5-11", "9-11", "13-11", "12-10", "8-11"],
+          "duration": 30,
+          "timeout": [true, true],
+          "medical": [false, false],
+          "notes": "比赛在第2个比赛日(2025年11月24日)进行。",
+          "totals": { "p1": 47, "p2": 54 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-24"
+        }
+      },
+      {
+        "stage": "D组",
+        "matchNum": 2,
+        "players": "王文彬 vs 杨蕊宁",
+        "score": "0-3",
+        "winner": "杨蕊宁",
+        "status": "default",
+        "details": {
+          "sets": ["0-11", "0-11", "0-11"],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "王文彬弃赛",
+          "totals": { "p1": 0, "p2": 33 },
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "D组",
+        "matchNum": 3,
+        "players": "王文彬 vs 周乾渊",
+        "score": "0-3",
+        "winner": "周乾渊",
+        "status": "default",
+        "details": {
+          "sets": ["0-11", "0-11", "0-11"],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "王文彬弃赛",
+          "totals": { "p1": 0, "p2": 33 },
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "E组",
+        "matchNum": 1,
+        "players": "肖逸轩 vs 陈子扬",
+        "score": "3-0",
+        "winner": "肖逸轩",
+        "status": "completed",
+        "details": {
+          "sets": ["11-9", "11-5", "11-9"],
+          "duration": 15,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第3个比赛日(2025年11月25日)进行。",
+          "totals": { "p1": 33, "p2": 23 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-25"
+        }
+      },
+      {
+        "stage": "E组",
+        "matchNum": 2,
+        "players": "肖逸轩 vs 王续成",
+        "score": "3-0",
+        "winner": "肖逸轩",
+        "status": "completed",
+        "details": {
+          "sets": ["11-2", "11-6", "11-3"],
+          "duration": 10,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第2个比赛日(2025年11月24日)进行。",
+          "totals": { "p1": 33, "p2": 11 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-24"
+        }
+      },
+      {
+        "stage": "E组",
+        "matchNum": 3,
+        "players": "陈子扬 vs 王续成",
+        "score": "3-0",
+        "winner": "陈子扬",
+        "status": "completed",
+        "details": {
+          "sets": ["11-5", "11-9", "11-6"],
+          "duration": 13,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第1个比赛日(2025年11月21日)进行。",
+          "totals": { "p1": 33, "p2": 20 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-21"
+        }
+      },
+      {
+        "stage": "F组",
+        "matchNum": 1,
+        "players": "郭东珉 vs 邹雨岑",
+        "score": "3-0",
+        "winner": "郭东珉",
+        "status": "completed",
+        "details": {
+          "sets": ["11-5", "11-6", "16-14"],
+          "duration": 17,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第3个比赛日(2025年11月25日)进行。",
+          "totals": { "p1": 38, "p2": 25 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-25"
+        }
+      },
+      {
+        "stage": "F组",
+        "matchNum": 2,
+        "players": "郭东珉 vs 郭圣易",
+        "score": "3-0",
+        "winner": "郭东珉",
+        "status": "completed",
+        "details": {
+          "sets": ["11-3", "11-7", "11-8"],
+          "duration": 13,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第5个比赛日(2025年11月27日)进行。",
+          "totals": { "p1": 33, "p2": 18 },
+          "venue": "Table 2 - 乒乓球馆",
+          "date": "2025-11-27"
+        }
+      },
+      {
+        "stage": "F组",
+        "matchNum": 3,
+        "players": "邹雨岑 vs 郭圣易",
+        "score": "3-0",
+        "winner": "邹雨岑",
+        "status": "completed",
+        "details": {
+          "sets": ["11-8", "11-8", "13-11"],
+          "duration": 15,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第3个比赛日(2025年11月25日)进行。",
+          "totals": { "p1": 35, "p2": 27 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-11-25"
+        }
+      }
+    ],
+    "knockoutStage": [
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 1,
+        "players": "朱恩骏 vs 邹雨岑",
+        "score": "3-2",
+        "winner": "朱恩骏",
+        "status": "completed",
+        "details": {
+          "sets": ["8-11", "11-7", "8-11", "11-7", "11-5"],
+          "duration": 36,
+          "timeout": [false, true],
+          "medical": [false, false],
+          "notes": "比赛在第7个比赛日(2025年12月2日)进行。",
+          "totals": { "p1": 49, "p2": 41 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-02"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 2,
+        "players": "肖逸轩 vs 轮空",
+        "score": "—",
+        "winner": "肖逸轩",
+        "status": "bye",
+        "details": {
+          "sets": [],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "轮空晋级",
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 3,
+        "players": "谢承宇 vs 轮空",
+        "score": "—",
+        "winner": "谢承宇",
+        "status": "bye",
+        "details": {
+          "sets": [],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "轮空晋级",
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 4,
+        "players": "赵久龄 vs 杨蕊宁",
+        "score": "2-3",
+        "winner": "杨蕊宁",
+        "status": "completed",
+        "details": {
+          "sets": ["11-9", "12-10", "5-11", "8-11", "8-11"],
+          "duration": 25,
+          "timeout": [true, true],
+          "medical": [false, false],
+          "notes": "比赛在第6个比赛日(2025年12月1日)进行。",
+          "totals": { "p1": 44, "p2": 52 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-01"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 5,
+        "players": "陈金森 vs 轮空",
+        "score": "—",
+        "winner": "陈金森",
+        "status": "bye",
+        "details": {
+          "sets": [],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "轮空晋级",
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 6,
+        "players": "殳晟欢 vs 周乾渊",
+        "score": "3-1",
+        "winner": "殳晟欢",
+        "status": "completed",
+        "details": {
+          "sets": ["11-3", "12-14", "11-9", "11-8"],
+          "duration": 25,
+          "timeout": [false, true],
+          "medical": [false, false],
+          "notes": "比赛在第7个比赛日(2025年12月2日)进行。",
+          "totals": { "p1": 45, "p2": 34 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-02"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 7,
+        "players": "刘函宇 vs 陈子扬",
+        "score": "1-3",
+        "winner": "陈子扬",
+        "status": "completed",
+        "details": {
+          "sets": ["11-13", "7-11", "11-8", "8-11"],
+          "duration": 22,
+          "timeout": [true, false],
+          "medical": [false, false],
+          "notes": "比赛在第6个比赛日(2025年12月1日)进行。",
+          "totals": { "p1": 37, "p2": 43 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-01"
+        }
+      },
+      {
+        "stage": "八分之一决赛",
+        "matchNum": 8,
+        "players": "郭东珉 vs 轮空",
+        "score": "—",
+        "winner": "郭东珉",
+        "status": "bye",
+        "details": {
+          "sets": [],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "轮空晋级",
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "四分之一决赛",
+        "matchNum": 1,
+        "players": "朱恩骏 vs 肖逸轩",
+        "score": "3-2",
+        "winner": "朱恩骏",
+        "status": "completed",
+        "details": {
+          "sets": ["11-7", "12-10", "3-11", "3-11", "11-7"],
+          "duration": 40,
+          "timeout": [true, true],
+          "medical": [false, false],
+          "notes": "比赛在第9个比赛日(2025年12月4日)进行。",
+          "totals": { "p1": 40, "p2": 46 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-04"
+        }
+      },
+      {
+        "stage": "四分之一决赛",
+        "matchNum": 2,
+        "players": "谢承宇 vs 杨蕊宁",
+        "score": "3-0",
+        "winner": "谢承宇",
+        "status": "completed",
+        "details": {
+          "sets": ["11-9", "11-7", "11-9"],
+          "duration": 17,
+          "timeout": [false, true],
+          "medical": [false, false],
+          "notes": "比赛在第9个比赛日(2025年12月4日)进行。",
+          "totals": { "p1": 33, "p2": 25 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-04"
+        }
+      },
+      {
+        "stage": "四分之一决赛",
+        "matchNum": 3,
+        "players": "陈金森 vs 殳晟欢",
+        "score": "3-0",
+        "winner": "陈金森",
+        "status": "completed",
+        "details": {
+          "sets": ["11-5", "13-11", "11-5"],
+          "duration": 27,
+          "timeout": [false, true],
+          "medical": [false, true],
+          "notes": "比赛在第8个比赛日(2025年12月3日)进行。",
+          "totals": { "p1": 35, "p2": 21 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-03"
+        }
+      },
+      {
+        "stage": "四分之一决赛",
+        "matchNum": 4,
+        "players": "陈子扬 vs 郭东珉",
+        "score": "3-0",
+        "winner": "陈子扬",
+        "status": "default",
+        "details": {
+          "sets": ["11-0", "11-0", "11-0"],
+          "duration": 0,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "郭东珉弃赛",
+          "totals": { "p1": 33, "p2": 0 },
+          "venue": "Table 1 - QTTF Breeze Arena"
+        }
+      },
+      {
+        "stage": "半决赛",
+        "matchNum": 1,
+        "players": "朱恩骏 vs 谢承宇",
+        "score": "1-3",
+        "winner": "谢承宇",
+        "status": "completed",
+        "details": {
+          "sets": ["11-8", "8-11", "9-11", "6-11"],
+          "duration": 22,
+          "timeout": [true, false],
+          "medical": [false, false],
+          "notes": "比赛在第10个比赛日(2025年12月5日)进行。",
+          "totals": { "p1": 34, "p2": 41 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-05"
+        }
+      },
+      {
+        "stage": "半决赛",
+        "matchNum": 2,
+        "players": "陈金森 vs 陈子扬",
+        "score": "3-0",
+        "winner": "陈金森",
+        "status": "completed",
+        "details": {
+          "sets": ["16-14", "12-10", "11-6"],
+          "duration": 18,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "notes": "比赛在第9个比赛日(2025年12月4日)进行。",
+          "totals": { "p1": 39, "p2": 30 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-04"
+        }
+      },
+      {
+        "stage": "铜牌赛",
+        "matchNum": 1,
+        "players": "朱恩骏 vs 陈子扬",
+        "score": "3-1",
+        "winner": "朱恩骏",
+        "status": "completed",
+        "details": {
+          "sets": ["11-8", "8-11", "11-7", "11-9"],
+          "duration": 20,
+          "timeout": [false, false],
+          "medical": [false, false],
+          "isBronze": true,
+          "notes": "比赛在第11个比赛日(2025年12月8日)进行。",
+          "totals": { "p1": 41, "p2": 35 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-08"
+        }
+      },
+      {
+        "stage": "决赛",
+        "matchNum": 1,
+        "players": "谢承宇 vs 陈金森",
+        "score": "2-3",
+        "winner": "陈金森",
+        "status": "completed",
+        "details": {
+          "sets": ["5-11", "7-11", "11-8", "12-10", "11-13"],
+          "duration": 36,
+          "timeout": [true, false],
+          "medical": [false, false],
+          "isFinal": true,
+          "runnerUp": "谢承宇",
+          "notes": "比赛在第12个比赛日(2025年12月9日)进行。",
+          "totals": { "p1": 46, "p2": 53 },
+          "venue": "Table 1 - QTTF Breeze Arena",
+          "date": "2025-12-09"
+        }
+      }
+    ]
+  },
+  "playerData": {
+    "陈金森": { "rank": 1, "seed": 1, "points": 2000, "group": null },
+    "刘函宇": { "rank": 7, "seed": 7, "points": 350, "group": "A组" },
+    "唐近尧": { "rank": null, "seed": null,"points": null, "group": "A组" },
+    "谢承宇": { "rank": 6, "seed": 6, "points": 350, "group": "B组" },
+    "殳晟欢": { "rank": null, "seed": null, "points": null, "group": "B组" },
+    "柴靖伟": { "rank": 18, "seed": null, "points": 0, "group": "B组" },
+    "朱恩骏": { "rank": 3, "seed": 3, "points": 800, "group": null },
+    "赵久龄": { "rank": null, "seed": null, "points": null, "group": "C组" },
+    "李嘉睿": { "rank": null, "seed": null, "points": null, "group": "C组" },
+    "杨蕊宁": { "rank": 4, "seed": 4, "points": 1800, "group": "D组" },
+    "周乾渊": { "rank": 8, "seed": 8, "points": 175, "group": "D组" },
+    "王文彬": { "rank": 16, "seed": null, "points": 20, "group": "D组" },
+    "肖逸轩": { "rank": 5, "seed": 5, "points": 1225, "group": "E组" },
+    "陈子扬": { "rank": null, "seed": null, "points": null, "group": "E组" },
+    "王续成": { "rank": null, "seed": null, "points": null, "group": "E组" },
+    "郭东珉": { "rank": 2, "seed": 2, "points": 1965, "group": "F组" },
+    "邹雨岑": { "rank": null, "seed": null, "points": null, "group": "F组" },
+    "郭圣易": { "rank": null, "seed": null, "points": null, "group": "F组" }
+  },
+  "showPodium": false
+}
