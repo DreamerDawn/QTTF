@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>乒乓球比赛抽签器 · 单打/双打签表生成</title>
+<meta name="description" content="乒乓球单打/双打比赛抽签器：种子与分档、小组赛分组、淘汰赛签表、A4 横向树状签表导出（PDF/PNG/Excel）。纯静态，可直接部署到 GitHub Pages。">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">🏓</div>
+    <div class="brand-text">
+      <b>乒乓球比赛抽签器</b>
+      <span>种子 · 分档 · 小组赛 · 淘汰赛签表</span>
+    </div>
+  </div>
+  <div class="topbar-spacer"></div>
+  <nav class="step-nav" id="stepNav" aria-label="步骤导航">
+    <button type="button" class="step-chip is-active" data-step="1"><span class="n">1</span>参赛名单</button>
+    <button type="button" class="step-chip" data-step="2"><span class="n">2</span>比赛设置</button>
+    <button type="button" class="step-chip" data-step="3"><span class="n">3</span>小组抽签</button>
+    <button type="button" class="step-chip" data-step="4"><span class="n">4</span>淘汰赛签表</button>
+    <button type="button" class="step-chip" data-step="5"><span class="n">5</span>导出</button>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- ==================== ① 参赛名单 ==================== -->
+  <section class="panel is-active" id="panel1">
+    <div class="card">
+      <div class="card-head">
+        <h2>① 参赛名单 <span class="tag">ENTRIES</span></h2>
+        <div class="muted" id="entrySummary">—</div>
+      </div>
+
+      <div class="entries-toolbar">
+        <div class="field" style="min-width:200px">
+          <label>比赛类型</label>
+          <div class="seg" id="segEventType">
+            <button type="button" data-v="singles" class="is-on">单打</button>
+            <button type="button" data-v="doubles">双打</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>生成示例数据</label>
+          <div style="display:flex;gap:8px">
+            <input type="number" id="bulkCount" value="20" min="2" max="64" style="width:84px" aria-label="生成数量">
+            <button type="button" class="btn" id="btnGenDemo">生成</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>手动维护</label>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn" id="btnAddRow">+ 添加一行</button>
+            <button type="button" class="btn btn-danger" id="btnClearAll">清空</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>导出</label>
+          <button type="button" class="btn" id="btnExportEntries">导出参赛名单</button>
+        </div>
+        <div class="field" style="margin-left:auto">
+          <label>&nbsp;</label>
+          <button type="button" class="btn btn-primary" id="btnToStep2">下一步：比赛设置 →</button>
+        </div>
+      </div>
+
+      <div class="notice-list" id="entryNotices"></div>
+
+      <div class="table-wrap" style="margin-top:14px;max-height:50vh">
+        <table class="grid" id="entryTable">
+          <thead>
+            <tr>
+              <th style="width:42px">#</th>
+              <th style="min-width:160px">参赛名</th>
+              <th style="min-width:108px" class="col-p1">球员 1</th>
+              <th style="min-width:108px" class="col-p2">球员 2</th>
+              <th style="width:76px">排名</th>
+              <th style="width:76px">种子序</th>
+              <th style="width:68px">档位</th>
+              <th style="width:88px">组合积分</th>
+              <th style="min-width:96px">备注</th>
+              <th style="width:48px"></th>
+            </tr>
+          </thead>
+          <tbody id="entryBody"></tbody>
+        </table>
+      </div>
+      <p class="hint">种子序 1 为最高；<b>排名</b>按你给定的先后填（留空则用录入顺序）；<b>档位</b>留空则按排名序自动分档（不再按积分排序）。双打请填两名球员，显示为“姓名A / 姓名B”。</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>从文件导入 <span class="tag">IMPORT</span></h2>
+        <button type="button" class="btn btn-sm" id="btnTpl">下载 CSV 模板</button>
+      </div>
+      <div class="io-grid">
+        <div class="io-card">
+          <h4>📄 拖入或选择文件</h4>
+          <p>支持 <b>.csv</b> / <b>.txt</b> / <b>.xlsx</b>。首行可为表头（entryName / player1 / player2 / seedRank / tier / groupPoints / remark），也支持中文表头“参赛名、球员1、种子序、档位”。</p>
+          <div class="drop-zone" id="dropZone">
+            <b>点击选择文件，或拖到这里</b>
+            <small>导入会替换当前名单（导入前会校验并给出提示）</small>
+          </div>
+          <input type="file" id="fileInput" accept=".csv,.txt,.xlsx" hidden>
+        </div>
+        <div class="io-card">
+          <h4>🧩 校验规则</h4>
+          <p>· 必填：单打姓名 / 双打两名球员<br>· 种子序不可重复，且为正整数<br>· 档位须在 1–（最大小组人数）<br>· 双打球员数必须为 2</p>
+          <button type="button" class="btn btn-sm" id="btnRevalidate">重新校验当前名单</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ② 比赛设置 ==================== -->
+  <section class="panel" id="panel2">
+    <div class="card">
+      <div class="card-head">
+        <h2>② 比赛设置 <span class="tag">CONFIG</span></h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm" id="btnReco">按人数自动推荐</button>
+          <button type="button" class="btn btn-sm btn-ghost" id="btnBack1">← 返回名单</button>
+        </div>
+      </div>
+
+      <div class="cfg-reco">
+        <span>当前参赛 <b id="recoN">0</b> 个单元</span>
+        <span class="muted">推荐：</span><b id="recoText">—</b>
+        <button type="button" class="btn btn-sm btn-ghost" id="btnApplyReco">采用推荐</button>
+      </div>
+
+      <div class="cfg-grid" style="margin-top:14px">
+        <div class="field"><label>小组数</label><input type="number" id="cfgGroups" min="1" max="32" value="6"></div>
+        <div class="field"><label>每组人数（目标）</label><input type="number" id="cfgSize" min="2" max="16" value="4"></div>
+        <div class="field"><label>每组出线人数</label><input type="number" id="cfgQual" min="1" max="8" value="2"></div>
+        <div class="field"><label>种子数（可手调）</label><input type="number" id="cfgSeeds" min="0" max="64" value="6"></div>
+        <div class="field"><label>档位数</label><input type="number" id="cfgTiers" min="1" max="16" value="4"></div>
+        <div class="field"><label>签名（开发者选项）</label><input type="text" id="cfgSeedText" placeholder="留空 = 每次随机"></div>
+        <div class="field"><label>&nbsp;</label><button type="button" class="btn btn-primary" id="btnDoDraw">开始抽签 →</button></div>
+      </div>
+
+      <div class="notice-list" id="cfgNotices"></div>
+      <p class="hint">
+        组间人数差最多 1 人（多出的人放在靠后小组）；种子按蛇形落入各组 1 号位（多于小组数时进入第 2 层）；
+        非种子按档位从高到低抽入，同档不同组。出线人数 = 小组数 × 每组出线人数。
+        “签名”用于可复现抽签（自测/复盘用），同一签名必然得到同一结果。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>配置预览</h2><span class="muted" id="cfgPreviewText"></span></div>
+      <div class="preview-groups" id="cfgPreview"></div>
+    </div>
+  </section>
+
+  <!-- ==================== ③ 小组抽签 ==================== -->
+  <section class="panel" id="panel3">
+    <div class="card">
+      <div class="card-head">
+        <h2>③ 小组赛抽签 <span class="tag">GROUP DRAW</span></h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm" id="btnSkipAnim">全部放入</button>
+          <button type="button" class="btn btn-sm" id="btnReplay">从头重播</button>
+          <button type="button" class="btn btn-sm" id="btnRedraw">整体重抽</button>
+          <button type="button" class="btn btn-sm" id="btnExportGroups">导出小组赛签表</button>
+          <button type="button" class="btn btn-sm" id="btnExportGroupData">导出数据</button>
+          <button type="button" class="btn btn-sm" id="btnJumpKnockout">直接跳到淘汰赛 →</button>
+          <button type="button" class="btn btn-sm btn-primary" id="btnToBracket">生成淘汰赛签表 →</button>
+        </div>
+      </div>
+
+      <div class="notice-list" id="drawNotices"></div>
+
+      <div class="draw-layout">
+        <!-- 左侧：待抽人卡（按名单顺序） -->
+        <aside class="draw-queue">
+          <div class="queue-head">
+            <b>抽签顺序</b>
+            <span class="muted" id="queueCount">0 / 0</span>
+          </div>
+          <div class="queue-hint" id="queueHint">按你在名单里给出的顺序，逐人点击抽取</div>
+          <div class="queue-list" id="queueList"></div>
+        </aside>
+
+        <!-- 右侧：小组栏平铺 + 当前抽取动作 -->
+        <div class="draw-board">
+          <div class="draw-now" id="drawNow">
+            <div class="draw-now-text"><b id="drawWho">准备抽签</b><span id="drawWhere">点击下方“开始抽签”或左侧卡片</span></div>
+            <button type="button" class="btn btn-accent" id="btnStartDraw">开始抽签</button>
+          </div>
+          <div class="draw-court" id="drawCourt"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ④ 淘汰赛抽签 ==================== -->
+  <section class="panel" id="panel4">
+    <div class="card">
+      <div class="card-head">
+        <h2>④ 淘汰赛抽签 <span class="tag">KNOCKOUT DRAW</span></h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm" id="btnKoSkip">全部放入</button>
+          <button type="button" class="btn btn-sm" id="btnKoReplay">从头重播</button>
+          <button type="button" class="btn btn-sm" id="btnRebuildBracket">整体重抽</button>
+          <button type="button" class="btn btn-sm btn-ghost" id="btnBack3">← 返回小组抽签</button>
+          <button type="button" class="btn btn-sm btn-primary" id="btnToExport">导出 →</button>
+        </div>
+      </div>
+
+      <div class="notice-list" id="bracketNotices"></div>
+
+      <div class="draw-layout">
+        <aside class="draw-queue">
+          <div class="queue-head"><b>抽签顺序</b><span class="muted" id="koCount">0 / 0</span></div>
+          <div class="queue-hint" id="koHint">出线名次优先 → 同名义内按赛前种子排名</div>
+          <div class="queue-list" id="koQueue"></div>
+        </aside>
+
+        <div class="draw-board">
+          <div class="draw-now" id="koNow">
+            <div class="draw-now-text"><b id="koWho">准备抽签</b><span id="koWhere">点左侧卡片或“开始抽签”</span></div>
+            <button type="button" class="btn btn-accent" id="btnKoStart">开始抽签</button>
+          </div>
+          <div class="ko-court" id="koBoard"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>签表预览 <span class="tag">A4</span></h2>
+        <span class="muted">A4 横向 · 树状推进 · 场次号保留 · 时间与球台留空</span>
+      </div>
+      <div class="bracket-toolbar">
+        <div class="field" style="min-width:240px">
+          <label>签表标题</label>
+          <input type="text" id="bracketTitle" value="淘汰赛签表" maxlength="40">
+        </div>
+        <div class="field" style="min-width:260px">
+          <label>副标题（赛事名 / 日期等）</label>
+          <input type="text" id="bracketSub" placeholder="如：2026 城市乒乓球邀请赛 · 男子单打" maxlength="60">
+        </div>
+        <div class="field"><label>&nbsp;</label><button type="button" class="btn btn-sm" id="btnApplyTitle">应用标题</button></div>
+      </div>
+      <div class="bracket-scroll" id="bracketHost" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- ==================== ⑤ 导出 ==================== -->
+  <section class="panel" id="panel5">
+    <div class="card">
+      <div class="card-head">
+        <h2>⑤ 导出 <span class="tag">EXPORT</span></h2>
+        <button type="button" class="btn btn-sm btn-ghost" id="btnBack4">← 返回签表</button>
+      </div>
+
+      <div class="sheet-tabs" id="exportTabs">
+        <button type="button" data-t="bracket" class="is-on">签表（PDF / PNG）</button>
+        <button type="button" data-t="data">数据（JSON / Excel / CSV）</button>
+      </div>
+
+      <div id="exportBracketBox">
+        <div class="io-grid">
+          <div class="io-card">
+            <h4>🖨 PDF（矢量，A4 横向）</h4>
+            <p>用浏览器原生打印输出 PDF：文字为矢量字形，中文不会乱码。在打印对话框里选“另存为 PDF”、纸张 A4 横向、勾选“背景图形”。</p>
+            <button type="button" class="btn btn-primary" id="btnPdf">导出 PDF</button>
+            <button type="button" class="btn btn-sm" id="btnPrint">直接打印当前页</button>
+          </div>
+          <div class="io-card">
+            <h4>🖼 PNG（高分辨率）</h4>
+            <p>把签表栅格化为图片，适合发群、贴通知。可选倍数（越大越清晰、文件越大）。</p>
+            <div class="field"><label>清晰度倍数</label>
+              <select id="pngScale">
+                <option value="2">2×（约 3368 × 2380）</option>
+                <option value="3" selected>3×（约 5052 × 3570）</option>
+                <option value="4">4×（约 6736 × 4760）</option>
+              </select>
+            </div>
+            <button type="button" class="btn" id="btnPng">导出 PNG</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="exportDataBox" hidden>
+        <div class="io-grid">
+          <div class="io-card">
+            <h4>📦 JSON（稳定 schema）</h4>
+            <p>含配置、参赛单元、小组、淘汰赛签位与场次，字段结构固定（schemaVersion），便于接入比赛统计系统。</p>
+            <button type="button" class="btn btn-primary" id="btnJson">导出 JSON</button>
+          </div>
+          <div class="io-card">
+            <h4>📊 Excel（.xlsx，多工作表）</h4>
+            <p>含「选手名单」「小组分组」「淘汰赛签表」「场次清单」四张表，签表以表格形式便于数据处理。</p>
+            <button type="button" class="btn" id="btnXlsx">导出 Excel</button>
+          </div>
+          <div class="io-card">
+            <h4>📋 CSV（名单与分组）</h4>
+            <p>「选手名单 + 小组分组」的可读表格，方便再导入或交给其他系统。</p>
+            <button type="button" class="btn" id="btnCsv">导出 CSV</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px;background:var(--bg-2)">
+          <div class="card-head"><h2>数据接口（预留）</h2><span class="muted">schemaVersion 固定，可对接统计系统</span></div>
+          <div class="table-wrap" style="max-height:280px">
+            <pre id="jsonPreview" style="margin:0;padding:12px;font-family:var(--mono);font-size:12px;line-height:1.55;color:var(--text-2)"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>规则说明 <span class="tag">RULES</span></h2></div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.75">
+        <p><b>小组赛</b>：组间人数差最多 1 人，多出的人放在靠后小组并给出提示。前 <i>seedCount</i> 个种子按蛇形/锚点分布到各组 1 号位（多于小组数时进入第 2 层，跨 1–2 档），高序种子优先占据靠前小组。非种子按档位从高到低逐档抽入小组空位，<b>同档回避</b>（同一档的单元不在同组）；档位容量不足时会明确报出冲突原因，不会静默放宽。同一随机签名必得同一结果。</p>
+        <p><b>淘汰赛</b>：签表大小为 ≥ 出线总人数的最小 2 的幂，不足位置为轮空。小组第一落位：A1 固定 1 号位（顶部）、B1 固定签表末端（底部），C1 及以后按种子序抽入中段/1 4 区锚点（ITTF 阶梯：1 上、2 下、3/4 中段、5–8 四分区、9–16 八分区）。小组第二及以后抽入剩余位置，<b>同组出线者必在不同半区</b>，出线人数 >2 时尽量分散到不同 1/4 区。轮空按“小组第一种子序优先 → 1/4 区均匀”分配，轮空位显式标注“轮空”。含<b>三四名决赛</b>。</p>
+        <p><b>导出</b>：签表为 A4 横向树状图，场次号保留，时间与球台留空占位；双打单元格显示“姓名A / 姓名B”。PDF 走浏览器原生打印（矢量文字，中文不乱码）；PNG 为 SVG 栅格化，可选 2×/3×/4×；Excel 为原生 OOXML，含四张工作表；JSON 为稳定 schema。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">提示</h3>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<div class="footer">
+  <span>纯静态 · 无后端 · 无第三方库 · 可直接部署 GitHub Pages</span>
+  <span><a href="#" id="linkRules">规则说明</a> ｜ 种子与档位、小组赛、淘汰赛、A4 横向导出</span>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="js/core.js"></script>
+<script src="js/draw-groups.js"></script>
+<script src="js/draw-knockout.js"></script>
+<script src="js/bracket-svg.js"></script>
+<script src="js/group-svg.js"></script>
+<script src="js/zip-writer.js"></script>
+<script src="js/xlsx-writer.js"></script>
+<script src="js/export.js"></script>
+<script src="js/import.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

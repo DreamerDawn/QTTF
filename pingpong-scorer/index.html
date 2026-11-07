@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>乒乓球计分器 · Table Tennis Scorer</title>
+<meta name="description" content="纯静态乒乓球计分器：单打/双打、BO3/5/7 与固定 K 局、加球、暂停、逐球统计与 SVG 走势图。无后端、无构建、无外部依赖。">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>乒乓球计分器</h1>
+  <div class="topbar-actions">
+    <span id="saveHint" class="save-hint" aria-live="polite">本地自动保存已开启</span>
+    <a class="link" href="#rules">规则说明</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 顶部：配置 / 状态 ============ -->
+  <section class="card" id="configPanel">
+    <div class="card-head">
+      <h2>比赛配置</h2>
+      <span class="lock-badge" id="lockBadge" hidden>配置已锁定 · 需“重置比赛”才能修改</span>
+    </div>
+
+    <div class="grid grid-cfg">
+      <fieldset class="field">
+        <legend>比赛类型</legend>
+        <label class="radio"><input type="radio" name="cfgType" value="singles" checked> 单打</label>
+        <label class="radio"><input type="radio" name="cfgType" value="doubles"> 双打</label>
+      </fieldset>
+
+      <fieldset class="field" id="namesSingles">
+        <legend>选手姓名</legend>
+        <label class="lined">A 方<input type="text" id="nameA" maxlength="18" placeholder="选手A"></label>
+        <label class="lined">B 方<input type="text" id="nameB" maxlength="18" placeholder="选手B"></label>
+      </fieldset>
+
+      <fieldset class="field" id="namesDoubles" hidden>
+        <legend>双打选手（按队伍汇总）</legend>
+        <div class="two-col">
+          <label class="lined">A1<input type="text" id="nameA1" maxlength="12" placeholder="A1"></label>
+          <label class="lined">A2<input type="text" id="nameA2" maxlength="12" placeholder="A2"></label>
+          <label class="lined">B1<input type="text" id="nameB1" maxlength="12" placeholder="B1"></label>
+          <label class="lined">B2<input type="text" id="nameB2" maxlength="12" placeholder="B2"></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>赛制</legend>
+        <label class="radio"><input type="radio" name="fmtKind" value="bo" checked> BO 赛制</label>
+        <label class="radio"><input type="radio" name="fmtKind" value="fixed"> 固定 K 局</label>
+        <div id="boOptions" class="sub">
+          <label class="radio"><input type="radio" name="bestOf" value="3" checked> BO3（三局两胜）</label>
+          <label class="radio"><input type="radio" name="bestOf" value="5"> BO5（五局三胜）</label>
+          <label class="radio"><input type="radio" name="bestOf" value="7"> BO7（七局四胜）</label>
+        </div>
+        <div id="fixedOptions" class="sub" hidden>
+          <label class="lined">K（1–9）<input type="number" id="fixedK" min="1" max="9" step="1" value="4"></label>
+          <p class="hint">打满 K 局；胜局多者获胜；K 为偶数且胜局相同时判平局；不显示赛点。</p>
+        </div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>每局目标分</legend>
+        <div class="row">
+          <button type="button" class="chip" data-target="7">7</button>
+          <button type="button" class="chip is-on" data-target="11">11</button>
+          <button type="button" class="chip" data-target="21">21</button>
+          <input type="number" id="targetInput" min="1" max="99" step="1" value="11" aria-label="自定义目标分">
+        </div>
+        <label class="switch"><input type="checkbox" id="deuceToggle" checked> 加球（10:10 后需领先 2 分）</label>
+      </fieldset>
+
+      <fieldset class="field" id="firstServeField">
+        <legend>首局先发球</legend>
+        <div id="firstTeamWrap">
+          <label class="radio"><input type="radio" name="firstTeam" value="A" checked> <span data-first-team-label="A">A 方</span></label>
+          <label class="radio"><input type="radio" name="firstTeam" value="B"> <span data-first-team-label="B">B 方</span></label>
+        </div>
+        <div id="doublesServeWrap" class="sub" hidden>
+          <label class="lined">先发球员
+            <select id="doublesFirstServer">
+              <option value="A1">A1</option><option value="A2">A2</option>
+              <option value="B1">B1</option><option value="B2">B2</option>
+            </select>
+          </label>
+          <label class="lined">首先接发球员
+            <select id="doublesFirstReceiver"></select>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="cfg-actions">
+      <button type="button" id="btnStartMatch" class="btn btn-primary btn-lg">开始比赛</button>
+      <button type="button" id="btnStartGame" class="btn btn-lg" hidden>开始本局 / 下一局</button>
+      <p id="cfgError" class="error" role="alert" hidden></p>
+    </div>
+    <p class="hint">比赛开始后配置锁定，只能通过“重置比赛”回到配置。总计时从“开始比赛”起算；单局计时点“开始本局/下一局”启动，或第一球得分时自动启动。</p>
+  </section>
+
+  <!-- ============ 中部：大比分与发球信息 ============ -->
+  <section class="card board" id="board">
+    <div class="board-meta">
+      <span class="pill" id="formatPill">BO3 · 11 分 · 加球</span>
+      <span class="pill" id="statePill">未开始</span>
+      <span class="pill ghost" id="curGamePill">第 1 局</span>
+    </div>
+
+    <div class="sides" id="sides">
+      <article class="side side-A" id="sideBoxA" data-side="A">
+        <div class="side-name" id="nameBoxA">选手A</div>
+        <div class="side-score" id="scoreA">0</div>
+        <div class="side-wins">胜局 <b id="winsA">0</b></div>
+        <div class="badges" id="badgesA"></div>
+        <div class="serve-dot" id="serveDotA" hidden>发球</div>
+      </article>
+      <article class="side side-B" id="sideBoxB" data-side="B">
+        <div class="side-name" id="nameBoxB">选手B</div>
+        <div class="side-score" id="scoreB">0</div>
+        <div class="side-wins">胜局 <b id="winsB">0</b></div>
+        <div class="badges" id="badgesB"></div>
+        <div class="serve-dot" id="serveDotB" hidden>发球</div>
+      </article>
+    </div>
+
+    <div class="serve-info" id="serveInfo">等待开始比赛</div>
+    <div class="round-info" id="roundInfo" hidden></div>
+
+    <div class="times">
+      <div class="time-box"><span class="t-label">总时长</span><b id="timerMatch">00:00</b></div>
+      <div class="time-box"><span class="t-label">本局时长</span><b id="timerGame">00:00</b></div>
+      <div class="time-box"><span class="t-label">普通暂停累计</span><b id="pauseNormalTotal">00:00</b></div>
+      <div class="time-box"><span class="t-label">医疗暂停累计</span><b id="pauseMedicalTotal">00:00</b></div>
+    </div>
+
+    <div class="games-strip" id="gamesStrip" aria-label="各局比分"></div>
+
+    <div class="pause-banner" id="pauseBanner" hidden>
+      <div class="banner-main">
+        <span id="pauseBannerText"></span>
+        <b class="big-countdown" id="pauseCountdown" hidden></b>
+      </div>
+      <button type="button" id="btnResumeInline" class="btn btn-primary">恢复比赛</button>
+    </div>
+
+    <div class="interval-banner" id="intervalBanner" hidden>
+      <div class="banner-main">
+        <span id="intervalText"></span>
+        <b class="big-countdown interval-countdown" id="intervalCountdown"></b>
+      </div>
+      <button type="button" id="btnStartGameInline" class="btn btn-primary">开始下一局</button>
+    </div>
+
+    <div class="change-end-banner" id="changeEndBanner" hidden>
+      <span id="changeEndText"></span>
+      <button type="button" id="btnAckChangeEnd" class="btn">已换边</button>
+      <button type="button" id="btnSwapInline" class="btn btn-ghost">手动换边</button>
+    </div>
+  </section>
+
+  <!-- ============ 控制按钮区 ============ -->
+  <section class="card controls" id="controls">
+    <div class="score-buttons">
+      <button type="button" id="btnPointA" class="btn btn-score btn-A">
+        <span class="kbd">A</span><span class="score-btn-label" id="pointLabelA">选手A +1</span>
+      </button>
+      <button type="button" id="btnPointB" class="btn btn-score btn-B">
+        <span class="kbd">B</span><span class="score-btn-label" id="pointLabelB">选手B +1</span>
+      </button>
+    </div>
+    <div class="ctrl-grid">
+      <button type="button" id="btnUndo" class="btn">撤销上一球 <span class="kbd">Ctrl+Z</span></button>
+      <button type="button" id="btnResetGame" class="btn">重置本局</button>
+      <button type="button" id="btnResetMatch" class="btn btn-danger">重置比赛</button>
+      <button type="button" id="btnNormalPause" class="btn">普通暂停 <span class="kbd">P</span></button>
+      <button type="button" id="btnMedicalPause" class="btn">医疗暂停 <span class="kbd">M</span></button>
+      <button type="button" id="btnResume" class="btn btn-primary" disabled>恢复比赛</button>
+      <button type="button" id="btnSwap" class="btn">手动换边</button>
+      <button type="button" id="btnExportJson" class="btn">导出 JSON</button>
+      <button type="button" id="btnExportCsv" class="btn">导出 CSV</button>
+    </div>
+    <p class="hint" id="pauseUsageHint"></p>
+  </section>
+
+  <!-- ============ 统计 tab 区 ============ -->
+  <section class="card" id="statsPanel">
+    <div class="card-head">
+      <h2>统计</h2>
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab is-on" id="tabMatch" role="tab" aria-selected="true">全场</button>
+        <button type="button" class="tab" id="tabGame" role="tab" aria-selected="false">单局</button>
+        <label class="lined small" id="statsGameWrap" hidden>局号
+          <select id="statsGameSelect"></select>
+        </label>
+      </div>
+    </div>
+
+    <p class="stats-duration" id="statsDuration"></p>
+
+    <div class="table-wrap">
+      <table class="stats-table">
+        <thead>
+          <tr><th>指标</th><th id="statsHeadA">A</th><th id="statsHeadB">B</th></tr>
+        </thead>
+        <tbody id="statsTableBody"></tbody>
+      </table>
+    </div>
+    <p class="hint" id="statsHint"></p>
+
+    <div class="chart-block">
+      <div class="chart-head">
+        <h3 id="statsChartTitle">单局比分走势</h3>
+        <span class="hint">X = 球序号，Y = 双方累计得分</span>
+      </div>
+      <div id="statsChart" class="chart-holder"></div>
+    </div>
+  </section>
+
+  <!-- ============ 逐球记录 ============ -->
+  <section class="card" id="logPanel">
+    <div class="card-head">
+      <h2>逐球记录</h2>
+      <span class="hint" id="logCount"></span>
+    </div>
+    <div class="table-wrap table-scroll">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>局</th><th>球序</th><th>发球方</th><th>发球人</th><th>接发人</th>
+            <th>得分方</th><th>比分</th><th>加球</th><th>时间</th>
+          </tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 赛末每局汇总 ============ -->
+  <section class="card" id="summaryPanel" hidden>
+    <div class="card-head">
+      <h2>赛末汇总</h2>
+      <span class="pill" id="summaryOutcome"></span>
+    </div>
+    <div id="gameCards" class="game-cards"></div>
+  </section>
+
+  <!-- ============ 规则说明 ============ -->
+  <section class="card" id="rules">
+    <div class="card-head"><h2>规则说明</h2></div>
+
+    <h3>赛制</h3>
+    <ul>
+      <li><b>BO3 / BO5 / BO7</b>：三局两胜 / 五局三胜 / 七局四胜，先赢所需局数即结束，显示赛点。</li>
+      <li><b>固定 K 局</b>：无论比分一律打满 K 局（K 1–9），按胜局多者获胜；K 为偶数且胜局相同时判<b>平局</b>；固定 K 局<b>不显示赛点</b>，只显示局点。</li>
+      <li>每局目标分默认 11，可选 7 / 21 或自定义 1–99。</li>
+      <li><b>选手姓名</b>：默认“选手A / 选手B”（双打为 A1/A2/B1/B2）。姓名框可完全清空重输；清空时界面以默认名回退显示，比赛开始时空位才补为默认名。</li>
+    </ul>
+
+    <h3>加球</h3>
+    <ul>
+      <li>默认<b>开启</b>。以目标分 T 为例：开启时当双方达到 <b>(T-1):(T-1)</b> 平后，需<b>领先 2 分</b>者胜；关闭时先到 T 分者胜。</li>
+      <li><b>T=1</b> 时先到 1 分胜（加球无意义）。</li>
+      <li>加球阶段从该局第 <b>2(T-1)</b> 球之后开始，此阶段每 <b>1 分</b>换发；此前每 2 分换发。</li>
+    </ul>
+
+    <h3>发球与换边</h3>
+    <ul>
+      <li><b>单打</b>：每 2 分换发；进入加球阶段后每 1 分换发。每局结束后，下一局由上一局接发球方先发。</li>
+      <li><b>双打</b>：4 人固定循环 <code>[先发球员 → 首先接发球员 → 先发球员搭档 → 接发球员搭档]</code>，例如 A1 先发、B1 先接时为 <code>A1 → B1 → A2 → B2</code>。普通阶段每人连发 2 球；加球阶段每人只发 1 球并沿同一循环继续（A1→B1→A2→B2 交替）。接发方按固定顺序轮转。</li>
+      <li>下一局：由上一局<b>接发球队先发</b>，其先发球员 = 上一局该队首先接发球员；接发球队 = 上一局发球队，接发球员 = 上一局该队首先发球员。</li>
+      <li><b>换边提示</b>：仅 BO 赛制的决胜局（最后一局），一方先到 <b>⌈T/2⌉</b> 时提示换边；换边不改变发球顺序，也不自动切换左右，只提示。固定 K 局不自动提示。另有“手动换边”按钮，仅切换左右显示，不影响数据。</li>
+      <li><b>暂停与医疗暂停不影响发球轮换</b>。</li>
+    </ul>
+
+    <h3>局点 / 赛点</h3>
+    <ul>
+      <li>某方再得 1 分即赢本局时显示“局点（本局第 N 个）”；BO 赛制中某方再得 1 分即赢整场时显示“赛点（本场第 N 个）”。</li>
+      <li>N 表示该方拿到过的第几个“机会”，即有多少个来球可以让他赢下本局/本场。<b>对方每救掉一个，下一个来球就是该方的再下一个局点</b>：A 在 10:7 拿到第 1 个局点，被追到 10:8 就是第 2 个，10:9 是第 3 个。</li>
+      <li><b>分方统计</b>：A、B 各自独立计数，互不混算。</li>
+      <li>被追平（如 10:10）后该方局点消失、停止累加；之后重新出现（如 11:10）则从第 1 个重新开始。</li>
+      <li>若某方一路领先、中途从未出现“再 1 分即胜”的局面（如 11:5），则全程没有局点，计数为 0。</li>
+      <li>固定 K 局不显示赛点。</li>
+    </ul>
+
+    <h3>暂停</h3>
+    <ul>
+      <li><b>普通暂停</b>：每方/每队每场 1 次（双打按队计），限时 60 秒；只能在<b>死球</b>状态请求（该局已有得分、下一球开始前；局间与本局 0:0 首球前不可请求）；请求后锁定计分并倒计时，倒计时到 0 只提示“可恢复比赛”并保持锁定，需点击“恢复比赛”解锁；可提前恢复。</li>
+      <li><b>局间休息</b>：每局结束后进入局间，显示 <b>1 分钟倒计时</b>（从上一局结束时刻起算）。局间<b>不锁定计分</b>，倒计时结束只是提示，随时可以开始下一局；局间时长<b>不计入任何一局</b>的单局时长，但计入总时长。</li>
+      <li><b>医疗暂停</b>：每方/每队不限次数、不限时；选择请求方后正计时，手动结束并记录开始/结束时间与累计时长（死球或局间均可请求）。</li>
+      <li>两者都锁定计分，<b>暂停期间总计时继续</b>，<b>单局时长包含该局内所有暂停</b>，但不包含局间。</li>
+    </ul>
+
+    <h3>统计口径</h3>
+    <ul>
+      <li>统计区提供“全场 / 单局”切换，单局可选局号；表格按 A / B 两列，双打按队伍汇总。全部统计由<b>逐球记录自动计算</b>，不手工维护，撤销 / 重置 / 刷新后保持一致。</li>
+      <li><b>Points won</b>：该范围内该方总得分（全场为所有局之和）。</li>
+      <li><b>Biggest lead</b>：该范围内该方曾达到的最大领先分差。单局取局内最大值；<b>全场取各局单局最大值中的最大值</b>，不按全场总得分差计算。</li>
+      <li><b>Points won / lost on own serve</b>：该方在己方发球轮中的得分 / 失分。</li>
+      <li><b>Points won / lost on opp serve</b>：该方在对方发球轮中的得分 / 失分。</li>
+      <li><b>Most consecutive points won / lost</b>：连续得分 / 失分最大值。单局取局内；全场取各局单局最大值，<b>不跨局累计</b>。</li>
+      <li><b>Greatest deficit overcome</b>：仅单局<b>胜方</b>统计，为该方在该局中曾落后的最大分差且最终获胜；若全程未落后记 0；<b>负方记 0</b>。全场取各局胜方该值的最大值。</li>
+      <li><b>Greatest lead against</b>：按本计分器的<b>默认定义</b>——单局<b>胜方</b>在该局中曾建立的最大领先分差；若未领先记 0；<b>负方记 0</b>。全场取各局胜方该值的最大值。（名称保留，语义为正向领先；与上一条的区别在于“曾落后多少”与“曾领先多少”。）</li>
+    </ul>
+
+    <h3>时间口径</h3>
+    <ul>
+      <li><b>总比赛时长</b>：从“开始比赛”到比赛结束，正计时，<b>包含</b>局间、普通暂停、医疗暂停。</li>
+      <li><b>单局时长</b>：从该局开始到该局结束，<b>包含</b>该局内普通暂停与医疗暂停，<b>不包含</b>局间。局间不计入任何一局。</li>
+    </ul>
+
+    <h3>状态机与撤销</h3>
+    <ul>
+      <li>状态：未开始配置 → 进行中 → 死球（每球得分后、下一球加分前）→ 普通暂停 / 医疗暂停（锁定计分）→ 局间 → 比赛结束。</li>
+      <li>撤销上一球会同步回退比分、发球方 / 发球人、局点 / 赛点、局分、统计与图表；若该球导致局结束或比赛结束，撤销后恢复到该局 / 该场进行中。<b>暂停记录与已用暂停次数不因撤销回退</b>（重置比赛才恢复）。</li>
+      <li>刷新页面自动从本地存储恢复当前比赛（比分、发球、计时、暂停次数、逐球记录、统计与已完成局图表）。只保存当前一场比赛，不提供历史比赛列表。</li>
+    </ul>
+
+    <h3>快捷键</h3>
+    <ul>
+      <li><span class="kbd">A</span> / <span class="kbd">←</span> A 方加 1 分；<span class="kbd">B</span> / <span class="kbd">→</span> B 方加 1 分；<span class="kbd">Ctrl+Z</span> 撤销；<span class="kbd">P</span> 普通暂停；<span class="kbd">M</span> 医疗暂停；<span class="kbd">Esc</span> 关闭弹窗。在输入框内输入时单键快捷键不生效。</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <p>纯静态 · 无后端 · 无构建 · 无外部依赖；可直接放入 GitHub Pages 仓库根目录或 docs 目录。图表为 SVG 自绘。</p>
+    <p><a class="link" href="?selftest=1">运行内置自测（验收用例 1–12 + 回归用例，共 35 项）</a></p>
+  </footer>
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">请选择</h3>
+    <div id="modalBody" class="modal-body"></div>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="js/rules.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/app.js"></script>
+<script src="tests/selftest.js"></script>
+</body>
+</html>
