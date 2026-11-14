@@ -117,7 +117,9 @@ function standingsRows(category, group) {
     return rows.get(name);
   };
 
-  (category.participants || []).forEach((participant) => ensure(participant.name));
+  (category.participants || [])
+    .filter((participant) => !participant.group || participant.group === group.name)
+    .forEach((participant) => ensure(participant.name));
 
   (group.matches || []).forEach((match) => {
     if (match.status !== 'completed' || match.players?.length !== 2) return;
