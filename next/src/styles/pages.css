@@ -2507,6 +2507,14 @@
   background: color-mix(in srgb, var(--chart-b) 9%, transparent);
 }
 
+.qttc26-analytics__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
 .qttc26-analytics__stats {
   overflow-x: auto;
 }
@@ -2713,7 +2721,13 @@
   }
 
   .qttc26-chart-mount {
+    overflow-x: auto;
     padding: 4px;
+    overscroll-behavior-inline: contain;
+  }
+
+  .qttc26-chart-mount .score-chart {
+    min-width: 520px;
   }
 }
 

@@ -51,6 +51,15 @@ export function createMatchAnalytics(match, options = {}) {
     );
   });
 
+  const duration = match.detail?.durationMinutes;
+  const normalPauses = (match.detail?.timeouts || []).filter(Boolean).length;
+  const medicalPauses = (match.detail?.medicalTimeouts || []).filter(Boolean).length;
+  const metaStrip = el('div', { class: 'qttc26-analytics__meta' }, [
+    el('span', { text: duration ? `${duration} 分钟` : '时长未记录' }),
+    el('span', { text: `普通暂停 ${normalPauses} 次` }),
+    el('span', { text: `医疗暂停 ${medicalPauses} 次` }),
+  ]);
+
   function renderStats(scopeId) {
     const gameNo = scopeId === 'match' ? 0 : Number(scopeId.replace('game-', ''));
     const stats = computeStats(pointLog, gameNo, winners, target);
@@ -123,6 +132,6 @@ export function createMatchAnalytics(match, options = {}) {
 
   renderStats('match');
   renderChart(1);
-  section.append(head, scoreStrip, statsTabs.element, statsMount, chartBlock);
+  section.append(head, scoreStrip, metaStrip, statsTabs.element, statsMount, chartBlock);
   return section;
 }
