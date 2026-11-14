@@ -30,6 +30,17 @@
   "home": {
     "slides": [
       {
+        "id": "qttc-2026",
+        "title": "QTTC 2026",
+        "kicker": "QTTF / 26 · FLAGSHIP",
+        "englishTitle": "TWICE THE TRIUMPH",
+        "description": "2026年丘班乒乓球锦标赛暨“觚棻”杯",
+        "meta": ["09 NOV — 04 DEC", "小组赛进行中", "1 场已录入"],
+        "path": "events/qttc/qttc2026/",
+        "theme": "forest",
+        "feature": "qttc"
+      },
+      {
         "id": "qsl",
         "title": "丘超联赛积分榜",
         "description": "QTTF 最高规格的联赛首周落幕，每分必争的联赛纪元已至。",

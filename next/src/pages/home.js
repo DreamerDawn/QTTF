@@ -1,4 +1,5 @@
 import { mountShell, setPageTitle } from '../components/layout.js';
+import { createGuTrophy } from '../components/gu-trophy.js';
 import { loadingState, setError } from '../components/status.js';
 import { el } from '../lib/dom.js';
 import { sitePath } from '../lib/router.js';
@@ -10,8 +11,12 @@ import {
   site,
 } from '../lib/data.js';
 
-function card({ title, accent, body, actions, label }) {
-  return el('article', { class: `card feature-card feature-card--${accent}`, 'aria-label': label || title }, [
+function card({ title, accent, body, actions, label, index }) {
+  return el('article', {
+    class: `card feature-card feature-card--${accent}`,
+    'aria-label': label || title,
+    dataset: { index: String(index).padStart(2, '0') },
+  }, [
     el('div', { class: 'feature-card__body' }, [
       el('h2', { class: 'card__title', text: title }),
       el('div', { class: 'card__body mt-2' }, body),
@@ -25,6 +30,7 @@ function renderHome(data, container) {
   const slides = homeSlides();
   const latest = latestSnapshot(rankings);
   const seeds = seedsFromRankings(rankings, site.home.seedCount || 8);
+  const qttc2026Event = events.events.find((event) => event.id === 'qttc-2026');
   const qttcEvent = events.events.find((event) => event.id === 'qttc-2025');
   const zgcupEvent = events.events.find((event) => event.id === 'zgcup-2024');
   const qsl = leagues.leagues.find((league) => league.shortName === 'QSL');
@@ -41,14 +47,43 @@ function renderHome(data, container) {
       'aria-hidden': index === 0 ? 'false' : 'true',
       'aria-label': `${index + 1} / ${slides.length}`,
     });
-    article.append(
-      el('span', { class: 'carousel__eyebrow', text: 'QTTF 赛事与排名' }),
-      el('h2', { class: 'carousel__title', text: slide.title }),
-      el('p', { class: 'carousel__desc', text: slide.description }),
-      el('div', { class: 'carousel__actions' }, [
-        el('a', { class: 'btn', href: sitePath(slide.path), text: '了解更多' }),
-      ]),
-    );
+    if (slide.feature === 'qttc') {
+      const titleWords = (slide.englishTitle || 'TWICE THE TRIUMPH').split(' ');
+      const titleTail = titleWords.pop();
+      article.classList.add('carousel__slide--qttc');
+      article.append(
+        el('div', { class: 'carousel__qttc-copy' }, [
+          el('span', { class: 'carousel__eyebrow', text: slide.kicker }),
+          el('h2', { class: 'carousel__title carousel__qttc-title' }, [
+            el('span', { text: titleWords.join(' ') }),
+            el('br'),
+            el('span', { text: titleTail }),
+          ]),
+          el('p', { class: 'carousel__desc', text: slide.description }),
+          el('div', { class: 'carousel__qttc-meta' }, (slide.meta || []).map((item) =>
+            el('span', { class: 'carousel__qttc-chip', text: item }),
+          )),
+          el('div', { class: 'carousel__actions' }, [
+            el('a', { class: 'btn', href: sitePath(slide.path), text: '查看赛事' }),
+          ]),
+        ]),
+        el('div', { class: 'carousel__qttc-art', 'aria-hidden': 'true' }, [
+          el('span', { class: 'carousel__qttc-year', text: '26' }),
+          createGuTrophy({ className: 'carousel__qttc-trophy' }),
+          el('span', { class: 'carousel__qttc-caption', text: 'QTTF / 26' }),
+        ]),
+      );
+    } else {
+      article.append(
+        el('span', { class: 'carousel__index', text: `0${index + 1}` }),
+        el('span', { class: 'carousel__eyebrow', text: 'QTTF 赛事与排名' }),
+        el('h2', { class: 'carousel__title', text: slide.title }),
+        el('p', { class: 'carousel__desc', text: slide.description }),
+        el('div', { class: 'carousel__actions' }, [
+          el('a', { class: 'btn', href: sitePath(slide.path), text: '了解更多' }),
+        ]),
+      );
+    }
     track.append(article);
   });
 
@@ -120,9 +155,10 @@ function renderHome(data, container) {
   carousel.addEventListener('focusout', start);
   start();
 
-  const eventItems = [qttcEvent, zgcupEvent].filter(Boolean).map((event) => {
+  const eventItems = [qttc2026Event, qttcEvent, zgcupEvent].filter(Boolean).map((event) => {
     const group = events.groups.find((item) => item.id === event.group);
-    return el('div', { class: 'event-mini' }, [
+    const isQttc2026 = event.id === 'qttc-2026';
+    return el('div', { class: `event-mini${isQttc2026 ? ' event-mini--qttc' : ''}` }, [
       el('a', {
         class: 'event-mini__title',
         href: sitePath(event.route),
@@ -130,8 +166,15 @@ function renderHome(data, container) {
       }),
       el('p', {
         class: 'event-mini__desc',
-        text: event.status === 'coming-soon' ? '档案整理中，稍后开放完整赛果。' : group?.description,
+        text: isQttc2026
+          ? event.meta.fullName
+          : event.status === 'coming-soon'
+            ? '档案整理中，稍后开放完整赛果。'
+            : group?.description,
       }),
+      isQttc2026
+        ? el('span', { class: 'event-mini__tag', text: '09.11 — 12.04 · 进行中' })
+        : null,
     ]);
   });
 
@@ -139,14 +182,16 @@ function renderHome(data, container) {
     title: '我们是谁',
     accent: 'blue',
     label: '我们是谁',
+    index: 1,
     body: el('p', { text: site.about.intro }),
     actions: el('a', { class: 'btn', href: sitePath('about/'), text: '了解协会' }),
   });
 
   const featureEvents = card({
     title: '赛事分类',
-    accent: 'cyan',
+    accent: 'forest',
     label: '赛事分类',
+    index: 2,
     body: el('div', { class: 'event-mini-list' }, eventItems),
     actions: el('a', { class: 'btn', href: sitePath('events/'), text: '查看全部赛事' }),
   });
@@ -170,6 +215,7 @@ function renderHome(data, container) {
     title: '种子选手',
     accent: 'green',
     label: '种子选手',
+    index: 3,
     body: el('div', {}, [
       el('p', { class: 'muted', text: latest ? `来自 ${latest.label} 全性别组排名前 ${seeds.length} 名。` : '排名数据待更新。' }),
       seedList,
@@ -181,6 +227,7 @@ function renderHome(data, container) {
     title: '联系我们',
     accent: 'amber',
     label: '联系我们',
+    index: 4,
     body: el('div', {}, [
       el('p', { text: site.contact.note }),
       el('div', { class: 'contact-lines' }, [

@@ -51,7 +51,7 @@ function renderEvents(data, container) {
 
   groups.forEach((group) => {
     const card = el('article', {
-      class: `card event-group-card event-group-card--${group.accent}`,
+      class: `card event-group-card event-group-card--${group.accent}${group.id === 'qttc' ? ' event-group-card--qttc' : ''}`,
       'aria-labelledby': `group-${group.id}`,
       dataset: { groupId: group.id },
     });
@@ -64,8 +64,9 @@ function renderEvents(data, container) {
     }
 
     group.items.forEach((item) => {
+      const isQttc2026 = item.id === 'qttc-2026';
       const row = el('a', {
-        class: 'event-group-card__item',
+        class: `event-group-card__item${isQttc2026 ? ' event-group-card__item--qttc' : ''}`,
         href: item.href,
         dataset: { searchText: item.searchText.toLowerCase() },
       });
