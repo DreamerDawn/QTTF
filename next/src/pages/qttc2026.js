@@ -98,6 +98,7 @@ function emptyDraw(kind) {
 
 function standingsRows(category, group) {
   const rows = new Map();
+  const tierRank = (tier) => ({ I: 1, II: 2, III: 3, IV: 4 }[tier] ?? 99);
   const ensure = (name) => {
     if (!rows.has(name)) {
       const participant = (category.participants || []).find((item) => item.name === name);
@@ -165,6 +166,9 @@ function standingsRows(category, group) {
       if (b.played !== a.played) return b.played - a.played;
       if (b.gameDiff !== a.gameDiff) return b.gameDiff - a.gameDiff;
       if (b.pointDiff !== a.pointDiff) return b.pointDiff - a.pointDiff;
+      if (a.played === 0 && b.played === 0 && a.tier !== b.tier) {
+        return tierRank(a.tier) - tierRank(b.tier);
+      }
       return a.name.localeCompare(b.name, 'zh-Hans-CN');
     })
     .map((row, index) => ({ ...row, position: index + 1 }));
