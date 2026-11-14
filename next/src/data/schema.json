@@ -1,0 +1,455 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamerdawn.github.io/QTTF/schema.json",
+  "title": "QTTF v2 data contract",
+  "description": "QTTF 静态站点统一数据契约。四个数据文件共享 schemaVersion=2；赛事、联赛、排名与站点内容分别位于独立文件，但字段命名保持一致。",
+  "type": "object",
+  "definitions": {
+    "nullableString": { "type": ["string", "null"] },
+    "nullableInteger": { "type": ["integer", "null"] },
+    "dateString": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "route": { "type": "string", "minLength": 1, "pattern": "/$" },
+    "siteInfo": {
+      "type": "object",
+      "required": ["name", "fullName", "tagline", "description", "logo", "footer", "repository"],
+      "properties": {
+        "name": { "type": "string" },
+        "fullName": { "type": "string" },
+        "tagline": { "type": "string" },
+        "description": { "type": "string" },
+        "logo": { "type": "string" },
+        "footer": { "type": "string" },
+        "repository": { "type": "string" }
+      }
+    },
+    "navItem": {
+      "type": "object",
+      "required": ["label", "path"],
+      "properties": {
+        "label": { "type": "string" },
+        "path": { "type": "string" }
+      }
+    },
+    "slide": {
+      "type": "object",
+      "required": ["id", "title", "description", "path", "theme"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "path": { "$ref": "#/definitions/route" },
+        "theme": { "enum": ["rose", "teal", "navy", "violet", "sunset"] }
+      }
+    },
+    "historyEntry": {
+      "type": "object",
+      "required": ["date", "text"],
+      "properties": {
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}$" },
+        "text": { "type": "string" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["email", "bilibili", "bilibiliLabel", "note"],
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "bilibili": { "type": "string", "format": "uri" },
+        "bilibiliLabel": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "eventGroup": {
+      "type": "object",
+      "required": ["id", "name", "description", "accent"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "accent": { "enum": ["blue", "violet", "orange", "green"] }
+      }
+    },
+    "participant": {
+      "type": "object",
+      "required": ["name", "seed", "rank", "points"],
+      "properties": {
+        "name": { "type": "string" },
+        "seed": { "$ref": "#/definitions/nullableInteger" },
+        "rank": { "$ref": "#/definitions/nullableInteger" },
+        "points": { "$ref": "#/definitions/nullableInteger" },
+        "group": { "type": "string" },
+        "qualified": { "type": "string" }
+      }
+    },
+    "podiumItem": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "rank": { "type": "integer" },
+        "points": { "type": "integer" }
+      }
+    },
+    "setScore": {
+      "type": "object",
+      "required": ["pointsWon", "pointsLost"],
+      "properties": {
+        "pointsWon": { "type": "integer", "minimum": 0 },
+        "pointsLost": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "matchDetail": {
+      "type": "object",
+      "required": [
+        "sets",
+        "durationMinutes",
+        "timeouts",
+        "medicalTimeouts",
+        "totalPoints",
+        "venue",
+        "playedAt",
+        "note"
+      ],
+      "properties": {
+        "sets": { "type": "array", "items": { "$ref": "#/definitions/setScore" } },
+        "durationMinutes": { "$ref": "#/definitions/nullableInteger" },
+        "timeouts": {
+          "type": ["array", "null"],
+          "items": { "type": "boolean" },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "medicalTimeouts": {
+          "type": ["array", "null"],
+          "items": { "type": "boolean" },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "totalPoints": {
+          "type": ["object", "null"],
+          "required": ["pointsWon", "pointsLost"],
+          "properties": {
+            "pointsWon": { "type": "integer", "minimum": 0 },
+            "pointsLost": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "venue": { "$ref": "#/definitions/nullableString" },
+        "playedAt": {
+          "oneOf": [{ "$ref": "#/definitions/dateString" }, { "type": "null" }]
+        },
+        "time": {
+          "oneOf": [
+            { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
+            { "type": "null" }
+          ]
+        },
+        "note": { "$ref": "#/definitions/nullableString" }
+      }
+    },
+    "match": {
+      "type": "object",
+      "required": ["id", "order", "players", "score", "winner", "status", "detail"],
+      "properties": {
+        "id": { "type": "string" },
+        "number": { "$ref": "#/definitions/nullableInteger" },
+        "order": { "type": "integer" },
+        "players": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "score": {
+          "type": ["object", "null"],
+          "required": ["gamesWon", "gamesLost"],
+          "properties": {
+            "gamesWon": { "type": "integer", "minimum": 0 },
+            "gamesLost": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "winner": { "$ref": "#/definitions/nullableString" },
+        "status": { "enum": ["completed", "bye", "default", "cancelled", "scheduled", "unknown"] },
+        "detail": { "$ref": "#/definitions/matchDetail" },
+        "flags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "groupBlock": {
+      "type": "object",
+      "required": ["id", "name", "matches"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "matches": { "type": "array", "items": { "$ref": "#/definitions/match" } }
+      }
+    },
+    "roundBlock": {
+      "type": "object",
+      "required": ["id", "name", "order", "matches"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "order": { "type": "integer" },
+        "matches": { "type": "array", "items": { "$ref": "#/definitions/match" } }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "enum": ["group", "knockout", "other"] },
+        "groups": { "type": "array", "items": { "$ref": "#/definitions/groupBlock" } },
+        "rounds": { "type": "array", "items": { "$ref": "#/definitions/roundBlock" } }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["id", "route", "group", "status", "meta", "participants", "podium", "stages"],
+      "properties": {
+        "id": { "type": "string" },
+        "route": { "$ref": "#/definitions/route" },
+        "group": { "type": "string" },
+        "status": { "enum": ["published", "coming-soon"] },
+        "meta": {
+          "type": "object",
+          "required": ["name", "fullName", "format", "dateRange", "venue", "description"],
+          "properties": {
+            "name": { "type": "string" },
+            "fullName": { "type": "string" },
+            "format": { "type": "string" },
+            "dateRange": {
+              "type": "object",
+              "required": ["start", "end"],
+              "properties": {
+                "start": { "oneOf": [{ "$ref": "#/definitions/dateString" }, { "type": "null" }] },
+                "end": { "oneOf": [{ "$ref": "#/definitions/dateString" }, { "type": "null" }] }
+              }
+            },
+            "venue": { "$ref": "#/definitions/nullableString" },
+            "description": { "type": "string" }
+          }
+        },
+        "participants": { "type": "array", "items": { "$ref": "#/definitions/participant" } },
+        "podium": {
+          "type": ["object", "null"],
+          "properties": {
+            "first": { "$ref": "#/definitions/podiumItem" },
+            "second": { "$ref": "#/definitions/podiumItem" },
+            "third": { "$ref": "#/definitions/podiumItem" }
+          }
+        },
+        "stages": { "type": "array", "items": { "$ref": "#/definitions/stage" } }
+      }
+    },
+    "standingRow": {
+      "type": "object",
+      "required": [
+        "rank",
+        "team",
+        "matches",
+        "wins",
+        "draws",
+        "losses",
+        "gamesWon",
+        "gamesLost",
+        "gameDifference",
+        "points",
+        "lastN"
+      ],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "team": { "type": "string" },
+        "matches": { "type": "integer", "minimum": 0 },
+        "wins": { "type": "integer", "minimum": 0 },
+        "draws": { "type": "integer", "minimum": 0 },
+        "losses": { "type": "integer", "minimum": 0 },
+        "gamesWon": { "type": "integer", "minimum": 0 },
+        "gamesLost": { "type": "integer", "minimum": 0 },
+        "gameDifference": { "type": "integer" },
+        "points": { "type": "integer", "minimum": 0 },
+        "lastN": {
+          "type": "array",
+          "items": { "enum": ["W", "D", "L", ""] }
+        }
+      }
+    },
+    "zone": {
+      "type": "object",
+      "required": ["id", "name", "from", "to", "tone"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "from": { "type": "integer", "minimum": 1 },
+        "to": { "type": "integer", "minimum": 1 },
+        "tone": { "enum": ["qualify", "playoff", "relegation"] },
+        "order": { "type": "integer" }
+      }
+    },
+    "leagueMatchweek": {
+      "type": "object",
+      "required": ["id", "label", "matches"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "date": { "oneOf": [{ "$ref": "#/definitions/dateString" }, { "type": "null" }] },
+        "matches": { "type": "array", "items": { "$ref": "#/definitions/match" } }
+      }
+    },
+    "league": {
+      "type": "object",
+      "required": [
+        "id",
+        "route",
+        "group",
+        "status",
+        "name",
+        "shortName",
+        "tier",
+        "season",
+        "round",
+        "lastUpdated",
+        "format",
+        "formLength",
+        "standings",
+        "zones",
+        "notes"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "route": { "$ref": "#/definitions/route" },
+        "group": { "type": "string" },
+        "status": { "enum": ["published", "coming-soon"] },
+        "name": { "type": "string" },
+        "shortName": { "type": "string" },
+        "tier": { "type": "string" },
+        "season": { "type": "string" },
+        "round": { "type": "string" },
+        "lastUpdated": { "$ref": "#/definitions/dateString" },
+        "format": { "type": "string" },
+        "formLength": { "type": "integer", "minimum": 1 },
+        "standings": { "type": "array", "items": { "$ref": "#/definitions/standingRow" } },
+        "matchweeks": { "type": "array", "items": { "$ref": "#/definitions/leagueMatchweek" } },
+        "zones": { "type": "array", "items": { "$ref": "#/definitions/zone" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "movement": {
+      "type": "object",
+      "required": ["direction", "places"],
+      "properties": {
+        "direction": { "enum": ["up", "down", "new", "none"] },
+        "places": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "rankingRow": {
+      "type": "object",
+      "required": ["rank", "position", "movement", "points", "player", "history"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "position": { "type": "integer", "minimum": 1 },
+        "movement": { "$ref": "#/definitions/movement" },
+        "points": { "type": "integer", "minimum": 0 },
+        "player": { "type": "string" },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["event", "expiresOn", "position", "points"],
+            "properties": {
+              "event": { "type": "string" },
+              "expiresOn": { "$ref": "#/definitions/dateString" },
+              "position": { "type": "string" },
+              "points": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "rankingSnapshot": {
+      "type": "object",
+      "required": ["id", "route", "label", "status", "title", "description", "rows"],
+      "properties": {
+        "id": { "type": "string" },
+        "route": { "$ref": "#/definitions/route" },
+        "label": { "type": "string" },
+        "status": { "enum": ["published", "unavailable"] },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "rows": { "type": "array", "items": { "$ref": "#/definitions/rankingRow" } }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "title": "site.json",
+      "type": "object",
+      "required": ["schemaVersion", "site", "navigation", "home", "about", "contact"],
+      "properties": {
+        "schemaVersion": { "const": 2 },
+        "site": { "$ref": "#/definitions/siteInfo" },
+        "navigation": { "type": "array", "items": { "$ref": "#/definitions/navItem" } },
+        "home": {
+          "type": "object",
+          "required": ["slides", "seedCount"],
+          "properties": {
+            "slides": { "type": "array", "items": { "$ref": "#/definitions/slide" } },
+            "seedCount": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "about": {
+          "type": "object",
+          "required": ["motto", "intro", "values", "history"],
+          "properties": {
+            "motto": { "type": "string" },
+            "tagline": { "type": "string" },
+            "intro": { "type": "string" },
+            "facts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["label", "value"],
+                "properties": {
+                  "label": { "type": "string" },
+                  "value": { "type": "string" }
+                }
+              }
+            },
+            "values": { "type": "string" },
+            "history": { "type": "array", "items": { "$ref": "#/definitions/historyEntry" } }
+          }
+        },
+        "contact": { "$ref": "#/definitions/contact" }
+      }
+    },
+    {
+      "title": "events.json",
+      "type": "object",
+      "required": ["schemaVersion", "groups", "events"],
+      "properties": {
+        "schemaVersion": { "const": 2 },
+        "groups": { "type": "array", "items": { "$ref": "#/definitions/eventGroup" } },
+        "events": { "type": "array", "items": { "$ref": "#/definitions/event" } }
+      }
+    },
+    {
+      "title": "leagues.json",
+      "type": "object",
+      "required": ["schemaVersion", "leagues"],
+      "properties": {
+        "schemaVersion": { "const": 2 },
+        "leagues": { "type": "array", "items": { "$ref": "#/definitions/league" } }
+      }
+    },
+    {
+      "title": "rankings.json",
+      "type": "object",
+      "required": ["schemaVersion", "current", "snapshots"],
+      "properties": {
+        "schemaVersion": { "const": 2 },
+        "current": { "type": "string" },
+        "snapshots": { "type": "array", "items": { "$ref": "#/definitions/rankingSnapshot" } }
+      }
+    }
+  ]
+}

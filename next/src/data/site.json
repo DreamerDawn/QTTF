@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "site": {
+    "name": "QTTF",
+    "fullName": "丘班乒乓球联合会",
+    "tagline": "办干净的比赛，办精彩的比赛",
+    "description": "贵州省丘班学生自主创办的乒乓球协会，QTTC 的组织团队。",
+    "logo": "QTTF.png",
+    "footer": "数据由丘班乒乓球联合会提供 · 本站为 2026 重构版",
+    "repository": "dreamerdawn/QTTF"
+  },
+  "navigation": [
+    {
+      "label": "首页",
+      "path": "/homepage"
+    },
+    {
+      "label": "赛事",
+      "path": "events/"
+    },
+    {
+      "label": "选手排名",
+      "path": "rankings/"
+    },
+    {
+      "label": "关于我们",
+      "path": "about/"
+    }
+  ],
+  "home": {
+    "slides": [
+      {
+        "id": "qsl",
+        "title": "丘超联赛积分榜",
+        "description": "QTTF 最高规格的联赛首周落幕，每分必争的联赛纪元已至。",
+        "path": "events/league/qsl/",
+        "theme": "rose"
+      },
+      {
+        "id": "qcl",
+        "title": "丘冠联赛积分榜",
+        "description": "次级联赛首周完赛，金字塔生态正式启幕。",
+        "path": "events/league/qcl/",
+        "theme": "teal"
+      },
+      {
+        "id": "qttc-2025",
+        "title": "QTTC 2025 赛事纪录",
+        "description": "经历 28 场比赛、104 局缠斗，QTTF 历史上最大规模的比赛圆满落幕。",
+        "path": "events/qttc/qttc2025/",
+        "theme": "navy"
+      },
+      {
+        "id": "zgcup-2024",
+        "title": "2024 年“追光”杯赛事纪录",
+        "description": "QTTF 仅记录了 2024 年九年级组比赛，且有部分缺失，望能谅解。",
+        "path": "events/zgcup2024/",
+        "theme": "violet"
+      },
+      {
+        "id": "rankings-2026-06",
+        "title": "2026 年 6 月 QTTF 选手排名",
+        "description": "“全球”运动会赛程全部结束后，QTTF 重新计算了最新选手积分。",
+        "path": "rankings/2026-06/",
+        "theme": "sunset"
+      }
+    ],
+    "seedCount": 8
+  },
+  "about": {
+    "motto": "办干净的比赛，办精彩的比赛",
+    "tagline": "贵州省丘班学生自主创办的乒乓球协会",
+    "intro": "我们是贵州省丘班学生自主创办的乒乓球协会，也是 QTTC（丘班乒乓球锦标赛）的组织团队。协会成立于 2024 年，现有会员 20+，已成功举办两届班内联赛，并建立起了一套完善的积分排名系统。我们致力于推广乒乓球文化，让更多同学感受竞技乐趣。无论你是高手还是新手，欢迎加入我们，一起挥拍向前！",
+    "facts": [
+      {
+        "label": "成立",
+        "value": "2024"
+      },
+      {
+        "label": "会员",
+        "value": "20+"
+      },
+      {
+        "label": "QTTC",
+        "value": "2 届"
+      },
+      {
+        "label": "排名体系",
+        "value": "1 套"
+      }
+    ],
+    "values": "秉持公平、透明与开放的比赛精神，鼓励学生参与、交流与持续进步。我们希望通过比赛与训练搭建学习平台，同时把竞技与友谊放在同等重要的位置。",
+    "history": [
+      {
+        "date": "2024-10",
+        "text": "QTTF 成立。"
+      },
+      {
+        "date": "2024-10",
+        "text": "举办首届丘班乒乓球锦标赛（“追光”杯选拔赛）。"
+      },
+      {
+        "date": "2024-11",
+        "text": "参加年级“追光”杯，取得良好成绩。"
+      },
+      {
+        "date": "2025-04",
+        "text": "举办“寝室团体赛”。"
+      },
+      {
+        "date": "2025-09",
+        "text": "高一入学，完成组织改组。"
+      },
+      {
+        "date": "2025-11",
+        "text": "举办“觚棻”杯暨第二届丘班乒乓球锦标赛。"
+      },
+      {
+        "date": "2026-5",
+        "text": "学校”全球“运动会混合团体摘银。"
+      }
+    ]
+  },
+  "contact": {
+    "email": "contact_qttf@163.com",
+    "bilibili": "https://space.bilibili.com/3546718777903801",
+    "bilibiliLabel": "@QTTF丘班乒联",
+    "note": "如有合作、加入或建议，请通过邮件联系，并备注来意。"
+  }
+}

@@ -1,0 +1,12 @@
+name = "qttf-decap-oauth"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://dreamerdawn.github.io,http://127.0.0.1:5173"
+GITHUB_REPO_PRIVATE = "0"
+
+# 不要在这里写 client secret。
+# 部署前运行：
+#   npx wrangler secret put GITHUB_OAUTH_ID
+#   npx wrangler secret put GITHUB_OAUTH_SECRET

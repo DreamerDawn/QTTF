@@ -1,0 +1,1250 @@
+{
+  "schemaVersion": 2,
+  "current": "2026-06",
+  "snapshots": [
+    {
+      "id": "2026-06",
+      "route": "rankings/2026-06/",
+      "label": "2026年6月",
+      "status": "published",
+      "title": "最新选手排名（全性别组）",
+      "description": "在“全球”运动会赛程全部结束后，QTTF再次计算了最新的选手积分。",
+      "rows": [
+        {
+          "rank": 1,
+          "position": 1,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 1945,
+          "player": "陈金森",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "W",
+              "points": 1000
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "L",
+              "points": 160
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "F-20%(M)",
+              "points": 425
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "Test-3",
+              "points": 360
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "position": 2,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 1549,
+          "player": "谢承宇",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 700
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 160
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 159
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 530
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "position": 3,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 975,
+          "player": "朱恩骏",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 400
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 160
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 225
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 190
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "position": 4,
+          "movement": {
+            "direction": "up",
+            "places": 1
+          },
+          "points": 873,
+          "player": "肖逸轩",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 175
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 169
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 159
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 370
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "position": 5,
+          "movement": {
+            "direction": "down",
+            "places": 1
+          },
+          "points": 788,
+          "player": "陈子扬",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 300
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 119
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 159
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 210
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "position": 6,
+          "movement": {
+            "direction": "down",
+            "places": 1
+          },
+          "points": 681,
+          "player": "郭东珉",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 175
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 121
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 25
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 360
+            }
+          ]
+        },
+        {
+          "rank": 7,
+          "position": 7,
+          "movement": {
+            "direction": "down",
+            "places": 2
+          },
+          "points": 652,
+          "player": "杨蕊宁",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 175
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 70
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 292
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 115
+            }
+          ]
+        },
+        {
+          "rank": 8,
+          "position": 8,
+          "movement": {
+            "direction": "up",
+            "places": 1
+          },
+          "points": 383,
+          "player": "周乾渊",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 88
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 295
+            }
+          ]
+        },
+        {
+          "rank": 9,
+          "position": 9,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 363,
+          "player": "赵久龄",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 88
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 85
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 190
+            }
+          ]
+        },
+        {
+          "rank": 10,
+          "position": 10,
+          "movement": {
+            "direction": "down",
+            "places": 1
+          },
+          "points": 307,
+          "player": "邹雨岑",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 88
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 84
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 135
+            }
+          ]
+        },
+        {
+          "rank": 11,
+          "position": 11,
+          "movement": {
+            "direction": "down",
+            "places": 2
+          },
+          "points": 256,
+          "player": "刘函宇",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 88
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 125
+            }
+          ]
+        },
+        {
+          "rank": 12,
+          "position": 12,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 229,
+          "player": "郭慕晗",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 159
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 70
+            }
+          ]
+        },
+        {
+          "rank": 13,
+          "position": 13,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 228,
+          "player": "李嘉睿",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 185
+            }
+          ]
+        },
+        {
+          "rank": 14,
+          "position": 14,
+          "movement": {
+            "direction": "down",
+            "places": 9
+          },
+          "points": 210,
+          "player": "殳晟欢",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 175
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 20
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 15
+            }
+          ]
+        },
+        {
+          "rank": 15,
+          "position": 15,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 180,
+          "player": "胡雅文",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 125
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 55
+            }
+          ]
+        },
+        {
+          "rank": 16,
+          "position": 16,
+          "movement": {
+            "direction": "up",
+            "places": 3
+          },
+          "points": 165,
+          "player": "梁博涛",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 165
+            }
+          ]
+        },
+        {
+          "rank": 17,
+          "position": 17,
+          "movement": {
+            "direction": "down",
+            "places": 4
+          },
+          "points": 154,
+          "player": "唐近尧",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 23
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 88
+            }
+          ]
+        },
+        {
+          "rank": 18,
+          "position": 18,
+          "movement": {
+            "direction": "down",
+            "places": 5
+          },
+          "points": 88,
+          "player": "王续成",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 20
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 25
+            }
+          ]
+        },
+        {
+          "rank": 19,
+          "position": 19,
+          "movement": {
+            "direction": "down",
+            "places": 6
+          },
+          "points": 43,
+          "player": "柴靖伟",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "DNP",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "rank": 20,
+          "position": 19,
+          "movement": {
+            "direction": "down",
+            "places": 6
+          },
+          "points": 43,
+          "player": "郭圣易",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "DNP",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "rank": 21,
+          "position": 19,
+          "movement": {
+            "direction": "down",
+            "places": 6
+          },
+          "points": 43,
+          "player": "王文彬",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "—",
+              "points": 43
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "DNP",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "rank": 22,
+          "position": 22,
+          "movement": {
+            "direction": "down",
+            "places": 3
+          },
+          "points": 36,
+          "player": "杨梓隽",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "—",
+              "points": 21
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "—",
+              "points": 15
+            }
+          ]
+        },
+        {
+          "rank": 23,
+          "position": 23,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 28,
+          "player": "柴韵晗",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Qualification",
+              "expiresOn": "2027-03-31",
+              "position": "DNP",
+              "points": 0
+            },
+            {
+              "event": "XTC Final",
+              "expiresOn": "2027-05-21",
+              "position": "—",
+              "points": 28
+            },
+            {
+              "event": "League(Test)",
+              "expiresOn": "2027-02-01",
+              "position": "DNP",
+              "points": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-01",
+      "route": "rankings/2026-01/",
+      "label": "2026年1月",
+      "status": "published",
+      "title": "最新选手排名（全性别组）",
+      "description": "为备战学校“全球运动会”，QTTF 首次进行全性别组与女子组的划分。本页展示全性别组排名。",
+      "rows": [
+        {
+          "rank": 1,
+          "position": 1,
+          "movement": {
+            "direction": "up",
+            "places": 2
+          },
+          "points": 2000,
+          "player": "陈金森",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "W",
+              "points": 2000
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "position": 2,
+          "movement": {
+            "direction": "up",
+            "places": 5
+          },
+          "points": 1400,
+          "player": "谢承宇",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "F",
+              "points": 1400
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "position": 3,
+          "movement": {
+            "direction": "down",
+            "places": 2
+          },
+          "points": 800,
+          "player": "朱恩骏",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "B",
+              "points": 800
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "position": 4,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 600,
+          "player": "陈子扬",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "SF",
+              "points": 600
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "position": 5,
+          "movement": {
+            "direction": "down",
+            "places": 3
+          },
+          "points": 350,
+          "player": "郭东珉",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "QF",
+              "points": 350
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "position": 5,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 350,
+          "player": "殳晟欢",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "QF",
+              "points": 350
+            }
+          ]
+        },
+        {
+          "rank": 7,
+          "position": 5,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 350,
+          "player": "肖逸轩",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "QF",
+              "points": 350
+            }
+          ]
+        },
+        {
+          "rank": 8,
+          "position": 5,
+          "movement": {
+            "direction": "down",
+            "places": 1
+          },
+          "points": 350,
+          "player": "杨蕊宁",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "QF",
+              "points": 350
+            }
+          ]
+        },
+        {
+          "rank": 9,
+          "position": 9,
+          "movement": {
+            "direction": "down",
+            "places": 1
+          },
+          "points": 175,
+          "player": "刘函宇",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "R16",
+              "points": 175
+            }
+          ]
+        },
+        {
+          "rank": 10,
+          "position": 9,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 175,
+          "player": "赵久龄",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "R16",
+              "points": 175
+            }
+          ]
+        },
+        {
+          "rank": 11,
+          "position": 9,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 175,
+          "player": "周乾渊",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "R16",
+              "points": 175
+            }
+          ]
+        },
+        {
+          "rank": 12,
+          "position": 9,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 175,
+          "player": "邹雨岑",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "R16",
+              "points": 175
+            }
+          ]
+        },
+        {
+          "rank": 13,
+          "position": 13,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 85,
+          "player": "柴靖伟",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "G3L",
+              "points": 85
+            }
+          ]
+        },
+        {
+          "rank": 14,
+          "position": 13,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 85,
+          "player": "郭圣易",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "G3L",
+              "points": 85
+            }
+          ]
+        },
+        {
+          "rank": 15,
+          "position": 13,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 85,
+          "player": "李嘉睿",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "G3L",
+              "points": 85
+            }
+          ]
+        },
+        {
+          "rank": 16,
+          "position": 13,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 85,
+          "player": "唐近尧",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "G3L",
+              "points": 85
+            }
+          ]
+        },
+        {
+          "rank": 17,
+          "position": 13,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 85,
+          "player": "王文彬",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "G3L",
+              "points": 85
+            }
+          ]
+        },
+        {
+          "rank": 18,
+          "position": 13,
+          "movement": {
+            "direction": "new",
+            "places": 0
+          },
+          "points": 85,
+          "player": "王续成",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "G3L",
+              "points": 85
+            }
+          ]
+        },
+        {
+          "rank": 19,
+          "position": 19,
+          "movement": {
+            "direction": "none",
+            "places": 0
+          },
+          "points": 0,
+          "player": "梁博涛",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "rank": 20,
+          "position": 19,
+          "movement": {
+            "direction": "down",
+            "places": 13
+          },
+          "points": 0,
+          "player": "杨梓隽",
+          "history": [
+            {
+              "event": "QTTC 2025",
+              "expiresOn": "2026-12-08",
+              "position": "DNP",
+              "points": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2025-11",
+      "route": "rankings/2025-11/",
+      "label": "2025年11月",
+      "status": "unavailable",
+      "title": "2025年11月排名",
+      "description": "旧版对应页面为“建设中”占位页，未找到可迁移的结构化排名数据。",
+      "rows": []
+    },
+    {
+      "id": "2025-07",
+      "route": "rankings/2025-07/",
+      "label": "2025年7月",
+      "status": "unavailable",
+      "title": "2025年7月排名",
+      "description": "旧版对应页面为“建设中”占位页，未找到可迁移的结构化排名数据。",
+      "rows": []
+    },
+    {
+      "id": "2024-11",
+      "route": "rankings/2024-11/",
+      "label": "2024年11月",
+      "status": "unavailable",
+      "title": "2024年11月排名",
+      "description": "旧版对应页面为“建设中”占位页，未找到可迁移的结构化排名数据。",
+      "rows": []
+    },
+    {
+      "id": "2024-10",
+      "route": "rankings/2024-10/",
+      "label": "2024年10月",
+      "status": "unavailable",
+      "title": "2024年10月排名",
+      "description": "旧版对应页面为“建设中”占位页，未找到可迁移的结构化排名数据。",
+      "rows": []
+    }
+  ]
+}

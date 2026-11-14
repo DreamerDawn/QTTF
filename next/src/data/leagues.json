@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 2,
+  "leagues": [
+    {
+      "id": "qsl-2025-26-ii",
+      "route": "events/league/qsl/",
+      "group": "classleague",
+      "status": "published",
+      "name": "2025-2026(II)赛季 丘超联赛",
+      "shortName": "QSL",
+      "tier": "顶级联赛",
+      "season": "2025-26-II",
+      "round": "第2轮",
+      "lastUpdated": "2026-06-07",
+      "format": "单循环",
+      "formLength": 3,
+      "standings": [
+        {
+          "rank": 1,
+          "team": "谢承宇",
+          "matches": 2,
+          "wins": 1,
+          "draws": 1,
+          "losses": 0,
+          "gamesWon": 5,
+          "gamesLost": 3,
+          "gameDifference": 2,
+          "points": 4,
+          "lastN": [
+            "",
+            "W",
+            "D"
+          ]
+        },
+        {
+          "rank": 2,
+          "team": "肖逸轩",
+          "matches": 1,
+          "wins": 1,
+          "draws": 0,
+          "losses": 0,
+          "gamesWon": 4,
+          "gamesLost": 0,
+          "gameDifference": 4,
+          "points": 3,
+          "lastN": [
+            "",
+            "",
+            "W"
+          ]
+        },
+        {
+          "rank": 3,
+          "team": "郭东珉",
+          "matches": 2,
+          "wins": 0,
+          "draws": 2,
+          "losses": 0,
+          "gamesWon": 4,
+          "gamesLost": 4,
+          "gameDifference": 0,
+          "points": 2,
+          "lastN": [
+            "",
+            "D",
+            "D"
+          ]
+        },
+        {
+          "rank": 4,
+          "team": "陈金森",
+          "matches": 2,
+          "wins": 0,
+          "draws": 2,
+          "losses": 0,
+          "gamesWon": 4,
+          "gamesLost": 4,
+          "gameDifference": 0,
+          "points": 2,
+          "lastN": [
+            "",
+            "D",
+            "D"
+          ]
+        },
+        {
+          "rank": 5,
+          "team": "赵久龄",
+          "matches": 1,
+          "wins": 0,
+          "draws": 1,
+          "losses": 0,
+          "gamesWon": 2,
+          "gamesLost": 2,
+          "gameDifference": 0,
+          "points": 1,
+          "lastN": [
+            "",
+            "",
+            "D"
+          ]
+        },
+        {
+          "rank": 6,
+          "team": "朱恩骏",
+          "matches": 1,
+          "wins": 0,
+          "draws": 1,
+          "losses": 0,
+          "gamesWon": 2,
+          "gamesLost": 2,
+          "gameDifference": 0,
+          "points": 1,
+          "lastN": [
+            "",
+            "",
+            "D"
+          ]
+        },
+        {
+          "rank": 7,
+          "team": "陈子扬",
+          "matches": 2,
+          "wins": 0,
+          "draws": 1,
+          "losses": 1,
+          "gamesWon": 2,
+          "gamesLost": 6,
+          "gameDifference": -4,
+          "points": 1,
+          "lastN": [
+            "",
+            "L",
+            "D"
+          ]
+        },
+        {
+          "rank": 8,
+          "team": "杨蕊宁",
+          "matches": 1,
+          "wins": 0,
+          "draws": 0,
+          "losses": 1,
+          "gamesWon": 1,
+          "gamesLost": 3,
+          "gameDifference": -2,
+          "points": 0,
+          "lastN": [
+            "",
+            "",
+            "L"
+          ]
+        }
+      ],
+      "matchweeks": [],
+      "zones": [
+        {
+          "id": "schoolZone",
+          "name": "校运区",
+          "from": 1,
+          "to": 4,
+          "tone": "qualify",
+          "order": 1
+        },
+        {
+          "id": "schoolPlayoff",
+          "name": "校运附加赛区",
+          "from": 5,
+          "to": 6,
+          "tone": "playoff",
+          "order": 2
+        },
+        {
+          "id": "relegation",
+          "name": "降级区",
+          "from": 7,
+          "to": 8,
+          "tone": "relegation",
+          "order": 3
+        }
+      ],
+      "notes": "丘班乒乓球超级联赛(Qiuban SMASH League)是QTTF联赛系列中的顶级赛事，试行赛季共由8名选手组成，单循环制比赛。\n 每场赛事胜者得3分，平局两队各得1分，负者不得分。 \n 7轮过后以积分多少决定最终排名，若同分则依次以下列方式决定排名：\n a）净胜局多者，名次列前；\n b）净胜分多者，名次列前；\n 若涉及到冠军、校运、降级名额的争夺，且以上选项都决定不出名次，则继续比较： \n c）相互对阵获胜者，名次列前；\n d）相互对阵净胜分多者，名次列前；\n e）五局三胜附加赛。\n \n 校运及降级名额：\n（一）联赛前4名直接获得下场“全球”运动会团体赛参赛资格；\n（二）第5、6名直接获得下场“全球”运动会附加赛参赛资格；\n（三）若本赛季有“觚棻”杯，则“觚棻”杯冠军直接获得下场“全球”运动会团体赛参赛资格；若其已获得校运资格，则名额顺延给联赛中未获校运资格中排名靠前的选手。\n（四）排名最后2名的选手降入丘冠联赛。"
+    },
+    {
+      "id": "qcl-2025-26-ii",
+      "route": "events/league/qcl/",
+      "group": "classleague",
+      "status": "published",
+      "name": "2025-2026(II)赛季 丘冠联赛",
+      "shortName": "QCL",
+      "tier": "次级联赛",
+      "season": "2025-26-II",
+      "round": "第2轮",
+      "lastUpdated": "2026-06-07",
+      "format": "单循环",
+      "formLength": 3,
+      "standings": [
+        {
+          "rank": 1,
+          "team": "周乾渊",
+          "matches": 2,
+          "wins": 1,
+          "draws": 1,
+          "losses": 0,
+          "gamesWon": 6,
+          "gamesLost": 2,
+          "gameDifference": 4,
+          "points": 4,
+          "lastN": [
+            "",
+            "W",
+            "D"
+          ]
+        },
+        {
+          "rank": 2,
+          "team": "李嘉睿",
+          "matches": 1,
+          "wins": 1,
+          "draws": 0,
+          "losses": 0,
+          "gamesWon": 4,
+          "gamesLost": 0,
+          "gameDifference": 4,
+          "points": 3,
+          "lastN": [
+            "",
+            "",
+            "W"
+          ]
+        },
+        {
+          "rank": 3,
+          "team": "邹雨岑",
+          "matches": 1,
+          "wins": 1,
+          "draws": 3,
+          "losses": 0,
+          "gamesWon": 3,
+          "gamesLost": 1,
+          "gameDifference": 2,
+          "points": 3,
+          "lastN": [
+            "",
+            "",
+            "W"
+          ]
+        },
+        {
+          "rank": 4,
+          "team": "刘函宇",
+          "matches": 1,
+          "wins": 1,
+          "draws": 0,
+          "losses": 0,
+          "gamesWon": 3,
+          "gamesLost": 1,
+          "gameDifference": 2,
+          "points": 3,
+          "lastN": [
+            "",
+            "",
+            "W"
+          ]
+        },
+        {
+          "rank": 5,
+          "team": "梁博涛",
+          "matches": 2,
+          "wins": 0,
+          "draws": 2,
+          "losses": 0,
+          "gamesWon": 4,
+          "gamesLost": 4,
+          "gameDifference": 0,
+          "points": 2,
+          "lastN": [
+            "",
+            "D",
+            "D"
+          ]
+        },
+        {
+          "rank": 6,
+          "team": "唐近尧",
+          "matches": 1,
+          "wins": 0,
+          "draws": 1,
+          "losses": 0,
+          "gamesWon": 2,
+          "gamesLost": 2,
+          "gameDifference": 0,
+          "points": 1,
+          "lastN": [
+            "",
+            "",
+            "D"
+          ]
+        },
+        {
+          "rank": 7,
+          "team": "胡雅文",
+          "matches": 1,
+          "wins": 0,
+          "draws": 0,
+          "losses": 1,
+          "gamesWon": 1,
+          "gamesLost": 3,
+          "gameDifference": -2,
+          "points": 0,
+          "lastN": [
+            "",
+            "",
+            "L"
+          ]
+        },
+        {
+          "rank": 8,
+          "team": "王续成",
+          "matches": 1,
+          "wins": 0,
+          "draws": 0,
+          "losses": 1,
+          "gamesWon": 0,
+          "gamesLost": 4,
+          "gameDifference": -4,
+          "points": 0,
+          "lastN": [
+            "",
+            "",
+            "L"
+          ]
+        },
+        {
+          "rank": 9,
+          "team": "郭慕晗",
+          "matches": 2,
+          "wins": 0,
+          "draws": 0,
+          "losses": 2,
+          "gamesWon": 1,
+          "gamesLost": 7,
+          "gameDifference": -6,
+          "points": 0,
+          "lastN": [
+            "",
+            "L",
+            "L"
+          ]
+        },
+        {
+          "rank": 10,
+          "team": "殳晟欢",
+          "matches": 0,
+          "wins": 0,
+          "draws": 0,
+          "losses": 0,
+          "gamesWon": 0,
+          "gamesLost": 0,
+          "gameDifference": 0,
+          "points": 0,
+          "lastN": [
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "rank": 11,
+          "team": "杨梓隽",
+          "matches": 0,
+          "wins": 0,
+          "draws": 0,
+          "losses": 0,
+          "gamesWon": 0,
+          "gamesLost": 0,
+          "gameDifference": 0,
+          "points": 0,
+          "lastN": [
+            "",
+            "",
+            ""
+          ]
+        }
+      ],
+      "matchweeks": [],
+      "zones": [
+        {
+          "id": "schoolPlayoff",
+          "name": "升级区/校运附加赛区",
+          "from": 1,
+          "to": 1,
+          "tone": "qualify",
+          "order": 1
+        },
+        {
+          "id": "qualification",
+          "name": "升级附加赛区/选拔赛资格赛区",
+          "from": 2,
+          "to": 3,
+          "tone": "playoff",
+          "order": 2
+        }
+      ],
+      "notes": "丘班乒乓球冠军联赛(Qiuban CHAMPIONSHIP League)是QTTF联赛系列中的次级赛事，试行赛季共由11名选手组成，单循环制比赛。\n 每场赛事胜者得3分，平局两队各得1分，负者不得分。 \n 11轮过后以积分多少决定最终排名，若同分则依次以下列方式决定排名：\n a）净胜局多者，名次列前；\n b）净胜分多者，名次列前；\n 若涉及到冠军、校运、升级名额的争夺，且以上选项都决定不出名次，则继续比较： \n c）相互对阵获胜者，名次列前；\n d）相互对阵净胜分多者，名次列前；\n e）五局三胜附加赛。\n \n 校运及升级名额：\n（一）联赛冠军直接获得下场“全球”运动会附加赛参赛资格，并升入丘超联赛；\n（二）联赛第2、3名单独进行五局三胜的升级附加赛，胜者升入丘超联赛并获得“全球”运动会附加赛参赛资格。 \n（三）若本赛季有“觚棻”杯，则“觚棻”杯冠军直接获得下场“全球”运动会团体赛参赛资格；若其已获得校运资格赛资格，则名额顺延给联赛中未获校运资格赛资格中排名靠前的选手。"
+    }
+  ]
+}

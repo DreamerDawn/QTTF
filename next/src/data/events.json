@@ -1,0 +1,1948 @@
+{
+  "schemaVersion": 2,
+  "groups": [
+    {
+      "id": "qttc",
+      "name": "QTTC",
+      "description": "丘班乒乓球锦标赛（QTTC），又称“觚棻”杯，是 QTTF 主办的年度旗舰赛事，面向全体丘班同学，采用标准淘汰赛制，积分计入协会排名系统。",
+      "accent": "blue"
+    },
+    {
+      "id": "zgcup",
+      "name": "“追光”杯",
+      "description": "“追光”杯由学校官方主办，曾设七年级至九年级组别。QTTF 记录了部分高中阶段的参赛数据。",
+      "accent": "violet"
+    },
+    {
+      "id": "tryout",
+      "name": "校级赛事选拔赛",
+      "description": "为备战校级以上运动会，QTTF 组织内部选拔赛，代表丘班参加乒乓球混合团体项目。",
+      "accent": "orange"
+    },
+    {
+      "id": "classleague",
+      "name": "班级联赛",
+      "description": "面向丘班各班级的日常联赛体系，分为超级联赛和冠军联赛两个级别，设升降级制度。",
+      "accent": "green"
+    }
+  ],
+  "events": [
+    {
+      "id": "qttc-2024",
+      "route": "events/qttc/qttc2024/",
+      "group": "qttc",
+      "status": "coming-soon",
+      "meta": {
+        "name": "QTTC 2024",
+        "fullName": "2024年丘班乒乓球锦标赛",
+        "format": "档案整理中",
+        "dateRange": {
+          "start": null,
+          "end": null
+        },
+        "venue": null,
+        "description": "旧版页面为“建设中”提示，未找到可迁移的结构化赛果数据。赛事档案整理完成后可在 CMS 中补录。"
+      },
+      "participants": [],
+      "podium": null,
+      "stages": []
+    },
+    {
+      "id": "qttc-2025",
+      "route": "events/qttc/qttc2025/",
+      "group": "qttc",
+      "status": "published",
+      "meta": {
+        "name": "QTTC 2025",
+        "fullName": "2025年“觚棻”杯暨丘班乒乓球锦标赛 (Qiuban Table Tennis Championship 2025)",
+        "format": "小组赛+淘汰赛",
+        "dateRange": {
+          "start": "2025-11-21",
+          "end": "2025-12-09"
+        },
+        "venue": "Table 1 - QTTF Breeze Arena",
+        "description": "QTTF 年度旗舰赛事。2025 年赛事共有 18 名选手参赛，先进行 A–F 六个小组的单循环，再进行八分之一决赛至决赛的淘汰赛。"
+      },
+      "participants": [
+        {
+          "name": "朱恩骏",
+          "seed": 1,
+          "rank": 1,
+          "points": 2225,
+          "group": "A组"
+        },
+        {
+          "name": "刘函宇",
+          "seed": 7,
+          "rank": 7,
+          "points": 350,
+          "group": "A组"
+        },
+        {
+          "name": "唐近尧",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "A组"
+        },
+        {
+          "name": "谢承宇",
+          "seed": 6,
+          "rank": 6,
+          "points": 350,
+          "group": "B组"
+        },
+        {
+          "name": "殳晟欢",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "B组"
+        },
+        {
+          "name": "柴靖伟",
+          "seed": null,
+          "rank": 18,
+          "points": 0,
+          "group": "B组"
+        },
+        {
+          "name": "陈金森",
+          "seed": 3,
+          "rank": 3,
+          "points": 1875,
+          "group": "C组"
+        },
+        {
+          "name": "赵久龄",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "C组"
+        },
+        {
+          "name": "李嘉睿",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "C组"
+        },
+        {
+          "name": "杨蕊宁",
+          "seed": 4,
+          "rank": 4,
+          "points": 1800,
+          "group": "D组"
+        },
+        {
+          "name": "周乾渊",
+          "seed": 8,
+          "rank": 8,
+          "points": 175,
+          "group": "D组"
+        },
+        {
+          "name": "王文彬",
+          "seed": null,
+          "rank": 16,
+          "points": 20,
+          "group": "D组"
+        },
+        {
+          "name": "肖逸轩",
+          "seed": 5,
+          "rank": 5,
+          "points": 1225,
+          "group": "E组"
+        },
+        {
+          "name": "陈子扬",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "E组"
+        },
+        {
+          "name": "王续成",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "E组"
+        },
+        {
+          "name": "郭东珉",
+          "seed": 2,
+          "rank": 2,
+          "points": 1965,
+          "group": "F组"
+        },
+        {
+          "name": "邹雨岑",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "F组"
+        },
+        {
+          "name": "郭圣易",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "F组"
+        }
+      ],
+      "podium": {
+        "first": {
+          "name": "陈金森",
+          "rank": 3,
+          "points": 1875
+        },
+        "second": {
+          "name": "谢承宇",
+          "rank": 6,
+          "points": 350
+        },
+        "third": {
+          "name": "朱恩骏",
+          "rank": 1,
+          "points": 2225
+        }
+      },
+      "stages": [
+        {
+          "id": "group-stage",
+          "name": "小组赛",
+          "type": "group",
+          "groups": [
+            {
+              "id": "a",
+              "name": "A组",
+              "matches": [
+                {
+                  "id": "qttc-2025-g-ag-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "朱恩骏",
+                    "刘函宇"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 2
+                  },
+                  "winner": "朱恩骏",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 9,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 13
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      }
+                    ],
+                    "durationMinutes": 38,
+                    "timeouts": [
+                      true,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 53,
+                      "pointsLost": 46
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-27",
+                    "note": "比赛在第5个比赛日(2025年11月27日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-ag-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "朱恩骏",
+                    "唐近尧"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "朱恩骏",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 4
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      }
+                    ],
+                    "durationMinutes": 12,
+                    "timeouts": [
+                      true,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 18
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-25",
+                    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-ag-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "刘函宇",
+                    "唐近尧"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 2
+                  },
+                  "winner": "刘函宇",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 9,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 10,
+                        "pointsLost": 12
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      }
+                    ],
+                    "durationMinutes": 25,
+                    "timeouts": [
+                      false,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 52,
+                      "pointsLost": 46
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-21",
+                    "note": "比赛在第1个比赛日(2025年11月21日)进行。"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "b",
+              "name": "B组",
+              "matches": [
+                {
+                  "id": "qttc-2025-g-bg-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "谢承宇",
+                    "殳晟欢"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "谢承宇",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      }
+                    ],
+                    "durationMinutes": 15,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 34,
+                      "pointsLost": 23
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-26",
+                    "note": "比赛在第4个比赛日(2025年11月26日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-bg-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "谢承宇",
+                    "柴靖伟"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "谢承宇",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 2
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 2
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      }
+                    ],
+                    "durationMinutes": 15,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 10
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-26",
+                    "note": "比赛在第4个比赛日(2025年11月26日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-bg-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "殳晟欢",
+                    "柴靖伟"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "殳晟欢",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 2
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 1
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      }
+                    ],
+                    "durationMinutes": 9,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 9
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-24",
+                    "note": "比赛在第2个比赛日(2025年11月24日)进行。"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "c",
+              "name": "C组",
+              "matches": [
+                {
+                  "id": "qttc-2025-g-cg-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "陈金森",
+                    "赵久龄"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "陈金森",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      }
+                    ],
+                    "durationMinutes": 12,
+                    "timeouts": [
+                      false,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 16
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-25",
+                    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-cg-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "陈金森",
+                    "李嘉睿"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 1
+                  },
+                  "winner": "陈金森",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 3
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 7,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      }
+                    ],
+                    "durationMinutes": 23,
+                    "timeouts": [
+                      true,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 41,
+                      "pointsLost": 31
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-26",
+                    "note": "比赛在第4个比赛日(2025年11月26日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-cg-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "赵久龄",
+                    "李嘉睿"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 1
+                  },
+                  "winner": "赵久龄",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 3,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      }
+                    ],
+                    "durationMinutes": 20,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 36,
+                      "pointsLost": 32
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-24",
+                    "note": "比赛在第2个比赛日(2025年11月24日)进行。"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "d",
+              "name": "D组",
+              "matches": [
+                {
+                  "id": "qttc-2025-g-dg-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "杨蕊宁",
+                    "周乾渊"
+                  ],
+                  "score": {
+                    "gamesWon": 2,
+                    "gamesLost": 3
+                  },
+                  "winner": "周乾渊",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 5,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 9,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 13,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 30,
+                    "timeouts": [
+                      true,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 47,
+                      "pointsLost": 54
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-24",
+                    "note": "比赛在第2个比赛日(2025年11月24日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-dg-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "王文彬",
+                    "杨蕊宁"
+                  ],
+                  "score": {
+                    "gamesWon": 0,
+                    "gamesLost": 3
+                  },
+                  "winner": "杨蕊宁",
+                  "status": "default",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 0,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 0,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 0,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 0,
+                      "pointsLost": 33
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "王文彬弃赛"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-dg-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "王文彬",
+                    "周乾渊"
+                  ],
+                  "score": {
+                    "gamesWon": 0,
+                    "gamesLost": 3
+                  },
+                  "winner": "周乾渊",
+                  "status": "default",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 0,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 0,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 0,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 0,
+                      "pointsLost": 33
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "王文彬弃赛"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "e",
+              "name": "E组",
+              "matches": [
+                {
+                  "id": "qttc-2025-g-eg-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "肖逸轩",
+                    "陈子扬"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "肖逸轩",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      }
+                    ],
+                    "durationMinutes": 15,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 23
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-25",
+                    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-eg-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "肖逸轩",
+                    "王续成"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "肖逸轩",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 2
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 3
+                      }
+                    ],
+                    "durationMinutes": 10,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 11
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-24",
+                    "note": "比赛在第2个比赛日(2025年11月24日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-eg-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "陈子扬",
+                    "王续成"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "陈子扬",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      }
+                    ],
+                    "durationMinutes": 13,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 20
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-21",
+                    "note": "比赛在第1个比赛日(2025年11月21日)进行。"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "f",
+              "name": "F组",
+              "matches": [
+                {
+                  "id": "qttc-2025-g-fg-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "郭东珉",
+                    "邹雨岑"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "郭东珉",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      },
+                      {
+                        "pointsWon": 16,
+                        "pointsLost": 14
+                      }
+                    ],
+                    "durationMinutes": 17,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 38,
+                      "pointsLost": 25
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-25",
+                    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-fg-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "郭东珉",
+                    "郭圣易"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "郭东珉",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 3
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      }
+                    ],
+                    "durationMinutes": 13,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 18
+                    },
+                    "venue": "Table 2 - 乒乓球馆",
+                    "playedAt": "2025-11-27",
+                    "note": "比赛在第5个比赛日(2025年11月27日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-g-fg-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "邹雨岑",
+                    "郭圣易"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "邹雨岑",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      },
+                      {
+                        "pointsWon": 13,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 15,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 35,
+                      "pointsLost": 27
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-11-25",
+                    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "knockout-stage",
+          "name": "淘汰赛",
+          "type": "knockout",
+          "rounds": [
+            {
+              "id": "round-10",
+              "name": "八分之一决赛",
+              "order": 10,
+              "matches": [
+                {
+                  "id": "qttc-2025-k-八分之一决赛-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "朱恩骏",
+                    "邹雨岑"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 2
+                  },
+                  "winner": "朱恩骏",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      }
+                    ],
+                    "durationMinutes": 36,
+                    "timeouts": [
+                      false,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 49,
+                      "pointsLost": 41
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-02",
+                    "note": "比赛在第7个比赛日(2025年12月2日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "肖逸轩",
+                    "轮空"
+                  ],
+                  "score": null,
+                  "winner": "肖逸轩",
+                  "status": "bye",
+                  "detail": {
+                    "sets": [],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": null,
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "轮空晋级"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "谢承宇",
+                    "轮空"
+                  ],
+                  "score": null,
+                  "winner": "谢承宇",
+                  "status": "bye",
+                  "detail": {
+                    "sets": [],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": null,
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "轮空晋级"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-4",
+                  "number": 4,
+                  "order": 4,
+                  "players": [
+                    "赵久龄",
+                    "杨蕊宁"
+                  ],
+                  "score": {
+                    "gamesWon": 2,
+                    "gamesLost": 3
+                  },
+                  "winner": "杨蕊宁",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 5,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 25,
+                    "timeouts": [
+                      true,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 44,
+                      "pointsLost": 52
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-01",
+                    "note": "比赛在第6个比赛日(2025年12月1日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-5",
+                  "number": 5,
+                  "order": 5,
+                  "players": [
+                    "陈金森",
+                    "轮空"
+                  ],
+                  "score": null,
+                  "winner": "陈金森",
+                  "status": "bye",
+                  "detail": {
+                    "sets": [],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": null,
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "轮空晋级"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-6",
+                  "number": 6,
+                  "order": 6,
+                  "players": [
+                    "殳晟欢",
+                    "周乾渊"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 1
+                  },
+                  "winner": "殳晟欢",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 3
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 14
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      }
+                    ],
+                    "durationMinutes": 25,
+                    "timeouts": [
+                      false,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 45,
+                      "pointsLost": 34
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-02",
+                    "note": "比赛在第7个比赛日(2025年12月2日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-7",
+                  "number": 7,
+                  "order": 7,
+                  "players": [
+                    "刘函宇",
+                    "陈子扬"
+                  ],
+                  "score": {
+                    "gamesWon": 1,
+                    "gamesLost": 3
+                  },
+                  "winner": "陈子扬",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 13
+                      },
+                      {
+                        "pointsWon": 7,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 22,
+                    "timeouts": [
+                      true,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 37,
+                      "pointsLost": 43
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-01",
+                    "note": "比赛在第6个比赛日(2025年12月1日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-八分之一决赛-8",
+                  "number": 8,
+                  "order": 8,
+                  "players": [
+                    "郭东珉",
+                    "轮空"
+                  ],
+                  "score": null,
+                  "winner": "郭东珉",
+                  "status": "bye",
+                  "detail": {
+                    "sets": [],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": null,
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "轮空晋级"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "round-20",
+              "name": "四分之一决赛",
+              "order": 20,
+              "matches": [
+                {
+                  "id": "qttc-2025-k-四分之一决赛-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "朱恩骏",
+                    "肖逸轩"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 2
+                  },
+                  "winner": "朱恩骏",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 3,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 3,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      }
+                    ],
+                    "durationMinutes": 40,
+                    "timeouts": [
+                      true,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 40,
+                      "pointsLost": 46
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-04",
+                    "note": "比赛在第9个比赛日(2025年12月4日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-四分之一决赛-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "谢承宇",
+                    "杨蕊宁"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "谢承宇",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      }
+                    ],
+                    "durationMinutes": 17,
+                    "timeouts": [
+                      false,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 25
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-04",
+                    "note": "比赛在第9个比赛日(2025年12月4日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-四分之一决赛-3",
+                  "number": 3,
+                  "order": 3,
+                  "players": [
+                    "陈金森",
+                    "殳晟欢"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "陈金森",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      },
+                      {
+                        "pointsWon": 13,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 5
+                      }
+                    ],
+                    "durationMinutes": 27,
+                    "timeouts": [
+                      false,
+                      true
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      true
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 35,
+                      "pointsLost": 21
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-03",
+                    "note": "比赛在第8个比赛日(2025年12月3日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-四分之一决赛-4",
+                  "number": 4,
+                  "order": 4,
+                  "players": [
+                    "陈子扬",
+                    "郭东珉"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "陈子扬",
+                  "status": "default",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 0
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 0
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 0
+                      }
+                    ],
+                    "durationMinutes": 0,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 33,
+                      "pointsLost": 0
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": null,
+                    "note": "郭东珉弃赛"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "round-30",
+              "name": "半决赛",
+              "order": 30,
+              "matches": [
+                {
+                  "id": "qttc-2025-k-半决赛-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "朱恩骏",
+                    "谢承宇"
+                  ],
+                  "score": {
+                    "gamesWon": 1,
+                    "gamesLost": 3
+                  },
+                  "winner": "谢承宇",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 9,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 6,
+                        "pointsLost": 11
+                      }
+                    ],
+                    "durationMinutes": 22,
+                    "timeouts": [
+                      true,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 34,
+                      "pointsLost": 41
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-05",
+                    "note": "比赛在第10个比赛日(2025年12月5日)进行。"
+                  }
+                },
+                {
+                  "id": "qttc-2025-k-半决赛-2",
+                  "number": 2,
+                  "order": 2,
+                  "players": [
+                    "陈金森",
+                    "陈子扬"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 0
+                  },
+                  "winner": "陈金森",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 16,
+                        "pointsLost": 14
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 6
+                      }
+                    ],
+                    "durationMinutes": 18,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 39,
+                      "pointsLost": 30
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-04",
+                    "note": "比赛在第9个比赛日(2025年12月4日)进行。"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "round-40",
+              "name": "铜牌赛",
+              "order": 40,
+              "matches": [
+                {
+                  "id": "qttc-2025-k-铜牌赛-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "朱恩骏",
+                    "陈子扬"
+                  ],
+                  "score": {
+                    "gamesWon": 3,
+                    "gamesLost": 1
+                  },
+                  "winner": "朱恩骏",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      },
+                      {
+                        "pointsWon": 8,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 7
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 9
+                      }
+                    ],
+                    "durationMinutes": 20,
+                    "timeouts": [
+                      false,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 41,
+                      "pointsLost": 35
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-08",
+                    "note": "比赛在第11个比赛日(2025年12月8日)进行。"
+                  },
+                  "flags": [
+                    "bronze"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "round-50",
+              "name": "决赛",
+              "order": 50,
+              "matches": [
+                {
+                  "id": "qttc-2025-k-决赛-1",
+                  "number": 1,
+                  "order": 1,
+                  "players": [
+                    "谢承宇",
+                    "陈金森"
+                  ],
+                  "score": {
+                    "gamesWon": 2,
+                    "gamesLost": 3
+                  },
+                  "winner": "陈金森",
+                  "status": "completed",
+                  "detail": {
+                    "sets": [
+                      {
+                        "pointsWon": 5,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 7,
+                        "pointsLost": 11
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 8
+                      },
+                      {
+                        "pointsWon": 12,
+                        "pointsLost": 10
+                      },
+                      {
+                        "pointsWon": 11,
+                        "pointsLost": 13
+                      }
+                    ],
+                    "durationMinutes": 36,
+                    "timeouts": [
+                      true,
+                      false
+                    ],
+                    "medicalTimeouts": [
+                      false,
+                      false
+                    ],
+                    "totalPoints": {
+                      "pointsWon": 46,
+                      "pointsLost": 53
+                    },
+                    "venue": "Table 1 - QTTF Breeze Arena",
+                    "playedAt": "2025-12-09",
+                    "note": "比赛在第12个比赛日(2025年12月9日)进行。"
+                  },
+                  "flags": [
+                    "final"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zgcup-2024",
+      "route": "events/zgcup2024/",
+      "group": "zgcup",
+      "status": "coming-soon",
+      "meta": {
+        "name": "2024“追光”杯",
+        "fullName": "2024年学校“追光”杯乒乓球比赛（部分记录）",
+        "format": "档案整理中",
+        "dateRange": {
+          "start": null,
+          "end": null
+        },
+        "venue": null,
+        "description": "旧版页面为“建设中”提示。QTTF 仅记录了 2024 年九年级组的部分比赛，完整数据尚待补录。"
+      },
+      "participants": [],
+      "podium": null,
+      "stages": []
+    },
+    {
+      "id": "xtcq-2026",
+      "route": "events/tryout/xtcq2026/",
+      "group": "tryout",
+      "status": "coming-soon",
+      "meta": {
+        "name": "2026 全球运动会选拔赛",
+        "fullName": "2026年“全球”运动会乒乓球混合团体项目选拔赛",
+        "format": "档案整理中",
+        "dateRange": {
+          "start": null,
+          "end": null
+        },
+        "venue": null,
+        "description": "旧版页面为“建设中”提示。旧 matchdata.json 与 QTTC 2025 小组赛数据高度重复，未直接迁移，待确认后补录。"
+      },
+      "participants": [],
+      "podium": null,
+      "stages": []
+    }
+  ]
+}
