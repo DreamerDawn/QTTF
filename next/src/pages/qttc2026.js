@@ -313,14 +313,14 @@ function groupStageContent(category, event, onOpen) {
   return block;
 }
 
-function categoryPanel(category, index, event, onOpen) {
+function categoryPanel(category, index, event, onOpen, initialId) {
   const panel = el('div', {
     class: 'qttc26-category',
     id: `qttc26-category-${category.id}`,
     role: 'tabpanel',
     'aria-labelledby': `tab-qttc26-${category.id}`,
   });
-  if (index !== 0) panel.hidden = true;
+  if (category.id !== initialId) panel.hidden = true;
 
   const matches = (category.stages || [])
     .filter((stage) => stage.type === 'group')
@@ -390,14 +390,22 @@ function drawSection(event, onOpen) {
     return section;
   }
 
-  const panels = categories.map((category, index) => categoryPanel(category, index, event, onOpen));
+  const initialCategory = categories.find((category) =>
+    (category.stages || [])
+      .filter((stage) => stage.type === 'group')
+      .flatMap((stage) => stage.groups || [])
+      .some((group) => (group.matches || []).length > 0),
+  ) || categories[0];
+  const panels = categories.map((category, index) =>
+    categoryPanel(category, index, event, onOpen, initialCategory.id),
+  );
   const tabs = createTabs({
     items: categories.map((category, index) => ({
       id: `qttc26-${category.id}`,
       label: category.name,
       controls: `qttc26-category-${category.id}`,
     })),
-    initial: `qttc26-${categories[0].id}`,
+    initial: `qttc26-${initialCategory.id}`,
     label: '赛事分类切换',
     onChange: (id) => {
       const target = id.replace('qttc26-', '');
