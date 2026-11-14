@@ -52,8 +52,8 @@
       "participants": [
         {
           "name": "朱恩骏/胡雅文",
-          "seed": null,
-          "rank": null,
+          "seed": 1,
+          "rank": 1,
           "points": null,
           "group": "A组",
           "tier": "I"
@@ -73,6 +73,54 @@
           "points": null,
           "group": "A组",
           "tier": "III"
+        },
+        {
+          "name": "陈金森/郭东珉",
+          "seed": 2,
+          "rank": 2,
+          "points": null,
+          "group": "B组",
+          "tier": "I"
+        },
+        {
+          "name": "杨蕊宁/赵久龄",
+          "seed": null,
+          "rank": 5,
+          "points": null,
+          "group": "B组",
+          "tier": "II"
+        },
+        {
+          "name": "殳晟欢/刘汤一",
+          "seed": null,
+          "rank": 9,
+          "points": null,
+          "group": "B组",
+          "tier": "III"
+        },
+        {
+          "name": "谢承宇/杨梓隽",
+          "seed": 3,
+          "rank": 3,
+          "points": null,
+          "group": "C组",
+          "tier": "I"
+        },
+        {
+          "name": "肖逸轩/邹雨岑",
+          "seed": 4,
+          "rank": 4,
+          "points": null,
+          "group": "C组",
+          "tier": "II"
+        },
+        {
+          "name": "周乾渊/甘梓辰",
+          "seed": 0,
+          "rank": 8,
+          "points": null,
+          "group": "C组",
+          "tier": "III"
         }
       ],
       "stages": [
@@ -87,6 +135,16 @@
               "matches": [
                 "qttc-2026-d-a-1"
               ]
+            },
+            {
+              "id": "doubles-b",
+              "name": "B组",
+              "matches": []
+            },
+            {
+              "id": "doubles-c",
+              "name": "C组",
+              "matches": []
             }
           ]
         },

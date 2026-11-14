@@ -2349,6 +2349,11 @@
   margin-top: var(--space-2);
 }
 
+.qttc26-group-stack {
+  display: grid;
+  gap: var(--space-8);
+}
+
 .qttc26-group-block {
   display: grid;
   gap: var(--space-4);

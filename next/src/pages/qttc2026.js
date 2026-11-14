@@ -222,6 +222,49 @@ function groupStandingsTable(category, group) {
   return wrap;
 }
 
+function groupBlock(category, group, onOpen) {
+  const groupParticipants = (category.participants || []).filter(
+    (participant) => participant.group === group.name,
+  );
+  const matches = group.matches || [];
+  const block = el('div', { class: 'qttc26-group-block' });
+  block.append(
+    el('div', { class: 'qttc26-group-head' }, [
+      el('div', {}, [
+        el('h3', { class: 'qttc26-group-title', text: group.name }),
+        el('p', {
+          class: 'section__hint',
+          text: `${groupParticipants.length} 对组合 · ${matches.length} 场已录入`,
+        }),
+      ]),
+      createBadge(`${matches.length} 场`, matches.length ? 'w' : 'empty'),
+    ]),
+    groupStandingsTable(category, group),
+  );
+
+  if (matches.length) {
+    block.append(
+      el('div', { class: 'section__header qttc26-match-head' }, [
+        el('h4', { class: 'section__title', text: '本场比赛' }),
+        el('p', { class: 'section__hint', text: `${group.name}小组赛` }),
+      ]),
+    );
+    const matchGrid = el('div', { class: 'match-grid qttc26-match-grid' });
+    matches.forEach((match) => {
+      matchGrid.append(
+        createMatchCard(
+          match,
+          { stageName: '双打', roundName: group.name, date: match.detail?.playedAt },
+          (item, context) => onOpen?.(item, context),
+        ),
+      );
+    });
+    block.append(matchGrid);
+  }
+
+  return block;
+}
+
 function groupStageContent(category, event, onOpen) {
   const groupStage = (category.stages || []).find((stage) => stage.type === 'group');
   const groups = groupStage?.groups || [];
@@ -230,39 +273,9 @@ function groupStageContent(category, event, onOpen) {
     return emptyDraw('group');
   }
 
-  const group = groups.find((item) => (item.matches || []).length) || groups[0];
-  const block = el('div', { class: 'qttc26-group-block' });
-  block.append(
-    el('div', { class: 'qttc26-group-head' }, [
-      el('div', {}, [
-        el('h3', { class: 'qttc26-group-title', text: group.name }),
-        el('p', {
-          class: 'section__hint',
-          text: `${(category.participants || []).length} 对组合 · ${matches.length} 场已录入`,
-        }),
-      ]),
-      createBadge(`${matches.length} 场`, 'w'),
-    ]),
-    groupStandingsTable(category, group),
-    el('div', { class: 'section__header qttc26-match-head' }, [
-      el('h4', { class: 'section__title', text: '本场比赛' }),
-      el('p', { class: 'section__hint', text: 'A组小组赛' }),
-    ]),
-  );
-
-  const matchGrid = el('div', { class: 'match-grid qttc26-match-grid' });
-  matches.forEach((match) => {
-    matchGrid.append(
-      createMatchCard(
-        match,
-        { stageName: '双打', roundName: group.name, date: match.detail?.playedAt },
-        (item, context) => onOpen?.(item, context),
-      ),
-    );
-  });
-  block.append(matchGrid);
-
-  return block;
+  const stack = el('div', { class: 'qttc26-group-stack' });
+  groups.forEach((group) => stack.append(groupBlock(category, group, onOpen)));
+  return stack;
 }
 
 function categoryPanel(category, index, event, onOpen, initialId) {
@@ -377,10 +390,6 @@ function infoSection(event) {
       el('p', { class: 'eyebrow', text: 'Event notes' }),
       el('h2', { class: 'section__title', text: '赛事说明' }),
       el('p', { class: 'qttc26-info__text', text: event.meta.description }),
-      el('p', {
-        class: 'qttc26-info__text',
-        text: '竞赛组别：全性别单打、全性别双打。阶段：小组赛、淘汰赛。双打 A 组已录入 II 档陈子扬/唐近尧与 III 档刘函宇/梁博涛的小组赛；其余场次与淘汰赛持续更新。',
-      }),
     ]),
     el('div', { class: 'qttc26-info__side' }, [
       el('div', { class: 'qttc26-info__line' }, [
