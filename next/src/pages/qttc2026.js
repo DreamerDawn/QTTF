@@ -245,12 +245,6 @@ function groupBlock(category, group, onOpen) {
   );
 
   if (matches.length) {
-    block.append(
-      el('div', { class: 'section__header qttc26-match-head' }, [
-        el('h4', { class: 'section__title', text: '本场比赛' }),
-        el('p', { class: 'section__hint', text: `${group.name}小组赛` }),
-      ]),
-    );
     const matchGrid = el('div', { class: 'match-grid qttc26-match-grid' });
     matches.forEach((match) => {
       matchGrid.append(
@@ -261,7 +255,14 @@ function groupBlock(category, group, onOpen) {
         ),
       );
     });
-    block.append(matchGrid);
+    const summary = el('summary', { class: 'qttc26-matches-summary' }, [
+      el('span', { class: 'qttc26-matches-summary__title', text: '比赛场次' }),
+      el('span', { class: 'qttc26-matches-summary__count', text: `${matches.length} 场` }),
+      el('span', { class: 'qttc26-matches-summary__chevron', 'aria-hidden': 'true' }),
+    ]);
+    block.append(
+      el('details', { class: 'qttc26-matches-collapse' }, [summary, matchGrid]),
+    );
   }
 
   return block;
