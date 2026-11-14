@@ -2948,7 +2948,8 @@
   }
 
   .match-dialog__team {
-    font-size: var(--text-sm);
+    font-size: 0.72rem;
+    white-space: nowrap;
   }
 
   .match-dialog__final-score {
