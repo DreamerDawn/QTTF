@@ -156,9 +156,13 @@
   letter-spacing: 0.02em;
 }
 
-.carousel__slide--qttc .btn {
+.carousel__slide--qttc .carousel__actions .btn {
   color: #173d34;
   background: var(--qttc26-paper);
+}
+
+.hero-carousel:has(.carousel__slide--qttc.is-active) .carousel__dot[aria-current="true"] {
+  background: var(--qttc26-teal);
 }
 
 .carousel__qttc-art {
