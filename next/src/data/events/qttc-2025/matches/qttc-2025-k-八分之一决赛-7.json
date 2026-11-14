@@ -1,0 +1,51 @@
+{
+  "id": "qttc-2025-k-八分之一决赛-7",
+  "number": 7,
+  "order": 7,
+  "players": [
+    "刘函宇",
+    "陈子扬"
+  ],
+  "score": {
+    "gamesWon": 1,
+    "gamesLost": 3
+  },
+  "winner": "陈子扬",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 13
+      },
+      {
+        "pointsWon": 7,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 22,
+    "timeouts": [
+      true,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 37,
+      "pointsLost": 43
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-01",
+    "note": "比赛在第6个比赛日(2025年12月1日)进行。"
+  }
+}

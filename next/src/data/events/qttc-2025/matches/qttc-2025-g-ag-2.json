@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-ag-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "朱恩骏",
+    "唐近尧"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "朱恩骏",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 4
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      }
+    ],
+    "durationMinutes": 12,
+    "timeouts": [
+      true,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 18
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-25",
+    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+  }
+}

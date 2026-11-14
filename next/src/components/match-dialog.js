@@ -1,4 +1,5 @@
 import { el } from '../lib/dom.js';
+import { createMatchAnalytics } from './match-analytics.js';
 import {
   boolLabel,
   formatDuration,
@@ -142,11 +143,15 @@ export function openMatchDialog(match, context = {}) {
   }
 
   if (!special) {
-    inner.append(el('h3', { class: 'match-dialog__section-title', text: '比赛统计' }));
-    const statsTable = el('table', {
-      class: 'match-dialog__stats',
-      'aria-label': '比赛统计',
-    });
+    const analytics = createMatchAnalytics(match, { showScoreStrip: false });
+    if (analytics) {
+      inner.append(analytics);
+    } else {
+      inner.append(el('h3', { class: 'match-dialog__section-title', text: '比赛统计' }));
+      const statsTable = el('table', {
+        class: 'match-dialog__stats',
+        'aria-label': '比赛统计',
+      });
     const head = el('tr');
     head.append(
       el('th', { scope: 'col', text: p1 }),
@@ -170,8 +175,9 @@ export function openMatchDialog(match, context = {}) {
     ].forEach(([left, label, right]) => {
       body.append(el('tr', {}, [el('td', { text: String(left) }), el('td', { text: label }), el('td', { text: String(right) })]));
     });
-    statsTable.append(body);
-    inner.append(statsTable);
+      statsTable.append(body);
+      inner.append(statsTable);
+    }
   }
 
   if (detail.note) {

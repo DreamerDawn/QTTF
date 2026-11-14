@@ -1,0 +1,103 @@
+{
+  "id": "qttc-2026",
+  "route": "events/qttc/qttc2026/",
+  "group": "qttc",
+  "status": "published",
+  "meta": {
+    "name": "QTTC 2026",
+    "fullName": "2026年丘班乒乓球锦标赛暨“觚棻”杯",
+    "tagline": "TWICE THE TRIUMPH",
+    "format": "小组赛 + 淘汰赛",
+    "dateRange": {
+      "start": "2026-11-09",
+      "end": "2026-12-04"
+    },
+    "venue": "QTTF Breeze Arena",
+    "deadline": "2026-11-07",
+    "organizer": "丘班乒乓球联合会",
+    "phase": "ongoing",
+    "description": "QTTF 年度旗舰赛事。2026 年设全性别单打与全性别双打，先进行小组赛，随后进入淘汰赛。签表、名单与赛果持续更新。"
+  },
+  "participants": [],
+  "podium": null,
+  "stages": [],
+  "categories": [
+    {
+      "id": "singles",
+      "name": "单打",
+      "fullName": "全性别单打",
+      "format": "小组赛 + 淘汰赛",
+      "participants": [],
+      "stages": [
+        {
+          "id": "singles-group",
+          "name": "小组赛",
+          "type": "group",
+          "groups": []
+        },
+        {
+          "id": "singles-knockout",
+          "name": "淘汰赛",
+          "type": "knockout",
+          "rounds": []
+        }
+      ],
+      "podium": null
+    },
+    {
+      "id": "doubles",
+      "name": "双打",
+      "fullName": "全性别双打",
+      "format": "小组赛 + 淘汰赛",
+      "participants": [
+        {
+          "name": "朱恩骏/胡雅文",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "A组",
+          "tier": "I"
+        },
+        {
+          "name": "陈子扬/唐近尧",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "A组",
+          "tier": "II"
+        },
+        {
+          "name": "刘函宇/梁博涛",
+          "seed": null,
+          "rank": null,
+          "points": null,
+          "group": "A组",
+          "tier": "III"
+        }
+      ],
+      "stages": [
+        {
+          "id": "doubles-group",
+          "name": "小组赛",
+          "type": "group",
+          "groups": [
+            {
+              "id": "doubles-a",
+              "name": "A组",
+              "matches": [
+                "qttc-2026-d-a-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "doubles-knockout",
+          "name": "淘汰赛",
+          "type": "knockout",
+          "rounds": []
+        }
+      ],
+      "podium": null
+    }
+  ]
+}

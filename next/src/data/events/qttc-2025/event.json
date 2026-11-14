@@ -1,0 +1,283 @@
+{
+  "id": "qttc-2025",
+  "route": "events/qttc/qttc2025/",
+  "group": "qttc",
+  "status": "published",
+  "meta": {
+    "name": "QTTC 2025",
+    "fullName": "2025年“觚棻”杯暨丘班乒乓球锦标赛 (Qiuban Table Tennis Championship 2025)",
+    "format": "小组赛+淘汰赛",
+    "dateRange": {
+      "start": "2025-11-21",
+      "end": "2025-12-09"
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "description": "QTTF 年度旗舰赛事。2025 年赛事共有 18 名选手参赛，先进行 A–F 六个小组的单循环，再进行八分之一决赛至决赛的淘汰赛。"
+  },
+  "participants": [
+    {
+      "name": "朱恩骏",
+      "seed": 1,
+      "rank": 1,
+      "points": 2225,
+      "group": "A组"
+    },
+    {
+      "name": "刘函宇",
+      "seed": 7,
+      "rank": 7,
+      "points": 350,
+      "group": "A组"
+    },
+    {
+      "name": "唐近尧",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "A组"
+    },
+    {
+      "name": "谢承宇",
+      "seed": 6,
+      "rank": 6,
+      "points": 350,
+      "group": "B组"
+    },
+    {
+      "name": "殳晟欢",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "B组"
+    },
+    {
+      "name": "柴靖伟",
+      "seed": null,
+      "rank": 18,
+      "points": 0,
+      "group": "B组"
+    },
+    {
+      "name": "陈金森",
+      "seed": 3,
+      "rank": 3,
+      "points": 1875,
+      "group": "C组"
+    },
+    {
+      "name": "赵久龄",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "C组"
+    },
+    {
+      "name": "李嘉睿",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "C组"
+    },
+    {
+      "name": "杨蕊宁",
+      "seed": 4,
+      "rank": 4,
+      "points": 1800,
+      "group": "D组"
+    },
+    {
+      "name": "周乾渊",
+      "seed": 8,
+      "rank": 8,
+      "points": 175,
+      "group": "D组"
+    },
+    {
+      "name": "王文彬",
+      "seed": null,
+      "rank": 16,
+      "points": 20,
+      "group": "D组"
+    },
+    {
+      "name": "肖逸轩",
+      "seed": 5,
+      "rank": 5,
+      "points": 1225,
+      "group": "E组"
+    },
+    {
+      "name": "陈子扬",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "E组"
+    },
+    {
+      "name": "王续成",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "E组"
+    },
+    {
+      "name": "郭东珉",
+      "seed": 2,
+      "rank": 2,
+      "points": 1965,
+      "group": "F组"
+    },
+    {
+      "name": "邹雨岑",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "F组"
+    },
+    {
+      "name": "郭圣易",
+      "seed": null,
+      "rank": null,
+      "points": null,
+      "group": "F组"
+    }
+  ],
+  "podium": {
+    "first": {
+      "name": "陈金森",
+      "rank": 3,
+      "points": 1875
+    },
+    "second": {
+      "name": "谢承宇",
+      "rank": 6,
+      "points": 350
+    },
+    "third": {
+      "name": "朱恩骏",
+      "rank": 1,
+      "points": 2225
+    }
+  },
+  "stages": [
+    {
+      "id": "group-stage",
+      "name": "小组赛",
+      "type": "group",
+      "groups": [
+        {
+          "id": "a",
+          "name": "A组",
+          "matches": [
+            "qttc-2025-g-ag-1",
+            "qttc-2025-g-ag-2",
+            "qttc-2025-g-ag-3"
+          ]
+        },
+        {
+          "id": "b",
+          "name": "B组",
+          "matches": [
+            "qttc-2025-g-bg-1",
+            "qttc-2025-g-bg-2",
+            "qttc-2025-g-bg-3"
+          ]
+        },
+        {
+          "id": "c",
+          "name": "C组",
+          "matches": [
+            "qttc-2025-g-cg-1",
+            "qttc-2025-g-cg-2",
+            "qttc-2025-g-cg-3"
+          ]
+        },
+        {
+          "id": "d",
+          "name": "D组",
+          "matches": [
+            "qttc-2025-g-dg-1",
+            "qttc-2025-g-dg-2",
+            "qttc-2025-g-dg-3"
+          ]
+        },
+        {
+          "id": "e",
+          "name": "E组",
+          "matches": [
+            "qttc-2025-g-eg-1",
+            "qttc-2025-g-eg-2",
+            "qttc-2025-g-eg-3"
+          ]
+        },
+        {
+          "id": "f",
+          "name": "F组",
+          "matches": [
+            "qttc-2025-g-fg-1",
+            "qttc-2025-g-fg-2",
+            "qttc-2025-g-fg-3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "knockout-stage",
+      "name": "淘汰赛",
+      "type": "knockout",
+      "rounds": [
+        {
+          "id": "round-10",
+          "name": "八分之一决赛",
+          "order": 10,
+          "matches": [
+            "qttc-2025-k-八分之一决赛-1",
+            "qttc-2025-k-八分之一决赛-2",
+            "qttc-2025-k-八分之一决赛-3",
+            "qttc-2025-k-八分之一决赛-4",
+            "qttc-2025-k-八分之一决赛-5",
+            "qttc-2025-k-八分之一决赛-6",
+            "qttc-2025-k-八分之一决赛-7",
+            "qttc-2025-k-八分之一决赛-8"
+          ]
+        },
+        {
+          "id": "round-20",
+          "name": "四分之一决赛",
+          "order": 20,
+          "matches": [
+            "qttc-2025-k-四分之一决赛-1",
+            "qttc-2025-k-四分之一决赛-2",
+            "qttc-2025-k-四分之一决赛-3",
+            "qttc-2025-k-四分之一决赛-4"
+          ]
+        },
+        {
+          "id": "round-30",
+          "name": "半决赛",
+          "order": 30,
+          "matches": [
+            "qttc-2025-k-半决赛-1",
+            "qttc-2025-k-半决赛-2"
+          ]
+        },
+        {
+          "id": "round-40",
+          "name": "铜牌赛",
+          "order": 40,
+          "matches": [
+            "qttc-2025-k-铜牌赛-1"
+          ]
+        },
+        {
+          "id": "round-50",
+          "name": "决赛",
+          "order": 50,
+          "matches": [
+            "qttc-2025-k-决赛-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

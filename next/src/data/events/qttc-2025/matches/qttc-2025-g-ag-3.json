@@ -1,0 +1,55 @@
+{
+  "id": "qttc-2025-g-ag-3",
+  "number": 3,
+  "order": 3,
+  "players": [
+    "刘函宇",
+    "唐近尧"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 2
+  },
+  "winner": "刘函宇",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      },
+      {
+        "pointsWon": 9,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 10,
+        "pointsLost": 12
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      }
+    ],
+    "durationMinutes": 25,
+    "timeouts": [
+      false,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 52,
+      "pointsLost": 46
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-21",
+    "note": "比赛在第1个比赛日(2025年11月21日)进行。"
+  }
+}

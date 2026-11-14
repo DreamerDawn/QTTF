@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-eg-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "肖逸轩",
+    "王续成"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "肖逸轩",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 2
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 6
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 3
+      }
+    ],
+    "durationMinutes": 10,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 11
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-24",
+    "note": "比赛在第2个比赛日(2025年11月24日)进行。"
+  }
+}

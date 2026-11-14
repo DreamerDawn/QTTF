@@ -1,0 +1,55 @@
+{
+  "id": "qttc-2025-k-八分之一决赛-4",
+  "number": 4,
+  "order": 4,
+  "players": [
+    "赵久龄",
+    "杨蕊宁"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 3
+  },
+  "winner": "杨蕊宁",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      },
+      {
+        "pointsWon": 12,
+        "pointsLost": 10
+      },
+      {
+        "pointsWon": 5,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 25,
+    "timeouts": [
+      true,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 44,
+      "pointsLost": 52
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-01",
+    "note": "比赛在第6个比赛日(2025年12月1日)进行。"
+  }
+}

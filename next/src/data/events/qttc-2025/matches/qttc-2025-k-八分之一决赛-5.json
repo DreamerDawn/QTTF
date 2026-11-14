@@ -1,0 +1,28 @@
+{
+  "id": "qttc-2025-k-八分之一决赛-5",
+  "number": 5,
+  "order": 5,
+  "players": [
+    "陈金森",
+    "轮空"
+  ],
+  "score": null,
+  "winner": "陈金森",
+  "status": "bye",
+  "detail": {
+    "sets": [],
+    "durationMinutes": 0,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": null,
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": null,
+    "note": "轮空晋级"
+  }
+}

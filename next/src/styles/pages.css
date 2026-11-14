@@ -2156,6 +2156,35 @@
   overflow: visible;
 }
 
+.qttc26-art__trophy .gu-trophy__body {
+  fill: var(--gu-fill);
+  stroke: none;
+}
+
+.qttc26-art__trophy .gu-trophy__volume {
+  fill: var(--gu-volume);
+  stroke: none;
+}
+
+.qttc26-art__trophy .gu-trophy__rim {
+  fill: none;
+  stroke: var(--gu-rim);
+  stroke-width: 3;
+  opacity: 0.98;
+}
+
+.qttc26-art__trophy .gu-trophy__foot-line {
+  fill: none;
+  stroke: var(--gu-foot);
+  stroke-width: 2;
+}
+
+.qttc26-art__trophy .gu-trophy__light {
+  fill: none;
+  stroke: var(--gu-light);
+  stroke-width: 2;
+}
+
 .qttc26-facts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2301,6 +2330,19 @@
   color: var(--text-strong);
   font-weight: 650;
   text-align: right;
+}
+
+.match-dialog {
+  overflow-y: auto;
+}
+
+.match-dialog .qttc26-analytics {
+  margin-top: var(--space-4);
+  padding: var(--space-3) 0 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
 }
 
 .qttc26-back {

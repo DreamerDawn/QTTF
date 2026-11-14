@@ -1,0 +1,28 @@
+{
+  "id": "qttc-2025-k-八分之一决赛-8",
+  "number": 8,
+  "order": 8,
+  "players": [
+    "郭东珉",
+    "轮空"
+  ],
+  "score": null,
+  "winner": "郭东珉",
+  "status": "bye",
+  "detail": {
+    "sets": [],
+    "durationMinutes": 0,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": null,
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": null,
+    "note": "轮空晋级"
+  }
+}

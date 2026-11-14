@@ -1,0 +1,54 @@
+{
+  "id": "qttc-2025-k-铜牌赛-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "朱恩骏",
+    "陈子扬"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 1
+  },
+  "winner": "朱恩骏",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      }
+    ],
+    "durationMinutes": 20,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 41,
+      "pointsLost": 35
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-08",
+    "note": "比赛在第11个比赛日(2025年12月8日)进行。"
+  },
+  "flags": [
+    "bronze"
+  ]
+}

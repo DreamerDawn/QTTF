@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-bg-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "谢承宇",
+    "柴靖伟"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "谢承宇",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 2
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 2
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 6
+      }
+    ],
+    "durationMinutes": 15,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 10
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-26",
+    "note": "比赛在第4个比赛日(2025年11月26日)进行。"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "qttc-2025-g-ag-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "朱恩骏",
+    "刘函宇"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 2
+  },
+  "winner": "朱恩骏",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 9,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 6
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 13
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      }
+    ],
+    "durationMinutes": 38,
+    "timeouts": [
+      true,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 53,
+      "pointsLost": 46
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-27",
+    "note": "比赛在第5个比赛日(2025年11月27日)进行。"
+  }
+}

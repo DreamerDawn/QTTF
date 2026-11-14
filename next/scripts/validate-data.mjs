@@ -63,13 +63,51 @@ function booleanTriplet(value) {
   return Array.isArray(value) && value.length === 2 && value.every((item) => typeof item === 'boolean');
 }
 
-const eventsData = readJson('src/data/events.json');
+function loadSplitEvents() {
+  const index = readJson('src/data/events/index.json');
+  if (!index) return null;
+  const matchCache = new Map();
+  const readMatch = (eventId, matchId) => {
+    const key = `${eventId}/${matchId}`;
+    if (!matchCache.has(key)) {
+      const match = readJson(`src/data/events/${eventId}/matches/${matchId}.json`);
+      if (!match) throw new Error(`比赛文件不存在：${eventId}/matches/${matchId}.json`);
+      matchCache.set(key, match);
+    }
+    return matchCache.get(key);
+  };
+  const hydrateStage = (stage, eventId) => {
+    const blockKey = stage.type === 'group' ? 'groups' : 'rounds';
+    return {
+      ...stage,
+      [blockKey]: (stage[blockKey] || []).map((block) => ({
+        ...block,
+        matches: (block.matches || []).map((matchId) => readMatch(eventId, matchId)),
+      })),
+    };
+  };
+  const hydrateEvent = (event) => ({
+    ...event,
+    stages: (event.stages || []).map((stage) => hydrateStage(stage, event.id)),
+    categories: (event.categories || []).map((category) => ({
+      ...category,
+      stages: (category.stages || []).map((stage) => hydrateStage(stage, event.id)),
+    })),
+  });
+  return {
+    schemaVersion: index.schemaVersion,
+    groups: index.groups || [],
+    events: (index.events || []).map((entry) => hydrateEvent(readJson(`src/data/events/${entry.file}`))),
+  };
+}
+
+const eventsData = loadSplitEvents();
 const leaguesData = readJson('src/data/leagues.json');
 const rankingsData = readJson('src/data/rankings.json');
 const siteData = readJson('src/data/site.json');
 
 if (eventsData) {
-  assert(eventsData.schemaVersion === 2, 'events.json: schemaVersion 必须为 2');
+  assert(eventsData.schemaVersion === 3, 'events/index.json: schemaVersion 必须为 3');
   const groups = eventsData.groups || [];
   const events = eventsData.events || [];
   uniqueBy(groups, 'id', 'events.groups');
@@ -125,7 +163,14 @@ if (eventsData) {
     const matchIds = new Set();
     let matchCount = 0;
     const participantNames = new Set((event.participants || []).map((player) => player.name));
-    for (const stage of event.stages || []) {
+    categories.forEach((category) => {
+      (category.participants || []).forEach((player) => participantNames.add(player.name));
+    });
+    const allStages = [
+      ...(event.stages || []),
+      ...categories.flatMap((category) => category.stages || []),
+    ];
+    for (const stage of allStages) {
       assert(stage.id && stage.name, `${label}: stage 缺少 id/name`);
       assert(['group', 'knockout', 'other'].includes(stage.type), `${label}.${stage.id}: stage.type 非法`);
       const groupsOrRounds = stage.type === 'group' ? stage.groups || [] : stage.rounds || [];

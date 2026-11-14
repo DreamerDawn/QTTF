@@ -1,6 +1,6 @@
 import { mountShell, setPageTitle } from '../components/layout.js';
 import { createBadge } from '../components/badge.js';
-import { createMatchAnalytics } from '../components/match-analytics.js';
+import { createGuTrophy } from '../components/gu-trophy.js';
 import { createMatchCard } from '../components/match-card.js';
 import { openMatchDialog } from '../components/match-dialog.js';
 import { createTabs } from '../components/tabs.js';
@@ -19,49 +19,6 @@ function eventGroupMatches(event) {
     .filter((stage) => stage.type === 'group')
     .flatMap((stage) => stage.groups || [])
     .flatMap((group) => group.matches || []);
-}
-
-function trophyArt() {
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', 'qttc26-art__trophy');
-  svg.setAttribute('viewBox', '0 0 220 360');
-  svg.setAttribute('aria-hidden', 'true');
-
-  const add = (tag, attrs) => {
-    const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
-    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
-    svg.append(node);
-    return node;
-  };
-
-  add('path', {
-    d: 'M48 28h124c0 68-22 105-59 118v94h43v14H66v-14h41v-94C70 133 48 96 48 28Z',
-    fill: 'currentColor',
-  });
-  add('path', {
-    d: 'M108 153v116',
-    stroke: 'var(--qttc26-paper)',
-    'stroke-width': '2',
-    'stroke-linecap': 'round',
-  });
-  add('path', {
-    d: 'M48 42c-31 5-43 32-27 56 11 17 28 24 49 27M172 42c31 5 43 32 27 56-11 17-28 24-49 27',
-    fill: 'none',
-    stroke: 'currentColor',
-    'stroke-width': '2',
-    opacity: '.55',
-  });
-  add('circle', { cx: '174', cy: '86', r: '5', fill: 'var(--qttc26-mint)' });
-  add('path', {
-    d: 'M19 286c61-24 85-58 101-112M191 246c-29-10-47-33-58-72',
-    fill: 'none',
-    stroke: 'currentColor',
-    'stroke-width': '1',
-    opacity: '.38',
-  });
-  add('circle', { cx: '139', cy: '322', r: '4', fill: 'var(--qttc26-mint)' });
-  add('circle', { cx: '163', cy: '322', r: '3', fill: 'var(--qttc26-navy)' });
-  return svg;
 }
 
 function hero(event) {
@@ -98,7 +55,7 @@ function hero(event) {
       ]),
       el('div', { class: 'qttc26-hero__art', 'aria-hidden': 'true' }, [
         el('span', { class: 'qttc26-art__label', text: 'QTTF / 26' }),
-        trophyArt(),
+        createGuTrophy({ className: 'qttc26-art__trophy' }),
         el('span', { class: 'qttc26-art__caption', text: 'QTTF Breeze Arena' }),
       ]),
     ]),
@@ -304,11 +261,6 @@ function groupStageContent(category, event, onOpen) {
     );
   });
   block.append(matchGrid);
-
-  matches.forEach((match) => {
-    const analytics = createMatchAnalytics(match);
-    if (analytics) block.append(analytics);
-  });
 
   return block;
 }

@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-cg-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "陈金森",
+    "赵久龄"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "陈金森",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 6
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      }
+    ],
+    "durationMinutes": 12,
+    "timeouts": [
+      false,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 16
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-25",
+    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-fg-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "郭东珉",
+    "郭圣易"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "郭东珉",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 3
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      }
+    ],
+    "durationMinutes": 13,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 18
+    },
+    "venue": "Table 2 - 乒乓球馆",
+    "playedAt": "2025-11-27",
+    "note": "比赛在第5个比赛日(2025年11月27日)进行。"
+  }
+}

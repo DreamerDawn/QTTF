@@ -1,0 +1,51 @@
+{
+  "id": "qttc-2025-g-cg-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "陈金森",
+    "李嘉睿"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 1
+  },
+  "winner": "陈金森",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 3
+      },
+      {
+        "pointsWon": 12,
+        "pointsLost": 10
+      },
+      {
+        "pointsWon": 7,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      }
+    ],
+    "durationMinutes": 23,
+    "timeouts": [
+      true,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 41,
+      "pointsLost": 31
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-26",
+    "note": "比赛在第4个比赛日(2025年11月26日)进行。"
+  }
+}

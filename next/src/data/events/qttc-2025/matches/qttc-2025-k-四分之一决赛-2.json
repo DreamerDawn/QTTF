@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-k-四分之一决赛-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "谢承宇",
+    "杨蕊宁"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "谢承宇",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      }
+    ],
+    "durationMinutes": 17,
+    "timeouts": [
+      false,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 25
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-04",
+    "note": "比赛在第9个比赛日(2025年12月4日)进行。"
+  }
+}

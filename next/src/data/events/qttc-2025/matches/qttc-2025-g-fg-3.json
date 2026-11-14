@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-fg-3",
+  "number": 3,
+  "order": 3,
+  "players": [
+    "邹雨岑",
+    "郭圣易"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "邹雨岑",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      },
+      {
+        "pointsWon": 13,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 15,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 35,
+      "pointsLost": 27
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-25",
+    "note": "比赛在第3个比赛日(2025年11月25日)进行。"
+  }
+}

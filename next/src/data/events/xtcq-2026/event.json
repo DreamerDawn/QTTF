@@ -1,0 +1,20 @@
+{
+  "id": "xtcq-2026",
+  "route": "events/tryout/xtcq2026/",
+  "group": "tryout",
+  "status": "coming-soon",
+  "meta": {
+    "name": "2026 全球运动会选拔赛",
+    "fullName": "2026年“全球”运动会乒乓球混合团体项目选拔赛",
+    "format": "档案整理中",
+    "dateRange": {
+      "start": null,
+      "end": null
+    },
+    "venue": null,
+    "description": "旧版页面为“建设中”提示。旧 matchdata.json 与 QTTC 2025 小组赛数据高度重复，未直接迁移，待确认后补录。"
+  },
+  "participants": [],
+  "podium": null,
+  "stages": []
+}

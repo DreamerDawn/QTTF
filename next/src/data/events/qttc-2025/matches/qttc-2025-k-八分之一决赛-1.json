@@ -1,0 +1,55 @@
+{
+  "id": "qttc-2025-k-八分之一决赛-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "朱恩骏",
+    "邹雨岑"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 2
+  },
+  "winner": "朱恩骏",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 7
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      }
+    ],
+    "durationMinutes": 36,
+    "timeouts": [
+      false,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 49,
+      "pointsLost": 41
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-02",
+    "note": "比赛在第7个比赛日(2025年12月2日)进行。"
+  }
+}

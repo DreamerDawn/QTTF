@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 3,
+  "groups": [
+    {
+      "id": "qttc",
+      "name": "QTTC",
+      "description": "丘班乒乓球锦标赛（QTTC），又称“觚棻”杯，是 QTTF 主办的年度旗舰赛事，面向全体丘班同学，采用标准淘汰赛制，积分计入协会排名系统。",
+      "accent": "blue"
+    },
+    {
+      "id": "zgcup",
+      "name": "“追光”杯",
+      "description": "“追光”杯由学校官方主办，曾设七年级至九年级组别。QTTF 记录了部分高中阶段的参赛数据。",
+      "accent": "violet"
+    },
+    {
+      "id": "tryout",
+      "name": "校级赛事选拔赛",
+      "description": "为备战校级以上运动会，QTTF 组织内部选拔赛，代表丘班参加乒乓球混合团体项目。",
+      "accent": "orange"
+    },
+    {
+      "id": "classleague",
+      "name": "班级联赛",
+      "description": "面向丘班各班级的日常联赛体系，分为超级联赛和冠军联赛两个级别，设升降级制度。",
+      "accent": "green"
+    }
+  ],
+  "events": [
+    {
+      "id": "qttc-2024",
+      "file": "qttc-2024/event.json"
+    },
+    {
+      "id": "qttc-2025",
+      "file": "qttc-2025/event.json"
+    },
+    {
+      "id": "qttc-2026",
+      "file": "qttc-2026/event.json"
+    },
+    {
+      "id": "zgcup-2024",
+      "file": "zgcup-2024/event.json"
+    },
+    {
+      "id": "xtcq-2026",
+      "file": "xtcq-2026/event.json"
+    }
+  ]
+}

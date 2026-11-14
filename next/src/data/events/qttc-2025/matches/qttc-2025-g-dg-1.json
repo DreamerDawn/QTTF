@@ -1,0 +1,55 @@
+{
+  "id": "qttc-2025-g-dg-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "杨蕊宁",
+    "周乾渊"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 3
+  },
+  "winner": "周乾渊",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 5,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 9,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 13,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 12,
+        "pointsLost": 10
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 30,
+    "timeouts": [
+      true,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 47,
+      "pointsLost": 54
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-24",
+    "note": "比赛在第2个比赛日(2025年11月24日)进行。"
+  }
+}

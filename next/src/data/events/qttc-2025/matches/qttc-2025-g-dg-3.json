@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-dg-3",
+  "number": 3,
+  "order": 3,
+  "players": [
+    "王文彬",
+    "周乾渊"
+  ],
+  "score": {
+    "gamesWon": 0,
+    "gamesLost": 3
+  },
+  "winner": "周乾渊",
+  "status": "default",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 0,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 0,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 0,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 0,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 0,
+      "pointsLost": 33
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": null,
+    "note": "王文彬弃赛"
+  }
+}

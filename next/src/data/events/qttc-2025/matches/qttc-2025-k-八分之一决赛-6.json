@@ -1,0 +1,51 @@
+{
+  "id": "qttc-2025-k-八分之一决赛-6",
+  "number": 6,
+  "order": 6,
+  "players": [
+    "殳晟欢",
+    "周乾渊"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 1
+  },
+  "winner": "殳晟欢",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 3
+      },
+      {
+        "pointsWon": 12,
+        "pointsLost": 14
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      }
+    ],
+    "durationMinutes": 25,
+    "timeouts": [
+      false,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 45,
+      "pointsLost": 34
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-02",
+    "note": "比赛在第7个比赛日(2025年12月2日)进行。"
+  }
+}

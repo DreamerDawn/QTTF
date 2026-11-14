@@ -1,0 +1,20 @@
+{
+  "id": "zgcup-2024",
+  "route": "events/zgcup2024/",
+  "group": "zgcup",
+  "status": "coming-soon",
+  "meta": {
+    "name": "2024“追光”杯",
+    "fullName": "2024年学校“追光”杯乒乓球比赛（部分记录）",
+    "format": "档案整理中",
+    "dateRange": {
+      "start": null,
+      "end": null
+    },
+    "venue": null,
+    "description": "旧版页面为“建设中”提示。QTTF 仅记录了 2024 年九年级组的部分比赛，完整数据尚待补录。"
+  },
+  "participants": [],
+  "podium": null,
+  "stages": []
+}

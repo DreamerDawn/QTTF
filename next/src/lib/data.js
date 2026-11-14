@@ -4,6 +4,19 @@ import { sitePath } from './router.js';
 /** 站点数据很小，静态导入即可在首屏立即渲染导航和页脚。 */
 export const site = siteJson;
 
+const eventIndexModules = import.meta.glob('../data/events/index.json', {
+  eager: true,
+  import: 'default',
+});
+const eventModules = import.meta.glob('../data/events/*/event.json', {
+  eager: true,
+  import: 'default',
+});
+const matchModules = import.meta.glob('../data/events/*/matches/*.json', {
+  eager: true,
+  import: 'default',
+});
+
 const cache = {
   events: null,
   leagues: null,
@@ -16,9 +29,50 @@ export function resetDataCache() {
   cache.rankings = null;
 }
 
+function hydrateEvent(event, matchMap) {
+  const hydrateStages = (stages) =>
+    (stages || []).map((stage) => {
+      const blockKey = stage.type === 'group' ? 'groups' : 'rounds';
+      const blocks = (stage[blockKey] || []).map((block) => ({
+        ...block,
+        matches: (block.matches || []).map((matchId) => {
+          const match = matchMap.get(matchId);
+          if (!match) throw new Error(`赛事 ${event.id} 缺少比赛文件：${matchId}`);
+          return match;
+        }),
+      }));
+      return { ...stage, [blockKey]: blocks };
+    });
+
+  return {
+    ...event,
+    stages: hydrateStages(event.stages),
+    categories: (event.categories || []).map((category) => ({
+      ...category,
+      stages: hydrateStages(category.stages),
+    })),
+  };
+}
+
 export async function loadEvents() {
   if (!cache.events) {
-    cache.events = import('../data/events.json').then((module) => module.default);
+    const index = eventIndexModules['../data/events/index.json'];
+    if (!index) throw new Error('缺少 events/index.json');
+    const matchMap = new Map(
+      Object.values(matchModules)
+        .filter((match) => match && match.id)
+        .map((match) => [match.id, match]),
+    );
+    const events = (index.events || []).map((entry) => {
+      const event = eventModules[`../data/events/${entry.file}`];
+      if (!event) throw new Error(`缺少赛事文件：${entry.file}`);
+      return hydrateEvent(event, matchMap);
+    });
+    cache.events = Promise.resolve({
+      schemaVersion: index.schemaVersion,
+      groups: index.groups || [],
+      events,
+    });
   }
   return cache.events;
 }

@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-eg-3",
+  "number": 3,
+  "order": 3,
+  "players": [
+    "陈子扬",
+    "王续成"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "陈子扬",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 9
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 6
+      }
+    ],
+    "durationMinutes": 13,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 20
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-11-21",
+    "note": "比赛在第1个比赛日(2025年11月21日)进行。"
+  }
+}

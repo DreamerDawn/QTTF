@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-k-四分之一决赛-3",
+  "number": 3,
+  "order": 3,
+  "players": [
+    "陈金森",
+    "殳晟欢"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "陈金森",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      },
+      {
+        "pointsWon": 13,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 5
+      }
+    ],
+    "durationMinutes": 27,
+    "timeouts": [
+      false,
+      true
+    ],
+    "medicalTimeouts": [
+      false,
+      true
+    ],
+    "totalPoints": {
+      "pointsWon": 35,
+      "pointsLost": 21
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-03",
+    "note": "比赛在第8个比赛日(2025年12月3日)进行。"
+  }
+}

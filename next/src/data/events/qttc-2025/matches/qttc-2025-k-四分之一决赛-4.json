@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-k-四分之一决赛-4",
+  "number": 4,
+  "order": 4,
+  "players": [
+    "陈子扬",
+    "郭东珉"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "陈子扬",
+  "status": "default",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 0
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 0
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 0
+      }
+    ],
+    "durationMinutes": 0,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 33,
+      "pointsLost": 0
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": null,
+    "note": "郭东珉弃赛"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "qttc-2025-k-半决赛-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "朱恩骏",
+    "谢承宇"
+  ],
+  "score": {
+    "gamesWon": 1,
+    "gamesLost": 3
+  },
+  "winner": "谢承宇",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 11,
+        "pointsLost": 8
+      },
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 9,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 6,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 22,
+    "timeouts": [
+      true,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 34,
+      "pointsLost": 41
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": "2025-12-05",
+    "note": "比赛在第10个比赛日(2025年12月5日)进行。"
+  }
+}

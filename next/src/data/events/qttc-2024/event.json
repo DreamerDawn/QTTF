@@ -1,0 +1,20 @@
+{
+  "id": "qttc-2024",
+  "route": "events/qttc/qttc2024/",
+  "group": "qttc",
+  "status": "coming-soon",
+  "meta": {
+    "name": "QTTC 2024",
+    "fullName": "2024年丘班乒乓球锦标赛",
+    "format": "档案整理中",
+    "dateRange": {
+      "start": null,
+      "end": null
+    },
+    "venue": null,
+    "description": "旧版页面为“建设中”提示，未找到可迁移的结构化赛果数据。赛事档案整理完成后可在 CMS 中补录。"
+  },
+  "participants": [],
+  "podium": null,
+  "stages": []
+}

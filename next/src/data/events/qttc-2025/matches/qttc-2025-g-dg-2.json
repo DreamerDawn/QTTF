@@ -1,0 +1,47 @@
+{
+  "id": "qttc-2025-g-dg-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "王文彬",
+    "杨蕊宁"
+  ],
+  "score": {
+    "gamesWon": 0,
+    "gamesLost": 3
+  },
+  "winner": "杨蕊宁",
+  "status": "default",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 0,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 0,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 0,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": 0,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 0,
+      "pointsLost": 33
+    },
+    "venue": "Table 1 - QTTF Breeze Arena",
+    "playedAt": null,
+    "note": "王文彬弃赛"
+  }
+}

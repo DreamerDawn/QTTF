@@ -132,6 +132,8 @@ export function createMatchAnalytics(match, options = {}) {
 
   renderStats('match');
   renderChart(1);
-  section.append(head, scoreStrip, metaStrip, statsTabs.element, statsMount, chartBlock);
+  section.append(head);
+  if (options.showScoreStrip !== false) section.append(scoreStrip);
+  section.append(metaStrip, statsTabs.element, statsMount, chartBlock);
   return section;
 }
