@@ -2169,20 +2169,20 @@
 .qttc26-art__trophy .gu-trophy__rim {
   fill: none;
   stroke: var(--gu-rim);
-  stroke-width: 3;
+  stroke-width: 4;
   opacity: 0.98;
 }
 
 .qttc26-art__trophy .gu-trophy__foot-line {
   fill: none;
   stroke: var(--gu-foot);
-  stroke-width: 2;
+  stroke-width: 3;
 }
 
 .qttc26-art__trophy .gu-trophy__light {
   fill: none;
   stroke: var(--gu-light);
-  stroke-width: 2;
+  stroke-width: 2.5;
 }
 
 .qttc26-facts {

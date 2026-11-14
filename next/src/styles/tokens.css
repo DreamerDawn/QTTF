@@ -354,10 +354,10 @@
     --chart-a: #82a7ff;
     --chart-b: #e4a08a;
     --gu-fill: #ece6d8;
-    --gu-rim: #d6b77a;
-    --gu-foot: #8cc7b5;
-    --gu-light: rgba(255, 255, 255, 0.16);
-    --gu-volume: rgba(0, 0, 0, 0.12);
+    --gu-rim: #8f6d35;
+    --gu-foot: #3c7b6f;
+    --gu-light: rgba(0, 0, 0, 0.16);
+    --gu-volume: rgba(0, 0, 0, 0.18);
   }
 }
 

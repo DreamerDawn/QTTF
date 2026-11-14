@@ -198,7 +198,7 @@
 
 /**
  * @typedef {object} EventsData
- * @property {2} schemaVersion
+ * @property {3} schemaVersion
  * @property {EventGroup[]} groups
  * @property {Event[]} events
  */

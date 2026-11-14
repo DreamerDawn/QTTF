@@ -79,7 +79,11 @@ next/
 ├── src/
 │   ├── data/
 │   │   ├── site.json                   # 站点 / 导航 / 首页 / 关于 / 联系
-│   │   ├── events.json                 # 所有赛事、阶段、比赛、选手、领奖台
+│   │   ├── events/
+│   │   │   ├── index.json              # 赛事分组与索引
+│   │   │   └── <event-id>/
+│   │   │       ├── event.json          # 赛事信息 + 阶段结构 + matchId
+│   │   │       └── matches/*.json      # 每场比赛一个文件
 │   │   ├── leagues.json                # 联赛、积分榜、区域
 │   │   ├── rankings.json               # 排名快照
 │   │   └── schema.json                 # JSON Schema 说明
@@ -105,14 +109,28 @@ next/
 
 ## 4. 数据契约
 
-### 4.1 四个文件，四个职责
+### 4.1 数据文件职责
 
 | 文件 | 顶层键 | 职责 |
 |---|---|---|
 | `src/data/site.json` | `schemaVersion`, `site`, `navigation`, `home`, `about`, `contact` | 站点级信息与首页内容 |
-| `src/data/events.json` | `schemaVersion`, `groups`, `events` | 所有赛事；每项含 `meta`、`participants`、`podium`、`stages` |
+| `src/data/events/index.json` | `schemaVersion`, `groups`, `events` | 赛事分组、赛事文件索引 |
+| `src/data/events/<id>/event.json` | 赛事元信息、参赛者、`stages`、`categories` | 一届赛事只保留结构与 `matchId` |
+| `src/data/events/<id>/matches/<matchId>.json` | 单场比赛完整数据 | 每场比赛独立文件 |
 | `src/data/leagues.json` | `schemaVersion`, `leagues` | 联赛；每项含 `standings`、`matchweeks`、`zones`、`notes` |
 | `src/data/rankings.json` | `schemaVersion`, `current`, `snapshots` | 排名快照；每项含 `rows`、`movement`、`history` |
+
+赛事目录示例：
+
+```text
+src/data/events/qttc-2026/
+├── event.json
+└── matches/qttc-2026-d-a-1.json
+```
+
+- `event.json` 的小组/轮次 `matches` 只写 matchId 字符串。
+- `matches/<id>.json` 保存比分、每局、逐球记录、暂停、场馆等全部细节。
+- `src/lib/data.js` 用 `import.meta.glob` 读取拆分文件，在内存中还原成页面使用的聚合结构。
 
 统一的命名约定：
 
@@ -165,8 +183,8 @@ next/
 |---|---|
 | `homepage/index.html` | `index.html` + `src/pages/home.js`；`homepage/index.html` 仅做兼容跳转 |
 | `events/index.html` | `events/index.html` + `src/pages/events.js` |
-| `events/qttc/qttc2025/index.html` | `src/pages/event-detail.js` + `src/data/events.json` |
-| `events/qttc/qttc2025/matchdata.json` | `src/data/events.json` 的 `qttc-2025` |
+| `events/qttc/qttc2025/index.html` | `src/pages/event-detail.js` + `src/data/events/qttc-2025/event.json` |
+| `events/qttc/qttc2025/matchdata.json` | `src/data/events/qttc-2025/matches/*.json` |
 | `events/league/qsl/index.html` | `src/pages/league.js` + `src/data/leagues.json` |
 | `events/league/qcl/index.html` | 同上 |
 | `events/league/league.json`、`qsl/league.json`、`qcl/25-26ii/league.json` 等重复副本 | 合并为 `src/data/leagues.json` |
@@ -224,7 +242,7 @@ next/
 - [移动端排名积分构成](docs/screenshots/rankings-mobile-open.png)
 - [窄屏小组排名](docs/screenshots/group-standings-mobile.png)
 - [QTTC 2026 桌面端](docs/screenshots/qttc2026-desktop.png)
-- [QTTC 2026 签表空状态](docs/screenshots/qttc2026-draws.png)
+- [QTTC 2026 技术统计与走势图](docs/screenshots/qttc2026-draws.png)
 - [QTTC 2026 移动端](docs/screenshots/qttc2026-mobile.png)
 - [横向比赛卡](docs/screenshots/match-card.png)
 - [晋级之路对阵树](docs/screenshots/bracket-desktop.png)
@@ -263,7 +281,9 @@ next/
 
 内容管理页面与 OAuth 依赖已移除，站点是纯静态发布。数据直接编辑：
 
-- `src/data/events.json`：赛事、阶段、比赛、签表
+- `src/data/events/index.json`：赛事分组与文件索引
+- `src/data/events/<id>/event.json`：单届赛事结构与 matchId
+- `src/data/events/<id>/matches/*.json`：每场比赛详情
 - `src/data/leagues.json`：积分榜、每周赛况
 - `src/data/rankings.json`：排名快照
 - `src/data/site.json`：导航、首页、关于、联系
