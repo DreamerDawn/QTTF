@@ -1,5 +1,8 @@
 import { mountShell, setPageTitle } from '../components/layout.js';
 import { createBadge } from '../components/badge.js';
+import { createMatchAnalytics } from '../components/match-analytics.js';
+import { createMatchCard } from '../components/match-card.js';
+import { openMatchDialog } from '../components/match-dialog.js';
 import { createTabs } from '../components/tabs.js';
 import { emptyState, loadingState, setError } from '../components/status.js';
 import { el } from '../lib/dom.js';
@@ -8,6 +11,14 @@ import { findEventByRoute, loadEvents } from '../lib/data.js';
 
 function dotDate(value) {
   return String(value || '').replaceAll('-', '.');
+}
+
+function eventGroupMatches(event) {
+  return (event.categories || [])
+    .flatMap((category) => category.stages || [])
+    .filter((stage) => stage.type === 'group')
+    .flatMap((stage) => stage.groups || [])
+    .flatMap((group) => group.matches || []);
 }
 
 function trophyArt() {
@@ -57,6 +68,7 @@ function hero(event) {
   const phase = event.meta.phase || 'ongoing';
   const phaseLabel = phase === 'completed' ? '已结束' : phase === 'upcoming' ? '即将开始' : '进行中';
   const meta = event.meta;
+  const recordedMatches = eventGroupMatches(event).length;
   const title = String(meta.fullName || meta.name);
   const titleParts = title.split('暨');
 
@@ -81,7 +93,7 @@ function hero(event) {
         el('div', { class: 'badge-row qttc26-hero__badges' }, [
           createBadge(phaseLabel, phase === 'completed' ? 'empty' : 'w'),
           createBadge(meta.format || '小组赛 + 淘汰赛', 'info'),
-          createBadge('签表待录入', 'empty'),
+          createBadge(recordedMatches ? `${recordedMatches} 场已录入` : '签表待录入', recordedMatches ? 'w' : 'empty'),
         ]),
       ]),
       el('div', { class: 'qttc26-hero__art', 'aria-hidden': 'true' }, [
@@ -127,7 +139,181 @@ function emptyDraw(kind) {
   ]);
 }
 
-function categoryPanel(category, index, event) {
+function standingsRows(category, group) {
+  const rows = new Map();
+  const ensure = (name) => {
+    if (!rows.has(name)) {
+      const participant = (category.participants || []).find((item) => item.name === name);
+      rows.set(name, {
+        name,
+        tier: participant?.tier || '—',
+        played: 0,
+        wins: 0,
+        losses: 0,
+        gamesFor: 0,
+        gamesAgainst: 0,
+        pointsFor: 0,
+        pointsAgainst: 0,
+        tablePoints: 0,
+      });
+    }
+    return rows.get(name);
+  };
+
+  (category.participants || []).forEach((participant) => ensure(participant.name));
+
+  (group.matches || []).forEach((match) => {
+    if (match.status !== 'completed' || match.players?.length !== 2) return;
+    const [p1, p2] = match.players;
+    const row1 = ensure(p1);
+    const row2 = ensure(p2);
+    const games1 = Number(match.score?.gamesWon) || 0;
+    const games2 = Number(match.score?.gamesLost) || 0;
+    const points1 = (match.detail?.sets || []).reduce((sum, set) => sum + (Number(set.pointsWon) || 0), 0);
+    const points2 = (match.detail?.sets || []).reduce((sum, set) => sum + (Number(set.pointsLost) || 0), 0);
+
+    row1.played += 1;
+    row2.played += 1;
+    row1.gamesFor += games1;
+    row1.gamesAgainst += games2;
+    row2.gamesFor += games2;
+    row2.gamesAgainst += games1;
+    row1.pointsFor += points1;
+    row1.pointsAgainst += points2;
+    row2.pointsFor += points2;
+    row2.pointsAgainst += points1;
+
+    if (match.winner === p1) {
+      row1.wins += 1;
+      row2.losses += 1;
+      row1.tablePoints += 3;
+    } else if (match.winner === p2) {
+      row2.wins += 1;
+      row1.losses += 1;
+      row2.tablePoints += 3;
+    }
+  });
+
+  return [...rows.values()]
+    .map((row) => ({
+      ...row,
+      gameDiff: row.gamesFor - row.gamesAgainst,
+      pointDiff: row.pointsFor - row.pointsAgainst,
+    }))
+    .sort((a, b) => {
+      if (b.tablePoints !== a.tablePoints) return b.tablePoints - a.tablePoints;
+      if (b.wins !== a.wins) return b.wins - a.wins;
+      if (b.played !== a.played) return b.played - a.played;
+      if (b.gameDiff !== a.gameDiff) return b.gameDiff - a.gameDiff;
+      if (b.pointDiff !== a.pointDiff) return b.pointDiff - a.pointDiff;
+      return a.name.localeCompare(b.name, 'zh-Hans-CN');
+    })
+    .map((row, index) => ({ ...row, position: index + 1 }));
+}
+
+function groupStandingsTable(category, group) {
+  const rows = standingsRows(category, group);
+  const wrap = el('div', { class: 'qttc26-standings-wrap' });
+  const table = el('table', {
+    class: 'qttc26-standings-table',
+    'aria-label': `${group.name} 小组积分榜`,
+  });
+  const head = el('tr');
+  ['排名', '组合', '档位', '场次', '胜–负', '胜局–负局', '得分–失分', '净胜（局/分）', '积分'].forEach((label) => {
+    head.append(el('th', { scope: 'col', text: label }));
+  });
+  table.append(el('thead', {}, [head]));
+  const body = el('tbody');
+  rows.forEach((row) => {
+    body.append(
+      el('tr', {}, [
+        el('td', { class: 'is-number', text: String(row.position) }),
+        el('td', { class: 'qttc26-standings-team', text: row.name }),
+        el('td', { class: 'qttc26-standings-tier', text: row.tier }),
+        el('td', { class: 'is-number', text: String(row.played) }),
+        el('td', { class: 'is-number', text: `${row.wins}–${row.losses}` }),
+        el('td', { class: 'is-number', text: `${row.gamesFor}–${row.gamesAgainst}` }),
+        el('td', { class: 'is-number', text: `${row.pointsFor}–${row.pointsAgainst}` }),
+        el('td', { class: 'is-number', text: `${row.gameDiff >= 0 ? '+' : ''}${row.gameDiff} / ${row.pointDiff >= 0 ? '+' : ''}${row.pointDiff}` }),
+        el('td', { class: 'is-number qttc26-standings-points', text: String(row.tablePoints) }),
+      ]),
+    );
+  });
+  table.append(body);
+  wrap.append(table);
+
+  const cards = el('div', { class: 'qttc26-standings-cards' });
+  rows.forEach((row) => {
+    cards.append(
+      el('div', { class: 'qttc26-standings-card' }, [
+        el('span', { class: 'qttc26-standings-card__rank', text: String(row.position) }),
+        el('div', { class: 'qttc26-standings-card__main' }, [
+          el('div', { class: 'qttc26-standings-card__name' }, [
+            el('strong', { text: row.name }),
+            el('span', { class: 'qttc26-standings-card__tier', text: `${row.tier}档` }),
+          ]),
+          el('p', {
+            class: 'qttc26-standings-card__meta',
+            text: `${row.played}场 · ${row.wins}–${row.losses} · 局${row.gamesFor}–${row.gamesAgainst} · 分${row.pointsFor}–${row.pointsAgainst}`,
+          }),
+        ]),
+        el('span', { class: 'qttc26-standings-card__points', text: `${row.tablePoints} 分` }),
+      ]),
+    );
+  });
+  wrap.append(cards);
+  return wrap;
+}
+
+function groupStageContent(category, event, onOpen) {
+  const groupStage = (category.stages || []).find((stage) => stage.type === 'group');
+  const groups = groupStage?.groups || [];
+  const matches = groups.flatMap((group) => group.matches || []);
+  if (!groups.length || (!matches.length && !(category.participants || []).length)) {
+    return emptyDraw('group');
+  }
+
+  const group = groups.find((item) => (item.matches || []).length) || groups[0];
+  const block = el('div', { class: 'qttc26-group-block' });
+  block.append(
+    el('div', { class: 'qttc26-group-head' }, [
+      el('div', {}, [
+        el('h3', { class: 'qttc26-group-title', text: group.name }),
+        el('p', {
+          class: 'section__hint',
+          text: `${(category.participants || []).length} 对组合 · ${matches.length} 场已录入`,
+        }),
+      ]),
+      createBadge(`${matches.length} 场`, 'w'),
+    ]),
+    groupStandingsTable(category, group),
+    el('div', { class: 'section__header qttc26-match-head' }, [
+      el('h4', { class: 'section__title', text: '本场比赛' }),
+      el('p', { class: 'section__hint', text: 'A组小组赛' }),
+    ]),
+  );
+
+  const matchGrid = el('div', { class: 'match-grid qttc26-match-grid' });
+  matches.forEach((match) => {
+    matchGrid.append(
+      createMatchCard(
+        match,
+        { stageName: '双打', roundName: group.name, date: match.detail?.playedAt },
+        (item, context) => onOpen?.(item, context),
+      ),
+    );
+  });
+  block.append(matchGrid);
+
+  matches.forEach((match) => {
+    const analytics = createMatchAnalytics(match);
+    if (analytics) block.append(analytics);
+  });
+
+  return block;
+}
+
+function categoryPanel(category, index, event, onOpen) {
   const panel = el('div', {
     class: 'qttc26-category',
     id: `qttc26-category-${category.id}`,
@@ -136,13 +322,17 @@ function categoryPanel(category, index, event) {
   });
   if (index !== 0) panel.hidden = true;
 
+  const matches = (category.stages || [])
+    .filter((stage) => stage.type === 'group')
+    .flatMap((stage) => stage.groups || [])
+    .flatMap((group) => group.matches || []);
   const stagePrefix = `qttc26-${category.id}-stage`;
   const groupPanel = el('div', {
     class: 'qttc26-stage-panel',
     id: `${stagePrefix}-group`,
     role: 'tabpanel',
     'aria-labelledby': `tab-${category.id}-group`,
-  }, [emptyDraw('group')]);
+  }, [groupStageContent(category, event, onOpen)]);
   const knockoutPanel = el('div', {
     class: 'qttc26-stage-panel',
     id: `${stagePrefix}-knockout`,
@@ -172,7 +362,7 @@ function categoryPanel(category, index, event) {
         el('h3', { class: 'qttc26-category__title', text: category.name }),
         el('p', { class: 'section__hint', text: `${category.format || '小组赛 + 淘汰赛'} · ${event.meta.venue || '场馆待定'}` }),
       ]),
-      createBadge('签表待录入', 'empty'),
+      createBadge(matches.length ? `${matches.length} 场已录入` : '签表待录入', matches.length ? 'w' : 'empty'),
     ]),
     stageTabs.element,
     groupPanel,
@@ -181,8 +371,9 @@ function categoryPanel(category, index, event) {
   return panel;
 }
 
-function drawSection(event) {
+function drawSection(event, onOpen) {
   const categories = event.categories || [];
+  const totalMatches = eventGroupMatches(event).length;
   const section = el('section', { class: 'section qttc26-draw', 'aria-labelledby': 'qttc26-draw-title' });
   section.append(
     el('div', { class: 'section__header' }, [
@@ -190,7 +381,7 @@ function drawSection(event) {
         el('p', { class: 'eyebrow', text: 'Draws & Results' }),
         el('h2', { class: 'section__title', id: 'qttc26-draw-title', text: '赛事签表' }),
       ]),
-      el('p', { class: 'section__hint', text: `${categories.length} 个竞赛组别 · 数据待录入` }),
+      el('p', { class: 'section__hint', text: `${categories.length} 个竞赛组别 · ${totalMatches ? `${totalMatches} 场已录入` : '数据待录入'}` }),
     ]),
   );
 
@@ -199,7 +390,7 @@ function drawSection(event) {
     return section;
   }
 
-  const panels = categories.map((category, index) => categoryPanel(category, index, event));
+  const panels = categories.map((category, index) => categoryPanel(category, index, event, onOpen));
   const tabs = createTabs({
     items: categories.map((category, index) => ({
       id: `qttc26-${category.id}`,
@@ -220,6 +411,7 @@ function drawSection(event) {
 }
 
 function infoSection(event) {
+  const recordedMatches = eventGroupMatches(event).length;
   return el('section', { class: 'section qttc26-info' }, [
     el('div', { class: 'qttc26-info__copy' }, [
       el('p', { class: 'eyebrow', text: 'Event notes' }),
@@ -227,7 +419,7 @@ function infoSection(event) {
       el('p', { class: 'qttc26-info__text', text: event.meta.description }),
       el('p', {
         class: 'qttc26-info__text',
-        text: '竞赛组别：全性别单打、全性别双打。阶段：小组赛、淘汰赛。当前页面为赛事结构与签表入口，具体名单、分组与比分将在数据录入后更新。',
+        text: '竞赛组别：全性别单打、全性别双打。阶段：小组赛、淘汰赛。双打 A 组已录入 II 档陈子扬/唐近尧与 III 档刘函宇/梁博涛的小组赛；其余场次与淘汰赛持续更新。',
       }),
     ]),
     el('div', { class: 'qttc26-info__side' }, [
@@ -241,7 +433,7 @@ function infoSection(event) {
       ]),
       el('div', { class: 'qttc26-info__line' }, [
         el('span', { text: '数据状态' }),
-        el('strong', { text: '签表待录入' }),
+        el('strong', { text: recordedMatches ? `${recordedMatches} 场已录入` : '签表待录入' }),
       ]),
     ]),
   ]);
@@ -249,10 +441,11 @@ function infoSection(event) {
 
 function renderEvent(event, container) {
   setPageTitle(event.meta.name);
+  const onOpen = (match, context) => openMatchDialog(match, context);
   container.replaceChildren(
     hero(event),
     facts(event),
-    drawSection(event),
+    drawSection(event, onOpen),
     infoSection(event),
     el('p', { class: 'qttc26-back' }, [
       el('a', { class: 'btn btn--secondary', href: sitePath('events/'), text: '返回赛事总览' }),

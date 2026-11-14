@@ -86,6 +86,7 @@
  * @property {number|null} rank
  * @property {number|null} points
  * @property {string} [group]
+ * @property {string} [tier]
  * @property {string} [qualified]
  */
 
@@ -110,6 +111,17 @@
  */
 
 /**
+ * @typedef {object} PointLogEntry
+ * @property {number} game
+ * @property {number} ball
+ * @property {'A'|'B'} scorer
+ * @property {'A'|'B'} serve
+ * @property {{A: number, B: number}} scoreBefore
+ * @property {{A: number, B: number}} scoreAfter
+ * @property {boolean} [deuce]
+ */
+
+/**
  * @typedef {object} MatchDetail
  * @property {SetScore[]} sets
  * @property {number|null} durationMinutes
@@ -119,6 +131,7 @@
  * @property {string|null} venue
  * @property {string|null} playedAt YYYY-MM-DD
  * @property {string|null} time HH:MM
+ * @property {PointLogEntry[]} [pointLog]
  * @property {string|null} note
  */
 

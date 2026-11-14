@@ -78,6 +78,7 @@
         "rank": { "$ref": "#/definitions/nullableInteger" },
         "points": { "$ref": "#/definitions/nullableInteger" },
         "group": { "type": "string" },
+        "tier": { "type": "string" },
         "qualified": { "type": "string" }
       }
     },
@@ -142,6 +143,36 @@
             { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
             { "type": "null" }
           ]
+        },
+        "pointLog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["game", "ball", "scorer", "serve", "scoreBefore", "scoreAfter"],
+            "properties": {
+              "game": { "type": "integer", "minimum": 1 },
+              "ball": { "type": "integer", "minimum": 1 },
+              "scorer": { "enum": ["A", "B"] },
+              "serve": { "enum": ["A", "B"] },
+              "scoreBefore": {
+                "type": "object",
+                "required": ["A", "B"],
+                "properties": {
+                  "A": { "type": "integer", "minimum": 0 },
+                  "B": { "type": "integer", "minimum": 0 }
+                }
+              },
+              "scoreAfter": {
+                "type": "object",
+                "required": ["A", "B"],
+                "properties": {
+                  "A": { "type": "integer", "minimum": 0 },
+                  "B": { "type": "integer", "minimum": 0 }
+                }
+              },
+              "deuce": { "type": "boolean" }
+            }
+          }
         },
         "note": { "$ref": "#/definitions/nullableString" }
       }

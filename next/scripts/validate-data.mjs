@@ -168,6 +168,36 @@ if (eventsData) {
           if (detail.time) {
             assert(/^([01]\d|2[0-3]):[0-5]\d$/.test(detail.time), `${mLabel}: detail.time 必须为 HH:MM`);
           }
+          if (Array.isArray(detail.pointLog) && detail.pointLog.length) {
+            const byGame = new Map();
+            detail.pointLog.forEach((point) => {
+              if (!byGame.has(point.game)) byGame.set(point.game, []);
+              byGame.get(point.game).push(point);
+            });
+            for (const [gameNo, points] of byGame) {
+              const sorted = [...points].sort((a, b) => a.ball - b.ball);
+              let a = 0;
+              let b = 0;
+              sorted.forEach((point, index) => {
+                const pLabel = `${mLabel}.pointLog.G${gameNo}.${point.ball}`;
+                assert(point.ball === index + 1, `${pLabel}: ball 必须从 1 连续递增`);
+                assert(point.scoreBefore?.A === a && point.scoreBefore?.B === b, `${pLabel}: scoreBefore 不连续`);
+                if (point.scorer === 'A') a += 1;
+                else if (point.scorer === 'B') b += 1;
+                else assert(false, `${pLabel}: scorer 必须为 A/B`);
+                assert(point.scoreAfter?.A === a && point.scoreAfter?.B === b, `${pLabel}: scoreAfter 与 scorer 不一致`);
+              });
+              const set = detail.sets?.[gameNo - 1];
+              assert(set, `${mLabel}: pointLog 第 ${gameNo} 局缺少 set`);
+              assert(set.pointsWon === a && set.pointsLost === b, `${mLabel}: pointLog 第 ${gameNo} 局总分与 set 不一致`);
+            }
+            const loggedA = [...byGame.values()].flat().reduce((sum, point) => sum + (point.scorer === 'A' ? 1 : 0), 0);
+            const loggedB = [...byGame.values()].flat().reduce((sum, point) => sum + (point.scorer === 'B' ? 1 : 0), 0);
+            if (detail.totalPoints) {
+              assert(loggedA === detail.totalPoints.pointsWon, `${mLabel}: pointLog 总得分 A 不一致`);
+              assert(loggedB === detail.totalPoints.pointsLost, `${mLabel}: pointLog 总得分 B 不一致`);
+            }
+          }
           (detail.sets || []).forEach((set, index) => {
             assert(finiteNumber(set.pointsWon), `${mLabel}.sets[${index}]: pointsWon 必须为数字`);
             assert(finiteNumber(set.pointsLost), `${mLabel}.sets[${index}]: pointsLost 必须为数字`);
@@ -364,20 +394,20 @@ for (const [file, data] of [
 const summary = {
   events: eventsData?.events?.length || 0,
   matches:
-    eventsData?.events?.reduce(
-      (sum, event) =>
-        sum +
-        (event.stages || []).reduce(
-          (stageSum, stage) =>
-            stageSum +
-            (stage.type === 'group' ? stage.groups || [] : stage.rounds || []).reduce(
-              (blockSum, block) => blockSum + (block.matches?.length || 0),
-              0,
-            ),
-          0,
-        ),
-      0,
-    ) || 0,
+    eventsData?.events?.reduce((sum, event) => {
+      let count = 0;
+      const countStages = (stages) => {
+        (stages || []).forEach((stage) => {
+          const blocks = stage.type === 'group' ? stage.groups || [] : stage.rounds || [];
+          blocks.forEach((block) => {
+            count += block.matches?.length || 0;
+          });
+        });
+      };
+      countStages(event.stages);
+      (event.categories || []).forEach((category) => countStages(category.stages));
+      return sum + count;
+    }, 0) || 0,
   leagues: leaguesData?.leagues?.length || 0,
   standings: leaguesData?.leagues?.reduce((sum, league) => sum + (league.standings?.length || 0), 0) || 0,
   matchweeks:

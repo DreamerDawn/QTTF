@@ -167,6 +167,8 @@
   --qttc26-mint: #d7e5dc;
   --qttc26-teal: #2f6d62;
   --qttc26-line: rgba(24, 32, 46, 0.18);
+  --chart-a: #3f5be8;
+  --chart-b: #c06b52;
 
   /* Typography — fluid, no breakpoint jumps */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
@@ -344,6 +346,8 @@
     --qttc26-mint: #24443d;
     --qttc26-teal: #8ac9b9;
     --qttc26-line: rgba(238, 243, 238, 0.18);
+    --chart-a: #82a7ff;
+    --chart-b: #e4a08a;
   }
 }
 
