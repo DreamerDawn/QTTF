@@ -119,6 +119,7 @@ next/
 - 比分：`score.gamesWon` / `score.gamesLost`
 - 局内得分：`sets[].pointsWon` / `sets[].pointsLost`（相对 `players[0]`）
 - 比赛时间：`detail.playedAt`（YYYY-MM-DD）+ `detail.time`（HH:MM）；`detail.venue` 记录球台/场地
+- 逐球记录：`detail.pointLog[]` 保存 game/ball/scorer/serve/scoreBefore/scoreAfter/deuce；统计与走势图均由此计算
 - 近期战绩：`lastN` 数组；表头根据数组长度显示“最近 N 场”
 - 联赛逐场赛况：`matchweeks[].matches` 复用赛事比赛结构；平局时 `winner: null` 且大比分相等
 - 区域语义：`tone: "qualify" | "playoff" | "relegation"`；具体色值仅存在于 `tokens.css`
@@ -237,7 +238,11 @@ next/
 
 - **首页**：5 张轮播（自动播放 8s、可暂停/点选）、4 个功能卡、种子选手（从最新排名派生，不再硬编码 `sampleRankings`）。
 - **赛事总览**：4 个系列卡片，实时搜索；联赛与赛事自动归组。
-- **QTTC 2026**：单打 / 双打分类，分类内切换小组赛 / 淘汰赛；海报式米白、薄荷、海军蓝主题，数据留空时不伪造签表。
+- **QTTC 2026**：单打 / 双打分类，分类内切换小组赛 / 淘汰赛；海报式米白、薄荷、海军蓝主题。
+  - 双打 A 组已录入一场 II 档 vs III 档小组赛：陈子扬/唐近尧 3–2 刘函宇/梁博涛
+  - 小组积分榜合并 QTTF/ITTF 同义列，胜一场 3 分
+  - 从 108 条逐球记录计算全场/单局 10 项统计
+  - 5 局可切换的 SVG 比分走势图
 - **赛事详情**：
   - 阶段导航：全部 / 小组赛 / 淘汰赛
   - 小组 Tab：A–F
@@ -321,7 +326,7 @@ npm run preview
 ```text
 npm run validate
   events: 5
-  matches: 34
+  matches: 35
   leagues: 2
   standings: 19
   matchweeks: 0
@@ -360,7 +365,9 @@ npm run build
   ✓ 关于页 1120/508/320 下大标题分别为 1/2/2 行，无单字孤行
   ✓ 关于页关键档案、理念关键词、按年份时间线与侧栏链接正常
   ✓ QTTC 2026 单打/双打分类、小组赛/淘汰赛切换与空状态
-  ✓ QTTC 2026 在 320px 下无页面横向滚动
+  ✓ QTTC 2026 双打 A 组积分榜、3–2 比赛卡与 108 球统计
+  ✓ 全场/单局 10 项统计与 5 局 SVG 走势图
+  ✓ QTTC 2026 在 320px 下无页面横向滚动，走势图内部可横向滚动
   ✓ 内容管理页面与页脚入口已移除
   ✓ 深色模式自动切换；prefers-reduced-transparency 下 blur 为 none
 
