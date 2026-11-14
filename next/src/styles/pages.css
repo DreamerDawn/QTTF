@@ -2815,7 +2815,7 @@
 
 .match-dialog__header {
   gap: var(--space-2);
-  padding-right: var(--space-7);
+  padding-right: 3.25rem;
   text-align: left;
 }
 
@@ -2935,6 +2935,13 @@
 }
 
 @media (--bp-nav) {
+  .match-dialog__topline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    padding-right: 0;
+  }
+
   .match-dialog__scoreline {
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     gap: var(--space-2);
