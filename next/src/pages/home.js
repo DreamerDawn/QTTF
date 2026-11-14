@@ -56,7 +56,6 @@ function renderHome(data, container) {
           el('span', { class: 'carousel__eyebrow', text: slide.kicker }),
           el('h2', { class: 'carousel__title carousel__qttc-title' }, [
             el('span', { text: titleWords.join(' ') }),
-            el('br'),
             el('span', { text: titleTail }),
           ]),
           el('p', { class: 'carousel__desc', text: slide.description }),

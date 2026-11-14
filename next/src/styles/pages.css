@@ -118,9 +118,12 @@
   color: #cfe3d8;
 }
 
+.carousel__slide--qttc .carousel__title {
+  color: var(--qttc26-paper);
+}
+
 .carousel__qttc-title {
   max-width: 10ch;
-  color: var(--qttc26-paper);
   font-size: clamp(3rem, 6vw, 5.6rem);
   font-weight: 700;
   letter-spacing: -0.065em;
