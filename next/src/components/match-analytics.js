@@ -37,7 +37,6 @@ export function createMatchAnalytics(match, options = {}) {
       el('p', { class: 'eyebrow', text: 'Match analytics' }),
       el('h2', { class: 'section__title', id: 'qttc26-analytics-title', text: '本场技术统计' }),
     ]),
-    el('p', { class: 'section__hint', text: '从 108 个逐球记录实时计算 · 与计分器口径一致' }),
   ]);
 
   const scoreStrip = el('div', { class: 'qttc26-game-strip', 'aria-label': '每局比分' });
@@ -121,10 +120,7 @@ export function createMatchAnalytics(match, options = {}) {
 
   const chartBlock = el('div', { class: 'qttc26-chart-block' }, [
     el('div', { class: 'qttc26-chart-head' }, [
-      el('div', {}, [
-        el('h3', { class: 'qttc26-chart-title', text: '比分走势' }),
-        el('p', { class: 'section__hint', text: 'X = 球序号 · Y = 双方累计得分' }),
-      ]),
+      el('h3', { class: 'qttc26-chart-title', text: '比分走势' }),
       chartTabs.element,
     ]),
     chartMount,

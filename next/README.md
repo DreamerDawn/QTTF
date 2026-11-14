@@ -132,6 +132,8 @@ src/data/events/qttc-2026/
 - `matches/<id>.json` 保存比分、每局、逐球记录、暂停、场馆等全部细节。
 - `src/lib/data.js` 用 `import.meta.glob` 读取拆分文件，在内存中还原成页面使用的聚合结构。
 
+完整的数据提交说明（含新增小组、淘汰赛签位、Agent 操作顺序）见 [`src/data/events/README.md`](src/data/events/README.md)。
+
 统一的命名约定：
 
 - 比分：`score.gamesWon` / `score.gamesLost`

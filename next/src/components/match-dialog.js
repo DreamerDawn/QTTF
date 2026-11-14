@@ -45,7 +45,11 @@ export function openMatchDialog(match, context = {}) {
   const timeouts = detail.timeouts || null;
   const medical = detail.medicalTimeouts || null;
   const round = context.roundName || context.stageName || '比赛';
-  const date = detail.playedAt || detail.note || '未记录';
+  const date = [detail.playedAt, detail.time].filter(Boolean).join(' ') || '时间未记录';
+  const matchNumber = match.number || match.order;
+  const winnerSide = match.winner === p1 ? 'p1' : match.winner === p2 ? 'p2' : null;
+  const finalA = score ? score.gamesWon : '—';
+  const finalB = score ? score.gamesLost : '—';
 
   const dialog = el('dialog', {
     class: 'match-dialog',
@@ -62,33 +66,37 @@ export function openMatchDialog(match, context = {}) {
 
   const header = el('div', { class: 'match-dialog__header' });
   header.append(
-    el('div', { class: 'section__hint', text: `${round} · ${statusLabel(match.status)}` }),
+    el('div', { class: 'match-dialog__topline' }, [
+      el('span', {
+        text: `${round}${matchNumber ? ` · 第 ${matchNumber} 场` : ''} · ${statusLabel(match.status)}`,
+      }),
+      el('span', { text: date }),
+    ]),
     el('h2', {
       class: 'match-dialog__title',
       id: 'match-dialog-title',
-      text: `${p1} vs ${p2}`,
+      text: '比赛详情',
     }),
-    el('p', { class: 'match-dialog__subtitle', text: `第 ${match.number || match.order} 场` }),
+    el('div', { class: 'match-dialog__scoreline' }, [
+      el('div', { class: 'match-dialog__team', text: p1 }),
+      el('div', { class: 'match-dialog__final-score', 'aria-label': `总比分 ${formatScore(score)}` }, [
+        el('span', {
+          class: winnerSide === 'p1' ? 'is-winner' : '',
+          text: String(finalA),
+        }),
+        el('span', { class: 'match-dialog__score-dash', text: '–' }),
+        el('span', {
+          class: winnerSide === 'p2' ? 'is-winner' : '',
+          text: String(finalB),
+        }),
+      ]),
+      el('div', { class: 'match-dialog__team', text: p2 }),
+    ]),
   );
-
-  const playerRow = el('div', { class: 'match-dialog__players' }, [
-    el('div', {
-      class: `match-dialog__player${match.winner === p1 ? ' is-winner' : ''}`,
-      text: p1,
-    }),
-    el('div', { class: 'match-dialog__score', text: formatScore(score) }),
-    el('div', {
-      class: `match-dialog__player${match.winner === p2 ? ' is-winner' : ''}`,
-      text: p2,
-    }),
-  ]);
-  header.append(playerRow);
 
   const meta = el('dl', { class: 'match-dialog__meta' });
   const metaItems = [
     ['阶段', round],
-    ['状态', statusLabel(match.status)],
-    ['日期', date],
     ['时长', formatDuration(detail.durationMinutes)],
     ['场地', detailValue(detail.venue, '未记录')],
     ['备注', detailValue(detail.note, '无')],
