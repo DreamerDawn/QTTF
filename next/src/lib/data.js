@@ -131,6 +131,7 @@ export function groupSummaries(eventsData, leaguesData) {
         subtitle: event.meta.fullName,
         description: event.meta.description,
         status: event.status,
+        phase: event.meta.phase || null,
         dateRange: event.meta.dateRange,
         href: eventHref(event),
         searchText: [

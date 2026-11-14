@@ -2037,6 +2037,314 @@
   max-width: 22rem;
 }
 
+/* =========================================================
+   QTTC 2026 event page
+   ========================================================= */
+.qttc26-hero {
+  min-height: clamp(360px, 44vw, 520px);
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  border-color: var(--qttc26-line);
+  background: var(--qttc26-paper);
+  color: var(--qttc26-ink);
+}
+
+.qttc26-hero__band {
+  position: absolute;
+  top: 9%;
+  left: -13%;
+  width: 72%;
+  height: 43%;
+  border-radius: 2px;
+  background: var(--qttc26-mint);
+  opacity: 0.92;
+  transform: rotate(-17deg);
+  transform-origin: center;
+}
+
+.qttc26-hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(12rem, 0.55fr);
+  gap: var(--space-5);
+  align-items: center;
+  min-height: 300px;
+}
+
+.qttc26-hero__copy {
+  min-width: 0;
+}
+
+.qttc26-hero__copy .section__hint {
+  color: var(--qttc26-ink);
+  opacity: 0.62;
+}
+
+.qttc26-hero__eyebrow {
+  margin-top: var(--space-6);
+  color: var(--qttc26-teal);
+  letter-spacing: 0.12em;
+}
+
+.qttc26-hero__english {
+  margin-top: var(--space-3);
+  color: var(--qttc26-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7.2vw, 6.4rem);
+  font-weight: 600;
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+}
+
+.qttc26-hero__title {
+  margin-top: var(--space-5);
+  color: var(--qttc26-ink);
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.qttc26-hero__title span {
+  display: block;
+}
+
+.qttc26-hero__desc {
+  max-width: 48ch;
+  margin-top: var(--space-3);
+  color: var(--qttc26-ink);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  opacity: 0.7;
+}
+
+.qttc26-hero__badges {
+  margin-top: var(--space-4);
+}
+
+.qttc26-hero__art {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  align-self: stretch;
+  color: var(--qttc26-ink);
+}
+
+.qttc26-art__label,
+.qttc26-art__caption {
+  color: var(--qttc26-teal);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.qttc26-art__label {
+  align-self: flex-start;
+  margin-bottom: var(--space-2);
+}
+
+.qttc26-art__caption {
+  margin-top: var(--space-2);
+}
+
+.qttc26-art__trophy {
+  width: min(100%, 210px);
+  height: auto;
+  overflow: visible;
+}
+
+.qttc26-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.qttc26-fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 6.5rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+.qttc26-fact__label {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.qttc26-fact__value {
+  color: var(--text-strong);
+  font-size: var(--text-sm);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.qttc26-category-tabs {
+  margin-top: var(--space-2);
+}
+
+.qttc26-category {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  background: var(--surface-subtle);
+}
+
+.qttc26-category[hidden],
+.qttc26-stage-panel[hidden] {
+  display: none !important;
+}
+
+.qttc26-category__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.qttc26-category__title {
+  margin-top: 2px;
+  color: var(--text-strong);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.qttc26-empty {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 10rem;
+  padding: var(--space-5);
+  border: 1px dashed var(--qttc26-line);
+  border-radius: var(--radius-control);
+  background: var(--qttc26-paper);
+  color: var(--qttc26-ink);
+}
+
+.qttc26-empty__mark {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--qttc26-mint);
+  color: var(--qttc26-teal);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.qttc26-empty__title {
+  color: var(--qttc26-ink);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+
+.qttc26-empty__text {
+  max-width: 56ch;
+  margin-top: 4px;
+  color: var(--qttc26-ink);
+  font-size: var(--text-sm);
+  opacity: 0.65;
+}
+
+.qttc26-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(15rem, 0.6fr);
+  gap: var(--space-5);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface-subtle);
+}
+
+.qttc26-info__text {
+  max-width: 65ch;
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.qttc26-info__side {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.qttc26-info__line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.qttc26-info__line strong {
+  color: var(--text-strong);
+  font-weight: 650;
+  text-align: right;
+}
+
+.qttc26-back {
+  margin-top: var(--space-2);
+}
+
+@media (--bp-nav) {
+  .qttc26-hero {
+    min-height: 0;
+  }
+
+  .qttc26-hero__grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .qttc26-hero__art {
+    display: none;
+  }
+
+  .qttc26-hero__eyebrow {
+    margin-top: var(--space-4);
+  }
+
+  .qttc26-hero__english {
+    font-size: clamp(2.5rem, 13vw, 4rem);
+  }
+
+  .qttc26-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qttc26-info {
+    grid-template-columns: 1fr;
+  }
+
+  .qttc26-empty {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    min-height: 0;
+    padding: var(--space-4);
+  }
+}
+
 @container match-card (--cq-card) {
   .match-card__board-head,
   .match-card__player-row {

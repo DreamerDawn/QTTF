@@ -203,6 +203,26 @@
         "rounds": { "type": "array", "items": { "$ref": "#/definitions/roundBlock" } }
       }
     },
+    "eventCategory": {
+      "type": "object",
+      "required": ["id", "name", "stages"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "fullName": { "type": "string" },
+        "format": { "type": "string" },
+        "participants": { "type": "array", "items": { "$ref": "#/definitions/participant" } },
+        "stages": { "type": "array", "items": { "$ref": "#/definitions/stage" } },
+        "podium": {
+          "type": ["object", "null"],
+          "properties": {
+            "first": { "$ref": "#/definitions/podiumItem" },
+            "second": { "$ref": "#/definitions/podiumItem" },
+            "third": { "$ref": "#/definitions/podiumItem" }
+          }
+        }
+      }
+    },
     "event": {
       "type": "object",
       "required": ["id", "route", "group", "status", "meta", "participants", "podium", "stages"],
@@ -227,8 +247,16 @@
               }
             },
             "venue": { "$ref": "#/definitions/nullableString" },
-            "description": { "type": "string" }
+            "description": { "type": "string" },
+            "tagline": { "type": "string" },
+            "deadline": { "oneOf": [{ "$ref": "#/definitions/dateString" }, { "type": "null" }] },
+            "organizer": { "type": "string" },
+            "phase": { "enum": ["upcoming", "ongoing", "completed"] }
           }
+        },
+        "categories": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/eventCategory" }
         },
         "participants": { "type": "array", "items": { "$ref": "#/definitions/participant" } },
         "podium": {

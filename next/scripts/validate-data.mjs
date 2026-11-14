@@ -13,8 +13,6 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { load as loadYaml } from 'js-yaml';
-
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const errors = [];
 const warnings = [];
@@ -99,9 +97,29 @@ if (eventsData) {
       if (start && end) assert(start <= end, `${label}: dateRange 开始晚于结束`);
     }
     uniqueBy(event.participants, 'name', `${label}.participants`);
+    if (event.meta?.deadline) {
+      assert(/^\d{4}-\d{2}-\d{2}$/.test(event.meta.deadline), `${label}: deadline 格式错误`);
+    }
+    if (event.meta?.phase) {
+      assert(['upcoming', 'ongoing', 'completed'].includes(event.meta.phase), `${label}: phase 非法`);
+    }
+
+    const categories = event.categories || [];
+    uniqueBy(categories, 'id', `${label}.categories`);
+    for (const category of categories) {
+      const cLabel = `${label}.categories.${category.id || '(no-id)'}`;
+      assert(category.name, `${cLabel}: 缺少 name`);
+      assert(Array.isArray(category.stages), `${cLabel}: stages 必须为数组`);
+      uniqueBy(category.participants || [], 'name', `${cLabel}.participants`);
+      for (const stage of category.stages) {
+        assert(stage.id && stage.name, `${cLabel}: stage 缺少 id/name`);
+        assert(['group', 'knockout', 'other'].includes(stage.type), `${cLabel}.${stage.id}: stage.type 非法`);
+      }
+    }
 
     if (event.status === 'published') {
-      assert(Array.isArray(event.stages) && event.stages.length > 0, `${label}: 已发布赛事必须有 stages`);
+      const hasStage = (event.stages || []).length > 0 || categories.some((category) => (category.stages || []).length > 0);
+      assert(hasStage, `${label}: 已发布赛事必须有 stages 或 categories[].stages`);
     }
 
     const matchIds = new Set();
@@ -168,7 +186,7 @@ if (eventsData) {
       }
     }
     if (event.status === 'published') {
-      warn(matchCount > 0, `${label}: 已发布赛事没有比赛记录`);
+      warn(matchCount > 0 || categories.length > 0, `${label}: 已发布赛事没有比赛记录`);
     }
   }
 }
@@ -328,33 +346,6 @@ if (siteData) {
   for (const path of ['events/', 'rankings/', 'about/', 'contact/']) {
     assert(existsSync(resolve(root, path, 'index.html')), `site.json: 导航目标 ${path} 缺少入口`);
   }
-}
-
-try {
-  const cmsConfig = loadYaml(readFileSync(resolve(root, 'admin/config.yml'), 'utf8'));
-  assert(cmsConfig?.backend?.name === 'github', 'admin/config.yml: backend 必须为 github');
-  assert(cmsConfig?.backend?.repo === 'dreamerdawn/QTTF', 'admin/config.yml: repo 不匹配');
-  assert(cmsConfig?.local_backend === true, 'admin/config.yml: 应开启 local_backend');
-  assert(cmsConfig?.media_folder === 'public/uploads', 'admin/config.yml: media_folder 不匹配');
-  assert(
-    Array.isArray(cmsConfig?.collections) && cmsConfig.collections.length >= 4,
-    'admin/config.yml: collections 至少应包含赛事、联赛、排名、站点',
-  );
-  for (const collection of cmsConfig.collections || []) {
-    for (const file of collection.files || []) {
-      assert(
-        file.file && existsSync(resolve(root, file.file)),
-        `admin/config.yml: 集合 ${collection.name} 的文件 ${file.file} 不存在`,
-      );
-    }
-  }
-  warn(
-    !String(cmsConfig?.backend?.base_url || '').includes('example.workers.dev'),
-    'admin/config.yml: base_url 仍是示例地址，生产登录前必须替换为真实 OAuth Worker URL',
-  );
-} catch (error) {
-  if (error instanceof Error) errors.push(`admin/config.yml: YAML 解析失败 — ${error.message}`);
-  else throw error;
 }
 
 for (const [file, data] of [

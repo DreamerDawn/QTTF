@@ -73,6 +73,10 @@
  * @property {{start: string|null, end: string|null}} dateRange
  * @property {string|null} venue
  * @property {string} description
+ * @property {string} [tagline]
+ * @property {string|null} [deadline]
+ * @property {string} [organizer]
+ * @property {'upcoming'|'ongoing'|'completed'} [phase]
  */
 
 /**
@@ -156,6 +160,17 @@
  */
 
 /**
+ * @typedef {object} EventCategory
+ * @property {string} id
+ * @property {string} name
+ * @property {string} [fullName]
+ * @property {string} [format]
+ * @property {Participant[]} [participants]
+ * @property {Stage[]} stages
+ * @property {Podium|null} [podium]
+ */
+
+/**
  * @typedef {object} Event
  * @property {string} id
  * @property {string} route
@@ -165,6 +180,7 @@
  * @property {Participant[]} participants
  * @property {Podium|null} podium
  * @property {Stage[]} stages
+ * @property {EventCategory[]} [categories]
  */
 
 /**

@@ -33,10 +33,7 @@ export function createFooter(site) {
 
   const note = el('div', { class: 'site-footer__note' }, [
     el('div', { text: site.site.footer }),
-    el('div', { class: 'mt-2' }, [
-      el('span', { text: '静态部署于 GitHub Pages · ' }),
-      el('a', { href: sitePath('admin/'), text: '内容管理' }),
-    ]),
+    el('div', { class: 'mt-2', text: '静态部署于 GitHub Pages' }),
   ]);
 
   container.append(brand, socials, note);

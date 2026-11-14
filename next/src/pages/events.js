@@ -7,6 +7,7 @@ import { groupSummaries, loadEvents, loadLeagues } from '../lib/data.js';
 
 function itemStatus(item) {
   if (item.kind === 'league') return createBadge('积分榜', 'info');
+  if (item.phase === 'ongoing') return createBadge('进行中', 'w');
   if (item.status === 'published') return createBadge('可查看', 'w');
   return createBadge('整理中', 'empty');
 }
