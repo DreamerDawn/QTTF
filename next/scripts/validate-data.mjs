@@ -63,6 +63,74 @@ function booleanTriplet(value) {
   return Array.isArray(value) && value.length === 2 && value.every((item) => typeof item === 'boolean');
 }
 
+function validateStageFormat(stage, label) {
+  const format = stage.format;
+  assert(format && typeof format === 'object', `${label}: 缺少 stage.format`);
+  if (!format || typeof format !== 'object') return null;
+  assert(['best-of', 'fixed'].includes(format.type), `${label}: stage.format.type 必须为 best-of/fixed`);
+  assert(Number.isInteger(format.games) && format.games > 0, `${label}: stage.format.games 必须为正整数`);
+  if (format.type === 'best-of') {
+    assert(format.games % 2 === 1, `${label}: best-of 的 games 必须为奇数`);
+  }
+  return format.type && Number.isInteger(format.games) ? format : null;
+}
+
+function formatLabel(format) {
+  if (!format) return '赛制未设置';
+  return format.type === 'fixed' ? `固定 ${format.games} 局` : `BO${format.games}`;
+}
+
+function validateMatchResult(match, format, label) {
+  const status = String(match.status || '').toLowerCase();
+  if (['bye', 'default', 'cancelled', 'scheduled', 'unknown'].includes(status)) return;
+  assert(format, `${label}: 无法校验结果，缺少合法 stage.format`);
+  if (!format) return;
+  assert(match.score, `${label}: 已完成比赛缺少 score`);
+  if (!match.score) return;
+
+  const won = match.score.gamesWon;
+  const lost = match.score.gamesLost;
+  assert(Number.isInteger(won) && won >= 0, `${label}: gamesWon 必须为非负整数`);
+  assert(Number.isInteger(lost) && lost >= 0, `${label}: gamesLost 必须为非负整数`);
+  if (!Number.isInteger(won) || !Number.isInteger(lost)) return;
+
+  const sets = Array.isArray(match.detail?.sets) ? match.detail.sets : [];
+  assert(won + lost === sets.length, `${label}: 大比分之和 ${won + lost} 与 sets 数量 ${sets.length} 不一致`);
+
+  if (format.type === 'fixed') {
+    assert(
+      sets.length === format.games,
+      `${label}: ${formatLabel(format)}必须打满 ${format.games} 局，当前 ${sets.length} 局`,
+    );
+    const canDraw = format.games % 2 === 0;
+    if (canDraw && won === lost) {
+      assert(status === 'draw', `${label}: 固定偶数局平局必须使用 status:"draw"`);
+      assert(match.winner === null, `${label}: 平局 winner 必须为 null`);
+    } else {
+      assert(status === 'completed', `${label}: 非平局比赛 status 必须为 "completed"`);
+      assert(
+        match.winner && match.players?.includes(match.winner),
+        `${label}: 非平局比赛 winner 必须为参赛选手`,
+      );
+      assert(won !== lost, `${label}: 胜局与负局相等时不能标记为非平局`);
+    }
+    return;
+  }
+
+  assert(format.type === 'best-of', `${label}: 未知赛制类型`);
+  assert(status === 'completed', `${label}: BO 赛制不能使用 status:"draw"`);
+  assert(won !== lost, `${label}: BO 赛制不存在平局`);
+  assert(won + lost <= format.games, `${label}: sets 数量超过 BO${format.games} 上限`);
+  assert(
+    Math.max(won, lost) === Math.ceil(format.games / 2),
+    `${label}: BO${format.games} 的胜方应赢 ${Math.ceil(format.games / 2)} 局`,
+  );
+  assert(
+    match.winner && match.players?.includes(match.winner),
+    `${label}: BO 赛制 winner 必须为参赛选手`,
+  );
+}
+
 function loadSplitEvents() {
   const index = readJson('src/data/events/index.json');
   if (!index) return null;
@@ -173,6 +241,7 @@ if (eventsData) {
     for (const stage of allStages) {
       assert(stage.id && stage.name, `${label}: stage 缺少 id/name`);
       assert(['group', 'knockout', 'other'].includes(stage.type), `${label}.${stage.id}: stage.type 非法`);
+      const stageFormat = validateStageFormat(stage, `${label}.${stage.id}`);
       const groupsOrRounds = stage.type === 'group' ? stage.groups || [] : stage.rounds || [];
       uniqueBy(
         groupsOrRounds,
@@ -195,21 +264,16 @@ if (eventsData) {
             warn(participantNames.has(p2) || p2 === '轮空', `${mLabel}: 选手 ${p2} 不在 participants 中`);
           }
           assert(
-            ['completed', 'bye', 'default', 'cancelled', 'scheduled', 'unknown'].includes(match.status),
+            ['completed', 'draw', 'bye', 'default', 'cancelled', 'scheduled', 'unknown'].includes(match.status),
             `${mLabel}: status 非法`,
           );
           if (match.score) {
             assert(finiteNumber(match.score.gamesWon), `${mLabel}: score.gamesWon 必须为数字`);
             assert(finiteNumber(match.score.gamesLost), `${mLabel}: score.gamesLost 必须为数字`);
           }
-          if (match.status === 'completed') {
-            assert(match.score, `${mLabel}: 已完成比赛缺少 score`);
-          }
-          if (match.winner && match.status !== 'scheduled') {
-            assert([p1, p2].includes(match.winner), `${mLabel}: winner 不属于对阵列`);
-          }
           const detail = match.detail || {};
           assert(Array.isArray(detail.sets), `${mLabel}: detail.sets 必须为数组`);
+          validateMatchResult(match, stageFormat, mLabel);
           if (detail.time) {
             assert(/^([01]\d|2[0-3]):[0-5]\d$/.test(detail.time), `${mLabel}: detail.time 必须为 HH:MM`);
           }
@@ -339,7 +403,7 @@ if (leaguesData) {
         const mLabel = `${wLabel}.matches.${match.id || '(no-id)'}`;
         assert(Array.isArray(match.players) && match.players.length === 2, `${mLabel}: players 必须为 2 人`);
         assert(
-          ['completed', 'bye', 'default', 'cancelled', 'scheduled', 'unknown'].includes(match.status),
+          ['completed', 'draw', 'bye', 'default', 'cancelled', 'scheduled', 'unknown'].includes(match.status),
           `${mLabel}: status 非法`,
         );
         assert(Array.isArray(match.detail?.sets), `${mLabel}: detail.sets 必须为数组`);
@@ -349,15 +413,17 @@ if (leaguesData) {
             `${mLabel}: detail.time 必须为 HH:MM`,
           );
         }
-        if (match.status === 'completed') {
+        if (match.status === 'completed' || match.status === 'draw') {
           assert(match.score, `${mLabel}: 已完成比赛缺少 score`);
           const equal =
             finiteNumber(match.score?.gamesWon) &&
             finiteNumber(match.score?.gamesLost) &&
             match.score.gamesWon === match.score.gamesLost;
           if (equal) {
-            assert(!match.winner, `${mLabel}: 平局比赛 winner 必须为空`);
+            assert(match.status === 'draw', `${mLabel}: 平局比赛必须使用 status:"draw"`);
+            assert(match.winner === null, `${mLabel}: 平局比赛 winner 必须为 null`);
           } else {
+            assert(match.status === 'completed', `${mLabel}: 非平局比赛 status 必须为 completed`);
             assert(match.winner && match.players.includes(match.winner), `${mLabel}: winner 必须是参赛选手`);
           }
         }

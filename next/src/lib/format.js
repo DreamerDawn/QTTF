@@ -42,6 +42,7 @@ export function formatSet(set) {
 
 export const STATUS_LABELS = {
   completed: '已完成',
+  draw: '平局',
   bye: '轮空',
   default: '弃赛',
   cancelled: '取消',
@@ -56,6 +57,7 @@ export function statusLabel(status) {
 export function statusVariant(status) {
   const key = String(status || 'unknown').toLowerCase();
   if (key === 'completed') return 'w';
+  if (key === 'draw') return 'd';
   if (key === 'default' || key === 'cancelled') return 'l';
   if (key === 'bye' || key === 'scheduled') return 'info';
   return 'empty';

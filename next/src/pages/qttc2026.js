@@ -13,6 +13,11 @@ function dotDate(value) {
   return String(value || '').replaceAll('-', '.');
 }
 
+function formatLabel(format) {
+  if (!format) return '赛制未设置';
+  return format.type === 'fixed' ? `固定 ${format.games} 局` : `BO${format.games}`;
+}
+
 function eventGroupMatches(event) {
   return (event.categories || [])
     .flatMap((category) => category.stages || [])
@@ -96,8 +101,9 @@ function emptyDraw(kind) {
   ]);
 }
 
-function standingsRows(category, group) {
+function standingsRows(category, group, format) {
   const rows = new Map();
+  const fixed = format?.type === 'fixed';
   const tierRank = (tier) => ({ I: 1, II: 2, III: 3, IV: 4 }[tier] ?? 99);
   const ensure = (name) => {
     if (!rows.has(name)) {
@@ -107,6 +113,7 @@ function standingsRows(category, group) {
         tier: participant?.tier || '—',
         played: 0,
         wins: 0,
+        draws: 0,
         losses: 0,
         gamesFor: 0,
         gamesAgainst: 0,
@@ -123,7 +130,8 @@ function standingsRows(category, group) {
     .forEach((participant) => ensure(participant.name));
 
   (group.matches || []).forEach((match) => {
-    if (match.status !== 'completed' || match.players?.length !== 2) return;
+    const status = String(match.status || '').toLowerCase();
+    if (!['completed', 'draw'].includes(status) || match.players?.length !== 2) return;
     const [p1, p2] = match.players;
     const row1 = ensure(p1);
     const row2 = ensure(p2);
@@ -143,7 +151,11 @@ function standingsRows(category, group) {
     row2.pointsFor += points2;
     row2.pointsAgainst += points1;
 
-    if (match.winner === p1) {
+    const draw = status === 'draw' || (!match.winner && games1 === games2);
+    if (draw) {
+      row1.draws += 1;
+      row2.draws += 1;
+    } else if (match.winner === p1) {
       row1.wins += 1;
       row2.losses += 1;
       row1.tablePoints += 3;
@@ -154,6 +166,18 @@ function standingsRows(category, group) {
     }
   });
 
+  const headToHead = (a, b) => {
+    let score = 0;
+    (group.matches || []).forEach((match) => {
+      const status = String(match.status || '').toLowerCase();
+      if (!['completed', 'draw'].includes(status) || match.players?.length !== 2) return;
+      if (!match.players.includes(a.name) || !match.players.includes(b.name)) return;
+      if (match.winner === a.name) score += 1;
+      else if (match.winner === b.name) score -= 1;
+    });
+    return score;
+  };
+
   return [...rows.values()]
     .map((row) => ({
       ...row,
@@ -161,6 +185,17 @@ function standingsRows(category, group) {
       pointDiff: row.pointsFor - row.pointsAgainst,
     }))
     .sort((a, b) => {
+      if (fixed) {
+        if (b.gamesFor !== a.gamesFor) return b.gamesFor - a.gamesFor;
+        if (a.gamesAgainst !== b.gamesAgainst) return a.gamesAgainst - b.gamesAgainst;
+        if (a.played === 0 && b.played === 0 && a.tier !== b.tier) {
+          return tierRank(a.tier) - tierRank(b.tier);
+        }
+        const direct = headToHead(a, b);
+        if (direct !== 0) return -direct;
+        if (b.pointDiff !== a.pointDiff) return b.pointDiff - a.pointDiff;
+        return a.name.localeCompare(b.name, 'zh-Hans-CN');
+      }
       if (b.tablePoints !== a.tablePoints) return b.tablePoints - a.tablePoints;
       if (b.wins !== a.wins) return b.wins - a.wins;
       if (b.played !== a.played) return b.played - a.played;
@@ -174,39 +209,55 @@ function standingsRows(category, group) {
     .map((row, index) => ({ ...row, position: index + 1 }));
 }
 
-function groupStandingsTable(category, group) {
-  const rows = standingsRows(category, group);
+function groupStandingsTable(category, group, format) {
+  const fixed = format?.type === 'fixed';
+  const rows = standingsRows(category, group, format);
+  const signed = (value) => (value >= 0 ? `+${value}` : String(value));
   const wrap = el('div', { class: 'qttc26-standings-wrap' });
   const table = el('table', {
-    class: 'qttc26-standings-table',
-    'aria-label': `${group.name} 小组积分榜`,
+    class: `qttc26-standings-table${fixed ? ' qttc26-standings-table--fixed' : ''}`,
+    'aria-label': `${group.name} 小组${fixed ? '排名' : '积分榜'}`,
   });
+  const headLabels = fixed
+    ? ['排名', '组合', '档位', '场次', '胜–平–负', '胜局–负局', '得分–失分', '净胜局']
+    : ['排名', '组合', '档位', '场次', '胜–负', '胜局–负局', '得分–失分', '净胜（局/分）', '积分'];
   const head = el('tr');
-  ['排名', '组合', '档位', '场次', '胜–负', '胜局–负局', '得分–失分', '净胜（局/分）', '积分'].forEach((label) => {
+  headLabels.forEach((label) => {
     head.append(el('th', { scope: 'col', text: label }));
   });
   table.append(el('thead', {}, [head]));
   const body = el('tbody');
   rows.forEach((row) => {
-    body.append(
-      el('tr', {}, [
-        el('td', { class: 'is-number', text: String(row.position) }),
-        el('td', { class: 'qttc26-standings-team', text: row.name }),
-        el('td', { class: 'qttc26-standings-tier', text: row.tier }),
-        el('td', { class: 'is-number', text: String(row.played) }),
-        el('td', { class: 'is-number', text: `${row.wins}–${row.losses}` }),
-        el('td', { class: 'is-number', text: `${row.gamesFor}–${row.gamesAgainst}` }),
-        el('td', { class: 'is-number', text: `${row.pointsFor}–${row.pointsAgainst}` }),
-        el('td', { class: 'is-number', text: `${row.gameDiff >= 0 ? '+' : ''}${row.gameDiff} / ${row.pointDiff >= 0 ? '+' : ''}${row.pointDiff}` }),
+    const record = fixed ? `${row.wins}–${row.draws}–${row.losses}` : `${row.wins}–${row.losses}`;
+    const cells = [
+      el('td', { class: 'is-number', text: String(row.position) }),
+      el('td', { class: 'qttc26-standings-team', text: row.name }),
+      el('td', { class: 'qttc26-standings-tier', text: row.tier }),
+      el('td', { class: 'is-number', text: String(row.played) }),
+      el('td', { class: 'is-number', text: record }),
+      el('td', { class: 'is-number', text: `${row.gamesFor}–${row.gamesAgainst}` }),
+      el('td', { class: 'is-number', text: `${row.pointsFor}–${row.pointsAgainst}` }),
+    ];
+    if (fixed) {
+      cells.push(el('td', { class: 'is-number', text: signed(row.gameDiff) }));
+    } else {
+      cells.push(
+        el('td', {
+          class: 'is-number',
+          text: `${signed(row.gameDiff)} / ${signed(row.pointDiff)}`,
+        }),
         el('td', { class: 'is-number qttc26-standings-points', text: String(row.tablePoints) }),
-      ]),
-    );
+      );
+    }
+    body.append(el('tr', {}, cells));
   });
   table.append(body);
   wrap.append(table);
 
   const cards = el('div', { class: 'qttc26-standings-cards' });
   rows.forEach((row) => {
+    const record = fixed ? `${row.wins}–${row.draws}–${row.losses}` : `${row.wins}–${row.losses}`;
+    const meta = `${row.played}场 · ${record} · 局${row.gamesFor}–${row.gamesAgainst} · 分${row.pointsFor}–${row.pointsAgainst}`;
     cards.append(
       el('div', { class: 'qttc26-standings-card' }, [
         el('span', { class: 'qttc26-standings-card__rank', text: String(row.position) }),
@@ -215,12 +266,12 @@ function groupStandingsTable(category, group) {
             el('strong', { text: row.name }),
             el('span', { class: 'qttc26-standings-card__tier', text: `${row.tier}档` }),
           ]),
-          el('p', {
-            class: 'qttc26-standings-card__meta',
-            text: `${row.played}场 · ${row.wins}–${row.losses} · 局${row.gamesFor}–${row.gamesAgainst} · 分${row.pointsFor}–${row.pointsAgainst}`,
-          }),
+          el('p', { class: 'qttc26-standings-card__meta', text: meta }),
         ]),
-        el('span', { class: 'qttc26-standings-card__points', text: `${row.tablePoints} 分` }),
+        el('span', {
+          class: 'qttc26-standings-card__points',
+          text: fixed ? `${signed(row.gameDiff)} 局` : `${row.tablePoints} 分`,
+        }),
       ]),
     );
   });
@@ -228,7 +279,7 @@ function groupStandingsTable(category, group) {
   return wrap;
 }
 
-function groupBlock(category, group, onOpen) {
+function groupBlock(category, group, format, onOpen) {
   const groupParticipants = (category.participants || []).filter(
     (participant) => participant.group === group.name,
   );
@@ -240,12 +291,12 @@ function groupBlock(category, group, onOpen) {
         el('h3', { class: 'qttc26-group-title', text: group.name }),
         el('p', {
           class: 'section__hint',
-          text: `${groupParticipants.length} 对组合 · ${matches.length} 场已录入`,
+          text: `${formatLabel(format)} · ${groupParticipants.length} 对组合 · ${matches.length} 场已录入`,
         }),
       ]),
       createBadge(`${matches.length} 场`, matches.length ? 'w' : 'empty'),
     ]),
-    groupStandingsTable(category, group),
+    groupStandingsTable(category, group, format),
   );
 
   if (matches.length) {
@@ -280,8 +331,9 @@ function groupStageContent(category, event, onOpen) {
     return emptyDraw('group');
   }
 
+  const format = groupStage?.format || { type: 'best-of', games: 5 };
   const stack = el('div', { class: 'qttc26-group-stack' });
-  groups.forEach((group) => stack.append(groupBlock(category, group, onOpen)));
+  groups.forEach((group) => stack.append(groupBlock(category, group, format, onOpen)));
   return stack;
 }
 

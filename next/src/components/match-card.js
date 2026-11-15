@@ -4,10 +4,11 @@ import { createStatusBadge } from './badge.js';
 
 function isDraw(match) {
   return (
-    match.status === 'completed' &&
-    !match.winner &&
-    match.score &&
-    Number(match.score.gamesWon) === Number(match.score.gamesLost)
+    String(match.status || '').toLowerCase() === 'draw' ||
+    (match.status === 'completed' &&
+      !match.winner &&
+      match.score &&
+      Number(match.score.gamesWon) === Number(match.score.gamesLost))
   );
 }
 

@@ -143,7 +143,7 @@
  * @property {[string, string]} players
  * @property {{gamesWon: number, gamesLost: number}|null} score 相对 players[0]。
  * @property {string|null} winner
- * @property {'completed'|'bye'|'default'|'cancelled'|'scheduled'|'unknown'} status
+ * @property {'completed'|'draw'|'bye'|'default'|'cancelled'|'scheduled'|'unknown'} status
  * @property {MatchDetail} detail
  * @property {string[]} [flags]
  */
@@ -164,10 +164,17 @@
  */
 
 /**
+ * @typedef {object} StageFormat
+ * @property {'best-of'|'fixed'} type
+ * @property {number} games
+ */
+
+/**
  * @typedef {object} Stage
  * @property {string} id
  * @property {string} name
  * @property {'group'|'knockout'|'other'} type
+ * @property {StageFormat} format
  * @property {GroupStageGroup[]} [groups]
  * @property {KnockoutRound[]} [rounds]
  */

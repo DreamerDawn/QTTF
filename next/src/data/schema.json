@@ -199,7 +199,7 @@
           }
         },
         "winner": { "$ref": "#/definitions/nullableString" },
-        "status": { "enum": ["completed", "bye", "default", "cancelled", "scheduled", "unknown"] },
+        "status": { "enum": ["completed", "draw", "bye", "default", "cancelled", "scheduled", "unknown"] },
         "detail": { "$ref": "#/definitions/matchDetail" },
         "flags": { "type": "array", "items": { "type": "string" } }
       }
@@ -225,11 +225,19 @@
     },
     "stage": {
       "type": "object",
-      "required": ["id", "name", "type"],
+      "required": ["id", "name", "type", "format"],
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
         "type": { "enum": ["group", "knockout", "other"] },
+        "format": {
+          "type": "object",
+          "required": ["type", "games"],
+          "properties": {
+            "type": { "enum": ["best-of", "fixed"] },
+            "games": { "type": "integer", "minimum": 1 }
+          }
+        },
         "groups": { "type": "array", "items": { "$ref": "#/definitions/groupBlock" } },
         "rounds": { "type": "array", "items": { "$ref": "#/definitions/roundBlock" } }
       }

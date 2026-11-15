@@ -141,7 +141,80 @@ src/data/events/
 
 ---
 
-## 2. 新增小组
+## 2. 阶段赛制
+
+每个阶段必须显式声明 `format`，同一阶段内的比赛共用该赛制。
+
+### BO 赛制
+
+```json
+{
+  "id": "doubles-group",
+  "name": "小组赛",
+  "type": "group",
+  "format": {
+    "type": "best-of",
+    "games": 5
+  },
+  "groups": []
+}
+```
+
+- `best-of` 的 `games` 必须为奇数。
+- 先赢 `ceil(games / 2)` 局者获胜。
+- 不需要打满全部局数。
+- BO 赛制不存在平局，`winner` 必填。
+
+### 固定 k 局制
+
+```json
+{
+  "format": {
+    "type": "fixed",
+    "games": 6
+  }
+}
+```
+
+- 固定局数制必须打满 `games` 局。
+- `games` 为偶数时允许平局：
+  - `status: "draw"`
+  - `winner: null`
+  - 大比分相等
+- `games` 为奇数时必须决出胜负，不能使用 `draw`。
+- 固定 k 制小组不采用积分排名，按：
+  1. 胜局数降序
+  2. 负局数升序
+  3. 相互战绩
+  4. 总得分差
+
+页面积分榜会改为显示“胜–平–负”“胜局–负局”“净胜局”，不显示积分。
+
+### 平局示例
+
+固定 6 局制，双方 3–3：
+
+```json
+{
+  "score": { "gamesWon": 3, "gamesLost": 3 },
+  "winner": null,
+  "status": "draw",
+  "detail": {
+    "sets": [
+      { "pointsWon": 11, "pointsLost": 9 },
+      { "pointsWon": 8, "pointsLost": 11 },
+      { "pointsWon": 11, "pointsLost": 7 },
+      { "pointsWon": 9, "pointsLost": 11 },
+      { "pointsWon": 11, "pointsLost": 6 },
+      { "pointsWon": 8, "pointsLost": 11 }
+    ]
+  }
+}
+```
+
+---
+
+## 3. 新增小组
 
 在 `event.json` 对应分类的 `stages` 中找到 `type: "group"` 的阶段，在 `groups` 中加入：
 
@@ -173,16 +246,16 @@ src/data/events/
 
 双打组合名统一用 `"甲/乙"` 格式。
 
-### 小组积分
+### 小组排名
 
 - 小组排名由比赛自动计算，不需要手填。
-- 胜一场 3 分，负一场 0 分。
-- 页面按积分、胜场、已赛场次、净胜局、净胜分排序。
-- 未赛组合保留在场次为 0 的行中。
+- BO 小组：胜一场 3 分，负一场 0 分；按积分、胜场、场次、净胜局、净胜分排序。
+- 固定 k 小组：不使用积分，按胜局、负局、相互战绩、得分差排序。
+- 未赛组合保留在场次为 0 的行中；无比赛小组按 I → II → III 档排序。
 
 ---
 
-## 3. 新增一场小组赛
+## 4. 新增一场小组赛
 
 1. 在 `event.json` 的对应小组 `matches` 中加入新 matchId。
 2. 在 `matches/` 中新建同名 JSON。
@@ -223,14 +296,15 @@ src/data/events/
 规则：
 
 - `players` 顺序就是 A/B 顺序。
-- `winner` 必须是 `players` 中的一项。
+- `winner` 必须是 `players` 中的一项；平局必须为 `null`。
 - `score.gamesWon` / `gamesLost` 对应 A/B 大比分。
 - `sets[].pointsWon` / `pointsLost` 对应 A/B 小分。
-- `status` 常用值：`completed`、`bye`、`default`、`cancelled`、`scheduled`。
+- `status` 常用值：`completed`、`draw`、`bye`、`default`、`cancelled`、`scheduled`。
+- 固定偶数局制的平局必须使用 `status: "draw"`，不要用 `completed`。
 
 ---
 
-## 4. 新增淘汰赛签位
+## 5. 新增淘汰赛签位
 
 在分类的 `stages` 中找到 `type: "knockout"` 的阶段，在 `rounds` 中加入轮次：
 
@@ -253,23 +327,13 @@ src/data/events/
 - `order` 决定左右顺序，从小到大。
 - 每轮 `matches` 按签位顺序排列。
 - 下一轮第 1 场默认由上一轮第 1、2 场胜者组成，第 2 场由第 3、4 场胜者组成，依此类推。
-- 决赛比赛设置：
-
-```json
-"flags": ["final"]
-```
-
-- 铜牌赛设置：
-
-```json
-"flags": ["bronze"]
-```
-
-- 铜牌赛不参与主对阵树；没有 `flags` 时，最后一个轮次被视为决赛轮。
+- 决赛比赛设置 `"flags": ["final"]`。
+- 铜牌赛设置 `"flags": ["bronze"]`，不参与主对阵树。
+- 没有 `flags` 时，最后一个轮次被视为决赛轮。
 
 ---
 
-## 5. ID 与文件命名
+## 6. ID 与文件命名
 
 推荐格式：
 
@@ -288,57 +352,53 @@ qttc-2026-s-k-final
 要求：
 
 - 全局 matchId 唯一。
-- 文件名与 matchId 一致：
-
-```text
-matches/qttc-2026-d-a-1.json
-```
-
+- 文件名与 matchId 一致：`matches/qttc-2026-d-a-1.json`
 - 不要把空格、斜杠、中文写进文件名。
 - 组合名可以写中文和 `/`，但 matchId 不要。
 
 ---
 
-## 6. 面向 Agent 的操作顺序
+## 7. 面向 Agent 的操作顺序
 
 1. 先读本 README。
 2. 确认要修改的 `event-id`。
 3. 读取 `index.json` 找到 `event.json`。
 4. 读取 `event.json` 找分类、阶段、小组/轮次。
-5. 如果要新增比赛：
+5. 修改阶段 `format` 前，确认整组比赛统一采用 BO 或固定 k。
+6. 新增比赛：
    - 在事件结构中只添加 matchId。
    - 在 `matches/` 创建完整比赛文件。
-6. 如果要修改比分：
+7. 修改比分：
    - 只改对应 match 文件。
    - 同步检查 `sets`、`score`、`winner`、`totalPoints`。
-7. 如果需要统计/走势图：
-   - 添加 `detail.pointLog`，确保每个 game 从 ball 1 连续递增。
-8. 运行：
+8. 添加统计/走势图：填写 `detail.pointLog`，确保每局 ball 从 1 连续递增。
+9. 运行：
 
 ```bash
 npm run validate
 npm run build
 ```
 
-9. 不要创建新的单体 `events.json`。
-10. 不要手改 `dist/` 或构建产物。
+10. 不要创建单体 `events.json`，不要手改 `dist/` 或构建产物。
 
 ---
 
-## 7. 校验会检查什么
+## 8. 校验会检查什么
 
 `npm run validate` 会检查：
 
 - 赛事索引、赛事文件、比赛文件是否存在
-- matchId 是否被引用且文件存在
-- ID 是否重复
-- 比分、胜者、局分是否一致
+- 阶段 `format` 是否合法
+- BO 的 `games` 是否为奇数
+- 固定 k 制是否打满 k 局
+- 固定偶数局的平局是否使用 `status: "draw"` 且 `winner: null`
+- 固定奇数局、BO 是否存在非法平局
+- 大比分之和是否等于 `sets` 数量
+- BO 胜方是否赢够所需局数
 - `pointLog` 是否连续
 - `pointLog` 每局总分是否与 `sets` 一致
 - `pointLog` 总得分是否与 `totalPoints` 一致
-- 小组/轮次结构
-- 赛事路由 HTML 入口是否存在
-- 新增赛事是否登记
+- 小组/轮次结构、路由 HTML 入口
 
 常见错误：
 
@@ -346,22 +406,26 @@ npm run build
 |---|---|
 | `缺少比赛文件` | `event.json` 引用了不存在的 matchId |
 | `matchId 重复` | 两个比赛文件使用同一 id |
-| `winner 不属于对阵列` | winner 与 players 不一致 |
+| `缺少 stage.format` | 阶段没有声明 BO 或固定 k |
+| `best-of 的 games 必须为奇数` | BO 配置成了偶数局 |
+| `固定 k 局制必须打满 k 局` | `sets` 数量与 k 不一致 |
+| `平局必须使用 status:"draw"` | 大比分相等但状态仍为 completed |
+| `平局 winner 必须为 null` | 平局仍填写了胜者 |
+| `BO 赛制不存在平局` | BO 比赛填了相等大比分 |
 | `pointLog 第 N 局总分与 set 不一致` | 逐球记录或 sets 填错 |
-| `路由缺少入口文件` | 新赛事没有对应 `index.html` |
-| `stage.type 非法` | 只能使用 `group` / `knockout` / `other` |
 
 ---
 
-## 8. 人类快速检查清单
+## 9. 人类快速检查清单
 
 - [ ] 每届赛事有独立 `event.json`
 - [ ] 每场比赛有独立 `matches/<id>.json`
-- [ ] `event.json` 中只出现 matchId，不出现完整比赛对象
-- [ ] 双打组合名使用 `甲/乙`
-- [ ] `winner` 在 `players` 中
-- [ ] `sets` 与 `score` 一致
+- [ ] 每个阶段都有 `format`
+- [ ] 同一小组只使用一种赛制
+- [ ] BO 的 `games` 为奇数
+- [ ] 固定偶数局平局使用 `status: "draw"` + `winner: null`
+- [ ] 固定奇数局没有平局
+- [ ] `winner` 在 `players` 中，或平局为 `null`
+- [ ] `sets` 数量与 `score` 大比分一致
 - [ ] 有 `pointLog` 时，球序号和局分连续
-- [ ] 新赛事已加入 `index.json`
-- [ ] 新赛事有 HTML 入口和 `vite.config.js` 入口
 - [ ] 已运行 `npm run validate`

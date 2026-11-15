@@ -33,13 +33,21 @@
           "id": "singles-group",
           "name": "小组赛",
           "type": "group",
-          "groups": []
+          "groups": [],
+          "format": {
+            "type": "best-of",
+            "games": 5
+          }
         },
         {
           "id": "singles-knockout",
           "name": "淘汰赛",
           "type": "knockout",
-          "rounds": []
+          "rounds": [],
+          "format": {
+            "type": "best-of",
+            "games": 5
+          }
         }
       ],
       "podium": null
@@ -146,13 +154,21 @@
               "name": "C组",
               "matches": []
             }
-          ]
+          ],
+          "format": {
+            "type": "best-of",
+            "games": 5
+          }
         },
         {
           "id": "doubles-knockout",
           "name": "淘汰赛",
           "type": "knockout",
-          "rounds": []
+          "rounds": [],
+          "format": {
+            "type": "best-of",
+            "games": 5
+          }
         }
       ],
       "podium": null

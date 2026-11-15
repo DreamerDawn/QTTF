@@ -219,7 +219,11 @@
             "qttc-2025-g-fg-3"
           ]
         }
-      ]
+      ],
+      "format": {
+        "type": "best-of",
+        "games": 5
+      }
     },
     {
       "id": "knockout-stage",
@@ -277,7 +281,11 @@
             "qttc-2025-k-决赛-1"
           ]
         }
-      ]
+      ],
+      "format": {
+        "type": "best-of",
+        "games": 5
+      }
     }
   ]
 }

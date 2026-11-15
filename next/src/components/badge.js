@@ -15,7 +15,7 @@ export function createScoreBadge(score) {
 export function createStatusBadge(status) {
   const key = String(status || 'unknown').toLowerCase();
   const variant = statusVariant(key);
-  const extra = key === 'completed' || key === 'scheduled' ? '' : 'badge--status';
+  const extra = ['completed', 'draw', 'scheduled'].includes(key) ? '' : 'badge--status';
   return createBadge(statusLabel(key), variant, extra);
 }
 
