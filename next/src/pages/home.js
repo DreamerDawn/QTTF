@@ -11,6 +11,10 @@ import {
   site,
 } from '../lib/data.js';
 
+function dotDate(value) {
+  return String(value || '').replaceAll('-', '.');
+}
+
 function card({ title, accent, body, actions, label, index }) {
   return el('article', {
     class: `card feature-card feature-card--${accent}`,
@@ -167,6 +171,9 @@ function renderHome(data, container) {
     const group = events.groups.find((item) => item.id === event.group);
     const isQttc2026 = event.id === 'qttc-2026';
     const isXtc = event.id === 'xtcf-2026';
+    const start = dotDate(event.meta.dateRange?.start);
+    const end = dotDate(event.meta.dateRange?.end);
+    const rangeTag = start && end ? `${start.slice(5)} — ${end.slice(5)}` : '';
     return el('div', { class: `event-mini${isQttc2026 ? ' event-mini--qttc' : ''}` }, [
       el('a', {
         class: 'event-mini__title',
@@ -183,11 +190,8 @@ function renderHome(data, container) {
       }),
       isQttc2026
         ? el('span', { class: 'event-mini__tag', text: '09.11 — 12.04 · 进行中' })
-        : isXtc
-          ? el('span', {
-              class: 'event-mini__tag',
-              text: `${dotDate(event.meta.dateRange?.start).slice(5)} — ${dotDate(event.meta.dateRange?.end).slice(5)} · 已结束`,
-            })
+        : isXtc && rangeTag
+          ? el('span', { class: 'event-mini__tag', text: `${rangeTag} · 已结束` })
           : null,
     ]);
   });
