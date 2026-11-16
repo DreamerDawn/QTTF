@@ -41,6 +41,17 @@
         "feature": "qttc"
       },
       {
+        "id": "xtcf-2026",
+        "title": "XTC Final 2026",
+        "kicker": "OMNI-BALL GAMES 2026",
+        "englishTitle": "WE ARE THE ANSWER",
+        "description": "2026年学校“全球”运动会乒乓球混合团体赛",
+        "meta": ["08 APR — 21 MAY", "35 支队伍", "18班 · 银牌"],
+        "path": "events/official/xtcf2026/",
+        "theme": "redgold",
+        "feature": "xtcf"
+      },
+      {
         "id": "qsl",
         "title": "丘超联赛积分榜",
         "description": "QTTF 最高规格的联赛首周落幕，每分必争的联赛纪元已至。",
@@ -60,13 +71,6 @@
         "description": "经历 28 场比赛、104 局缠斗，QTTF 历史上最大规模的比赛圆满落幕。",
         "path": "events/qttc/qttc2025/",
         "theme": "navy"
-      },
-      {
-        "id": "zgcup-2024",
-        "title": "2024 年“追光”杯赛事纪录",
-        "description": "QTTF 仅记录了 2024 年九年级组比赛，且有部分缺失，望能谅解。",
-        "path": "events/zgcup2024/",
-        "theme": "violet"
       },
       {
         "id": "rankings-2026-06",

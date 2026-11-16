@@ -2,19 +2,224 @@
   "id": "xtcq-2026",
   "route": "events/tryout/xtcq2026/",
   "group": "tryout",
-  "status": "coming-soon",
+  "status": "published",
   "meta": {
-    "name": "2026 全球运动会选拔赛",
+    "name": "XTC Qualification 2026",
     "fullName": "2026年“全球”运动会乒乓球混合团体项目选拔赛",
-    "format": "档案整理中",
+    "tagline": "万夫一力，天下无敌",
+    "format": "第一阶段固定四局制小组循环+附加循环；第二阶段五局三胜淘汰赛+固定四局制附加循环",
     "dateRange": {
-      "start": null,
-      "end": null
+      "start": "2026-03-16",
+      "end": "2026-03-31"
     },
-    "venue": null,
-    "description": "旧版页面为“建设中”提示。旧 matchdata.json 与 QTTC 2025 小组赛数据高度重复，未直接迁移，待确认后补录。"
+    "venue": "QTTF Breeze Arena",
+    "description": "为备战学校“全球”运动会，QTTF在班内开展直通赛，选拔参加团体赛的选手。第一阶段10人分3组进行固定四局制循环赛，小组第1直接晋级，小组第2进入附加循环；第二阶段8人进行五局三胜淘汰赛，四强直接进入大名单，八强负者进入固定四局制附加循环，决出最后两个名额。半决赛、决赛未进行。最终男子大名单：陈金森、谢承宇、朱恩骏、肖逸轩、陈子扬、郭东珉。"
   },
-  "participants": [],
+  "participants": [
+    {
+      "name": "陈金森",
+      "seed": 1,
+      "rank": 1,
+      "points": 2000,
+      "group": null,
+      "tier": "I"
+    },
+    {
+      "name": "谢承宇",
+      "seed": 2,
+      "rank": 2,
+      "points": 1400,
+      "group": null,
+      "tier": "I"
+    },
+    {
+      "name": "朱恩骏",
+      "seed": 3,
+      "rank": 3,
+      "points": 800,
+      "group": null,
+      "tier": "I"
+    },
+    {
+      "name": "陈子扬",
+      "seed": 4,
+      "rank": 4,
+      "points": 600,
+      "group": "A组",
+      "tier": "II"
+    },
+    {
+      "name": "赵久龄",
+      "seed": null,
+      "rank": 9,
+      "points": 175,
+      "group": "A组",
+      "tier": "III"
+    },
+    {
+      "name": "王续成",
+      "seed": null,
+      "rank": 13,
+      "points": 85,
+      "group": "A组",
+      "tier": "IV"
+    },
+    {
+      "name": "肖逸轩",
+      "seed": 5,
+      "rank": 5,
+      "points": 350,
+      "group": "B组",
+      "tier": "II"
+    },
+    {
+      "name": "邹雨岑",
+      "seed": 8,
+      "rank": 9,
+      "points": 175,
+      "group": "B组",
+      "tier": "III"
+    },
+    {
+      "name": "唐近尧",
+      "seed": null,
+      "rank": 13,
+      "points": 85,
+      "group": "B组",
+      "tier": "IV"
+    },
+    {
+      "name": "杨梓隽",
+      "seed": null,
+      "rank": 19,
+      "points": 0,
+      "group": "B组",
+      "tier": "V"
+    },
+    {
+      "name": "郭东珉",
+      "seed": 6,
+      "rank": 5,
+      "points": 350,
+      "group": "C组",
+      "tier": "II"
+    },
+    {
+      "name": "殳晟欢",
+      "seed": null,
+      "rank": 5,
+      "points": 350,
+      "group": "C组",
+      "tier": "III"
+    },
+    {
+      "name": "刘函宇",
+      "seed": null,
+      "rank": 9,
+      "points": 175,
+      "group": "C组",
+      "tier": "IV"
+    }
+  ],
   "podium": null,
-  "stages": []
+  "stages": [],
+  "categories": [
+    {
+      "id": "individual",
+      "name": "个人选拔",
+      "fullName": "混合团体项目个人选拔",
+      "format": "第一阶段固定四局制循环；第二阶段五局三胜淘汰赛+固定四局制附加循环",
+      "participants": [],
+      "stages": [
+        {
+          "id": "stage1-group",
+          "name": "第一阶段小组赛",
+          "type": "group",
+          "format": {
+            "type": "fixed",
+            "games": 4
+          },
+          "groups": [
+            {
+              "id": "stage1-a",
+              "name": "A组",
+              "matches": []
+            },
+            {
+              "id": "stage1-b",
+              "name": "B组",
+              "matches": []
+            },
+            {
+              "id": "stage1-c",
+              "name": "C组",
+              "matches": []
+            }
+          ]
+        },
+        {
+          "id": "stage1-playoff",
+          "name": "第一阶段附加赛",
+          "type": "group",
+          "format": {
+            "type": "fixed",
+            "games": 4
+          },
+          "groups": [
+            {
+              "id": "stage1-playoff-rr",
+              "name": "附加循环",
+              "matches": []
+            }
+          ]
+        },
+        {
+          "id": "stage2-knockout",
+          "name": "第二阶段淘汰赛",
+          "type": "knockout",
+          "format": {
+            "type": "best-of",
+            "games": 5
+          },
+          "rounds": [
+            {
+              "id": "qf",
+              "name": "四分之一决赛",
+              "order": 10,
+              "matches": [
+                "xtc-2026-s2-qf-1",
+                "xtc-2026-s2-qf-2",
+                "xtc-2026-s2-qf-3",
+                "xtc-2026-s2-qf-4"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "stage2-playoff",
+          "name": "第二阶段附加赛",
+          "type": "group",
+          "format": {
+            "type": "fixed",
+            "games": 4
+          },
+          "groups": [
+            {
+              "id": "stage2-playoff-rr",
+              "name": "附加循环",
+              "matches": [
+                "xtc-2026-s2-c-1",
+                "xtc-2026-s2-c-2",
+                "xtc-2026-s2-c-3",
+                "xtc-2026-s2-c-4",
+                "xtc-2026-s2-c-5",
+                "xtc-2026-s2-c-6"
+              ]
+            }
+          ]
+        }
+      ],
+      "podium": null
+    }
+  ]
 }

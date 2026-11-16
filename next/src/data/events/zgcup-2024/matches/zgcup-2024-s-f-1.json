@@ -1,0 +1,46 @@
+{
+  "id": "zgcup-2024-s-f-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "杨蕊宁",
+    "陈金森"
+  ],
+  "score": {
+    "gamesWon": 1,
+    "gamesLost": 2
+  },
+  "winner": "陈金森",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 9,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 3
+      },
+      {
+        "pointsWon": 5,
+        "pointsLost": 11
+      }
+    ],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": {
+      "pointsWon": 25,
+      "pointsLost": 25
+    },
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  },
+  "flags": [
+    "final"
+  ]
+}

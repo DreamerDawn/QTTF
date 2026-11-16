@@ -80,7 +80,72 @@ function formatLabel(format) {
   return format.type === 'fixed' ? `固定 ${format.games} 局` : `BO${format.games}`;
 }
 
-function validateMatchResult(match, format, label) {
+/**
+ * 团体赛单盘校验：盘数须等于大比分之和；每盘为三局两胜（或 stage.rubberFormat 指定）。
+ * rubbers 为空时视为单盘明细缺失，只校验大比分。
+ */
+function validateRubbers(match, stage, won, lost, label) {
+  const rubbers = Array.isArray(match.detail?.rubbers) ? match.detail.rubbers : [];
+  if (!rubbers.length) return;
+
+  assert(
+    won + lost === rubbers.length,
+    `${label}: 大比分之和 ${won + lost} 与单盘数量 ${rubbers.length} 不一致`,
+  );
+
+  const rubberFormat = stage?.rubberFormat;
+  const target = Number.isInteger(rubberFormat?.games)
+    ? Math.ceil(rubberFormat.games / 2)
+    : 2;
+
+  rubbers.forEach((rubber, index) => {
+    const rLabel = `${label}.rubbers[${index}]`;
+    assert(
+      Array.isArray(rubber.players) && rubber.players.length === 2,
+      `${rLabel}: players 必须是 [A 方, B 方] 两方`,
+    );
+    (rubber.players || []).forEach((side, sideIndex) => {
+      assert(
+        Array.isArray(side) && side.length >= 1 && side.length <= 2,
+        `${rLabel}: 第 ${sideIndex + 1} 方选手必须是 1–2 人的数组`,
+      );
+    });
+    const gamesWon = rubber.score?.gamesWon;
+    const gamesLost = rubber.score?.gamesLost;
+    assert(
+      Number.isInteger(gamesWon) && Number.isInteger(gamesLost),
+      `${rLabel}: 缺少 score.gamesWon / gamesLost`,
+    );
+    if (!Number.isInteger(gamesWon) || !Number.isInteger(gamesLost)) return;
+
+    const irregular = ['bye', 'default', 'cancelled'].includes(
+      String(rubber.status || '').toLowerCase(),
+    );
+    if (!irregular) {
+      assert(gamesWon !== gamesLost, `${rLabel}: 单盘不应为平局`);
+    }
+    assert(
+      Math.max(gamesWon, gamesLost) === target,
+      `${rLabel}: 每盘 ${rubberFormat?.games || 3} 局制，胜方应赢 ${target} 局`,
+    );
+
+    const games = Array.isArray(rubber.games) ? rubber.games : [];
+    if (games.length) {
+      assert(
+        games.length === gamesWon + gamesLost,
+        `${rLabel}: games 数量 ${games.length} 与单盘局分 ${gamesWon + gamesLost} 不一致`,
+      );
+      games.forEach((game, gameIndex) => {
+        assert(
+          finiteNumber(game.a) && finiteNumber(game.b),
+          `${rLabel}.games[${gameIndex}]: a / b 必须为数字`,
+        );
+      });
+    }
+  });
+}
+
+function validateMatchResult(match, format, label, stage = null) {
   const status = String(match.status || '').toLowerCase();
   if (['bye', 'default', 'cancelled', 'scheduled', 'unknown'].includes(status)) return;
   assert(format, `${label}: 无法校验结果，缺少合法 stage.format`);
@@ -95,13 +160,30 @@ function validateMatchResult(match, format, label) {
   if (!Number.isInteger(won) || !Number.isInteger(lost)) return;
 
   const sets = Array.isArray(match.detail?.sets) ? match.detail.sets : [];
-  assert(won + lost === sets.length, `${label}: 大比分之和 ${won + lost} 与 sets 数量 ${sets.length} 不一致`);
+  // 每局小分未知时允许 sets 为空数组：只登记大比分，不展示逐球数据。
+  if (sets.length > 0) {
+    assert(won + lost === sets.length, `${label}: 大比分之和 ${won + lost} 与 sets 数量 ${sets.length} 不一致`);
+  } else {
+    assert(
+      match.detail?.pointsLogged !== true,
+      `${label}: sets 为空时不能声明 pointsLogged`,
+    );
+  }
+
+  validateRubbers(match, stage, won, lost, label);
 
   if (format.type === 'fixed') {
-    assert(
-      sets.length === format.games,
-      `${label}: ${formatLabel(format)}必须打满 ${format.games} 局，当前 ${sets.length} 局`,
-    );
+    if (sets.length === 0) {
+      assert(
+        won + lost === format.games,
+        `${label}: ${formatLabel(format)}大比分之和必须为 ${format.games}`,
+      );
+    } else {
+      assert(
+        sets.length === format.games,
+        `${label}: ${formatLabel(format)}必须打满 ${format.games} 局，当前 ${sets.length} 局`,
+      );
+    }
     const canDraw = format.games % 2 === 0;
     if (canDraw && won === lost) {
       assert(status === 'draw', `${label}: 固定偶数局平局必须使用 status:"draw"`);
@@ -135,7 +217,14 @@ function loadSplitEvents() {
   const index = readJson('src/data/events/index.json');
   if (!index) return null;
   const matchCache = new Map();
+  const matchOwner = new Map();
   const readMatch = (eventId, matchId) => {
+    const owner = matchOwner.get(matchId);
+    assert(
+      !owner || owner === eventId,
+      `比赛 id 跨赛事重复：${matchId}（${owner} / ${eventId}）`,
+    );
+    matchOwner.set(matchId, eventId);
     const key = `${eventId}/${matchId}`;
     if (!matchCache.has(key)) {
       const match = readJson(`src/data/events/${eventId}/matches/${matchId}.json`);
@@ -273,7 +362,7 @@ if (eventsData) {
           }
           const detail = match.detail || {};
           assert(Array.isArray(detail.sets), `${mLabel}: detail.sets 必须为数组`);
-          validateMatchResult(match, stageFormat, mLabel);
+          validateMatchResult(match, stageFormat, mLabel, stage);
           if (detail.time) {
             assert(/^([01]\d|2[0-3]):[0-5]\d$/.test(detail.time), `${mLabel}: detail.time 必须为 HH:MM`);
           }

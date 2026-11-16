@@ -1,0 +1,22 @@
+{
+  "id": "xtc-2026-s2-c-6",
+  "number": 6,
+  "order": 6,
+  "players": ["郭东珉", "陈子扬"],
+  "score": { "gamesWon": 3, "gamesLost": 1 },
+  "winner": "郭东珉",
+  "status": "completed",
+  "flags": [],
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": [false, false],
+    "medicalTimeouts": [false, false],
+    "totalPoints": null,
+    "venue": "QTTF Breeze Arena",
+    "playedAt": null,
+    "time": null,
+    "note": "每局小分待补录。",
+    "pointLog": []
+  }
+}

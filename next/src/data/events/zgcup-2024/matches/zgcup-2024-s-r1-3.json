@@ -1,0 +1,27 @@
+{
+  "id": "zgcup-2024-s-r1-3",
+  "number": 3,
+  "order": 3,
+  "players": [
+    "杨蕊宁",
+    "吴景添"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 0
+  },
+  "winner": "杨蕊宁",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

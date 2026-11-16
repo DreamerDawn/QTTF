@@ -291,7 +291,7 @@ function groupBlock(category, group, format, onOpen) {
         el('h3', { class: 'qttc26-group-title', text: group.name }),
         el('p', {
           class: 'section__hint',
-          text: `${formatLabel(format)} · ${groupParticipants.length} 对组合 · ${matches.length} 场已录入`,
+          text: `${groupParticipants.length} 对组合 · ${matches.length} 场已录入`,
         }),
       ]),
       createBadge(`${matches.length} 场`, matches.length ? 'w' : 'empty'),

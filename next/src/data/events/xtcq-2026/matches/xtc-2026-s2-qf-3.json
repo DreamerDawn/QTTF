@@ -1,0 +1,22 @@
+{
+  "id": "xtc-2026-s2-qf-3",
+  "number": 3,
+  "order": 3,
+  "players": ["陈子扬", "肖逸轩"],
+  "score": { "gamesWon": 0, "gamesLost": 3 },
+  "winner": "肖逸轩",
+  "status": "completed",
+  "flags": [],
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": [false, false],
+    "medicalTimeouts": [false, false],
+    "totalPoints": null,
+    "venue": "QTTF Breeze Arena",
+    "playedAt": null,
+    "time": null,
+    "note": "每局小分待补录。",
+    "pointLog": []
+  }
+}

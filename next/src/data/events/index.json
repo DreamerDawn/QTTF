@@ -8,12 +8,6 @@
       "accent": "blue"
     },
     {
-      "id": "zgcup",
-      "name": "“追光”杯",
-      "description": "“追光”杯由学校官方主办，曾设七年级至九年级组别。QTTF 记录了部分高中阶段的参赛数据。",
-      "accent": "violet"
-    },
-    {
       "id": "tryout",
       "name": "校级赛事选拔赛",
       "description": "为备战校级以上运动会，QTTF 组织内部选拔赛，代表丘班参加乒乓球混合团体项目。",
@@ -24,6 +18,12 @@
       "name": "班级联赛",
       "description": "面向丘班各班级的日常联赛体系，分为超级联赛和冠军联赛两个级别，设升降级制度。",
       "accent": "green"
+    },
+    {
+      "id": "official",
+      "name": "学校官方赛事",
+      "description": "由学校官方主办的运动会及年级赛事，QTTF 仅记录部分班级与场次。",
+      "accent": "violet"
     }
   ],
   "events": [
@@ -46,6 +46,10 @@
     {
       "id": "xtcq-2026",
       "file": "xtcq-2026/event.json"
+    },
+    {
+      "id": "xtcf-2026",
+      "file": "xtcf-2026/event.json"
     }
   ]
 }

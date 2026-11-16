@@ -1,20 +1,133 @@
 {
   "id": "zgcup-2024",
-  "route": "events/zgcup2024/",
-  "group": "zgcup",
-  "status": "coming-soon",
+  "route": "events/official/zgcup2024/",
+  "group": "official",
+  "status": "published",
   "meta": {
     "name": "2024“追光”杯",
     "fullName": "2024年学校“追光”杯乒乓球比赛（部分记录）",
-    "format": "档案整理中",
+    "format": "单打淘汰赛 + 团体赛",
     "dateRange": {
-      "start": null,
-      "end": null
+      "start": "2024-10-22",
+      "end": "2024-10-29"
     },
-    "venue": null,
-    "description": "旧版页面为“建设中”提示。QTTF 仅记录了 2024 年九年级组的部分比赛，完整数据尚待补录。"
+    "venue": "学校乒乓球馆",
+    "organizer": "学校官方",
+    "phase": "completed",
+    "description": "2024 年学校“追光”杯，设单打与团体两个项目。QTTF 记录了九年级单打淘汰赛全程与 2502、2501 两班的团体对决。"
   },
   "participants": [],
   "podium": null,
-  "stages": []
+  "stages": [],
+  "categories": [
+    {
+      "id": "singles",
+      "name": "单打",
+      "fullName": "九年级单打",
+      "format": "淘汰赛",
+      "participants": [
+        { "name": "朱恩骏", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2502" },
+        { "name": "郭东珉", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2502" },
+        { "name": "杨蕊宁", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2502" },
+        { "name": "陈金森", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2502" },
+        { "name": "肖逸轩", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2502" },
+        { "name": "杨梓隽", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2502" },
+        { "name": "何子健", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2501" },
+        { "name": "唐近尧", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2501" },
+        { "name": "吴景添", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2501" },
+        { "name": "郭圣易", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2501" },
+        { "name": "赵久龄", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2501" },
+        { "name": "殳晟欢", "seed": null, "rank": null, "points": null, "group": null, "tier": null, "class": "2501" }
+      ],
+      "stages": [
+        {
+          "id": "singles-knockout",
+          "name": "淘汰赛",
+          "type": "knockout",
+          "format": { "type": "best-of", "games": 3 },
+          "rounds": [
+            {
+              "id": "r1",
+              "name": "首轮",
+              "order": 10,
+              "matches": [
+                "zgcup-2024-s-r1-1",
+                "zgcup-2024-s-r1-2",
+                "zgcup-2024-s-r1-3",
+                "zgcup-2024-s-r1-4",
+                "zgcup-2024-s-r1-5",
+                "zgcup-2024-s-r1-6"
+              ]
+            },
+            {
+              "id": "r2",
+              "name": "次轮",
+              "order": 20,
+              "matches": [
+                "zgcup-2024-s-r2-1",
+                "zgcup-2024-s-r2-2",
+                "zgcup-2024-s-r2-3",
+                "zgcup-2024-s-r2-4"
+              ]
+            },
+            {
+              "id": "sf",
+              "name": "半决赛",
+              "order": 30,
+              "matches": ["zgcup-2024-s-sf-1", "zgcup-2024-s-sf-2"]
+            },
+            {
+              "id": "final",
+              "name": "决赛",
+              "order": 40,
+              "matches": ["zgcup-2024-s-f-1"]
+            }
+          ]
+        }
+      ],
+      "podium": {
+        "first": {
+          "name": "陈金森"
+        },
+        "second": {
+          "name": "杨蕊宁"
+        },
+        "third": {
+          "name": "朱恩骏 / 肖逸轩"
+        }
+      }
+    },
+    {
+      "id": "team",
+      "name": "团体",
+      "fullName": "班级团体赛",
+      "format": "班级对抗赛",
+      "participants": [
+        { "name": "2502", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2501", "seed": null, "rank": null, "points": null, "group": null, "tier": null }
+      ],
+      "stages": [
+        {
+          "id": "team-final",
+          "name": "团体赛",
+          "type": "knockout",
+          "format": { "type": "best-of", "games": 5 },
+          "rubberFormat": { "type": "best-of", "games": 3 },
+          "rounds": [
+            {
+              "id": "t-final",
+              "name": "团体决赛",
+              "order": 10,
+              "matches": ["zgcup-2024-t-1"]
+            }
+          ]
+        }
+      ],
+      "podium": {
+        "first": {
+          "name": "2502"
+        }
+      }
+    }
+  ]
 }

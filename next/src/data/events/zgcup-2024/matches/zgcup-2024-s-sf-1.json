@@ -1,0 +1,27 @@
+{
+  "id": "zgcup-2024-s-sf-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "朱恩骏",
+    "杨蕊宁"
+  ],
+  "score": {
+    "gamesWon": 0,
+    "gamesLost": 2
+  },
+  "winner": "杨蕊宁",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

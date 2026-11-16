@@ -1,0 +1,22 @@
+{
+  "id": "xtc-2026-s2-c-1",
+  "number": 1,
+  "order": 1,
+  "players": ["赵久龄", "邹雨岑"],
+  "score": { "gamesWon": 2, "gamesLost": 2 },
+  "winner": null,
+  "status": "draw",
+  "flags": [],
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": [false, false],
+    "medicalTimeouts": [false, false],
+    "totalPoints": null,
+    "venue": "QTTF Breeze Arena",
+    "playedAt": null,
+    "time": null,
+    "note": "固定四局制2–2平局；每局小分待补录。",
+    "pointLog": []
+  }
+}

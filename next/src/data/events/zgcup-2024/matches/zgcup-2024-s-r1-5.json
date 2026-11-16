@@ -1,0 +1,27 @@
+{
+  "id": "zgcup-2024-s-r1-5",
+  "number": 5,
+  "order": 5,
+  "players": [
+    "肖逸轩",
+    "赵久龄"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 0
+  },
+  "winner": "肖逸轩",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

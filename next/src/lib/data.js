@@ -58,11 +58,17 @@ export async function loadEvents() {
   if (!cache.events) {
     const index = eventIndexModules['../data/events/index.json'];
     if (!index) throw new Error('缺少 events/index.json');
-    const matchMap = new Map(
-      Object.values(matchModules)
-        .filter((match) => match && match.id)
-        .map((match) => [match.id, match]),
-    );
+    const matchMap = new Map();
+    const matchOwner = new Map();
+    Object.entries(matchModules).forEach(([file, match]) => {
+      if (!match || !match.id) return;
+      const prev = matchOwner.get(match.id);
+      if (prev) {
+        throw new Error(`比赛 id 跨赛事重复：${match.id}（${prev} / ${file}）`);
+      }
+      matchOwner.set(match.id, file);
+      matchMap.set(match.id, match);
+    });
     const events = (index.events || []).map((entry) => {
       const event = eventModules[`../data/events/${entry.file}`];
       if (!event) throw new Error(`缺少赛事文件：${entry.file}`);

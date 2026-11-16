@@ -1,0 +1,27 @@
+{
+  "id": "zgcup-2024-s-r2-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "朱恩骏",
+    "郭东珉"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 1
+  },
+  "winner": "朱恩骏",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

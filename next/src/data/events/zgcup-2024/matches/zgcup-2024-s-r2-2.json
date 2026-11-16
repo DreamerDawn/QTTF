@@ -1,0 +1,24 @@
+{
+  "id": "zgcup-2024-s-r2-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "杨蕊宁",
+    "轮空"
+  ],
+  "score": null,
+  "winner": "杨蕊宁",
+  "status": "bye",
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

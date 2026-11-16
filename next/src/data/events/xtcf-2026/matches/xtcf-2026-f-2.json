@@ -1,0 +1,95 @@
+{
+  "id": "xtcf-2026-f-2",
+  "number": 2,
+  "order": 2,
+  "kind": "team",
+  "players": [
+    "2818",
+    "2814"
+  ],
+  "score": {
+    "gamesWon": 0,
+    "gamesLost": 3
+  },
+  "winner": "2814",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "rubbers": [
+      {
+        "order": 1,
+        "kind": "singles",
+        "players": [
+          [
+            "谢承宇"
+          ],
+          [
+            "选手1"
+          ]
+        ],
+        "score": {
+          "gamesWon": 0,
+          "gamesLost": 2
+        },
+        "games": []
+      },
+      {
+        "order": 2,
+        "kind": "singles",
+        "players": [
+          [
+            "陈金森"
+          ],
+          [
+            "彭啸林"
+          ]
+        ],
+        "score": {
+          "gamesWon": 1,
+          "gamesLost": 2
+        },
+        "games": [
+          {
+            "a": 11,
+            "b": 9
+          },
+          {
+            "a": 11,
+            "b": 13
+          },
+          {
+            "a": 8,
+            "b": 11
+          }
+        ]
+      },
+      {
+        "order": 3,
+        "kind": "singles",
+        "players": [
+          [
+            "郭慕晗"
+          ],
+          [
+            "选手2"
+          ]
+        ],
+        "score": {
+          "gamesWon": 0,
+          "gamesLost": 2
+        },
+        "games": []
+      }
+    ],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": null,
+    "playedAt": "2026-05-21",
+    "time": null,
+    "note": "",
+    "teamNote": "",
+    "pointLog": []
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "xtc-2026-s2-c-4",
+  "number": 4,
+  "order": 4,
+  "players": ["邹雨岑", "郭东珉"],
+  "score": null,
+  "winner": null,
+  "status": "cancelled",
+  "flags": [],
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": [false, false],
+    "medicalTimeouts": [false, false],
+    "totalPoints": null,
+    "venue": "QTTF Breeze Arena",
+    "playedAt": null,
+    "time": null,
+    "note": "邹雨岑身体不适退赛；最终判罚待确认。",
+    "pointLog": []
+  }
+}

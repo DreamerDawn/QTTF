@@ -1,0 +1,101 @@
+{
+  "id": "xtcf-2026-r16-1",
+  "number": 1,
+  "order": 1,
+  "kind": "team",
+  "players": [
+    "2818",
+    "2835"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 1
+  },
+  "winner": "2818",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "rubbers": [
+      {
+        "order": 1,
+        "kind": "singles",
+        "players": [
+          [
+            "郭东珉"
+          ],
+          [
+            "选手1"
+          ]
+        ],
+        "score": {
+          "gamesWon": 1,
+          "gamesLost": 2
+        },
+        "games": []
+      },
+      {
+        "order": 2,
+        "kind": "singles",
+        "players": [
+          [
+            "陈子扬"
+          ],
+          [
+            "选手2"
+          ]
+        ],
+        "score": {
+          "gamesWon": 2,
+          "gamesLost": 0
+        },
+        "games": []
+      },
+      {
+        "order": 3,
+        "kind": "singles",
+        "players": [
+          [
+            "杨蕊宁"
+          ],
+          [
+            "选手3"
+          ]
+        ],
+        "score": {
+          "gamesWon": 2,
+          "gamesLost": 0
+        },
+        "games": []
+      },
+      {
+        "order": 4,
+        "kind": "singles",
+        "players": [
+          [
+            "郭慕晗"
+          ],
+          [
+            "选手4"
+          ]
+        ],
+        "score": {
+          "gamesWon": 2,
+          "gamesLost": 0
+        },
+        "games": [],
+        "status": "default",
+        "note": "对手弃赛"
+      }
+    ],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": null,
+    "playedAt": "2026-04-14",
+    "time": null,
+    "note": "",
+    "teamNote": "",
+    "pointLog": []
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "id": "xtcf-2026",
+  "route": "events/official/xtcf2026/",
+  "group": "official",
+  "status": "published",
+  "meta": {
+    "name": "XTC Final 2026",
+    "fullName": "2026年学校“全球”运动会乒乓球混合团体赛",
+    "tagline": "WE ARE THE ANSWER",
+    "format": "淘汰赛 - 小组赛 - 决赛阶段",
+    "dateRange": {
+      "start": "2026-04-08",
+      "end": "2026-05-21"
+    },
+    "venue": "学校新体育馆",
+    "organizer": "学校官方",
+    "phase": "completed",
+    "theme": "red-gold",
+    "description": "学校高一年级“全球”运动会混合团体赛，共 35 支队伍参赛。QTTF 仅记录了高一（18）班（编号 2818）的比赛，最终获得银牌。"
+  },
+  "participants": [],
+  "podium": {
+    "first": {
+      "name": "2814"
+    },
+    "second": {
+      "name": "2818"
+    },
+    "third": {
+      "name": "2822"
+    }
+  },
+  "stages": [],
+  "categories": [
+    {
+      "id": "team",
+      "name": "混合团体赛",
+      "fullName": "高一年级混合团体赛",
+      "format": "淘汰赛 - 小组赛 - 决赛阶段",
+      "participants": [
+        { "name": "2818", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2817", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2835", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2825", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2833", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2822", "seed": null, "rank": null, "points": null, "group": null, "tier": null },
+        { "name": "2814", "seed": null, "rank": null, "points": null, "group": null, "tier": null }
+      ],
+      "stages": [
+        {
+          "id": "knockout",
+          "name": "淘汰赛",
+          "type": "knockout",
+          "format": {
+            "type": "best-of",
+            "games": 5
+          },
+          "rubberFormat": {
+            "type": "best-of",
+            "games": 3
+          },
+          "rounds": [
+            {
+              "id": "r35",
+              "name": "首轮",
+              "order": 10,
+              "matches": ["xtcf-2026-r35-1"]
+            },
+            {
+              "id": "r16",
+              "name": "十六强",
+              "order": 20,
+              "matches": ["xtcf-2026-r16-1"]
+            }
+          ]
+        },
+        {
+          "id": "group-c",
+          "name": "小组赛",
+          "type": "group",
+          "format": {
+            "type": "best-of",
+            "games": 5
+          },
+          "rubberFormat": {
+            "type": "best-of",
+            "games": 3
+          },
+          "groups": [
+            {
+              "id": "c",
+              "name": "C组",
+              "advance": 1,
+              "matches": ["xtcf-2026-gc-1", "xtcf-2026-gc-2", "xtcf-2026-gc-3"]
+            }
+          ]
+        },
+        {
+          "id": "final-rr",
+          "name": "决赛阶段",
+          "type": "group",
+          "format": {
+            "type": "best-of",
+            "games": 5
+          },
+          "rubberFormat": {
+            "type": "best-of",
+            "games": 3
+          },
+          "groups": [
+            {
+              "id": "final",
+              "name": "三强循环",
+              "advance": 0,
+              "medals": 3,
+              "matches": ["xtcf-2026-f-1", "xtcf-2026-f-2", "xtcf-2026-f-3"]
+            }
+          ]
+        }
+      ],
+      "podium": null
+    }
+  ]
+}

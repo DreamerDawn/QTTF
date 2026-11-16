@@ -79,6 +79,7 @@
         "points": { "$ref": "#/definitions/nullableInteger" },
         "group": { "type": "string" },
         "tier": { "type": "string" },
+        "class": { "type": "string" },
         "qualified": { "type": "string" }
       }
     },

@@ -1,5 +1,7 @@
 import { el } from '../lib/dom.js';
 import { createMatchAnalytics } from './match-analytics.js';
+import { rubberKindLabel, rubberPlayers } from './team-tie.js';
+import { createTabs } from './tabs.js';
 import {
   boolLabel,
   formatDuration,
@@ -17,6 +19,140 @@ function setWinner(set) {
 function detailValue(value, fallback = '无数据') {
   if (value === null || value === undefined || value === '') return fallback;
   return String(value);
+}
+
+/**
+ * 团体赛：每盘一个 tab，盘内明细与单打/双打一致
+ * （该盘比分、每局比分、逐球统计、走势图）。
+ */
+function buildRubberTabs(rubbers) {
+  const wrap = el('div', { class: 'team-rubbers' });
+  const panels = rubbers.map((rubber, index) => {
+    const { a, b } = rubberPlayers(rubber);
+    const games = rubber.games || [];
+    const sets = games.map((game) => ({
+      pointsWon: Number(game.a),
+      pointsLost: Number(game.b),
+    }));
+    const rubberScore = rubber.score || null;
+    const wonA = rubberScore ? Number(rubberScore.gamesWon) : null;
+    const wonB = rubberScore ? Number(rubberScore.gamesLost) : null;
+    const scoreNode = el('span', { class: 'team-rubber-panel__games' });
+    if (Number.isFinite(wonA) && Number.isFinite(wonB)) {
+      scoreNode.append(
+        el('span', { class: wonA > wonB ? 'is-winner' : '', text: String(wonA) }),
+        el('span', { class: 'team-rubber-panel__dash', text: '–' }),
+        el('span', { class: wonB > wonA ? 'is-winner' : '', text: String(wonB) }),
+      );
+    } else {
+      scoreNode.textContent = '—';
+    }
+    const panel = el('div', {
+      class: 'team-rubber-panel',
+      id: `team-rubber-panel-${index}`,
+      role: 'tabpanel',
+      'aria-labelledby': `team-rubber-tab-${index}`,
+    });
+    if (index !== 0) panel.hidden = true;
+
+    const head = el('div', { class: 'team-rubber-panel__head' }, [
+      el('div', { class: 'team-rubber-panel__meta' }, [
+        el('span', { class: 'rubber-row__kind', text: rubberKindLabel(rubber.kind) }),
+        el('span', { class: 'team-rubber-panel__order', text: `第 ${rubber.order || index + 1} 盘` }),
+      ]),
+      el('div', { class: 'team-rubber-panel__score' }, [
+        el('span', { class: 'team-rubber-panel__name', text: a }),
+        scoreNode,
+        el('span', { class: 'team-rubber-panel__name is-right', text: b }),
+      ]),
+    ]);
+    panel.append(head);
+
+    if (sets.length) {
+      const winsA = sets.filter((s) => s.pointsWon > s.pointsLost).length;
+      const winsB = sets.filter((s) => s.pointsLost > s.pointsWon).length;
+      const setWrap = el('div', { class: 'match-dialog__sets' });
+      const table = el('table', { 'aria-label': `第 ${rubber.order || index + 1} 盘每局比分` });
+      const headRow = el('tr');
+      headRow.append(el('th', { scope: 'col', text: '选手' }), el('th', { scope: 'col', text: '局数' }));
+      sets.forEach((_, i) => headRow.append(el('th', { scope: 'col', text: String(i + 1) })));
+      table.append(el('thead', {}, [headRow]));
+
+      const body = el('tbody');
+      const row1 = el('tr');
+      row1.append(el('td', { text: a }), el('td', { text: String(winsA), class: winsA > winsB ? 'is-point-winner' : '' }));
+      sets.forEach((set) => {
+        row1.append(el('td', {
+          class: set.pointsWon > set.pointsLost ? 'is-point-winner' : '',
+          text: String(set.pointsWon),
+        }));
+      });
+      const row2 = el('tr');
+      row2.append(el('td', { text: b }), el('td', { text: String(winsB), class: winsB > winsA ? 'is-point-winner' : '' }));
+      sets.forEach((set) => {
+        row2.append(el('td', {
+          class: set.pointsLost > set.pointsWon ? 'is-point-winner' : '',
+          text: String(set.pointsLost),
+        }));
+      });
+      body.append(row1, row2);
+      table.append(body);
+      setWrap.append(table);
+      panel.append(setWrap);
+    } else {
+      panel.append(el('p', { class: 'section__hint', text: '暂无每局比分。' }));
+    }
+
+    const rubberMatch = {
+      players: [a, b],
+      status: rubber.status || 'completed',
+      score: rubberScore,
+      winner: rubber.winner || null,
+      detail: {
+        sets,
+        pointLog: rubber.pointLog || [],
+        durationMinutes: rubber.durationMinutes ?? null,
+        timeouts: rubber.timeouts || null,
+        medicalTimeouts: rubber.medicalTimeouts || null,
+        totalPoints: rubber.totalPoints || null,
+      },
+    };
+    const analytics = createMatchAnalytics(rubberMatch, {
+      showScoreStrip: false,
+      labelA: a,
+      labelB: b,
+    });
+    if (analytics) {
+      panel.append(analytics);
+    } else {
+      panel.append(
+        el('p', { class: 'section__hint', text: '该盘暂无逐球数据，补齐 pointLog 后可显示技术统计与走势图。' }),
+      );
+    }
+
+    if (rubber.note) panel.append(el('p', { class: 'match-dialog__note', text: rubber.note }));
+    return panel;
+  });
+
+  const tabs = createTabs({
+    items: rubbers.map((rubber, index) => ({
+      id: `team-rubber-${index}`,
+      label: `${rubber.order || index + 1} ${rubberKindLabel(rubber.kind)}`,
+      controls: `team-rubber-panel-${index}`,
+    })),
+    initial: rubbers.length ? 'team-rubber-0' : undefined,
+    variant: 'subtab',
+    label: '单盘切换',
+    onChange: (id) => {
+      const index = Number(id.replace('team-rubber-', ''));
+      panels.forEach((panel, panelIndex) => {
+        panel.hidden = panelIndex !== index;
+      });
+    },
+  });
+
+  wrap.append(tabs.element, ...panels);
+  return wrap;
 }
 
 export function openMatchDialog(match, context = {}) {
@@ -106,6 +242,14 @@ export function openMatchDialog(match, context = {}) {
   });
 
   inner.append(close, header, meta);
+
+  const rubbers = detail.rubbers || [];
+  if (rubbers.length) {
+    inner.append(buildRubberTabs(rubbers));
+    if (detail.teamNote) {
+      inner.append(el('p', { class: 'match-dialog__note', text: detail.teamNote }));
+    }
+  }
 
   if (!special && sets.length) {
     inner.append(el('h3', { class: 'match-dialog__section-title', text: '每局比分' }));

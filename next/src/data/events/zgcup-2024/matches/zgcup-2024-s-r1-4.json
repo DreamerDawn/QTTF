@@ -1,0 +1,27 @@
+{
+  "id": "zgcup-2024-s-r1-4",
+  "number": 4,
+  "order": 4,
+  "players": [
+    "陈金森",
+    "郭圣易"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 0
+  },
+  "winner": "陈金森",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

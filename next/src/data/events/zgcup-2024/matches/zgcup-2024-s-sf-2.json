@@ -1,0 +1,43 @@
+{
+  "id": "zgcup-2024-s-sf-2",
+  "number": 2,
+  "order": 2,
+  "players": [
+    "陈金森",
+    "肖逸轩"
+  ],
+  "score": {
+    "gamesWon": 2,
+    "gamesLost": 1
+  },
+  "winner": "陈金森",
+  "status": "completed",
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 8,
+        "pointsLost": 11
+      },
+      {
+        "pointsWon": 12,
+        "pointsLost": 10
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 3
+      }
+    ],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": {
+      "pointsWon": 31,
+      "pointsLost": 24
+    },
+    "venue": "学校乒乓球馆",
+    "playedAt": "2024-10-22",
+    "time": null,
+    "note": "",
+    "pointLog": []
+  }
+}

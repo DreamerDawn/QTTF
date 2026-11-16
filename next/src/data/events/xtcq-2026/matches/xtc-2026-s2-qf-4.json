@@ -1,0 +1,22 @@
+{
+  "id": "xtc-2026-s2-qf-4",
+  "number": 4,
+  "order": 4,
+  "players": ["谢承宇", "郭东珉"],
+  "score": { "gamesWon": 3, "gamesLost": 1 },
+  "winner": "谢承宇",
+  "status": "completed",
+  "flags": [],
+  "detail": {
+    "sets": [],
+    "durationMinutes": null,
+    "timeouts": [false, false],
+    "medicalTimeouts": [false, false],
+    "totalPoints": null,
+    "venue": "QTTF Breeze Arena",
+    "playedAt": null,
+    "time": null,
+    "note": "每局小分待补录。",
+    "pointLog": []
+  }
+}

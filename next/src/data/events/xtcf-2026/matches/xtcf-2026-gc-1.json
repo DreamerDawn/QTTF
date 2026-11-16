@@ -1,0 +1,82 @@
+{
+  "id": "xtcf-2026-gc-1",
+  "number": 1,
+  "order": 1,
+  "kind": "team",
+  "players": [
+    "2818",
+    "2825"
+  ],
+  "score": {
+    "gamesWon": 3,
+    "gamesLost": 0
+  },
+  "winner": "2818",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "rubbers": [
+      {
+        "order": 1,
+        "kind": "singles",
+        "players": [
+          [
+            "陈金森"
+          ],
+          [
+            "选手1"
+          ]
+        ],
+        "score": {
+          "gamesWon": 2,
+          "gamesLost": 0
+        },
+        "games": []
+      },
+      {
+        "order": 2,
+        "kind": "singles",
+        "players": [
+          [
+            "肖逸轩"
+          ],
+          [
+            "选手2"
+          ]
+        ],
+        "score": {
+          "gamesWon": 2,
+          "gamesLost": 0
+        },
+        "games": []
+      },
+      {
+        "order": 3,
+        "kind": "singles",
+        "players": [
+          [
+            "杨蕊宁"
+          ],
+          [
+            "选手3"
+          ]
+        ],
+        "score": {
+          "gamesWon": 2,
+          "gamesLost": 0
+        },
+        "games": []
+      }
+    ],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": null,
+    "playedAt": "2026-04-21",
+    "time": null,
+    "note": "",
+    "teamNote": "",
+    "pointLog": []
+  }
+}

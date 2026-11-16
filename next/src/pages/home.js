@@ -32,7 +32,7 @@ function renderHome(data, container) {
   const seeds = seedsFromRankings(rankings, site.home.seedCount || 8);
   const qttc2026Event = events.events.find((event) => event.id === 'qttc-2026');
   const qttcEvent = events.events.find((event) => event.id === 'qttc-2025');
-  const zgcupEvent = events.events.find((event) => event.id === 'zgcup-2024');
+  const xtcEvent = events.events.find((event) => event.id === 'xtcf-2026');
   const qsl = leagues.leagues.find((league) => league.shortName === 'QSL');
 
   const carousel = el('section', {
@@ -47,10 +47,11 @@ function renderHome(data, container) {
       'aria-hidden': index === 0 ? 'false' : 'true',
       'aria-label': `${index + 1} / ${slides.length}`,
     });
-    if (slide.feature === 'qttc') {
+    if (slide.feature === 'qttc' || slide.feature === 'xtcf') {
       const titleWords = (slide.englishTitle || 'TWICE THE TRIUMPH').split(' ');
       const titleTail = titleWords.pop();
       article.classList.add('carousel__slide--qttc');
+      if (slide.feature === 'xtcf') article.classList.add('carousel__slide--xtcf');
       article.append(
         el('div', { class: 'carousel__qttc-copy' }, [
           el('span', { class: 'carousel__eyebrow', text: slide.kicker }),
@@ -66,11 +67,19 @@ function renderHome(data, container) {
             el('a', { class: 'btn', href: sitePath(slide.path), text: '查看赛事' }),
           ]),
         ]),
-        el('div', { class: 'carousel__qttc-art', 'aria-hidden': 'true' }, [
-          el('span', { class: 'carousel__qttc-year', text: '26' }),
-          createGuTrophy({ className: 'carousel__qttc-trophy' }),
-          el('span', { class: 'carousel__qttc-caption', text: 'QTTF / 26' }),
-        ]),
+        el('div', { class: 'carousel__qttc-art', 'aria-hidden': 'true' },
+          slide.feature === 'xtcf'
+            ? [
+                el('span', { class: 'carousel__xtcf-ball' }),
+                el('span', { class: 'carousel__xtcf-year', text: '26' }),
+                el('span', { class: 'carousel__qttc-caption', text: 'QTTF / XTC' }),
+              ]
+            : [
+                el('span', { class: 'carousel__qttc-year', text: '26' }),
+                createGuTrophy({ className: 'carousel__qttc-trophy' }),
+                el('span', { class: 'carousel__qttc-caption', text: 'QTTF / 26' }),
+              ],
+        ),
       );
     } else {
       article.append(
@@ -154,9 +163,10 @@ function renderHome(data, container) {
   carousel.addEventListener('focusout', start);
   start();
 
-  const eventItems = [qttc2026Event, qttcEvent, zgcupEvent].filter(Boolean).map((event) => {
+  const eventItems = [qttc2026Event, qttcEvent, xtcEvent].filter(Boolean).map((event) => {
     const group = events.groups.find((item) => item.id === event.group);
     const isQttc2026 = event.id === 'qttc-2026';
+    const isXtc = event.id === 'xtcf-2026';
     return el('div', { class: `event-mini${isQttc2026 ? ' event-mini--qttc' : ''}` }, [
       el('a', {
         class: 'event-mini__title',
@@ -165,7 +175,7 @@ function renderHome(data, container) {
       }),
       el('p', {
         class: 'event-mini__desc',
-        text: isQttc2026
+        text: isQttc2026 || isXtc
           ? event.meta.fullName
           : event.status === 'coming-soon'
             ? '档案整理中，稍后开放完整赛果。'
@@ -173,7 +183,12 @@ function renderHome(data, container) {
       }),
       isQttc2026
         ? el('span', { class: 'event-mini__tag', text: '09.11 — 12.04 · 进行中' })
-        : null,
+        : isXtc
+          ? el('span', {
+              class: 'event-mini__tag',
+              text: `${dotDate(event.meta.dateRange?.start).slice(5)} — ${dotDate(event.meta.dateRange?.end).slice(5)} · 已结束`,
+            })
+          : null,
     ]);
   });
 

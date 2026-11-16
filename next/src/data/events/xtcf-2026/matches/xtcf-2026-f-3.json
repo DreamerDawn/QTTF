@@ -1,0 +1,27 @@
+{
+  "id": "xtcf-2026-f-3",
+  "number": 3,
+  "order": 3,
+  "kind": "team",
+  "players": ["2822", "2814"],
+  "score": {
+    "gamesWon": 0,
+    "gamesLost": 3
+  },
+  "winner": "2814",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "rubbers": [],
+    "durationMinutes": null,
+    "timeouts": null,
+    "medicalTimeouts": null,
+    "totalPoints": null,
+    "venue": null,
+    "playedAt": null,
+    "time": null,
+    "note": "仅有大比分，单盘明细缺失。",
+    "teamNote": "",
+    "pointLog": []
+  }
+}

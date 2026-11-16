@@ -139,6 +139,68 @@ src/data/events/
 }
 ```
 
+### 团体赛（tie）
+
+团体赛一场比赛由若干「盘」（rubber）组成。盘数、盘的顺序和项目都不固定，因此不用顶层 `detail.sets`，改用 `detail.rubbers`。
+
+```json
+{
+  "id": "xtc-2026-team-sf-1",
+  "kind": "team",
+  "players": ["甲队", "乙队"],
+  "score": { "gamesWon": 3, "gamesLost": 1 },
+  "winner": "甲队",
+  "status": "completed",
+  "detail": {
+    "sets": [],
+    "rubbers": [
+      {
+        "order": 1,
+        "kind": "singles",
+        "players": [["甲一"], ["乙一"]],
+        "score": { "gamesWon": 3, "gamesLost": 1 },
+        "games": [
+          { "a": 11, "b": 8 },
+          { "a": 9, "b": 11 },
+          { "a": 11, "b": 6 },
+          { "a": 11, "b": 9 }
+        ]
+      },
+      {
+        "order": 2,
+        "kind": "doubles",
+        "players": [["甲一", "甲二"], ["乙一", "乙二"]],
+        "score": { "gamesWon": 2, "gamesLost": 3 },
+        "games": [
+          { "a": 11, "b": 13 },
+          { "a": 11, "b": 9 },
+          { "a": 8, "b": 11 },
+          { "a": 11, "b": 7 },
+          { "a": 9, "b": 11 }
+        ]
+      }
+    ],
+    "venue": "QTTF Breeze Arena · 1号台",
+    "playedAt": "2026-11-20",
+    "time": "14:00",
+    "teamNote": "甲队 3–1 晋级决赛。"
+  }
+}
+```
+
+规则：
+
+- `kind: "team"` 标记团体赛；也可只靠 `detail.rubbers` 非空识别。
+- `players` 是**队名**，顺序即 A/B 顺序。
+- `score` 是**盘分**总比分，不是局分。
+- `detail.sets` 保持空数组，团体赛不使用。
+- `detail.rubbers` 按 `order` 升序展示。
+- 每盘 `kind` 支持 `singles`、`doubles`、`mixed`；未识别时显示“对决”。
+- 每盘 `players` 是二维数组：`[A 方选手数组, B 方选手数组]`。双打写两名选手。
+- 每盘 `score` 是该盘的局分，`games` 是逐局小分。
+- 盘数不固定，五盘三胜、四盘、三盘都可以；不要为凑满固定盘数添加空盘。
+- `detail.teamNote` 显示在弹窗单盘明细下方，可不填。
+
 ---
 
 ## 2. 阶段赛制
