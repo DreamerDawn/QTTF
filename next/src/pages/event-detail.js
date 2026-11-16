@@ -505,30 +505,30 @@ function renderEventDetail(event, container) {
     if (participants) panel.append(participants);
 
     const stages = scope.stages || [];
-    const groupStages = stages.filter((stage) => stage.type === 'group');
-    const knockoutStages = stages.filter((stage) => stage.type === 'knockout');
-    const groupStage = groupStages[0];
     const hasMultipleStages = stages.length > 1;
 
-    knockoutStages.forEach((stage) => {
-      const bracket = createBracket(stage, event, onOpen);
-      if (bracket) panel.append(bracket);
-    });
+    // 对阵树：每个淘汰赛阶段一块，紧随其阶段分组渲染。
+    const bracketByStage = new Map();
+    stages
+      .filter((stage) => stage.type === 'knockout')
+      .forEach((stage) => {
+        const bracket = createBracket(stage, event, onOpen);
+        if (bracket) bracketByStage.set(stage.id, bracket);
+      });
 
     const stats = scopeStats(scope, event);
     if (hasMultipleStages) {
+      // tab 顺序严格按 stages 数组顺序，保证「淘汰赛」早于「附加赛」等真实先后。
       const stageTabs = createTabs({
         items: [
           { id: 'all', label: '全部', controls: '' },
-          ...groupStages.map((stage) => ({
+          ...stages.map((stage) => ({
             id: stage.id,
             label: stage.name,
-            controls: `stage-group-section-${stage.id}`,
-          })),
-          ...knockoutStages.map((stage) => ({
-            id: stage.id,
-            label: stage.name,
-            controls: `stage-knockout-section-${stage.id}`,
+            controls:
+              stage.type === 'group'
+                ? `stage-group-section-${stage.id}`
+                : `stage-knockout-section-${stage.id}`,
           })),
         ],
         initial: 'all',
@@ -566,9 +566,17 @@ function renderEventDetail(event, container) {
       );
     }
 
-    if (groupStage) panel.append(buildGroupStage(event, groupStage, onOpen));
-    groupStages.slice(1).forEach((stage) => panel.append(buildGroupStage(event, stage, onOpen, true)));
-    knockoutStages.forEach((stage) => panel.append(buildKnockoutStage(stage, onOpen)));
+    let groupSeen = 0;
+    stages.forEach((stage) => {
+      if (stage.type === 'group') {
+        panel.append(buildGroupStage(event, stage, onOpen, groupSeen > 0));
+        groupSeen += 1;
+        return;
+      }
+      const bracket = bracketByStage.get(stage.id);
+      if (bracket) panel.append(bracket);
+      panel.append(buildKnockoutStage(stage, onOpen));
+    });
     return panel;
   });
 
