@@ -186,8 +186,9 @@
     padding: var(--space-2);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
-    background: var(--glass-bg-strong);
-    box-shadow: var(--glass-shadow);
+    /* 展开菜单用高不透明度实底，保证文字在任意背景上都清晰可读 */
+    background: var(--nav-menu-bg);
+    box-shadow: var(--shadow-modal);
     -webkit-backdrop-filter: var(--glass-blur);
     backdrop-filter: var(--glass-blur);
     transform: var(--glass-composite);
@@ -201,6 +202,18 @@
   .nav__link {
     justify-content: flex-start;
     border-radius: var(--radius-sm);
+    color: var(--text-strong);
+    font-size: var(--text-md);
+  }
+
+  .nav__link:hover,
+  .nav__link:focus-visible {
+    background: var(--accent-soft);
+  }
+
+  .nav__link[aria-current="page"] {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
   }
 }
 

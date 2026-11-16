@@ -82,6 +82,8 @@
   --glass-radius-lg: 28px;
   --glass-composite: translateZ(0);
   --nav-bg: rgba(255, 255, 255, 0.58);
+  /* 移动端展开菜单：需要更高不透明度，避免背景内容透出导致文字难读 */
+  --nav-menu-bg: rgba(255, 255, 255, 0.94);
   --nav-blur: blur(12px);
   --shadow-xs: var(--glass-shadow);
   --shadow-sm: var(--glass-shadow);
@@ -291,6 +293,7 @@
       0 4px 8px rgba(0, 0, 0, 0.26),
       0 16px 32px rgba(0, 0, 0, 0.32);
     --nav-bg: rgba(12, 12, 12, 0.62);
+    --nav-menu-bg: rgba(18, 18, 18, 0.96);
 
     --success: #59c3a1;
     --success-soft: rgba(89, 195, 161, 0.16);
@@ -378,6 +381,7 @@
     --nav-blur: none;
     --glass-bg: var(--glass-bg-fallback);
     --nav-bg: var(--glass-bg-fallback);
+    --nav-menu-bg: var(--glass-bg-fallback);
   }
 }
 
@@ -389,6 +393,7 @@
     --glass-bg: var(--glass-bg-solid);
     --glass-bg-hover: var(--glass-bg-solid);
     --nav-bg: var(--glass-bg-solid);
+    --nav-menu-bg: var(--glass-bg-solid);
     --shadow-nav: none;
   }
 }
