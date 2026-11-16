@@ -498,10 +498,13 @@ function renderEventDetail(event, container) {
 
     const podium = podiumSection(scope.podium || (multiScope ? null : event.podium));
     if (podium) panel.append(podium);
-    const participants = participantsSection([
-      ...(event.participants || []),
-      ...(scope.participants || []),
-    ]);
+    // 名单来源：多分类时为「赛事级 + 分类级」合并；单分类时优先分类级，
+    // 分类未声明名单则回退赛事级（如 xtcq-2026 把名单放在事件顶层）。
+    // 注意不要同时拼接两处，否则同一批选手会重复渲染。
+    const scopeParticipants = multiScope
+      ? [...(event.participants || []), ...(scope.participants || [])]
+      : (scope.participants?.length ? scope.participants : event.participants || []);
+    const participants = participantsSection(scopeParticipants);
     if (participants) panel.append(participants);
 
     const stages = scope.stages || [];
