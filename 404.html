@@ -1,122 +1,137 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>页面建设中 - QTTF</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <!-- 后备：meta 刷新（作为备用方案） -->
-  <meta http-equiv="refresh" content="3;url=https://dreamerdawn.github.io/QTTF/homepage">
-  <style>
-    :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --accent:#0066ff;
-      --accent-warn:#ff6b35;
-      --muted:#6b7280;
-      --max-width:1200px;
-    }
-    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0b1220;background:linear-gradient(180deg,#f7fafc 0%, #eef4ff 100%);} 
-    a{color:inherit;text-decoration:none}
-
-    header{background:rgba(255,255,255,0.72);-webkit-backdrop-filter: blur(8px);backdrop-filter: blur(8px);box-shadow:0 6px 24px rgba(16,24,40,.06);position:sticky;top:0;z-index:1100;border-bottom:1px solid rgba(15,23,42,.03)}
-    .container{max-width:var(--max-width);margin:0 auto;padding:0 28px}
-    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .brand{font-weight:700;font-size:20px;color:var(--accent)}
-    .nav-links{display:flex;gap:20px}
-    .nav-links a{color:var(--muted);padding:8px 10px;border-radius:8px;transition:all .18s;font-weight:600}
-    .nav-links a:hover{background:rgba(0,102,255,.08);color:var(--accent)}
-    .nav-links a.active{color:var(--accent);background:linear-gradient(90deg,rgba(0,102,255,.08),rgba(31,139,255,.06));box-shadow:none;border-radius:10px}
-
-    main{padding:28px 0 56px;min-height:60vh;display:flex;align-items:center}
-
-    .features{display:none}
-    .card{background:linear-gradient(180deg,var(--card),var(--card));padding:14px;border-radius:14px;box-shadow:10px 12px 30px rgba(20,32,78,.04);border:1px solid rgba(15,23,42,.04);box-sizing:border-box}
-
-    /* 提示卡片样式 */
-    .notice-wrap{display:flex;align-items:center;justify-content:center;width:100%}
-    .notice{max-width:720px;width:100%;padding:36px;border-radius:16px;background:#fff;box-shadow:0 12px 30px rgba(16,24,40,.06);border:1px solid rgba(15,23,42,.04);text-align:center}
-    .notice h1{margin:0 0 8px;font-size:20px;font-weight:700;color:var(--accent-warn)}
-    .notice p{margin:0 0 12px;font-size:18px;color:#0b1220}
-    .notice .muted{color:var(--muted);font-size:14px;margin-top:8px}
-
-    footer{padding:28px 0;text-align:center;color:var(--muted)}
-  </style>
-</head>
-<body>
-  <script src="https://keepandroidopen.org/banner.js?size=mini"></script>
-  <header>
-    <div class="container">
-      <nav>
-        <div style="display:flex;align-items:center;gap:10px">
-          <img src="QTTF.png" alt="QTTF" style="height:40px;display:inline-block;border-radius:8px;object-fit:contain;" />
-          <div class="brand">QTTF</div>
-        </div>
-        <div class="nav-links">
-            <a href="https://dreamerdawn.github.io/QTTF/homepage">首页</a>
-            <a href="https://dreamerdawn.github.io/QTTF/events">赛事</a>
-            <a href="https://dreamerdawn.github.io/QTTF/rankings">选手排名</a>
-            <a href="https://dreamerdawn.github.io/QTTF/about">关于我们</a>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="card notice-wrap">
-      <div class="notice" role="status">
-        <h1>🏓 抱歉，此页面正在开发中，<span style="color:var(--accent-warn)">即将上线，敬请期待！</span></h1>
-        <p id="dev-message"><strong style="color:var(--accent-warn)">正在开发</strong> — 我们正在加速完善页面内容。</p>
-        <div id="countdown" class="muted">3秒后自动返回首页</div>
-      </div>
-    </section>
-
-    <!-- 预留：小组件容器（隐藏） -->
-    <div class="features" aria-hidden="true"></div>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>本网页由Github Copilot生成，数据由丘班乒乓球联合会提供</p>
-    </div>
-  </footer>
-
-  <script>
-    (function(){
-      const homeUrl = 'https://dreamerdawn.github.io/QTTF/homepage';
-      let seconds = 3;
-      const countdownEl = document.getElementById('countdown');
-
-      function updateText(){
-        if(countdownEl) countdownEl.textContent = `${seconds}秒后自动返回首页`;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f1f1" />
+    <meta name="robots" content="noindex" />
+    <title>页面不存在 · QTTF</title>
+    <meta name="description" content="该页面不存在或旧版页面已停止对外提供，请前往 QTTF 新版站点。" />
+    <link rel="icon" href="/QTTF/QTTF.png" />
+    <style>
+      :root {
+        --bg: #f2f1f1;
+        --surface: #ffffff;
+        --surface-subtle: rgba(255, 255, 255, 0.62);
+        --text: #171717;
+        --text-strong: #0d0d0d;
+        --text-muted: #5f5f5f;
+        --text-subtle: #737373;
+        --border: rgba(23, 23, 23, 0.1);
+        --accent: #4d6bfe;
+        --accent-strong: #3f5be8;
+        --accent-soft: rgba(77, 107, 254, 0.1);
+        --radius: 18px;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 40px rgba(0, 0, 0, 0.06);
       }
-
-      updateText();
-      const timer = setInterval(()=>{
-        seconds -= 1;
-        if(seconds > 0){
-          updateText();
-        } else {
-          if(countdownEl) countdownEl.textContent = `0秒，正在跳转…`;
-          clearInterval(timer);
-          // 使用 replace 避免在历史中留下当前页
-          window.location.replace(homeUrl);
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0a0a;
+          --surface: #151515;
+          --surface-subtle: rgba(255, 255, 255, 0.05);
+          --text: #ededed;
+          --text-strong: #f7f7f7;
+          --text-muted: #a9a9a9;
+          --text-subtle: #7d7d7d;
+          --border: rgba(255, 255, 255, 0.12);
+          --accent: #7ca7ff;
+          --accent-strong: #9dbcff;
+          --accent-soft: rgba(103, 153, 254, 0.14);
+          --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 40px rgba(0, 0, 0, 0.42);
         }
-      }, 1000);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px;
+        color: var(--text);
+        background:
+          radial-gradient(680px 420px at 12% -10%, var(--accent-soft), transparent 62%),
+          var(--bg);
+        font: 15px/1.7 -apple-system, "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .panel {
+        width: min(100%, 560px);
+        padding: clamp(28px, 5vw, 44px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface-subtle);
+        box-shadow: var(--shadow);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+      }
+      .brand { display: flex; align-items: center; gap: 12px; }
+      .logo {
+        width: 40px; height: 40px; border-radius: 10px; object-fit: contain;
+        background: var(--surface); border: 1px solid var(--border);
+      }
+      .brand-name { color: var(--accent); font-size: 1.05rem; font-weight: 800; }
+      .code {
+        margin: 22px 0 0;
+        color: var(--accent);
+        font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em;
+      }
+      h1 { margin: 6px 0 0; color: var(--text-strong); font-size: clamp(1.5rem, 4.4vw, 1.95rem); line-height: 1.3; }
+      .lead { margin: 12px 0 0; color: var(--text-muted); }
+      .note {
+        margin: 18px 0 0;
+        padding: 12px 14px;
+        border-left: 3px solid var(--accent);
+        border-radius: 8px;
+        background: var(--accent-soft);
+        color: var(--text-muted);
+        font-size: 0.86rem;
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 44px; padding: 10px 20px;
+        border: 1px solid transparent; border-radius: 12px;
+        font: inherit; font-weight: 700; text-decoration: none;
+        transition: background 0.16s, border-color 0.16s, transform 0.16s;
+      }
+      .btn--primary { color: #fff; background: var(--accent-strong); }
+      .btn--primary:hover { transform: translateY(-1px); }
+      .btn--ghost { color: var(--text-strong); background: var(--surface); border-color: var(--border); }
+      .btn--ghost:hover { border-color: var(--accent); }
+      footer { margin-top: 24px; color: var(--text-subtle); font-size: 0.76rem; }
+      footer a { color: var(--text-muted); }
+      @media (max-width: 430px) {
+        .actions { flex-direction: column; }
+        .btn { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="panel">
+      <div class="brand">
+        <img class="logo" src="/QTTF/QTTF.png" alt="" width="40" height="40" />
+        <span class="brand-name">QTTF</span>
+      </div>
 
-      // 如果用户点击导航，取消倒计时（导航会自行跳转）
-      document.querySelectorAll('nav .nav-links a').forEach(a=>{
-        a.addEventListener('click', ()=>{ clearInterval(timer); });
-      });
+      <p class="code">404 · NOT FOUND</p>
+      <h1>页面不存在或已下线</h1>
+      <p class="lead">
+        你访问的地址不存在。如果它来自旧版网站，说明该栏目已在 2026 重构中停止对外提供。
+      </p>
+      <p class="note">
+        旧版的赛事、排名、关于与联系页面已全部并入新版站点，内容保留且持续更新。
+      </p>
 
-      // 鼠标悬停高亮逻辑：悬停时高亮，离开时移除所有高亮（不设置默认高亮）
-      const navLinks = document.querySelectorAll('nav .nav-links a');
-      navLinks.forEach(a=>{
-        a.addEventListener('mouseenter', ()=>{ navLinks.forEach(x=>x.classList.remove('active')); a.classList.add('active'); });
-      });
-      const navLinksContainer = document.querySelector('nav .nav-links');
-      if(navLinksContainer) navLinksContainer.addEventListener('mouseleave', ()=>{ navLinks.forEach(x=>x.classList.remove('active')); });
-    })();
-  </script>
-</body>
+      <div class="actions">
+        <a class="btn btn--primary" href="/QTTF/next/">前往新版首页</a>
+        <a class="btn btn--ghost" href="/QTTF/next/events/">浏览赛事</a>
+      </div>
+
+      <footer>
+        仓库 <a href="https://github.com/DreamerDawn/QTTF">DreamerDawn/QTTF</a>
+        ｜ 数据由丘班乒乓球联合会提供
+      </footer>
+    </main>
+  </body>
 </html>

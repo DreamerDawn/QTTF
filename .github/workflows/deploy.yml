@@ -50,11 +50,20 @@ jobs:
       - name: Assemble Pages artifact
         run: |
           mkdir -p _site
+          # 旧站栏目不再对外提供：文件保留在仓库，但排除出部署产物，
+          # 访问旧 URL 会落到 404.html 的迁移说明页。
           rsync -a \
             --exclude='.git' \
             --exclude='.github' \
             --exclude='next' \
             --exclude='_site' \
+            --exclude='/about' \
+            --exclude='/contact' \
+            --exclude='/events' \
+            --exclude='/homepage' \
+            --exclude='/newmatch' \
+            --exclude='/rankings' \
+            --exclude='/model.html' \
             ./ _site/
           mkdir -p _site/next
           cp -R next/dist/. _site/next/

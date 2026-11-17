@@ -1,5 +1,6 @@
 import { mountShell, setPageTitle } from '../components/layout.js';
 import { createGuTrophy } from '../components/gu-trophy.js';
+import { createVisitCounter } from '../components/visit-counter.js';
 import { loadingState, setError } from '../components/status.js';
 import { el } from '../lib/dom.js';
 import { sitePath } from '../lib/router.js';
@@ -309,7 +310,10 @@ function renderHome(data, container) {
 }
 
 async function main() {
-  const { container } = mountShell({ activePath: '' });
+  const { container } = mountShell({
+    activePath: '',
+    footerExtras: createVisitCounter(),
+  });
   container.replaceChildren(loadingState('正在加载首页…'));
   try {
     const data = await loadHomeData();

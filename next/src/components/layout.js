@@ -22,8 +22,9 @@ function ensureFavicon() {
 /**
  * 所有页面共享的壳：跳转链接 + 导航 + main + 页脚。
  * 页面只负责往 container 内渲染内容。
+ * `footerExtras` 可向页脚追加元素（如首页的累计访问量）。
  */
-export function mountShell({ activePath = currentPath(), pageClass = '' } = {}) {
+export function mountShell({ activePath = currentPath(), pageClass = '', footerExtras = null } = {}) {
   const root = document.getElementById('app');
   if (!root) throw new Error('Missing #app mount element');
 
@@ -42,6 +43,7 @@ export function mountShell({ activePath = currentPath(), pageClass = '' } = {}) 
   });
   const container = el('div', { class: 'container' });
   const footer = createFooter(site);
+  if (footerExtras) footer.append(footerExtras);
 
   main.append(container);
   root.replaceChildren(skip, header, main, footer);

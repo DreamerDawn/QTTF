@@ -168,6 +168,33 @@
   font-weight: 700;
 }
 
+/* 首页页脚的累计访问量 */
+.site-footer__visits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+}
+
+.site-footer__visits[hidden] {
+  display: none !important;
+}
+
+.site-footer__visits-value {
+  color: var(--text-muted);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.site-footer__visits.is-unavailable .site-footer__visits-label {
+  opacity: 0.72;
+}
+
 /* 唯一结构性导航断点：宽度不足时折叠为浮层菜单 */
 @media (--bp-nav) {
   .nav__toggle {
