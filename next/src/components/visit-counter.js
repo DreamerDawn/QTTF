@@ -26,24 +26,24 @@ function formatCount(value) {
 }
 
 export function createVisitCounter() {
-  const wrap = el('div', { class: 'site-footer__visits', hidden: '' });
-  const label = el('span', { class: 'site-footer__visits-label', text: '累计访问' });
-  const value = el('span', { class: 'site-footer__visits-value', text: '—' });
-  const unit = el('span', { class: 'site-footer__visits-unit', text: '次' });
-  wrap.append(label, value, unit);
+  const card = el('div', { class: 'visit-card', hidden: '' });
+  const label = el('p', { class: 'visit-card__label', text: '累计访问' });
+  const figure = el('p', { class: 'visit-card__figure' });
+  const value = el('span', { class: 'visit-card__value', text: '—' });
+  const unit = el('span', { class: 'visit-card__unit', text: '次' });
+  figure.append(value, unit);
+  const note = el('p', { class: 'visit-card__note', text: '统计自 2026/11/17 始' });
+  card.append(label, figure, note);
 
   let settled = false;
   const finish = (text) => {
     if (settled) return;
     settled = true;
-    wrap.hidden = false;
+    card.hidden = false;
     if (text === null) {
-      wrap.classList.add('is-unavailable');
-      label.textContent = '访问统计暂不可用';
-      value.textContent = '';
-      unit.textContent = '';
-      value.remove();
-      unit.remove();
+      card.classList.add('is-unavailable');
+      label.textContent = '访问统计';
+      figure.replaceChildren(el('span', { class: 'visit-card__unavailable', text: '暂不可用' }));
       return;
     }
     value.textContent = text;
@@ -83,5 +83,5 @@ export function createVisitCounter() {
       finish(null);
     });
 
-  return wrap;
+  return card;
 }

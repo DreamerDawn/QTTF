@@ -43,7 +43,10 @@ export function mountShell({ activePath = currentPath(), pageClass = '', footerE
   });
   const container = el('div', { class: 'container' });
   const footer = createFooter(site);
-  if (footerExtras) footer.append(footerExtras);
+  if (footerExtras) {
+    // 放进页脚容器，与导航、正文共用同一套左右栅格
+    footer.append(el('div', { class: 'container site-footer__extras' }, [footerExtras]));
+  }
 
   main.append(container);
   root.replaceChildren(skip, header, main, footer);
