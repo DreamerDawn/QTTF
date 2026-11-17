@@ -1,64 +1,87 @@
 import { el } from '../lib/dom.js';
 
-const SCRIPT_SRC = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-const TIMEOUT_MS = 4000;
-
 /**
  * 页脚累计访问量（PV）。
  *
- * 纯静态站点没有后端，这里用 busuanzi 的公开计数接口：
- * 该脚本会查找 #busuanzi_value_site_pv 并填入数字。
+ * 纯静态站点没有后端，用 abacus（https://abacus.jasoncameron.dev）做计数：
+ * `/hit/{namespace}/{key}` 自增并返回当前值，`/get/...` 只读。
+ * 该服务对静态站点免费、响应带 `access-control-allow-origin: *`、限流 30 次/10 秒。
  *
  * 设计约束：
- * - 异步加载，不阻塞首屏
+ * - 异步请求，不阻塞首屏
  * - 数据未就位前整块隐藏，避免闪出占位符
- * - 超时或脚本不可用时显示「统计暂不可用」，而不是显示 0
+ * - 超时或服务不可用时显示「统计暂不可用」，而不是显示 0
+ * - 同一会话内节流，避免刷新页面反复自增
  */
+const ENDPOINT = 'https://abacus.jasoncameron.dev';
+const NAMESPACE = 'dreamerdawn-qttf';
+const KEY = 'site';
+const TIMEOUT_MS = 6000;
+const SESSION_KEY = 'qttf.visitCounted';
+
+function formatCount(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+  return n.toLocaleString('zh-CN');
+}
+
 export function createVisitCounter() {
   const wrap = el('div', { class: 'site-footer__visits', hidden: '' });
   const label = el('span', { class: 'site-footer__visits-label', text: '累计访问' });
-  const value = el('span', {
-    class: 'site-footer__visits-value',
-    id: 'busuanzi_value_site_pv',
-    text: '—',
-  });
+  const value = el('span', { class: 'site-footer__visits-value', text: '—' });
   const unit = el('span', { class: 'site-footer__visits-unit', text: '次' });
   wrap.append(label, value, unit);
 
   let settled = false;
-  const fail = () => {
+  const finish = (text) => {
     if (settled) return;
     settled = true;
     wrap.hidden = false;
-    wrap.classList.add('is-unavailable');
-    label.textContent = '访问统计暂不可用';
-    value.textContent = '';
-    unit.textContent = '';
+    if (text === null) {
+      wrap.classList.add('is-unavailable');
+      label.textContent = '访问统计暂不可用';
+      value.textContent = '';
+      unit.textContent = '';
+      value.remove();
+      unit.remove();
+      return;
+    }
+    value.textContent = text;
   };
 
-  // busuanzi 直接写 #busuanzi_value_site_pv 的 innerHTML，用轮询感知完成
-  const timer = window.setTimeout(fail, TIMEOUT_MS);
-  const poll = window.setInterval(() => {
-    const text = value.textContent?.trim();
-    if (text && text !== '—') {
-      settled = true;
-      window.clearInterval(poll);
-      window.clearTimeout(timer);
-      wrap.hidden = false;
-      // busuanzi 可能返回 "1,234" 形式，保留原样
-      label.textContent = '累计访问';
-    }
-  }, 250);
+  // 同一会话只自增一次；之后刷新走只读，避免数字虚高。
+  let counted = false;
+  try {
+    counted = window.sessionStorage.getItem(SESSION_KEY) === '1';
+  } catch {
+    counted = false;
+  }
+  const method = counted ? 'get' : 'hit';
+  const url = `${ENDPOINT}/${method}/${NAMESPACE}/${KEY}`;
 
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = SCRIPT_SRC;
-  script.addEventListener('error', () => {
-    window.clearTimeout(timer);
-    window.clearInterval(poll);
-    fail();
-  });
-  document.head.append(script);
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+  fetch(url, { signal: controller.signal, cache: 'no-store' })
+    .then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    })
+    .then((data) => {
+      window.clearTimeout(timer);
+      const text = formatCount(data?.value);
+      if (text === null) throw new Error('bad payload');
+      try {
+        window.sessionStorage.setItem(SESSION_KEY, '1');
+      } catch {
+        /* 隐私模式下忽略 */
+      }
+      finish(text);
+    })
+    .catch(() => {
+      window.clearTimeout(timer);
+      finish(null);
+    });
 
   return wrap;
 }
