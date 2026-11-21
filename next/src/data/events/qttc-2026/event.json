@@ -354,7 +354,9 @@
             {
               "id": "doubles-b",
               "name": "B组",
-              "matches": []
+              "matches": [
+                "qttc-2026-d-b-1"
+              ]
             },
             {
               "id": "doubles-c",
