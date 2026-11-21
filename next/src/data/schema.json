@@ -462,7 +462,33 @@
           "required": ["slides", "seedCount"],
           "properties": {
             "slides": { "type": "array", "items": { "$ref": "#/definitions/slide" } },
-            "seedCount": { "type": "integer", "minimum": 1 }
+            "seedCount": { "type": "integer", "minimum": 1 },
+            "tools": {
+              "type": "object",
+              "required": ["items"],
+              "properties": {
+                "eyebrow": { "type": "string" },
+                "title": { "type": "string" },
+                "titleSuffix": { "type": "string" },
+                "hint": { "type": "string" },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["id", "name", "description", "path"],
+                    "properties": {
+                      "id": { "type": "string" },
+                      "name": { "type": "string" },
+                      "english": { "type": "string" },
+                      "description": { "type": "string" },
+                      "highlights": { "type": "array", "items": { "type": "string" } },
+                      "path": { "type": "string" },
+                      "accent": { "enum": ["blue", "forest", "green", "amber", "cyan"] }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "about": {

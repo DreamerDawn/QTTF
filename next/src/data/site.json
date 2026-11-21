@@ -28,6 +28,32 @@
     }
   ],
   "home": {
+    "tools": {
+      "eyebrow": "Toolbox",
+      "title": "实用工具",
+      "titleSuffix": "（实验性）",
+      "hint": "QTTF 自制的比赛工具，纯静态、无后端，可直接在浏览器中使用。",
+      "items": [
+        {
+          "id": "draw",
+          "name": "比赛抽签器",
+          "english": "Draw Generator",
+          "description": "录入参赛名单与种子序，自动分档并生成小组循环与淘汰赛签表，支持 A4 横向导出。",
+          "highlights": ["种子与分档", "小组抽签", "淘汰赛签表", "A4 横向导出"],
+          "path": "draw/",
+          "accent": "forest"
+        },
+        {
+          "id": "scorer",
+          "name": "比赛计分器",
+          "english": "Table Tennis Scorer",
+          "description": "逐球记录比分与发球轮换，自动处理加球、局点赛点与暂停计时，并统计逐球数据与走势图。",
+          "highlights": ["逐球计分", "暂停与计时", "技术统计", "导出 JSON / CSV"],
+          "path": "pingpong-scorer/",
+          "accent": "amber"
+        }
+      ]
+    },
     "slides": [
       {
         "id": "qttc-2026",

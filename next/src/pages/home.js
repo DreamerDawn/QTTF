@@ -1,11 +1,13 @@
 import { mountShell, setPageTitle } from '../components/layout.js';
 import { createGuTrophy } from '../components/gu-trophy.js';
+import { createTabs } from '../components/tabs.js';
 import { createVisitCounter } from '../components/visit-counter.js';
 import { loadingState, setError } from '../components/status.js';
 import { el } from '../lib/dom.js';
 import { sitePath } from '../lib/router.js';
 import {
   homeSlides,
+  homeTools,
   latestSnapshot,
   loadHomeData,
   seedsFromRankings,
@@ -27,6 +29,85 @@ function card({ title, accent, body, actions, label, index }) {
       el('div', { class: 'card__body mt-2' }, body),
     ]),
     el('div', { class: 'card__footer' }, actions),
+  ]);
+}
+
+/** 单个工具的详情卡：名称、说明、能力点、打开按钮。 */
+function toolPanel(tool) {
+  return el('div', { class: `tool-panel tool-panel--${tool.accent || 'blue'}` }, [
+    el('div', { class: 'tool-panel__head' }, [
+      el('div', {}, [
+        el('p', { class: 'eyebrow', text: tool.english || 'QTTF Tool' }),
+        el('h3', { class: 'tool-panel__title', text: tool.name }),
+      ]),
+      el('span', { class: 'tool-panel__badge', text: '纯静态' }),
+    ]),
+    el('p', { class: 'tool-panel__desc', text: tool.description }),
+    (tool.highlights || []).length
+      ? el('ul', { class: 'tool-panel__points' }, tool.highlights.map((point) =>
+          el('li', { text: point }),
+        ))
+      : null,
+    el('div', { class: 'tool-panel__actions' }, [
+      el('a', {
+        class: 'btn',
+        href: tool.href,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        text: '打开工具',
+      }),
+      el('span', { class: 'tool-panel__path', text: tool.path }),
+    ]),
+  ]);
+}
+
+/** 首页「实用工具」板块：一组 tab，每个 tab 放一个工具的入口卡。 */
+function toolsSection(tools) {
+  const items = tools?.items || [];
+  if (!items.length) return null;
+
+  const panels = items.map((tool, index) => {
+    const panel = el('div', {
+      class: 'tool-panel-wrap',
+      id: `tool-panel-${tool.id}`,
+      role: 'tabpanel',
+      'aria-labelledby': `tab-tool-${tool.id}`,
+    });
+    if (index !== 0) panel.hidden = true;
+    panel.append(toolPanel(tool));
+    return panel;
+  });
+
+  const tabs = createTabs({
+    items: items.map((tool) => ({
+      id: `tool-${tool.id}`,
+      label: tool.name,
+      controls: `tool-panel-${tool.id}`,
+    })),
+    initial: `tool-${items[0].id}`,
+    label: '工具切换',
+    onChange: (id) => {
+      panels.forEach((panel, index) => {
+        panel.hidden = `tool-${items[index].id}` !== id;
+      });
+    },
+  });
+
+  const heading = el('h2', { class: 'section__title', id: 'home-tools-title', text: tools.title || '实用工具' });
+  if (tools.titleSuffix) {
+    heading.append(el('span', { class: 'home-tools__suffix', text: tools.titleSuffix }));
+  }
+
+  return el('section', { class: 'section home-tools', 'aria-labelledby': 'home-tools-title' }, [
+    el('div', { class: 'section__header' }, [
+      el('div', {}, [
+        el('p', { class: 'eyebrow', text: tools.eyebrow || 'Toolbox' }),
+        heading,
+      ]),
+      el('p', { class: 'section__hint', text: tools.hint || '' }),
+    ]),
+    el('div', { class: 'home-tools__tabs' }, [tabs.element]),
+    ...panels,
   ]);
 }
 
@@ -305,6 +386,7 @@ function renderHome(data, container) {
     el('h1', { class: 'visually-hidden', text: `${site.site.name} · ${site.site.fullName}` }),
     carousel,
     features,
+    toolsSection(homeTools()),
     intro,
   );
 }

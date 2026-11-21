@@ -7,10 +7,23 @@ const BASE = import.meta.env.BASE_URL.endsWith('/')
 
 export const baseUrl = BASE;
 
+/**
+ * 部署根。本站在 GitHub Pages 上以 `<root>/next/` 形式发布，
+ * 而 `draw/`、`pingpong-scorer/` 等独立工具放在部署根，不在 next/ 下。
+ * `sitePath()` 只能生成 next/ 内部的地址，跨出这层必须用这里。
+ */
+const DEPLOY_ROOT = BASE.replace(/[^/]+\/$/, '');
+
 /** 把站内路径转为带 base 的 URL。 */
 export function sitePath(path = '') {
   const clean = String(path).replace(/^\/+/, '');
   return `${BASE}${clean}`;
+}
+
+/** 指向部署根（next/ 的上一层）的路径，用于 roots 里的独立工具页。 */
+export function rootPath(path = '') {
+  const clean = String(path).replace(/^\/+/, '');
+  return `${DEPLOY_ROOT}${clean}`;
 }
 
 /** 当前页面相对站点根的路径，例如 events/league/qsl/。 */

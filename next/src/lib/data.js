@@ -1,5 +1,5 @@
 import siteJson from '../data/site.json';
-import { sitePath } from './router.js';
+import { rootPath, sitePath } from './router.js';
 
 /** 站点数据很小，静态导入即可在首屏立即渲染导航和页脚。 */
 export const site = siteJson;
@@ -166,6 +166,19 @@ export function homeSlides() {
     ...slide,
     href: sitePath(slide.path),
   }));
+}
+
+/**
+ * 首页「实用工具」清单。
+ * 工具本身是独立静态页面，部署在仓库根（next/ 之外），所以用 rootPath 而不是 sitePath。
+ */
+export function homeTools() {
+  const tools = site.home.tools;
+  if (!tools?.items?.length) return { ...tools, items: [] };
+  return {
+    ...tools,
+    items: tools.items.map((item) => ({ ...item, href: rootPath(item.path) })),
+  };
 }
 
 export function seedsFromRankings(rankingsData, limit = site.home.seedCount || 8) {
