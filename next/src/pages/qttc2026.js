@@ -3,6 +3,7 @@ import { createBadge } from '../components/badge.js';
 import { createGuTrophy } from '../components/gu-trophy.js';
 import { createMatchCard } from '../components/match-card.js';
 import { openMatchDialog } from '../components/match-dialog.js';
+import { participantsSection } from '../components/participants.js';
 import { createTabs } from '../components/tabs.js';
 import { emptyState, loadingState, setError } from '../components/status.js';
 import { el } from '../lib/dom.js';
@@ -18,6 +19,13 @@ function formatLabel(format) {
   return format.type === 'fixed' ? `固定 ${format.games} 局` : `BO${format.games}`;
 }
 
+/** 单打称「选手 / 人」，双打称「组合 / 对」，避免页面在单打组别里写「对组合」。 */
+function unitOf(category) {
+  return category?.id === 'doubles'
+    ? { head: '组合', amount: '对组合', count: '对' }
+    : { head: '选手', amount: '名选手', count: '人' };
+}
+
 function eventGroupMatches(event) {
   return (event.categories || [])
     .flatMap((category) => category.stages || [])
@@ -26,11 +34,24 @@ function eventGroupMatches(event) {
     .flatMap((group) => group.matches || []);
 }
 
+/** 参赛规模文案：单打论「人」、双打论「对」，不能相加成「人」。 */
+function entrantLabel(event) {
+  const parts = (event.categories || [])
+    .map((category) => {
+      const count = (category.participants || []).length;
+      if (!count) return null;
+      return `${category.name} ${count} ${unitOf(category).count}`;
+    })
+    .filter(Boolean);
+  return parts.join(' · ');
+}
+
 function hero(event) {
   const phase = event.meta.phase || 'ongoing';
   const phaseLabel = phase === 'completed' ? '已结束' : phase === 'upcoming' ? '即将开始' : '进行中';
   const meta = event.meta;
   const recordedMatches = eventGroupMatches(event).length;
+  const entrants = entrantLabel(event);
   const title = String(meta.fullName || meta.name);
   const titleParts = title.split('暨');
 
@@ -55,8 +76,9 @@ function hero(event) {
         el('div', { class: 'badge-row qttc26-hero__badges' }, [
           createBadge(phaseLabel, phase === 'completed' ? 'empty' : 'w'),
           createBadge(meta.format || '小组赛 + 淘汰赛', 'info'),
-          createBadge(recordedMatches ? `${recordedMatches} 场已录入` : '签表待录入', recordedMatches ? 'w' : 'empty'),
-        ]),
+          createBadge(`${recordedMatches} 场已录入`, recordedMatches ? 'w' : 'empty'),
+          entrants ? createBadge(entrants, 'empty') : null,
+        ].filter(Boolean)),
       ]),
       el('div', { class: 'qttc26-hero__art', 'aria-hidden': 'true' }, [
         el('span', { class: 'qttc26-art__label', text: 'QTTF / 26' }),
@@ -211,6 +233,7 @@ function standingsRows(category, group, format) {
 
 function groupStandingsTable(category, group, format) {
   const fixed = format?.type === 'fixed';
+  const unit = unitOf(category);
   const rows = standingsRows(category, group, format);
   const signed = (value) => (value >= 0 ? `+${value}` : String(value));
   const wrap = el('div', { class: 'qttc26-standings-wrap' });
@@ -219,8 +242,8 @@ function groupStandingsTable(category, group, format) {
     'aria-label': `${group.name} 小组${fixed ? '排名' : '积分榜'}`,
   });
   const headLabels = fixed
-    ? ['排名', '组合', '档位', '场次', '胜–平–负', '胜局–负局', '得分–失分', '净胜局']
-    : ['排名', '组合', '档位', '场次', '胜–负', '胜局–负局', '得分–失分', '净胜（局/分）', '积分'];
+    ? ['排名', unit.head, '档位', '场次', '胜–平–负', '胜局–负局', '得分–失分', '净胜局']
+    : ['排名', unit.head, '档位', '场次', '胜–负', '胜局–负局', '得分–失分', '净胜（局/分）', '积分'];
   const head = el('tr');
   headLabels.forEach((label) => {
     head.append(el('th', { scope: 'col', text: label }));
@@ -279,7 +302,42 @@ function groupStandingsTable(category, group, format) {
   return wrap;
 }
 
+/** 尚无比赛的小组：直接展示签表名单，不显示全 0 的积分榜。 */
+function groupDrawList(category, group) {
+  const members = (category.participants || []).filter(
+    (participant) => participant.group === group.name,
+  );
+  const tierRank = (tier) => ({ I: 1, II: 2, III: 3, IV: 4 }[tier] ?? 99);
+  const sorted = [...members].sort((a, b) => {
+    const tierDiff = tierRank(a.tier) - tierRank(b.tier);
+    if (tierDiff !== 0) return tierDiff;
+    return (a.seed ?? 999) - (b.seed ?? 999) || (a.rank ?? 999) - (b.rank ?? 999);
+  });
+  const list = el('div', { class: 'qttc26-draw-list', role: 'list' });
+  sorted.forEach((participant) => {
+    const meta = [
+      participant.seed ? `种子 ${participant.seed}` : null,
+      participant.rank !== null && participant.rank !== undefined ? `排名 ${participant.rank}` : '暂无排名',
+      participant.points !== null && participant.points !== undefined ? `${participant.points} 分` : null,
+    ]
+      .filter(Boolean)
+      .join(' · ');
+    list.append(
+      el('div', { class: 'qttc26-draw-row', role: 'listitem' }, [
+        el('span', { class: 'qttc26-draw-row__tier', text: `${participant.tier} 档` }),
+        el('div', { class: 'qttc26-draw-row__main' }, [
+          el('strong', { class: 'qttc26-draw-row__name', text: participant.name }),
+          el('span', { class: 'qttc26-draw-row__meta', text: meta }),
+        ]),
+        participant.seed ? el('span', { class: 'qttc26-draw-row__seed', text: `#${participant.seed}` }) : null,
+      ]),
+    );
+  });
+  return list;
+}
+
 function groupBlock(category, group, format, onOpen) {
+  const unit = unitOf(category);
   const groupParticipants = (category.participants || []).filter(
     (participant) => participant.group === group.name,
   );
@@ -291,12 +349,12 @@ function groupBlock(category, group, format, onOpen) {
         el('h3', { class: 'qttc26-group-title', text: group.name }),
         el('p', {
           class: 'section__hint',
-          text: `${groupParticipants.length} 对组合 · ${matches.length} 场已录入`,
-        }),
-      ]),
+          text: `${groupParticipants.length} ${unit.amount} · ${matches.length ? `${matches.length} 场已录入` : '签表已出，比赛待进行'}`,
+        }),      ]),
       createBadge(`${matches.length} 场`, matches.length ? 'w' : 'empty'),
     ]),
-    groupStandingsTable(category, group, format),
+    // 有比赛才显示积分榜；未开赛只显示签表，避免整张全 0 的表。
+    matches.length ? groupStandingsTable(category, group, format) : groupDrawList(category, group),
   );
 
   if (matches.length) {
@@ -305,7 +363,7 @@ function groupBlock(category, group, format, onOpen) {
       matchGrid.append(
         createMatchCard(
           match,
-          { stageName: '双打', roundName: group.name, date: match.detail?.playedAt },
+          { stageName: category.name, roundName: group.name, date: match.detail?.playedAt },
           (item, context) => onOpen?.(item, context),
         ),
       );
@@ -333,7 +391,36 @@ function groupStageContent(category, event, onOpen) {
 
   const format = groupStage?.format || { type: 'best-of', games: 5 };
   const stack = el('div', { class: 'qttc26-group-stack' });
-  groups.forEach((group) => stack.append(groupBlock(category, group, format, onOpen)));
+  const panels = groups.map((group, index) => {
+    const panel = el('div', {
+      class: 'qttc26-group-panel',
+      id: `qttc26-group-panel-${category.id}-${index}`,
+      role: 'tabpanel',
+      'aria-labelledby': `tab-qttc26-group-${category.id}-${index}`,
+    });
+    if (index !== 0) panel.hidden = true;
+    panel.append(groupBlock(category, group, format, onOpen));
+    return panel;
+  });
+
+  const tabs = createTabs({
+    items: groups.map((group, index) => ({
+      id: `qttc26-group-${category.id}-${index}`,
+      label: group.name,
+      controls: `qttc26-group-panel-${category.id}-${index}`,
+    })),
+    initial: `qttc26-group-${category.id}-0`,
+    variant: 'subtab',
+    label: `${category.name}小组切换`,
+    onChange: (id) => {
+      const index = Number(id.replace(`qttc26-group-${category.id}-`, ''));
+      panels.forEach((panel, panelIndex) => {
+        panel.hidden = panelIndex !== index;
+      });
+    },
+  });
+
+  stack.append(el('div', { class: 'qttc26-group-tabs' }, [tabs.element]), ...panels);
   return stack;
 }
 
@@ -379,6 +466,14 @@ function categoryPanel(category, index, event, onOpen, initialId) {
     },
   });
 
+  const entrantCount = (category.participants || []).length;
+  const unit = unitOf(category);
+  const statusBadge = matches.length
+    ? createBadge(`${matches.length} 场已录入`, 'w')
+    : entrantCount
+      ? createBadge(`${entrantCount} ${unit.amount} · 签表已出`, 'info')
+      : createBadge('签表待录入', 'empty');
+
   panel.append(
     el('div', { class: 'qttc26-category__head' }, [
       el('div', {}, [
@@ -386,7 +481,7 @@ function categoryPanel(category, index, event, onOpen, initialId) {
         el('h3', { class: 'qttc26-category__title', text: category.name }),
         el('p', { class: 'section__hint', text: `${category.format || '小组赛 + 淘汰赛'} · ${event.meta.venue || '场馆待定'}` }),
       ]),
-      createBadge(matches.length ? `${matches.length} 场已录入` : '签表待录入', matches.length ? 'w' : 'empty'),
+      statusBadge,
     ]),
     stageTabs.element,
     groupPanel,
@@ -414,12 +509,12 @@ function drawSection(event, onOpen) {
     return section;
   }
 
-  const initialCategory = categories.find((category) =>
-    (category.stages || [])
-      .filter((stage) => stage.type === 'group')
-      .flatMap((stage) => stage.groups || [])
-      .some((group) => (group.matches || []).length > 0),
-  ) || categories[0];
+  // 优先展示「有比赛或已有签表」的组别；都没有时退回第一个组别。
+  const initialCategory = categories.find((category) => {
+    const groupStage = (category.stages || []).find((stage) => stage.type === 'group');
+    const hasMatch = (groupStage?.groups || []).some((group) => (group.matches || []).length > 0);
+    return hasMatch || (category.participants || []).length > 0;
+  }) || categories[0];
   const panels = categories.map((category, index) =>
     categoryPanel(category, index, event, onOpen, initialCategory.id),
   );
@@ -467,6 +562,62 @@ function infoSection(event) {
   ]);
 }
 
+function rosterSection(event) {
+  const categories = event.categories || [];
+  if (!categories.length) return null;
+  const multi = categories.length > 1;
+  const panels = categories.map((category, index) => {
+    const unit = unitOf(category);
+    const panel = el('div', {
+      class: 'qttc26-roster-panel',
+      id: `qttc26-roster-${category.id}`,
+      role: 'tabpanel',
+      'aria-labelledby': `tab-qttc26-roster-${category.id}`,
+    });
+    if (index !== 0) panel.hidden = true;
+    const section = participantsSection(category.participants, {
+      title: `${category.name}参赛名单`,
+      unit: unit.amount,
+    });
+    panel.append(section || el('p', { class: 'section__hint', text: '名单待公布。' }));
+    return panel;
+  });
+
+  const section = el('section', { class: 'section qttc26-roster', 'aria-labelledby': 'qttc26-roster-title' }, [
+    el('div', { class: 'section__header' }, [
+      el('div', {}, [
+        el('p', { class: 'eyebrow', text: 'Entrants' }),
+        el('h2', { class: 'section__title', id: 'qttc26-roster-title', text: '参赛名单' }),
+      ]),
+      el('p', {
+        class: 'section__hint',
+        text: multi ? `${categories.length} 个组别` : '排名取 2026 年 11 月快照',
+      }),
+    ]),
+  ]);
+
+  if (multi) {
+    const tabs = createTabs({
+      items: categories.map((category) => ({
+        id: `qttc26-roster-${category.id}`,
+        label: category.name,
+        controls: `qttc26-roster-${category.id}`,
+      })),
+      initial: `qttc26-roster-${categories[0].id}`,
+      label: '参赛名单组别切换',
+      onChange: (id) => {
+        const target = id.replace('qttc26-roster-', '');
+        panels.forEach((panel, index) => {
+          panel.hidden = categories[index].id !== target;
+        });
+      },
+    });
+    section.append(el('div', { class: 'qttc26-category-tabs' }, [tabs.element]));
+  }
+  section.append(...panels);
+  return section;
+}
+
 function renderEvent(event, container) {
   setPageTitle(event.meta.name);
   const onOpen = (match, context) => openMatchDialog(match, context);
@@ -474,6 +625,7 @@ function renderEvent(event, container) {
     hero(event),
     facts(event),
     drawSection(event, onOpen),
+    rosterSection(event),
     infoSection(event),
     el('p', { class: 'qttc26-back' }, [
       el('a', { class: 'btn btn--secondary', href: sitePath('events/'), text: '返回赛事总览' }),

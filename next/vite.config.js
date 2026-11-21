@@ -32,6 +32,7 @@ const htmlEntries = [
   'rankings/2025-11/index.html',
   'rankings/2026-01/index.html',
   'rankings/2026-06/index.html',
+  'rankings/2026-11/index.html',
   'about/index.html',
   'contact/index.html',
   '404.html',

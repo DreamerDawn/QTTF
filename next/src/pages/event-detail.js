@@ -4,6 +4,7 @@ import { createBracket } from '../components/bracket.js';
 import { createMatchCard } from '../components/match-card.js';
 import { createTeamMatchCard } from '../components/team-tie.js';
 import { openMatchDialog } from '../components/match-dialog.js';
+import { participantsSection } from '../components/participants.js';
 import { createTable } from '../components/table.js';
 import { createTabs } from '../components/tabs.js';
 import { emptyState, loadingState, setError } from '../components/status.js';
@@ -39,53 +40,6 @@ function groupHint(group, format) {
     return `前 ${Number(advance)} 名晋级 · ${order}`;
   }
   return fixedFormat ? `固定 ${format.games} 局 · ${order}` : `前 2 名晋级 · ${order}`;
-}
-
-function participantsSection(participants) {
-  if (!participants?.length) return null;
-  const rankValue = (value) =>
-    value === null || value === undefined || value === '' ? Number.POSITIVE_INFINITY : Number(value);
-  const sorted = [...participants].sort((a, b) => {
-    const seedA = rankValue(a.seed);
-    const seedB = rankValue(b.seed);
-    const hasSeedA = Number.isFinite(seedA);
-    const hasSeedB = Number.isFinite(seedB);
-    // 有种子位的选手优先，按种子号升序。
-    if (hasSeedA !== hasSeedB) return hasSeedA ? -1 : 1;
-    if (hasSeedA && seedA !== seedB) return seedA - seedB;
-    // 其余按排名升序，未排名者最后。
-    const rankA = rankValue(a.rank);
-    const rankB = rankValue(b.rank);
-    if (rankA !== rankB) return rankA - rankB;
-    return a.name.localeCompare(b.name, 'zh-Hans-CN');
-  });
-  const grid = el('div', { class: 'participants-grid' });
-  sorted.forEach((participant) => {
-    const name = el('div', { class: 'player-chip__name' }, [
-      el('span', { text: participant.name }),
-      participant.class ? el('span', { class: 'player-chip__class', text: participant.class }) : null,
-    ]);
-    grid.append(
-      el('div', { class: `player-chip${participant.seed ? ' is-seed' : ''}` }, [
-        el('div', {
-          class: 'player-chip__rank',
-          text: participant.seed ? `种子 ${participant.seed}` : `排名 ${participant.rank ?? '—'}`,
-        }),
-        name,
-        el('div', {
-          class: 'player-chip__points',
-          text: participant.points === null || participant.points === undefined ? '积分 —' : `积分 ${participant.points}`,
-        }),
-      ]),
-    );
-  });
-  return el('section', { class: 'section' }, [
-    el('div', { class: 'section__header' }, [
-      el('h2', { class: 'section__title', text: '参赛选手' }),
-      el('p', { class: 'section__hint', text: `${participants.length} 名选手` }),
-    ]),
-    grid,
-  ]);
 }
 
 function podiumSection(podium) {

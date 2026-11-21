@@ -491,3 +491,55 @@ npm run build
 - [ ] `sets` 数量与 `score` 大比分一致
 - [ ] 有 `pointLog` 时，球序号和局分连续
 - [ ] 已运行 `npm run validate`
+
+---
+
+## 10. 小组签表（尚无赛果时）
+
+只出了签表、还没打的小组，`matches` 留空数组即可，页面会自动切换成「签表名单」视图，不会显示一张全 0 的积分榜。
+
+```json
+{
+  "id": "singles-a",
+  "name": "A组",
+  "matches": []
+}
+```
+
+小组名单写在分类的 `participants` 里，用 `group` 字段归属到小组：
+
+```json
+{
+  "name": "陈金森",
+  "seed": 1,
+  "rank": 1,
+  "points": 1945,
+  "group": "A组",
+  "tier": "I"
+}
+```
+
+字段约定：
+
+| 字段 | 说明 |
+|---|---|
+| `seed` | 种子序号；无种子写 `null`。有名次但非种子写 `null`，靠 `rank` 排序 |
+| `rank` | 最新排名名次；无排名写 `null` |
+| `points` | 最新排名积分；无排名写 `0` 并配 `rank: null` 需谨慎，见下 |
+| `tier` | 档位 `I` / `II` / `III`，用于未开赛小组的展示顺序 |
+| `group` | 必须与 `stages[].groups[].name` 完全一致 |
+
+首次进入排名、尚无积分的选手，先在当期排名快照里补一行（并列末位、`points: 0`），再把 `rank` 对上去，避免 `event.json` 里出现快照中不存在的名次。
+
+### 排名快照
+
+`src/data/rankings.json` 的 `snapshots[0]` 是最新一期，`current` 指向它。新增一期时：
+
+1. 复制上一期 `rows`，按实际积分调整。
+2. 更新 `id` / `route` / `label` / `title` / `description`。
+3. 把 `current` 改成新 `id`。
+4. `movement` 按与上一期真实名次差填写；名次没动写 `{ "direction": "none", "places": 0 }`，不要沿用上一期的值。
+5. 新建 `src/rankings/<id>/index.html` 并在 `vite.config.js` 登记。
+
+`rows[].history` 的积分之和必须等于 `points`，校验会检查。
+

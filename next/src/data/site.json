@@ -73,10 +73,10 @@
         "theme": "navy"
       },
       {
-        "id": "rankings-2026-06",
-        "title": "2026 年 6 月 QTTF 选手排名",
-        "description": "“全球”运动会赛程全部结束后，QTTF 重新计算了最新选手积分。",
-        "path": "rankings/2026-06/",
+        "id": "rankings-2026-11",
+        "title": "2026 年 11 月 QTTF 选手排名",
+        "description": "QTTC 2026 开赛前的最新选手积分。",
+        "path": "rankings/2026-11/",
         "theme": "sunset"
       }
     ],

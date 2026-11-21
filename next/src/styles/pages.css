@@ -2866,7 +2866,80 @@
 
 .qttc26-group-stack {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-5);
+}
+
+.qttc26-group-tabs {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.qttc26-group-panel[hidden] {
+  display: none;
+}
+
+.qttc26-draw-list {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--border);
+}
+
+.qttc26-draw-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+}
+
+.qttc26-draw-row__tier {
+  flex: none;
+  width: 2.6rem;
+  color: var(--accent);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.qttc26-draw-row__main {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.qttc26-draw-row__name {
+  color: var(--text-strong);
+  font-weight: 750;
+}
+
+.qttc26-draw-row__meta {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.qttc26-draw-row__seed {
+  flex: none;
+  margin-left: auto;
+  padding: 1px 7px;
+  border: 1px solid var(--seed-border);
+  border-radius: var(--radius-pill);
+  background: var(--seed-bg);
+  color: var(--accent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.qttc26-roster-panel[hidden] {
+  display: none;
+}
+
+.qttc26-roster .participants-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 7rem), 1fr));
 }
 
 .qttc26-group-block {

@@ -27,13 +27,218 @@
       "name": "单打",
       "fullName": "全性别单打",
       "format": "小组赛 + 淘汰赛",
-      "participants": [],
+      "participants": [
+        {
+          "name": "陈金森",
+          "seed": 1,
+          "rank": 1,
+          "points": 1945,
+          "group": "A组",
+          "tier": "I"
+        },
+        {
+          "name": "谢承宇",
+          "seed": 2,
+          "rank": 2,
+          "points": 1549,
+          "group": "B组",
+          "tier": "I"
+        },
+        {
+          "name": "朱恩骏",
+          "seed": 3,
+          "rank": 3,
+          "points": 975,
+          "group": "C组",
+          "tier": "I"
+        },
+        {
+          "name": "肖逸轩",
+          "seed": 4,
+          "rank": 4,
+          "points": 873,
+          "group": "D组",
+          "tier": "I"
+        },
+        {
+          "name": "陈子扬",
+          "seed": 5,
+          "rank": 5,
+          "points": 788,
+          "group": "E组",
+          "tier": "I"
+        },
+        {
+          "name": "郭东珉",
+          "seed": 6,
+          "rank": 6,
+          "points": 681,
+          "group": "F组",
+          "tier": "I"
+        },
+        {
+          "name": "杨蕊宁",
+          "seed": 7,
+          "rank": 7,
+          "points": 652,
+          "group": "G组",
+          "tier": "I"
+        },
+        {
+          "name": "周乾渊",
+          "seed": 8,
+          "rank": 8,
+          "points": 383,
+          "group": "G组",
+          "tier": "II"
+        },
+        {
+          "name": "赵久龄",
+          "seed": null,
+          "rank": 9,
+          "points": 363,
+          "group": "F组",
+          "tier": "II"
+        },
+        {
+          "name": "邹雨岑",
+          "seed": null,
+          "rank": 10,
+          "points": 307,
+          "group": "E组",
+          "tier": "II"
+        },
+        {
+          "name": "刘函宇",
+          "seed": null,
+          "rank": 11,
+          "points": 256,
+          "group": "B组",
+          "tier": "II"
+        },
+        {
+          "name": "郭慕晗",
+          "seed": null,
+          "rank": 12,
+          "points": 229,
+          "group": "B组",
+          "tier": "III"
+        },
+        {
+          "name": "李嘉睿",
+          "seed": null,
+          "rank": 13,
+          "points": 228,
+          "group": "D组",
+          "tier": "II"
+        },
+        {
+          "name": "殳晟欢",
+          "seed": null,
+          "rank": 14,
+          "points": 210,
+          "group": "C组",
+          "tier": "II"
+        },
+        {
+          "name": "胡雅文",
+          "seed": null,
+          "rank": 15,
+          "points": 180,
+          "group": "A组",
+          "tier": "III"
+        },
+        {
+          "name": "梁博涛",
+          "seed": null,
+          "rank": 16,
+          "points": 165,
+          "group": "A组",
+          "tier": "II"
+        },
+        {
+          "name": "唐近尧",
+          "seed": null,
+          "rank": 17,
+          "points": 154,
+          "group": "F组",
+          "tier": "III"
+        },
+        {
+          "name": "王续成",
+          "seed": null,
+          "rank": 18,
+          "points": 88,
+          "group": "E组",
+          "tier": "III"
+        },
+        {
+          "name": "杨梓隽",
+          "seed": null,
+          "rank": 22,
+          "points": 36,
+          "group": "D组",
+          "tier": "III"
+        },
+        {
+          "name": "刘汤一",
+          "seed": null,
+          "rank": 24,
+          "points": 0,
+          "group": "C组",
+          "tier": "III"
+        },
+        {
+          "name": "甘梓辰",
+          "seed": null,
+          "rank": 25,
+          "points": 0,
+          "group": "G组",
+          "tier": "III"
+        }
+      ],
       "stages": [
         {
           "id": "singles-group",
           "name": "小组赛",
           "type": "group",
-          "groups": [],
+          "groups": [
+            {
+              "id": "singles-a",
+              "name": "A组",
+              "matches": []
+            },
+            {
+              "id": "singles-b",
+              "name": "B组",
+              "matches": []
+            },
+            {
+              "id": "singles-c",
+              "name": "C组",
+              "matches": []
+            },
+            {
+              "id": "singles-d",
+              "name": "D组",
+              "matches": []
+            },
+            {
+              "id": "singles-e",
+              "name": "E组",
+              "matches": []
+            },
+            {
+              "id": "singles-f",
+              "name": "F组",
+              "matches": []
+            },
+            {
+              "id": "singles-g",
+              "name": "G组",
+              "matches": []
+            }
+          ],
           "format": {
             "type": "best-of",
             "games": 5
