@@ -287,6 +287,24 @@ export function openMatchDialog(match, context = {}) {
       );
     });
     body.append(row1, row2);
+    // 有逐局时长时补一行「用时」；没有则整行不出现。
+    const hasSetDuration = sets.some(
+      (set) => set.durationMinutes !== null && set.durationMinutes !== undefined,
+    );
+    if (hasSetDuration) {
+      const rowTime = el('tr', { class: 'match-dialog__sets-duration' });
+      rowTime.append(
+        el('td', { text: '用时', colspan: '2' }),
+        ...sets.map((set) =>
+          el('td', {
+            text: set.durationMinutes === null || set.durationMinutes === undefined
+              ? '—'
+              : `${set.durationMinutes}′`,
+          }),
+        ),
+      );
+      body.append(rowTime);
+    }
     table.append(body);
     setWrap.append(table);
     inner.append(setWrap);

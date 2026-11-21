@@ -399,7 +399,24 @@ if (eventsData) {
           (detail.sets || []).forEach((set, index) => {
             assert(finiteNumber(set.pointsWon), `${mLabel}.sets[${index}]: pointsWon 必须为数字`);
             assert(finiteNumber(set.pointsLost), `${mLabel}.sets[${index}]: pointsLost 必须为数字`);
+            if (set.durationMinutes !== null && set.durationMinutes !== undefined) {
+              assert(
+                finiteNumber(set.durationMinutes) && set.durationMinutes >= 0,
+                `${mLabel}.sets[${index}]: durationMinutes 必须为非负数字`,
+              );
+            }
           });
+          // 逐局时长可选；一旦填写，各局之和不应超过整场时长（整场含局间与暂停）。
+          const setDurations = (detail.sets || [])
+            .map((set) => set.durationMinutes)
+            .filter((value) => finiteNumber(value));
+          if (setDurations.length && finiteNumber(detail.durationMinutes)) {
+            const sum = setDurations.reduce((total, value) => total + value, 0);
+            assert(
+              sum <= detail.durationMinutes,
+              `${mLabel}: 逐局用时之和 ${sum} 分钟超过整场 ${detail.durationMinutes} 分钟`,
+            );
+          }
           if (detail.timeouts !== null && detail.timeouts !== undefined) {
             assert(booleanTriplet(detail.timeouts), `${mLabel}: timeouts 必须为 2 个布尔值`);
           }

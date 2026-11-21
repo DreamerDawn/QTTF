@@ -127,10 +127,27 @@ src/data/events/
 
 `pointLog` 可选；有逐球记录时，比赛详情弹窗会显示全场/单局统计和走势图。
 
+### 逐局用时
+
+`sets` 每局可选填 `durationMinutes`（整数分钟）。填了任意一局，弹窗「每局比分」表末就会多一行「用时」，没填的局显示 `—`。
+
+```json
+"sets": [
+  { "pointsWon": 11, "pointsLost": 4, "durationMinutes": 3 },
+  { "pointsWon": 11, "pointsLost": 5, "durationMinutes": 3 },
+  { "pointsWon": 11, "pointsLost": 8, "durationMinutes": 4 }
+]
+```
+
+约定：
+
+- 整场 `durationMinutes` 含局间休息与暂停，因此**各局之和通常小于等于整场**，不需要相等；校验只拦截「各局之和超过整场」。
+- 逐局用时不含局间休息，包含该局内的暂停。
+- 时间是可选信息，没有就省略该字段，不要填 `0` 占位。
+
 ```json
 {
-  "game": 1,
-  "ball": 1,
+  "game": 1,  "ball": 1,
   "scorer": "B",
   "serve": "B",
   "scoreBefore": { "A": 0, "B": 0 },

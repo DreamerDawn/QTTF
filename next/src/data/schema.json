@@ -97,7 +97,8 @@
       "required": ["pointsWon", "pointsLost"],
       "properties": {
         "pointsWon": { "type": "integer", "minimum": 0 },
-        "pointsLost": { "type": "integer", "minimum": 0 }
+        "pointsLost": { "type": "integer", "minimum": 0 },
+        "durationMinutes": { "$ref": "#/definitions/nullableInteger" }
       }
     },
     "matchDetail": {
