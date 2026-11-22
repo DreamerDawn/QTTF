@@ -228,7 +228,9 @@
             {
               "id": "singles-e",
               "name": "E组",
-              "matches": []
+              "matches": [
+                "qttc-2026-s-e-1"
+              ]
             },
             {
               "id": "singles-f",

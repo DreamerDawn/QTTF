@@ -1,0 +1,1127 @@
+{
+  "id": "qttc-2026-s-e-1",
+  "number": 1,
+  "order": 1,
+  "players": [
+    "王续成",
+    "邹雨岑"
+  ],
+  "score": {
+    "gamesWon": 1,
+    "gamesLost": 3
+  },
+  "winner": "邹雨岑",
+  "status": "completed",
+  "flags": [
+    "group-e",
+    "singles"
+  ],
+  "detail": {
+    "sets": [
+      {
+        "pointsWon": 9,
+        "pointsLost": 11,
+        "durationMinutes": 3
+      },
+      {
+        "pointsWon": 6,
+        "pointsLost": 11,
+        "durationMinutes": 3
+      },
+      {
+        "pointsWon": 11,
+        "pointsLost": 6,
+        "durationMinutes": 3
+      },
+      {
+        "pointsWon": 6,
+        "pointsLost": 11,
+        "durationMinutes": 3
+      }
+    ],
+    "durationMinutes": 17,
+    "timeouts": [
+      false,
+      false
+    ],
+    "medicalTimeouts": [
+      false,
+      false
+    ],
+    "totalPoints": {
+      "pointsWon": 32,
+      "pointsLost": 39
+    },
+    "venue": "QTTF Breeze Arena · 1号台",
+    "playedAt": "2026-11-19",
+    "time": "17:45",
+    "note": null,
+    "pointLog": [
+      {
+        "game": 1,
+        "ball": 1,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 0,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 0
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 2,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 1,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 0
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 3,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 1
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 4,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 1
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 5,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 2,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 6,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 3,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 7,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 4,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 8,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 4,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 9,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 4,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 10,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 11,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 6,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 5
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 12,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 6,
+          "B": 5
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 13,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 6,
+          "B": 6
+        },
+        "scoreAfter": {
+          "A": 7,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 14,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 7,
+          "B": 6
+        },
+        "scoreAfter": {
+          "A": 8,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 15,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 8,
+          "B": 6
+        },
+        "scoreAfter": {
+          "A": 8,
+          "B": 7
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 16,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 8,
+          "B": 7
+        },
+        "scoreAfter": {
+          "A": 9,
+          "B": 7
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 17,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 9,
+          "B": 7
+        },
+        "scoreAfter": {
+          "A": 9,
+          "B": 8
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 18,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 9,
+          "B": 8
+        },
+        "scoreAfter": {
+          "A": 9,
+          "B": 9
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 19,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 9,
+          "B": 9
+        },
+        "scoreAfter": {
+          "A": 9,
+          "B": 10
+        },
+        "deuce": false
+      },
+      {
+        "game": 1,
+        "ball": 20,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 9,
+          "B": 10
+        },
+        "scoreAfter": {
+          "A": 9,
+          "B": 11
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 1,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 0,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 0
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 2,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 1,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 1
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 3,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 1,
+          "B": 1
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 4,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 1,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 5,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 6,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 7,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 3,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 8,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 3,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 9,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 4,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 10,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 5,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 5
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 11,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 5
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 12,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 6
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 7
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 13,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 5,
+          "B": 7
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 8
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 14,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 5,
+          "B": 8
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 9
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 15,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 9
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 10
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 16,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 10
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 10
+        },
+        "deuce": false
+      },
+      {
+        "game": 2,
+        "ball": 17,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 6,
+          "B": 10
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 11
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 1,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 0,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 0
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 2,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 1,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 0
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 3,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 1
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 4,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 1
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 5,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 2,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 6,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 2,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 7,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 3,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 8,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 3,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 9,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 4,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 10,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 11,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 6,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 7,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 12,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 7,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 8,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 13,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 8,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 8,
+          "B": 5
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 14,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 8,
+          "B": 5
+        },
+        "scoreAfter": {
+          "A": 9,
+          "B": 5
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 15,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 9,
+          "B": 5
+        },
+        "scoreAfter": {
+          "A": 10,
+          "B": 5
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 16,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 10,
+          "B": 5
+        },
+        "scoreAfter": {
+          "A": 10,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 3,
+        "ball": 17,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 10,
+          "B": 6
+        },
+        "scoreAfter": {
+          "A": 11,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 1,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 0,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 0
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 2,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 1,
+          "B": 0
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 1
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 3,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 1,
+          "B": 1
+        },
+        "scoreAfter": {
+          "A": 1,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 4,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 1,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 2
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 5,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 2
+        },
+        "scoreAfter": {
+          "A": 2,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 6,
+        "scorer": "A",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 2,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 3
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 7,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 3,
+          "B": 3
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 4
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 8,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 3,
+          "B": 4
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 5
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 9,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 3,
+          "B": 5
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 6
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 10,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 3,
+          "B": 6
+        },
+        "scoreAfter": {
+          "A": 3,
+          "B": 7
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 11,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 3,
+          "B": 7
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 7
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 12,
+        "scorer": "B",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 4,
+          "B": 7
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 8
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 13,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 4,
+          "B": 8
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 9
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 14,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 4,
+          "B": 9
+        },
+        "scoreAfter": {
+          "A": 4,
+          "B": 10
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 15,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 4,
+          "B": 10
+        },
+        "scoreAfter": {
+          "A": 5,
+          "B": 10
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 16,
+        "scorer": "A",
+        "serve": "A",
+        "scoreBefore": {
+          "A": 5,
+          "B": 10
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 10
+        },
+        "deuce": false
+      },
+      {
+        "game": 4,
+        "ball": 17,
+        "scorer": "B",
+        "serve": "B",
+        "scoreBefore": {
+          "A": 6,
+          "B": 10
+        },
+        "scoreAfter": {
+          "A": 6,
+          "B": 11
+        },
+        "deuce": false
+      }
+    ]
+  }
+}
